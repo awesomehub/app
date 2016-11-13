@@ -26,8 +26,8 @@ before_script:
   - cp patches/ngtools-webpack-1.1.4/loader.js node_modules/@ngtools/webpack/src/loader.js
 script:
   - cp .env.travis .env
-  - yarn run stat
-  - yarn test -- --ci
+  # - yarn run stat
+  # - yarn test -- --ci
   - yarn run build
 after_script:
   - yarn add coveralls
