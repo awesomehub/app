@@ -1,2 +1,3 @@
 !.svgo.yml
 !browser-sync-ui/lib/plugins/history
+!istanbul/lib/assets
