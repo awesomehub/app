@@ -8,7 +8,6 @@ env:
     - ENCRYPTION_LABEL="abd15e3073ee"
     - GIT_NAME="Mohamed Kholy"
     - GIT_EMAIL="mkh117@gmail.com"
-    - API_URL="https://awesomehub.github.io/hub"
 before_install:
   # Install yarn
   - sudo apt-key adv --fetch-keys http://dl.yarnpkg.com/debian/pubkey.gpg
@@ -31,7 +30,7 @@ script:
   - yarn test -- --ci
   - yarn run build
 after_script:
-  - yarn install coveralls
+  - yarn add coveralls
   - yarn run coveralls
 deploy:
   provider: script
