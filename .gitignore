@@ -12,9 +12,7 @@
 /src/**/*.ngfactory.js
 /src/**/*.ngfactory.ts
 /src/**/*.ngfactory.js.map
-/src/**/*.metadata.json
 /src/**/*.js.map
-/src/**/*.js
 /src/**/*.shim.ts
 
 # Deploy keys
