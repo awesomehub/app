@@ -1,0 +1,44 @@
+<div #layout class="mdl-layout mdl-layout--fixed-header mdl-js-layout mdl-color--grey-100"
+     [class.mdl-layout--fixed-drawer]="drawer">
+  <!-- Header -->
+  <header class="mdl-layout__header mdl-layout__header--scroll mdl-color-text--white">
+    <a #drawerButton style="display:none" class="mdl-layout__drawer-button"></a>
+    <div class="mdl-layout__header-row">
+      <a class="mdl-layout-title logo" [routerLink]="['./']">{{title}}</a>
+      <div class="mdl-layout-spacer"></div>
+      <nav class="mdl-navigation">
+        <a class="mdl-navigation__link" [routerLink]="['./']">Home</a>
+        <a class="mdl-navigation__link" href="//github.com/awesomehub/" target="_blank">Github</a>
+      </nav>
+    </div>
+    <div class="header-bar mdl-layout__header-row">
+      <a *ngIf="drawer"
+         class="drawer-toggler mdl-layout--small-screen-only"
+         (click)="toggleDrawer()">
+        <i class="icon icon-bars"></i>
+      </a>
+      <list-search-bar
+        [placeholder]="searchService.searchTitle"
+        [query]="searchService.query"
+        (dosearch)="searchService.search($event)">
+      </list-search-bar>
+    </div>
+  </header>
+
+  <!-- Ribbon -->
+  <div class="ribbon mdl-color--indigo"></div>
+
+  <!-- Drawer outlet -->
+  <div class="mdl-layout__drawer drawer">
+    <span *ngIf="drawer" class="mdl-layout__title">{{drawer.title}}</span>
+    <router-outlet name="aux-drawer" (activate)='onAuxActivation($event)' (deactivate)='onAuxDeactivation($event)'></router-outlet>
+  </div>
+
+  <!-- Main -->
+  <main class="mdl-layout__content">
+    <router-outlet (activate)='onActivation($event)' (deactivate)='onDeactivation($event)'></router-outlet>
+  </main>
+
+  <!-- Loading indicator -->
+  <loading-indicator></loading-indicator>
+</div>

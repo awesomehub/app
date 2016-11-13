@@ -1,0 +1,33 @@
+.content-wrapper {
+  max-width: 1080px;
+  margin: 0 auto 80px;
+}
+
+.content-wrapper.layout-compact {
+  max-width: 1096px; /* 1080 + 8px(x2) mdl-grid-cell margins inside */
+  padding: 0;
+}
+
+.content {
+  border-radius: 2px;
+  padding: 56px;
+  animation-duration: 0.3s;
+  min-height: 350px;
+}
+
+.content-wrapper.with-sidebar {
+  max-width: 1600px;
+}
+
+.content-wrapper.layout-compact .content,
+.content-wrapper.layout-compact .content > .mdl-grid,
+.content-wrapper.layout-compact .content > * > .mdl-grid{
+  padding: 0;
+}
+
+.content-wrapper.layout-compact > .content.mdl-cell--12-col > .content-heading,
+.content-wrapper.layout-compact > .content.mdl-cell--12-col > * >.content-heading {
+  margin-bottom: 16px;
+  margin-left: 8px;
+}
+

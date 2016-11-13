@@ -1,0 +1,20 @@
+.list-search-bar {
+  display: block;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.list-search-bar > input.search-input {
+  width: 100%;
+  font-size: 1.6rem;
+  padding: 16pt;
+  border: 0;
+  outline: none;
+  background: rgba(0, 0, 0, 0.08);
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.list-search-bar > input.search-input:focus {
+  background: rgba(0, 0, 0, 0.12);
+  color: rgba(255, 255, 255, 0.7);
+}

@@ -1,0 +1,38 @@
+{
+  "compilerOptions": {
+    "target": "es5",
+    "module": "es2015",
+    "moduleResolution": "node",
+    "sourceMap": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "removeComments": false,
+    "noImplicitAny": false,
+    "suppressImplicitAnyIndexErrors": true,
+    "outDir": "lib",
+    "rootDir": ".",
+    "mapRoot": "",
+    "skipLibCheck": true,
+    "typeRoots": [
+      "node_modules/@types"
+    ]
+  },
+  "exclude": [
+    "node_modules",
+    "config",
+    "e2e",
+    "src/**/*.spec.ts",
+    "src/main-ngc.ts",
+    "src/main.ts"
+  ],
+  "awesomeTypescriptLoaderOptions": {
+    "useWebpackText": true,
+    "forkChecker": true,
+    "useCache": true
+  },
+  "angularCompilerOptions": {
+   "genDir": "./src/app/compiled",
+   "entryModule": "./src/app/app.module#AppModule",
+   "skipMetadataEmit" : true
+ }
+}

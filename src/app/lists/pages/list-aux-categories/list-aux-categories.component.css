@@ -1,0 +1,9 @@
+.list-navigation .category-count {
+  position: absolute;
+  right: 8px;
+}
+
+.list-navigation .level-1::before,
+.list-navigation .level-2::before {
+  content: ' - ';
+}

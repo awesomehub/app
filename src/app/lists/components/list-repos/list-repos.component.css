@@ -1,0 +1,33 @@
+.list-repos {
+  display: block;
+  position: relative;
+  margin: 0 auto;
+}
+
+.list-repos .repos-sort {
+  position: absolute;
+  top: 6px;
+  right: 0;
+}
+
+.list-repos .repos-sort .mdl-button {
+  color: rgba(255,255,255,0.8);
+}
+
+.list-repos .repos-sort .mdl-button .icon {
+  font-size: 16px;
+}
+
+.list-repos > .mdl-grid--no-spacing > .mdl-cell:not(:first-child) {
+  margin-top: 16px;
+}
+
+.list-repos .infinite-scroll {
+  padding: 16px;
+  text-align: center;
+  background: #fff;
+  border-radius: 2px;
+}
+
+.list-repos .infinite-scroll a { text-decoration: none; }
+.list-repos .infinite-scroll a:hover { text-decoration: underline; }

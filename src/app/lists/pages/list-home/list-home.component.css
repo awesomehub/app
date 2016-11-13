@@ -1,0 +1,9 @@
+@media (max-width: 839px) {
+  .list-repos:nth-child(2) {
+    margin-top: 32px;
+  }
+
+  .list-repos:nth-child(2) .content-heading {
+    color: inherit;
+  }
+}

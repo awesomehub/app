@@ -1,0 +1,28 @@
+.loading-indicator {
+    display: none;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 999;
+    background: rgba(255, 255, 255, 0.65);
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.loading-indicator.active {
+    display: flex;
+}
+
+.loading-indicator .message {
+    font-size: 1.5em;
+    padding-top: 1.5em;
+    color: rgba(0,0,0,.54);
+}
+
+.loading-indicator .mdl-spinner {
+    width: 3em;
+    height: 3em;
+}

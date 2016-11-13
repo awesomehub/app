@@ -1,0 +1,56 @@
+.list-card {
+  border-top: 5px solid #0091ea;
+  min-height: 180px;
+}
+
+.list-card h4 {
+  font-size: 2rem;
+  margin: 10px 0 15px;
+}
+
+.list-card h4 a {
+  text-decoration: none;
+}
+
+.list-card:hover {
+  background: #f0f0f0;
+}
+
+.list-card h4 a:hover {
+  text-decoration: underline;
+}
+
+.list-card .mdl-card__supporting-text {
+  flex-grow: 1;
+}
+
+.list-card .meta {
+  position: relative;
+  color: rgba(0,0,0,.54);
+  height: 36px;
+  margin: 0;
+  min-width: 60px;
+  padding-left: 13px;
+  display: inline-block;
+  font-size: 14px;
+  font-weight: 500;
+  text-align: left;
+  line-height: 36px;
+  vertical-align: middle;
+}
+
+.list-card .meta .icon {
+  font-size: 20px;
+  padding-right: 4px;
+}
+
+.list-card .mdl-button {
+  float: right;
+  color: #0091ea;
+}
+
+@media (max-width: 479px) {
+  .list-card .mdl-button {
+    display: none;
+  }
+}

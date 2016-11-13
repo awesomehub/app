@@ -1,0 +1,219 @@
+.list-repo-card {
+  min-height: 180px;
+}
+
+.list-repo-inner {
+  display: flex;
+  flex-direction: row;
+  flex-grow: 1;
+}
+
+@media (max-width: 479px) {
+  .list-repo-inner {
+    flex-direction: column-reverse;
+  }
+}
+
+.list-repo-inner .mdl-card__media {
+  min-width: 100px;
+  background: none;
+  display: flex;
+  flex-direction: column;
+}
+
+.list-repo-inner .mdl-card__media:hover {
+  cursor: pointer;
+}
+
+.list-repo-inner .mdl-card__media:hover .score a {
+  text-decoration: underline;
+}
+
+.list-repo-inner .mdl-card__supporting-text {
+  width: auto;
+  position: relative;
+  flex-grow: 1;
+}
+
+.list-repo-inner h4 {
+  margin: 0 0 10px;
+  position: relative;
+}
+
+.list-repo-inner h4 a {
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.list-repo-inner h4::after {
+  content: '';
+  right: 0;
+  width: 6em;
+  height: 100%;
+  position: absolute;
+  top: 0;
+}
+
+.list-repo-inner h4 a:hover {
+  text-decoration: underline;
+}
+
+.list-repo-inner .repo-author {
+  font-size: 55%;
+  display: block;
+  line-height: 100%;
+  color: rgba(0,0,0,.54);
+}
+
+.list-repo-inner .repo-desc {
+  display: inline-block;
+  position: relative;
+  line-height: 1.5em;
+  max-height: 3em;
+  overflow: hidden;
+}
+
+.list-repo-inner .repo-desc::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 1.5em;
+  height: 1.5em;
+  width: 6em;
+}
+
+.list-repo-inner h4::after,
+.list-repo-inner .repo-desc::after {
+  background: linear-gradient(to right, rgba(0,0,0,0) 0%, #fff 40%);
+}
+
+.list-repo-inner .score {
+  display: flex;
+  min-height: 85px;
+  position: relative;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.7rem;
+  text-align: center;
+  background: #f3f3f3;
+  flex-grow: 1;
+  flex-direction: column;
+}
+
+.list-repo-inner .score a {
+  color: #0074bc;
+  text-decoration: none;
+}
+
+.list-repo-inner .score .score-diff {
+  display: block;
+  position: absolute;
+  font-size: 0.6em;
+  margin-top: 1.6em;
+}
+
+.list-repo-inner .scores {
+  display: flex;
+  flex-direction: row;
+  border-top: 5px solid #505050;
+}
+
+.list-repo-inner .scores > span {
+  width: 25%;
+  height: 25px;
+  line-height: 25px;
+  font-size: 12px;
+  background: #505050;
+  text-align: center;
+  font-weight: bold;
+  color: #fff;
+  text-indent: -9999px;
+  border-right: 1px solid #f3f3f3;
+  border-top: 1px solid #f3f3f3;
+}
+
+.list-repo-inner .scores > span:last-child {
+    border-right: 0;
+}
+
+.list-repo-card:hover .list-repo-inner .scores > span {
+  text-indent: 0;
+}
+
+.list-repo-inner .extended-scores {
+  border-left: 5px solid #505050;
+}
+
+.list-repo-inner .extended-scores > div {
+  display: flex;
+  flex-direction: row;
+  flex-grow: 1;
+  min-height: 30px;
+}
+
+.list-repo-inner .extended-scores .score-seg {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 25px;
+  font-size: 12px;
+  font-weight: bold;
+  border-left: 1px solid #fff;
+}
+
+.list-repo-inner .extended-scores .score-seg-inf {
+  display: flex;
+  flex-grow: 1;
+  align-items: center;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.list-repo-inner .extended-scores .score-seg,
+.list-repo-inner .extended-scores .score-seg-inf {
+  border-bottom: 1px solid #fff;
+}
+
+.list-repo-inner .extended-scores > div:last-child .score-seg,
+.list-repo-inner .extended-scores > div:last-child .score-seg-inf {
+  border-bottom: 0;
+}
+
+.list-repo-inner .extended-scores .score-diff.score-diff {
+  color: inherit;
+  font-size: 0.8em;
+  font-weight: normal;
+  padding-left: 2px;
+}
+
+.list-repo-card .mdl-card__actions {
+  /* 36px height + 8px padding */
+  padding: 8px;
+  max-height: 52px;
+}
+
+.list-repo-card .meta {
+  display: inline-block;
+  position: relative;
+  color: rgba(0,0,0,.54);
+  height: 36px;
+  margin: 0;
+  min-width: 60px;
+  padding-left: 13px;
+  font-size: 13px;
+  line-height: 36px;
+  font-weight: 500;
+  text-align: left;
+  vertical-align: middle;
+}
+
+@media (max-width: 479px) {
+  .list-repo-card .meta:last-child {
+    display: none;
+  }
+}
+
+.list-repo-card .meta .icon {
+  font-size: 16px;
+  padding-right: 4px;
+}
