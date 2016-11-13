@@ -3,6 +3,11 @@ node_js:
   - "5"
   - "6"
   - "node"
+env:
+  global:
+    - ENCRYPTION_LABEL="abd15e3073ee"
+    - GIT_NAME="Mohamed Kholy"
+    - GIT_EMAIL="mkh117@gmail.com"
 before_install:
   # Install yarn
   - sudo apt-key adv --fetch-keys http://dl.yarnpkg.com/debian/pubkey.gpg
@@ -16,6 +21,9 @@ before_script:
   # starting a GUI to run tests, per https://docs.travis-ci.com/user/gui-and-headless-browsers/#Using-xvfb-to-Run-Tests-That-Require-a-GUI
   - export DISPLAY=:99.0
   - sh -e /etc/init.d/xvfb start
+  # Workaround for https://github.com/angular/angular-cli/issues/2799
+  # see https://github.com/angular/angular-cli/pull/2881
+  - cp patches/ngtools-webpack-1.1.4/loader.js @ngtools/webpack/src/loader.js
 script:
   - cp .env.travis .env
   - yarn run stat

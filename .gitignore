@@ -16,3 +16,7 @@
 /src/**/*.js.map
 /src/**/*.js
 /src/**/*.shim.ts
+
+# Deploy keys
+deploy_key
+deploy_key.pub
