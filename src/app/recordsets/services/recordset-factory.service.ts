@@ -15,7 +15,10 @@ export class RecordsetFactoryService {
 
   create(id: string, reducer: string, options?: RecordsetConstructorOptions): RecordsetService<any> {
     if (RecordsetFactoryService.recordsets[id]) {
-      // skip creating it if it's already created
+      // Reset it if it's already created
+      this.store$.dispatch(
+        RecordsetActions.reset(id, reducer, options)
+      );
       return RecordsetFactoryService.recordsets[id];
     }
 

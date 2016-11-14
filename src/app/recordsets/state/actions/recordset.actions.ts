@@ -5,6 +5,7 @@ import { RecordsetSorting, RecordsetReducer, RecordsetConstructorOptions } from 
 export class RecordsetActions {
 
   static CREATE         = '[RECORDSET] CREATE';
+  static RESET          = '[RECORDSET] RESET';
   static UPDATE         = '[RECORDSET] UPDATE';
   static DESTROY        = '[RECORDSET] DESTROY';
   static SET_FILTER     = '[RECORDSET] SET FILTER';
@@ -16,6 +17,17 @@ export class RecordsetActions {
   static create(id: string, reducer: string, options?: RecordsetConstructorOptions): Action {
     return {
       type: RecordsetActions.CREATE,
+      payload: {
+        id,
+        reducer,
+        options
+      }
+    };
+  }
+
+  static reset(id: string, reducer: string, options?: RecordsetConstructorOptions): Action {
+    return {
+      type: RecordsetActions.RESET,
       payload: {
         id,
         reducer,

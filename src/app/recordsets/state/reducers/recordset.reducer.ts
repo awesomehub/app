@@ -7,6 +7,7 @@ export function recordsetReducer(state: Recordset<any>, { type, payload }: Actio
   let newState;
   switch (type) {
     case RecordsetActions.CREATE:
+    case RecordsetActions.RESET:
       return new RecordsetRecord(payload.id, payload.reducer, payload.options);
 
     case RecordsetActions.SET_FILTER:

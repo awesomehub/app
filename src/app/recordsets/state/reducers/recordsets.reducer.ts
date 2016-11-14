@@ -17,6 +17,10 @@ export function recordsetsReducer(state: Recordsets = [], action: Action): Recor
       }
       return state;
 
+    case RecordsetActions.RESET:
+      return state
+        .map(recordset => recordset.id === action.payload.id ? recordsetReducer(undefined, action) : recordset);
+
     case RecordsetActions.DESTROY:
       return state
         .filter(recordset => recordset.id !== action.payload.id);
