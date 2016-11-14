@@ -38,7 +38,8 @@ deploy:
   skip_cleanup: true
   script: scripts/deploy.sh
   on:
-    branch: master
+    node: "6"
+    tags: true
 cache:
   directories:
   - $HOME/.yarn-cache
