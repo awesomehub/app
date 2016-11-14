@@ -34,6 +34,7 @@ after_script:
   - yarn run coveralls
 deploy:
   provider: script
+  skip_cleanup: true
   script: scripts/deploy.sh
   on:
     branch: master
