@@ -8,6 +8,7 @@ env:
     - ENCRYPTION_LABEL="abd15e3073ee"
     - GIT_NAME="Mohamed Kholy"
     - GIT_EMAIL="mkh117@gmail.com"
+    - GIT_REPO="awesomehub/awesomehub.github.io"
 before_install:
   # Install yarn
   - sudo apt-key adv --fetch-keys http://dl.yarnpkg.com/debian/pubkey.gpg

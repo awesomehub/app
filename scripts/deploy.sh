@@ -7,8 +7,6 @@ set -e
 TARGET_BRANCH="master"
 # Sync the contents of this directory where the site should have been built
 SOURCE_DIR="dist"
-# The target repo
-REPO="awesomehub/awesomehub.github.io"
 
 # When running on Travis we need to use SSH to deploy to GitHub
 #
@@ -26,12 +24,13 @@ REPO="awesomehub/awesomehub.github.io"
 echo ENCRYPTION_LABEL: $ENCRYPTION_LABEL
 echo GIT_NAME: $GIT_NAME
 echo GIT_EMAIL: $GIT_EMAIL
+echo GIT_REPO: $GIT_REPO
 
 ENCRYPTED_KEY_VAR=encrypted_${ENCRYPTION_LABEL}_key
 ENCRYPTED_IV_VAR=encrypted_${ENCRYPTION_LABEL}_iv
 ENCRYPTED_KEY=${!ENCRYPTED_KEY_VAR}
 ENCRYPTED_IV=${!ENCRYPTED_IV_VAR}
-REPO="git@github.com:${REPO}.git"
+REPO="git@github.com:${GIT_REPO}.git"
 
 # The `deploy_key.enc` file should have been added to the repo and should
 # have been created from the deploy private key using `travis encrypt-file`
