@@ -44,10 +44,10 @@ git config --global user.email "$GIT_EMAIL"
 
 REPO_NAME=$(basename $REPO)
 TARGET_DIR=$(mktemp -d /tmp/$REPO_NAME.XXXX)
-REV=$(git rev-parse HEAD)
+REV=$(git describe --always --contains --tags)
 git clone --branch ${TARGET_BRANCH} ${REPO} ${TARGET_DIR}
 rsync -rt --delete --exclude=".git" $SOURCE_DIR/ $TARGET_DIR/
 cd $TARGET_DIR
 git add -A .
-git commit --allow-empty -m "Built from commit $REV"
+git commit --allow-empty -m "Built from $REV"
 git push $REPO $TARGET_BRANCH
