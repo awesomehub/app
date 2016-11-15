@@ -4,7 +4,7 @@
 
 This repository contains the sources for AwesomeHub Angular 2 application.
 
-> Live production build can be found at [https://awesomehub.netlify.com](https://awesomehub.netlify.com)
+> Live production build can be found at [awesomehub.js.org](https://awesomehub.js.org)
 
 ## Prerequisites
 
