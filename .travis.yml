@@ -36,7 +36,7 @@ after_script:
 deploy:
   provider: script
   skip_cleanup: true
-  script: scripts/deploy.sh
+  script: scripts/deploy.sh $TRAVIS_TAG
   on:
     node: "6"
     tags: true

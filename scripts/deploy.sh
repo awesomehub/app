@@ -44,7 +44,8 @@ git config --global user.email "$GIT_EMAIL"
 
 REPO_NAME=$(basename $REPO)
 TARGET_DIR=$(mktemp -d /tmp/$REPO_NAME.XXXX)
-REV=$(git describe --always --contains --tags)
+REV=$(git rev-parse --short HEAD)
+[[ ! -z $1 ]] && REV="tag ${1}" || REV="commit $(git rev-parse --short HEAD)"
 git clone --branch ${TARGET_BRANCH} ${REPO} ${TARGET_DIR}
 rsync -rt --delete --exclude=".git" $SOURCE_DIR/ $TARGET_DIR/
 cd $TARGET_DIR
