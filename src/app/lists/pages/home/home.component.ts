@@ -59,5 +59,6 @@ export class ListsHomePage extends BasePage implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.query_.unsubscribe();
+    this.recordsetFactory.destroy('home-lists');
   }
 }

@@ -1,5 +1,5 @@
 import {
-  Component, OnInit,
+  Component, OnInit, OnDestroy,
   ViewEncapsulation, ChangeDetectionStrategy,
   Inject, forwardRef
 } from '@angular/core';
@@ -29,7 +29,7 @@ import { List, ListCategory, ListRepo } from '../../state';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ListsListCategoryPage extends BasePage implements OnInit {
+export class ListsListCategoryPage extends BasePage implements OnInit, OnDestroy {
 
   public title;
   public searchTitle;
@@ -97,5 +97,9 @@ export class ListsListCategoryPage extends BasePage implements OnInit {
         this.app.onActivation(this);
       }
     });
+  }
+
+  ngOnDestroy() {
+    this.recordsetFactory.destroy('category-repos');
   }
 }

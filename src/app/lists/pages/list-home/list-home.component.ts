@@ -1,4 +1,4 @@
-import { Component, ViewEncapsulation, ChangeDetectionStrategy, OnInit } from '@angular/core';
+import { Component, ViewEncapsulation, ChangeDetectionStrategy, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 
@@ -34,7 +34,7 @@ import { List, ListRepo } from '../../state';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ListsListHomePage extends BasePage implements OnInit {
+export class ListsListHomePage extends BasePage implements OnInit, OnDestroy {
 
   public title;
   public searchTitle;
@@ -87,5 +87,10 @@ export class ListsListHomePage extends BasePage implements OnInit {
       best: this.repos.best.fetch(),
       trending: this.repos.trending.fetch()
     };
+  }
+
+  ngOnDestroy() {
+    this.recordsetFactory.destroy('best-repos');
+    this.recordsetFactory.destroy('trending-repos');
   }
 }

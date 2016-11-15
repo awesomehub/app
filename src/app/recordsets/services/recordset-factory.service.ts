@@ -44,6 +44,9 @@ export class RecordsetFactoryService {
       throw new Error(`Unable to find recordset '${id}', it must be created first.`);
     }
 
-    return RecordsetFactoryService.recordsets[id].destroy();
+    this.store$.dispatch(
+      RecordsetActions.destroy(id)
+    );
+    delete RecordsetFactoryService.recordsets[id];
   }
 }

@@ -20,12 +20,6 @@ export class RecordsetService<T> {
     return this.recordset$;
   }
 
-  destroy(): void {
-    this.store$.dispatch(
-      RecordsetActions.destroy(this.id)
-    );
-  }
-
   filter(id: string, filter: any): void {
     this.store$.dispatch(
       RecordsetActions.setFilter(this.id, id, filter)

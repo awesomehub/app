@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewEncapsulation, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewEncapsulation, ChangeDetectionStrategy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 
@@ -24,7 +24,7 @@ import { List, ListRepo } from '../../state';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ListsListAllPage extends BasePage implements OnInit {
+export class ListsListAllPage extends BasePage implements OnInit, OnDestroy {
 
   public title;
   public searchTitle;
@@ -65,5 +65,9 @@ export class ListsListAllPage extends BasePage implements OnInit {
 
     // Set page title
     this.title = this.list.name + ' / All Repositories';
+  }
+
+  ngOnDestroy() {
+    this.recordsetFactory.destroy('all-repos');
   }
 }
