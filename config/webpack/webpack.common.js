@@ -29,16 +29,19 @@ module.exports = {
         test: /\.ts$/,
         loaders: [
           'angular2-router-loader?loader=system&genDir=src/app/compiled/src/app&aot=' + isProd
+        ],
+        exclude: [
+          /node_modules/
         ]
       },
       {
         test: /\.html$/,
-        loader: 'html',
+        loader: 'html-loader',
         exclude: helpers.root('src', 'public')
       },
       {
         test: /\.(png|jpe?g|gif|svg|woff|woff2|ttf|eot|ico)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
-        loader: 'file?name=assets/[name].[hash].[ext]'
+        loader: 'file-loader?name=assets/[name].[hash].[ext]'
       },
       {
         test: /\.css$/,
@@ -46,13 +49,13 @@ module.exports = {
         loader: ExtractTextPlugin
           .extract({
               fallbackLoader: "style-loader",
-              loader: ['css' + (isProd ? '?minimize' : ''), 'postcss']
+              loader: ['css-loader' + (isProd ? '?minimize' : ''), 'postcss-loader']
           })
       },
       {
         test: /\.css$/,
         include: helpers.root('src', 'app'),
-        loader: 'raw!postcss'
+        loader: 'raw-loader!postcss-loader'
       }
     ]
   },

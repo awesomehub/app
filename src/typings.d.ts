@@ -1,5 +1,3 @@
-declare var System: any;
-
 // .env variables
 declare var ENV: {
     APP_ENV: string;

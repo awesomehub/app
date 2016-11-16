@@ -39,9 +39,6 @@ module.exports = webpackMerge(commonConfig, {
     }),
     new webpack.NoErrorsPlugin(),
 
-    // TODO: Webpack 2 issue https://github.com/webpack/webpack/issues/2644
-    // new webpack.optimize.DedupePlugin(),
-
     new webpack.optimize.UglifyJsPlugin({
       comments: false,
       //beautify: true // for debuging production builds

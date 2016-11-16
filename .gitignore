@@ -1,19 +1,13 @@
 .env
 .idea/
+.log
 /coverage
 /node_modules
 /bower_components
 /dist
-/output
-/src/compiled
 /typings
 .DS_Store
 /src/public/assets/data
-/src/**/*.ngfactory.js
-/src/**/*.ngfactory.ts
-/src/**/*.ngfactory.js.map
-/src/**/*.js.map
-/src/**/*.shim.ts
 
 # Deploy keys
 deploy_key
