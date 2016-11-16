@@ -7,7 +7,7 @@ import { List, ListCategory } from '../../state';
   template: `
     <div *ngFor="let category of categories">
       <a [class]="'mdl-navigation__link level-'+depth" routerLinkActive="mdl-navigation__link--current"
-        [routerLink]="['/list', list.id, category.id]"
+        [routerLink]="['/list', list.id, category.path]"
         (click)="navigate.emit(category)">
             {{category.title}} <span class="category-count">{{category.count.all | number}}</span>
       </a>

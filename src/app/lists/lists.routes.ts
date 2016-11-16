@@ -1,7 +1,7 @@
 import { Routes } from '@angular/router';
 
 import { ListsHomePage, ListsListHomePage, ListsListAllPage, ListsListCategoryPage, ListsListAuxCategoriesPage } from './pages';
-import { HomeDataResolver, ListDataResolver } from './services';
+import { HomeDataResolver, ListDataResolver, ListCategoryDataResolver } from './services';
 
 export const routes: Routes = [
   {
@@ -31,6 +31,9 @@ export const routes: Routes = [
           },
           {
             path: ':category',
+            resolve: {
+              category: ListCategoryDataResolver
+            },
             component: ListsListCategoryPage,
           }
         ]

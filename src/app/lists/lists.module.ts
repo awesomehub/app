@@ -19,6 +19,7 @@ import {
   ListsSearchService,
   HomeDataResolver,
   ListDataResolver,
+  ListCategoryDataResolver,
   ListRepoScoreService
 } from './services';
 import { ListsEffects } from './state';
@@ -54,6 +55,7 @@ import { routes } from './lists.routes';
     ListsSearchService,
     HomeDataResolver,
     ListDataResolver,
+    ListCategoryDataResolver,
     ListRepoScoreService
   ]
 })
