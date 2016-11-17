@@ -82,6 +82,10 @@
   width: 6em;
 }
 
+.list-repo-inner .repo-desc.no-desc {
+  font-style: italic;
+}
+
 .list-repo-inner h4::after,
 .list-repo-inner .repo-desc::after {
   background: linear-gradient(to right, rgba(0,0,0,0) 0%, #fff 40%);

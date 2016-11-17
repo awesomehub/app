@@ -55,7 +55,9 @@ import { ListRepoScoreService } from '../../services';
           <a class="repo-author" href="//github.com/{{repo.author}}" title="Visit {{repo.author}}'s profile" target="_blank">{{repo.author}}</a>
           <a class="repo-name" href="//github.com/{{repo.author}}/{{repo.name}}" title="Visit {{repo.author}}/{{repo.name}}" target="_blank">{{repo.name}}</a>
         </h4>
-        <span class="repo-desc">{{repo.desc}}</span>
+        <span class="repo-desc" [class.no-desc]="!repo.desc.length">
+          {{repo.desc || 'No description provided.'}}
+        </span>
       </div>
     </div>
     <div class="mdl-card__actions mdl-card--border">
