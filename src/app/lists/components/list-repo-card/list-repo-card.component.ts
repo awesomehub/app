@@ -62,7 +62,7 @@ import { ListRepoScoreService } from '../../services';
     </div>
     <div class="mdl-card__actions mdl-card--border">
       <a class="meta" title="Language">
-        <i class="icon icon-code"></i> {{repo.lang}}
+        <i class="icon icon-code"></i> {{repo.lang || 'None'}}
       </a>
       <a class="meta" title="Last Pushed">
         <i class="icon icon-repo-pushed"></i> Pushed {{repo.pushed | momentFormat}}
