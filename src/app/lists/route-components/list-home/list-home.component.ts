@@ -2,7 +2,7 @@ import { Component, ViewEncapsulation, ChangeDetectionStrategy, OnInit, OnDestro
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 
-import { BasePage } from '../../../core';
+import { PrimaryRouteComponent } from '../../../core';
 import { ListsConfig } from '../../lists.config';
 import { RecordsetFactoryService, RecordsetService, Recordset } from '../../../recordsets';
 import { List, ListRepo } from '../../state';
@@ -34,11 +34,9 @@ import { List, ListRepo } from '../../state';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ListsListHomePage extends BasePage implements OnInit, OnDestroy {
+export class ListHomeRouteComponent extends PrimaryRouteComponent implements OnInit, OnDestroy {
 
   public title;
-  public searchTitle;
-
   public list: List;
   public repos: {
     best: RecordsetService<ListRepo>;
@@ -58,9 +56,6 @@ export class ListsListHomePage extends BasePage implements OnInit, OnDestroy {
     this.route.data.forEach(({list}) => {
       this.list = list;
     });
-
-    // Set page title
-    this.title = this.searchTitle = this.list.name;
 
     // Create repos recordsets
     this.repos = {

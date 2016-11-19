@@ -6,7 +6,7 @@ import { Store } from '@ngrx/store';
 
 import { AppState } from './app.state';
 import { AppConfig } from './app.config';
-import { TitleService, PageComponent, AuxDrawerComponent, getRouterPath } from './core';
+import { TitleService, PrimaryRouteComponent, DrawerRouteComponent, getRouterPath } from './core';
 
 // App-wide Styles
 import '../public/assets/css/main.css';
@@ -20,7 +20,7 @@ import '../public/assets/css/main.css';
 export class AppComponent implements OnInit {
 
   public title: string;
-  public drawer: AuxDrawerComponent;
+  public drawer: DrawerRouteComponent;
 
   @ViewChild('layout') private layout: ElementRef;
   @ViewChild('drawerButton') private drawerButton: ElementRef;
@@ -92,9 +92,9 @@ export class AppComponent implements OnInit {
   /**
    * Triggered when the main router outlet is activated
    *
-   * @param component PageComponent
+   * @param component PrimaryRouteComponent
    */
-  onActivation(component: PageComponent) {
+  onActivation(component: PrimaryRouteComponent) {
     this.setPageTitle(component.title);
   }
 
@@ -103,23 +103,23 @@ export class AppComponent implements OnInit {
    *
    * @param component PageComponent
    */
-  onDeactivation(component: PageComponent) { }
+  onDeactivation(component: PrimaryRouteComponent) { }
 
   /**
    * Triggered when the aux router outlet is activated
    *
-   * @param component AuxDrawerComponent
+   * @param component DrawerRouteComponent
    */
-  onAuxActivation(component: AuxDrawerComponent) {
+  onAuxActivation(component: DrawerRouteComponent) {
     this.drawer = component;
   }
 
   /**
    * Triggered when the main router outlet is deactivated
    *
-   * @param component AuxDrawerComponent
+   * @param component DrawerRouteComponent
    */
-  onAuxDeactivation(component: AuxDrawerComponent) {
+  onAuxDeactivation(component: DrawerRouteComponent) {
     this.drawer = null;
   }
 }

@@ -1,6 +1,10 @@
 import { Routes } from '@angular/router';
 
-import { ListsHomePage, ListsListHomePage, ListsListAllPage, ListsListCategoryPage, ListsListAuxCategoriesPage, SearchBarRouteComponent } from './pages';
+import {
+  HomeRouteComponent, SearchBarRouteComponent,
+  ListHomeRouteComponent, ListAllRouteComponent,
+  ListCategoryRouteComponent, ListCategoriesRouteComponent
+} from './route-components';
 import { HomeDataResolver, ListDataResolver, ListCategoryDataResolver } from './services';
 
 export const routes: Routes = [
@@ -13,7 +17,7 @@ export const routes: Routes = [
     children: [
       {
         path: '',
-        component: ListsHomePage
+        component: HomeRouteComponent
       },
       {
         path: '',
@@ -33,25 +37,25 @@ export const routes: Routes = [
         children: [
           {
             path: '',
-            component: ListsListHomePage,
+            component: ListHomeRouteComponent,
           },
           {
             path: 'all',
-            component: ListsListAllPage
+            component: ListAllRouteComponent
           },
           {
             path: ':category',
             resolve: {
               category: ListCategoryDataResolver
             },
-            component: ListsListCategoryPage,
+            component: ListCategoryRouteComponent,
           }
         ]
       },
       {
         path: '',
-        component: ListsListAuxCategoriesPage,
-        outlet: 'aux-drawer'
+        component: ListCategoriesRouteComponent,
+        outlet: 'drawer'
       }
     ],
 

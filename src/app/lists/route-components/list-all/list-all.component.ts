@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy, ViewEncapsulation, ChangeDetectionStrateg
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 
-import { BasePage } from '../../../core';
+import { PrimaryRouteComponent } from '../../../core';
 import { ListsConfig } from '../../lists.config';
 import { RecordsetFactoryService, RecordsetService, Recordset } from '../../../recordsets';
 import { List, ListRepo } from '../../state';
@@ -24,11 +24,9 @@ import { List, ListRepo } from '../../state';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ListsListAllPage extends BasePage implements OnInit, OnDestroy {
+export class ListAllRouteComponent extends PrimaryRouteComponent implements OnInit, OnDestroy {
 
   public title;
-  public searchTitle;
-
   public list: List;
 
   public recordset: RecordsetService<ListRepo>;
@@ -59,9 +57,6 @@ export class ListsListAllPage extends BasePage implements OnInit, OnDestroy {
 
     // Set recordset observable
     this.recordset$ = this.recordset.fetch();
-
-    // No need to add category name to the search title
-    this.searchTitle = this.list.name;
 
     // Set page title
     this.title = this.list.name + ' / All Repositories';

@@ -4,7 +4,7 @@ import { Subscription } from 'rxjs/Subscription';
 import { Component, OnInit, OnDestroy, ViewEncapsulation, ChangeDetectionStrategy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
-import { BasePage } from '../../../core';
+import { PrimaryRouteComponent } from '../../../core';
 import { ListsConfig } from '../../lists.config';
 import { RecordsetFactoryService, RecordsetService, Recordset } from '../../../recordsets';
 import { ListCollection, ListSummary } from '../../state';
@@ -22,7 +22,7 @@ import { ListCollection, ListSummary } from '../../state';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ListsHomePage extends BasePage implements OnInit, OnDestroy {
+export class HomeRouteComponent extends PrimaryRouteComponent implements OnInit, OnDestroy {
   public title = 'Home';
   public recordset: RecordsetService<ListSummary>;
   public recordset$: Observable<Recordset<ListSummary>>;

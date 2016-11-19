@@ -4,23 +4,18 @@ import { EffectsModule } from '@ngrx/effects';
 
 import { SharedModule } from '../shared';
 import {
-  ListsHomePage,
-  ListsListHomePage,
-  ListsListAllPage,
-  ListsListCategoryPage,
-  ListsListAuxCategoriesPage,
-  SearchBarRouteComponent
-} from './pages';
+  HomeRouteComponent, SearchBarRouteComponent,
+  ListHomeRouteComponent, ListAllRouteComponent,
+  ListCategoryRouteComponent, ListCategoriesRouteComponent
+} from './route-components';
 import {
   ListsComponent, ListCardComponent, ListCategoriesComponent,
   ListReposComponent, ListRepoCardComponent
 } from './components';
 import { ListRepoScoreStyleDirective } from './directives';
 import {
-  HomeDataResolver,
-  ListDataResolver,
-  ListCategoryDataResolver,
-  ListRepoScoreService
+  HomeDataResolver, ListDataResolver,
+  ListCategoryDataResolver, ListRepoScoreService
 } from './services';
 import { ListsEffects } from './state';
 import { routes } from './lists.routes';
@@ -32,13 +27,13 @@ import { routes } from './lists.routes';
     EffectsModule.run(ListsEffects)
   ],
   declarations: [
-    // Pages
-    ListsHomePage,
-    ListsListHomePage,
-    ListsListAllPage,
-    ListsListCategoryPage,
-    ListsListAuxCategoriesPage,
+    // Route Components
+    HomeRouteComponent,
     SearchBarRouteComponent,
+    ListHomeRouteComponent,
+    ListAllRouteComponent,
+    ListCategoryRouteComponent,
+    ListCategoriesRouteComponent,
     // Components
     ListsComponent,
     ListCardComponent,

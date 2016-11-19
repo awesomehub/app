@@ -1,12 +1,8 @@
-import {
-  Component, OnInit,
-  ViewEncapsulation, ChangeDetectionStrategy,
-  Inject, forwardRef
-} from '@angular/core';
+import { Component, OnInit, ViewEncapsulation, ChangeDetectionStrategy, Inject, forwardRef } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 import { AppComponent } from '../../../app.component';
-import { BaseAuxDrawerPage } from '../../../core';
+import { DrawerRouteComponent } from '../../../core';
 import { List } from '../../state';
 
 @Component({
@@ -27,7 +23,7 @@ import { List } from '../../state';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ListsListAuxCategoriesPage extends BaseAuxDrawerPage implements OnInit {
+export class ListCategoriesRouteComponent extends DrawerRouteComponent implements OnInit {
 
   public title;
   public list: List;

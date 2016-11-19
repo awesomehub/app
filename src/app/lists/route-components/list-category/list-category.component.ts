@@ -1,13 +1,9 @@
-import {
-  Component, OnInit, OnDestroy,
-  ViewEncapsulation, ChangeDetectionStrategy,
-  Inject, forwardRef
-} from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Component, OnInit, OnDestroy, ViewEncapsulation, ChangeDetectionStrategy, Inject, forwardRef } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 
 import { AppComponent } from '../../../app.component';
-import { BasePage } from '../../../core';
+import { PrimaryRouteComponent } from '../../../core';
 import { ListsConfig } from '../../lists.config';
 import { RecordsetFactoryService, RecordsetService, Recordset } from '../../../recordsets';
 import { List, ListCategory, ListRepo } from '../../state';
@@ -29,11 +25,9 @@ import { List, ListCategory, ListRepo } from '../../state';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ListsListCategoryPage extends BasePage implements OnInit, OnDestroy {
+export class ListCategoryRouteComponent extends PrimaryRouteComponent implements OnInit, OnDestroy {
 
   public title;
-  public searchTitle;
-
   public list: List;
   public category: ListCategory;
 
@@ -43,9 +37,7 @@ export class ListsListCategoryPage extends BasePage implements OnInit, OnDestroy
   constructor(
     private route: ActivatedRoute,
     private recordsetFactory: RecordsetFactoryService,
-    private router: Router,
-    @Inject(forwardRef(() => AppComponent)) private app: AppComponent
-  ) {
+    @Inject(forwardRef(() => AppComponent)) private app: AppComponent) {
     super();
   }
 
@@ -67,9 +59,6 @@ export class ListsListCategoryPage extends BasePage implements OnInit, OnDestroy
         });
         this.recordset$ = this.recordset.fetch();
       }
-
-      // No need to add category name to the search title
-      this.searchTitle = this.list.name;
 
       // Re-invoke Outlet deactivation event since it's not invoked when navigating
       //  within the same component
