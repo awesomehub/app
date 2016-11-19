@@ -1,9 +1,12 @@
-import { Component, OnInit, ViewEncapsulation, ChangeDetectionStrategy, ViewChild, ElementRef, Renderer } from '@angular/core';
-import { Router, Event, NavigationEnd } from '@angular/router';
+import 'rxjs/add/operator/let';
+import 'rxjs/add/operator/skip';
 
+import { Component, OnInit, ViewEncapsulation, ChangeDetectionStrategy, ViewChild, ElementRef, Renderer } from '@angular/core';
+import { Store } from '@ngrx/store';
+
+import { AppState } from './app.state';
 import { AppConfig } from './app.config';
-import { TitleService, PageComponent, AuxDrawerComponent } from './core';
-import { ListsSearchService } from './lists';
+import { TitleService, PageComponent, AuxDrawerComponent, getRouterPath } from './core';
 
 // App-wide Styles
 import '../public/assets/css/main.css';
@@ -23,21 +26,20 @@ export class AppComponent implements OnInit {
   @ViewChild('drawerButton') private drawerButton: ElementRef;
 
   constructor (
-    private router: Router,
+    private store$: Store<AppState>,
     private titleService: TitleService,
-    public searchService: ListsSearchService,
-    public renderer: Renderer,
-  ) {}
+    private renderer: Renderer) { }
 
   ngOnInit() {
-    this.router.events.subscribe((e: Event) => {
-      if (e instanceof NavigationEnd) {
-        // Run MDL componentHandler for any new elements added dynamically
-        if (e.id > 1 && 'componentHandler' in window) {
+    // Run MDL after each navigation to update any new elements added (Skip on app startup)
+    this.store$
+      .let(getRouterPath())
+      .skip(1)
+      .subscribe(url => {
+        if ('componentHandler' in window) {
           window.componentHandler.upgradeAllRegistered();
         }
-      }
-    });
+      });
 
     this.setHeaderTitle(AppConfig.NAME);
   }
@@ -88,25 +90,12 @@ export class AppComponent implements OnInit {
   }
 
   /**
-   * Updates the Search title.
-   *
-   *  @param title string The Search title
-   */
-  setSearchTitle(title: string) {
-    this.searchService.setSearchTitle(title);
-  }
-
-  /**
    * Triggered when the main router outlet is activated
    *
    * @param component PageComponent
    */
   onActivation(component: PageComponent) {
     this.setPageTitle(component.title);
-
-    if ('searchTitle' in component) {
-      this.setSearchTitle(component.searchTitle);
-    }
   }
 
   /**

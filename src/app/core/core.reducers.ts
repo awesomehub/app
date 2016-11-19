@@ -18,6 +18,7 @@ import { combineReducers } from '@ngrx/store';
 /**
  * Import reducer symbols
  */
+import { routerReducer } from '@ngrx/router-store';
 import { resetReducer } from './state';
 import { recordsetsReducer } from '../recordsets';
 
@@ -34,12 +35,13 @@ export const coreMetaReducers: MetaReducers = [ combineReducers ];
 // The following will be dropped during production build
 // Any modules required in here won't be part of the bundle
 if ('production' !== ENV.APP_ENV) {
-    const { storeFreeze } = <typeof StoreFreeze>require('ngrx-store-freeze');
-    const { storeLogger } = <typeof StoreLogger>require('ngrx-store-logger');
+  const { storeFreeze } = <typeof StoreFreeze>require('ngrx-store-freeze');
+  const { storeLogger } = <typeof StoreLogger>require('ngrx-store-logger');
 
-    coreMetaReducers.unshift(storeFreeze, storeLogger({ collapsed: true }), resetReducer);
+  coreMetaReducers.unshift(storeFreeze, storeLogger({ collapsed: true }), resetReducer);
 }
 
 export const coreReducers: Reducers = {
-    recordsets: recordsetsReducer,
+  router: routerReducer,
+  recordsets: recordsetsReducer,
 };

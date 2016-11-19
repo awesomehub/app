@@ -1,4 +1,3 @@
-export * from './list-search-bar';
 export * from './lists';
 export * from './list-card';
 export * from './list-categories';

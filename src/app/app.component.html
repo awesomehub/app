@@ -17,11 +17,7 @@
          (click)="toggleDrawer()">
         <i class="icon icon-bars"></i>
       </a>
-      <list-search-bar
-        [placeholder]="searchService.searchTitle"
-        [query]="searchService.query"
-        (dosearch)="searchService.search($event)">
-      </list-search-bar>
+      <router-outlet name="header-bar"></router-outlet>
     </div>
   </header>
 

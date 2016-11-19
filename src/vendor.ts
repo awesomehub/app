@@ -2,13 +2,16 @@
 import '@angular/platform-browser';
 import '@angular/core';
 import '@angular/common';
+import '@angular/forms';
 import '@angular/http';
 import '@angular/router';
 
 // NgRx
 import '@ngrx/core/add/operator/enterZone';
+import '@ngrx/core/add/operator/select';
 import '@ngrx/effects';
 import '@ngrx/store';
+import '@ngrx/router-store';
 
 // RxJS
 import 'rxjs/add/observable/merge';
@@ -22,6 +25,7 @@ import 'rxjs/add/operator/mergeMap';
 import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/operator/let';
 import 'rxjs/add/operator/take';
+import 'rxjs/add/operator/skip';
 import 'rxjs/add/operator/startWith';
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/combineLatest';

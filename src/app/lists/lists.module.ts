@@ -8,15 +8,15 @@ import {
   ListsListHomePage,
   ListsListAllPage,
   ListsListCategoryPage,
-  ListsListAuxCategoriesPage
+  ListsListAuxCategoriesPage,
+  SearchBarRouteComponent
 } from './pages';
 import {
-  ListSearchBarComponent, ListsComponent, ListCardComponent,
-  ListCategoriesComponent, ListReposComponent, ListRepoCardComponent
+  ListsComponent, ListCardComponent, ListCategoriesComponent,
+  ListReposComponent, ListRepoCardComponent
 } from './components';
 import { ListRepoScoreStyleDirective } from './directives';
 import {
-  ListsSearchService,
   HomeDataResolver,
   ListDataResolver,
   ListCategoryDataResolver,
@@ -38,8 +38,8 @@ import { routes } from './lists.routes';
     ListsListAllPage,
     ListsListCategoryPage,
     ListsListAuxCategoriesPage,
+    SearchBarRouteComponent,
     // Components
-    ListSearchBarComponent,
     ListsComponent,
     ListCardComponent,
     ListCategoriesComponent,
@@ -48,11 +48,7 @@ import { routes } from './lists.routes';
     // Directives
     ListRepoScoreStyleDirective
   ],
-  exports: [
-    ListSearchBarComponent
-  ],
   providers: [
-    ListsSearchService,
     HomeDataResolver,
     ListDataResolver,
     ListCategoryDataResolver,
