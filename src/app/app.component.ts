@@ -90,7 +90,7 @@ export class AppComponent implements OnInit {
   }
 
   /**
-   * Triggered when the main router outlet is activated
+   * Triggered when the main outlet is activated
    *
    * @param component PrimaryRouteComponent
    */
@@ -99,27 +99,27 @@ export class AppComponent implements OnInit {
   }
 
   /**
-   * Triggered when the main router outlet is deactivated
+   * Triggered when the main outlet is deactivated
    *
    * @param component PageComponent
    */
   onDeactivation(component: PrimaryRouteComponent) { }
 
   /**
-   * Triggered when the aux router outlet is activated
+   * Triggered when the drawer outlet is activated
    *
    * @param component DrawerRouteComponent
    */
-  onAuxActivation(component: DrawerRouteComponent) {
+  onDrawerActivation(component: DrawerRouteComponent) {
     this.drawer = component;
   }
 
   /**
-   * Triggered when the main router outlet is deactivated
+   * Triggered when the drawer outlet is deactivated
    *
    * @param component DrawerRouteComponent
    */
-  onAuxDeactivation(component: DrawerRouteComponent) {
+  onDrawerDeactivation(component: DrawerRouteComponent) {
     this.drawer = null;
   }
 }

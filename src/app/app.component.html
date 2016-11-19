@@ -27,7 +27,7 @@
   <!-- Drawer outlet -->
   <div class="mdl-layout__drawer drawer">
     <span *ngIf="drawer" class="mdl-layout__title">{{drawer.title}}</span>
-    <router-outlet name="drawer" (activate)='onAuxActivation($event)' (deactivate)='onAuxDeactivation($event)'></router-outlet>
+    <router-outlet name="drawer" (activate)='onDrawerActivation($event)' (deactivate)='onDrawerDeactivation($event)'></router-outlet>
   </div>
 
   <!-- Main -->

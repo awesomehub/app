@@ -6,7 +6,7 @@ import { DrawerRouteComponent } from '../../../core';
 import { List } from '../../state';
 
 @Component({
-  styleUrls: [ './list-aux-categories.component.css' ],
+  styleUrls: [ './list-categories.component.css' ],
   template: `
     <nav class="list-navigation mdl-navigation">
       <a class="mdl-navigation__link" routerLinkActive="mdl-navigation__link--current"
