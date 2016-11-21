@@ -20,7 +20,7 @@ import { ListSummary } from '../../state';
     </list-card>
 
     <div *ngIf="recordset.set.length == 0 && recordset.updated" class="mdl-cell mdl-cell--12-col no-lists">
-      <i class="icon icon-frown-o"></i> Nothing found!
+      <i class="icon icon-frown-o"></i> No lists found!
     </div>
 
     <spinner class="mdl-cell mdl-cell--12-col" [active]="!recordset.updated"></spinner>
