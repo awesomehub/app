@@ -11,7 +11,7 @@ import { ListsConfig } from '../../lists.config';
 import { ListCollectionActions, ListCollection, getListCollection } from '../../state';
 
 @Injectable()
-export class HomeDataResolver implements Resolve<ListCollection> {
+export class ListsDataResolver implements Resolve<ListCollection> {
   constructor(private store$: Store<AppState>) {}
 
   resolve(route: ActivatedRouteSnapshot): Promise<ListCollection> {

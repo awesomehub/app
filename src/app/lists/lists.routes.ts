@@ -1,30 +1,36 @@
 import { Routes } from '@angular/router';
 
 import {
-  HomeRouteComponent, SearchBarRouteComponent,
-  ListHomeRouteComponent, ListAllRouteComponent,
-  ListCategoryRouteComponent, ListCategoriesRouteComponent
+  HomeRouteComponent, SearchRouteComponent, SearchBarRouteComponent,
+  ListHomeRouteComponent, ListAllRouteComponent, ListCategoryRouteComponent, ListCategoriesRouteComponent
 } from './route-components';
-import { HomeDataResolver, ListDataResolver, ListCategoryDataResolver } from './services';
+import { ListsDataResolver, ListDataResolver, ListCategoryDataResolver } from './services';
 
 export const routes: Routes = [
   {
     path: '',
     pathMatch: 'full',
+    component: HomeRouteComponent,
     resolve: {
-      collection: HomeDataResolver
+      collection: ListsDataResolver
+    }
+  },
+  {
+    path: 'search',
+    component: SearchRouteComponent,
+    resolve: {
+      collection: ListsDataResolver
+    }
+  },
+  {
+    path: '',
+    component: SearchBarRouteComponent,
+    data: {
+      searchRoute: 'search',
+      searchRouteComponent: SearchRouteComponent,
+      cancelRoute: ''
     },
-    children: [
-      {
-        path: '',
-        component: HomeRouteComponent
-      },
-      {
-        path: '',
-        component: SearchBarRouteComponent,
-        outlet: 'header-bar'
-      }
-    ]
+    outlet: 'header-bar'
   },
   {
     path: 'list/:id',

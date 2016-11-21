@@ -4,9 +4,8 @@ import { EffectsModule } from '@ngrx/effects';
 
 import { SharedModule } from '../shared';
 import {
-  HomeRouteComponent, SearchBarRouteComponent,
-  ListHomeRouteComponent, ListAllRouteComponent,
-  ListCategoryRouteComponent, ListCategoriesRouteComponent
+  HomeRouteComponent, SearchRouteComponent, SearchBarRouteComponent,
+  ListHomeRouteComponent, ListAllRouteComponent, ListCategoryRouteComponent, ListCategoriesRouteComponent
 } from './route-components';
 import {
   ListsComponent, ListCardComponent, ListCategoriesComponent,
@@ -14,7 +13,7 @@ import {
 } from './components';
 import { ListRepoScoreStyleDirective } from './directives';
 import {
-  HomeDataResolver, ListDataResolver,
+  ListsDataResolver, ListDataResolver,
   ListCategoryDataResolver, ListRepoScoreService
 } from './services';
 import { ListsEffects } from './state';
@@ -29,6 +28,7 @@ import { routes } from './lists.routes';
   declarations: [
     // Route Components
     HomeRouteComponent,
+    SearchRouteComponent,
     SearchBarRouteComponent,
     ListHomeRouteComponent,
     ListAllRouteComponent,
@@ -44,7 +44,7 @@ import { routes } from './lists.routes';
     ListRepoScoreStyleDirective
   ],
   providers: [
-    HomeDataResolver,
+    ListsDataResolver,
     ListDataResolver,
     ListCategoryDataResolver,
     ListRepoScoreService

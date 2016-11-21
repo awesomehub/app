@@ -11,7 +11,7 @@ import { ListCollection, ListSummary } from '../../state';
 @Component({
   template: `
     <content transparent="true" layout="compact">
-      <h3 class="content-heading">Browse Lists</h3>
+      <h3 class="content-heading">{{title}}</h3>
       <lists
         [recordset]="recordset$ | async"
         (needMore)="recordset.paginate()">
@@ -21,8 +21,8 @@ import { ListCollection, ListSummary } from '../../state';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class HomeRouteComponent extends PrimaryRouteComponent implements OnInit, OnDestroy {
-  public title = 'Home';
+export class SearchRouteComponent extends PrimaryRouteComponent implements OnInit, OnDestroy {
+  public title = 'Search results';
   public recordset: RecordsetService<ListSummary>;
   public recordset$: Observable<Recordset<ListSummary>>;
 
@@ -35,16 +35,25 @@ export class HomeRouteComponent extends PrimaryRouteComponent implements OnInit,
     let collection: ListCollection = this.route.snapshot.data['collection'];
 
     // Create the lists recordset
-    this.recordset = this.recordsetFactory.create('browse-lists', ListsConfig.LIST_SUMMARY_RECORDSET, {
+    this.recordset = this.recordsetFactory.create('search-lists', ListsConfig.LIST_SUMMARY_RECORDSET, {
       parent: collection.id,
       size: ListsConfig.LISTS_PER_PAGE
     });
 
     // Fetch the recordset observable
     this.recordset$ = this.recordset.fetch();
+
+    // Listen to query changes
+    this.route.params.forEach(({q}) => {
+        if (q) {
+          this.recordset.filter('q', q);
+        } else {
+          this.recordset.unfilter('q');
+        }
+      });
   }
 
   ngOnDestroy() {
-    this.recordsetFactory.destroy('browse-lists');
+    this.recordsetFactory.destroy('search-lists');
   }
 }
