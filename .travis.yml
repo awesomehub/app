@@ -39,7 +39,6 @@ deploy:
   script: scripts/deploy.sh $TRAVIS_TAG
   on:
     node: "6"
-    tags: true
 cache:
   directories:
   - $HOME/.yarn-cache
