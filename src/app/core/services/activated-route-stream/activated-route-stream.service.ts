@@ -4,28 +4,28 @@ import 'rxjs/add/operator/distinctUntilChanged';
 import { Observable } from 'rxjs/Observable';
 
 import { Injectable } from '@angular/core';
-import { Router, ActivatedRoute, Event, NavigationEnd } from '@angular/router';
+import { Router, ActivatedRouteSnapshot, Event, NavigationEnd } from '@angular/router';
 
 @Injectable()
 export class ActivatedRouteStream {
 
-  private stream: Observable<ActivatedRoute>;
+  private stream: Observable<ActivatedRouteSnapshot>;
 
   constructor(private router: Router) {
     this.stream = this.router.events
       .filter((e: Event) => e instanceof NavigationEnd)
       .switchMap(e => {
-        return this.getChildRoutes(this.router.routerState.root);
+        return this.getChildRoutes(this.router.routerState.snapshot.root);
       })
       .distinctUntilChanged();
   }
 
-  getOutletStream(outlet: string = 'primary'): Observable<ActivatedRoute> {
+  getOutletStream(outlet: string = 'primary'): Observable<ActivatedRouteSnapshot> {
     return this.stream
       .filter(ar => ar.outlet === outlet);
   }
 
-  private getChildRoutes(root: ActivatedRoute) {
+  private getChildRoutes(root: ActivatedRouteSnapshot) {
     let routes = [];
     for (let route of root.children) {
       if (route.component) {
