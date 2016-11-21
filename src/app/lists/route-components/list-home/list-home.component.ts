@@ -55,6 +55,7 @@ export class ListHomeRouteComponent extends PrimaryRouteComponent implements OnI
     // Fetch resolved list
     this.route.data.forEach(({list}) => {
       this.list = list;
+      this.title = this.list.name;
     });
 
     // Create repos recordsets
