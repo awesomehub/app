@@ -83,10 +83,10 @@ function _replaceBootstrap(fileName, source, plugin) {
         write: function (path, content) { return Promise.resolve(sourceText = content); }
     }).then(function () { return sourceText; });
 }
-function _transpile(plugin, filePath, sourceText) {
+function _transpile(plugin, fileName, sourceText) {
     var program = plugin.program;
     if (plugin.typeCheck) {
-        var sourceFile = program.getSourceFile(filePath);
+        var sourceFile = program.getSourceFile(fileName);
         var diagnostics = program.getSyntacticDiagnostics(sourceFile)
             .concat(program.getSemanticDiagnostics(sourceFile))
             .concat(program.getDeclarationDiagnostics(sourceFile));
@@ -101,10 +101,13 @@ function _transpile(plugin, filePath, sourceText) {
             throw new Error(message);
         }
     }
-    var result = ts.transpileModule(sourceText, {
-        compilerOptions: plugin.compilerOptions,
-        fileName: filePath
+    // Force a few compiler options to make sure we get the result we want.
+    var compilerOptions = Object.assign({}, plugin.compilerOptions, {
+        inlineSources: true,
+        inlineSourceMap: false,
+        sourceRoot: plugin.basePath
     });
+    var result = ts.transpileModule(sourceText, { compilerOptions: compilerOptions, fileName: fileName });
     return {
         outputText: result.outputText,
         sourceMap: JSON.parse(result.sourceMapText)
@@ -118,10 +121,10 @@ function ngcLoader(source) {
     // We must verify that AotPlugin is an instance of the right class.
     if (plugin && plugin instanceof plugin_1.AotPlugin) {
         var cb_1 = this.async();
-        plugin.done
+        Promise.resolve()
             .then(function () { return _replaceBootstrap(_this.resource, source, plugin); })
             .then(function (sourceText) {
-            var result = _transpile(plugin, _this.resource, sourceText);
+            var result = _transpile(plugin, _this.resourcePath, sourceText);
             cb_1(null, result.outputText, result.sourceMap);
         })
             .catch(function (err) { return cb_1(err); });
@@ -136,4 +139,4 @@ function ngcLoader(source) {
     }
 }
 exports.ngcLoader = ngcLoader;
-//# sourceMappingURL=/Users/hans/Sources/angular-cli/packages/webpack/src/loader.js.map
+//# sourceMappingURL=/Users/hansl/Sources/angular-cli/packages/webpack/src/loader.js.map

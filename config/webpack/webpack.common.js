@@ -20,20 +20,12 @@ module.exports = {
   },
 
   resolve: {
-    extensions: ['.js', '.ts']
+    extensions: ['.js', '.ts'],
+    modules: ['node_modules', helpers.root('src')]
   },
 
   module: {
     rules: [
-      {
-        test: /\.ts$/,
-        loaders: [
-          'angular2-router-loader?loader=system&genDir=src/app/compiled/src/app&aot=' + isProd
-        ],
-        exclude: [
-          /node_modules/
-        ]
-      },
       {
         test: /\.html$/,
         loader: 'html-loader',
