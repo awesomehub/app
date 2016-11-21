@@ -9,7 +9,7 @@ import { SharedModule } from '../shared';
 import { RecordsetsModule } from '../recordsets';
 import { ScrollSpyModule } from '../scroll-spy';
 
-import { ApiService } from './services';
+import { ApiService, ActivatedRouteStream } from './services';
 import { Error404Component } from './route-components';
 import { LoadingIndicatorComponent } from './components';
 import { routes } from './core.routes';
@@ -35,7 +35,8 @@ import { routes } from './core.routes';
   ],
   providers: [
     TitleService,
-    ApiService
+    ApiService,
+    ActivatedRouteStream
   ]
 })
 export class CoreModule {
