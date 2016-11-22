@@ -4,7 +4,7 @@ import 'rxjs/add/operator/distinctUntilChanged';
 import { Observable } from 'rxjs/Observable';
 
 import { Injectable } from '@angular/core';
-import { Router, ActivatedRouteSnapshot, Event, NavigationEnd } from '@angular/router';
+import { Router, ActivatedRouteSnapshot, Event, NavigationEnd, PRIMARY_OUTLET } from '@angular/router';
 
 @Injectable()
 export class ActivatedRouteStream {
@@ -20,7 +20,7 @@ export class ActivatedRouteStream {
       .distinctUntilChanged();
   }
 
-  getOutletStream(outlet: string = 'primary'): Observable<ActivatedRouteSnapshot> {
+  getOutletStream(outlet: string = PRIMARY_OUTLET): Observable<ActivatedRouteSnapshot> {
     return this.stream
       .filter(ar => ar.outlet === outlet);
   }
