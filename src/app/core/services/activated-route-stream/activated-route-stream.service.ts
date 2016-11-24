@@ -4,17 +4,21 @@ import 'rxjs/add/operator/distinctUntilChanged';
 import { Observable } from 'rxjs/Observable';
 
 import { Injectable } from '@angular/core';
-import { Router, ActivatedRouteSnapshot, Event, NavigationEnd, PRIMARY_OUTLET } from '@angular/router';
+import { Router, ActivatedRouteSnapshot, PRIMARY_OUTLET } from '@angular/router';
+import { Store } from '@ngrx/store';
+
+import { AppState } from "../../../app.state";
+import { getRouterPath } from "../../state";
 
 @Injectable()
 export class ActivatedRouteStream {
 
   private stream: Observable<ActivatedRouteSnapshot>;
 
-  constructor(private router: Router) {
-    this.stream = this.router.events
-      .filter((e: Event) => e instanceof NavigationEnd)
-      .switchMap(e => {
+  constructor(private router: Router, private store$: Store<AppState>) {
+    this.stream = this.store$
+      .let(getRouterPath())
+      .switchMap(() => {
         return this.getChildRoutes(this.router.routerState.snapshot.root);
       })
       .distinctUntilChanged();
