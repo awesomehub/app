@@ -10,8 +10,7 @@ import { HeaderBarRouteComponent, getRouterPath } from '../../../core';
 
 @Component({
   template: `
-    <input #input type="search"
-      [placeholder]="'Search Lists...'"
+    <input #input type="search" placeholder="Search Lists..."
       [value]="query"
       (input)="search($event.target.value)" />
 `,
