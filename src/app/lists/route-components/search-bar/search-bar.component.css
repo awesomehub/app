@@ -4,7 +4,7 @@
   margin: 0 auto;
 }
 
-.list-search-bar > input.search-input {
+.list-search-bar > input {
   width: 100%;
   font-size: 1.6rem;
   padding: 16pt;
@@ -14,7 +14,7 @@
   color: rgba(255, 255, 255, 0.5);
 }
 
-.list-search-bar > input.search-input:focus {
+.list-search-bar > input:focus {
   background: rgba(0, 0, 0, 0.12);
   color: rgba(255, 255, 255, 0.7);
 }

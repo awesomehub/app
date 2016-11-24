@@ -6,31 +6,44 @@ import {
 } from './route-components';
 import { ListsDataResolver, ListDataResolver, ListCategoryDataResolver } from './services';
 
+const listsSearchBarRoute = {
+  path: '',
+  component: SearchBarRouteComponent,
+  data: {
+    searchRoute: 'search',
+    searchRouteComponent: SearchRouteComponent,
+    cancelRoute: ''
+  },
+  outlet: 'header-bar'
+};
+
 export const routes: Routes = [
   {
     path: '',
     pathMatch: 'full',
-    component: HomeRouteComponent,
-    resolve: {
-      collection: ListsDataResolver
-    }
+    children: [
+      {
+        path: '',
+        component: HomeRouteComponent,
+        resolve: {
+          collection: ListsDataResolver
+        }
+      },
+      listsSearchBarRoute
+    ]
   },
   {
     path: 'search',
-    component: SearchRouteComponent,
-    resolve: {
-      collection: ListsDataResolver
-    }
-  },
-  {
-    path: '',
-    component: SearchBarRouteComponent,
-    data: {
-      searchRoute: 'search',
-      searchRouteComponent: SearchRouteComponent,
-      cancelRoute: ''
-    },
-    outlet: 'header-bar'
+    children: [
+      {
+        path: '',
+        component: SearchRouteComponent,
+        resolve: {
+          collection: ListsDataResolver
+        }
+      },
+      listsSearchBarRoute
+    ]
   },
   {
     path: 'list/:id',

@@ -1,6 +1,6 @@
 import 'rxjs/add/operator/withLatestFrom';
 
-import { Component, OnInit, ViewEncapsulation, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation, ChangeDetectionStrategy, ChangeDetectorRef, ViewChild, ElementRef } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { go, replace, back } from '@ngrx/router-store';
@@ -10,7 +10,7 @@ import { HeaderBarRouteComponent, ActivatedRouteStream } from '../../../core';
 
 @Component({
   template: `
-    <input type="search" class="search-input" 
+    <input #input type="search"
       [placeholder]="'Search Lists...'"
       [value]="query"
       (input)="search($event.target.value)" />
@@ -30,6 +30,8 @@ export class SearchBarRouteComponent extends HeaderBarRouteComponent implements 
   private cancelRoute: string;
   private hasBack: boolean;
 
+  @ViewChild('input') private input: ElementRef;
+
   constructor(
     private route: ActivatedRoute,
     private routeStream: ActivatedRouteStream,
@@ -39,6 +41,9 @@ export class SearchBarRouteComponent extends HeaderBarRouteComponent implements 
   }
 
   ngOnInit() {
+    // Prevents input focus getting lost during typing due to component re-initiation
+    this.input.nativeElement.focus();
+
     this.route.data.forEach(({searchRoute, cancelRoute}) => {
       this.searchRoute = searchRoute;
       this.cancelRoute = cancelRoute;
