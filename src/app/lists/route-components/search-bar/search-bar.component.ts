@@ -6,7 +6,7 @@ import { Store } from '@ngrx/store';
 import { go, replace, back } from '@ngrx/router-store';
 
 import { AppState } from '../../../app.state';
-import { HeaderBarRouteComponent, ActivatedRouteStream } from '../../../core';
+import { HeaderBarRouteComponent, getRouterPath } from '../../../core';
 
 @Component({
   template: `
@@ -34,7 +34,6 @@ export class SearchBarRouteComponent extends HeaderBarRouteComponent implements 
 
   constructor(
     private route: ActivatedRoute,
-    private routeStream: ActivatedRouteStream,
     private store$: Store<AppState>,
     private cd: ChangeDetectorRef) {
     super();
@@ -49,16 +48,15 @@ export class SearchBarRouteComponent extends HeaderBarRouteComponent implements 
       this.cancelRoute = cancelRoute;
     });
 
-    this.routeStream.getOutletStream()
-      .withLatestFrom(this.route.data)
-      .forEach(([{component, params}, {searchRouteComponent}]) => {
-        const isSearch = component === searchRouteComponent;
+    this.store$
+      .let(getRouterPath())
+      .withLatestFrom(this.route.data, this.route.queryParams)
+      .forEach(([url, {searchRouteMatch}, {q}]) => {
+        const isSearch = new RegExp(searchRouteMatch).test(<string>url);
         if (this.hasBack === undefined) {
           this.hasBack = !isSearch;
         }
-        this.query = isSearch
-          ? params['q'] || ''
-          : '';
+        this.query = isSearch ? q || '' : '';
         this.cd.markForCheck();
       });
   }
@@ -69,15 +67,11 @@ export class SearchBarRouteComponent extends HeaderBarRouteComponent implements 
       return;
     }
 
-    const path = [
-      this.searchRoute,
-      {
-        q: query
-      }
-    ];
+    const path = [this.searchRoute];
+    const params = {q: query};
     const action = this.query === ''
-      ? go(path)
-      : replace(path);
+      ? go(path, params)
+      : replace(path, params);
     this.query = query;
     this.store$.dispatch(action);
     this.cd.markForCheck();

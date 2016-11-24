@@ -44,7 +44,7 @@ export class SearchRouteComponent extends PrimaryRouteComponent implements OnIni
     this.recordset$ = this.recordset.fetch();
 
     // Listen to query changes
-    this.route.params.forEach(({q}) => {
+    this.route.queryParams.forEach(({q}) => {
         if (q) {
           this.recordset.filter('q', q);
         } else {

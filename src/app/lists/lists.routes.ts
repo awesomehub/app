@@ -11,7 +11,7 @@ const listsSearchBarRoute = {
   component: SearchBarRouteComponent,
   data: {
     searchRoute: 'search',
-    searchRouteComponent: SearchRouteComponent,
+    searchRouteMatch: '^\/search[\?|\;|\/]',
     cancelRoute: ''
   },
   outlet: 'header-bar'
