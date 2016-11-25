@@ -47,7 +47,7 @@
 
 .list-repo-inner h4::after {
   content: '';
-  right: 0;
+  right: -6px;
   width: 6em;
   height: 100%;
   position: absolute;
