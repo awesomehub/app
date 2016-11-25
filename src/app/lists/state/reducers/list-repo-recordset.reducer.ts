@@ -13,19 +13,26 @@ export function listRepoRecordsetReducer(state: List, filters: RecordsetFilters,
 
   if (filters['q']) {
     const q = filters['q'].toLowerCase();
+    let _scores = {};
     repos = repos
       .filter(repo => {
         if (!q) {
           return true;
         }
-        return (repo.author+'/'+repo.name).toLowerCase().indexOf(q) !== -1;
+        const id = repo.author+'/'+repo.name;
+        _scores[id] = id.toLowerCase().indexOf(q);
+        if (_scores[id] === -1) {
+          _scores[id] = repo.desc.toLowerCase().indexOf(q);
+        }
+        return _scores[id] !== -1;
       })
       .sort((a, b) => {
         if (q) {
-          return (a.author+'/'+a.name).toLowerCase().indexOf(q) - (b.author+'/'+b.name).toLowerCase().indexOf(q);
+          return _scores[a.author+'/'+a.name] - _scores[b.author+'/'+b.name];
         }
         return 0;
       });
+    _scores = undefined;
   }
 
   // clone the array if it wasn't cloned by above filters
