@@ -11,7 +11,7 @@ import { List, ListRepo } from '../../state';
   template: `
     <content transparent="true" layout="compact">
       <list-repos class=""
-          heading="Search Results"
+          heading="Search Results ({{(recordset$ | async).set.length}})"
           [recordset]="recordset$ | async"
           (needMore)="recordset.paginate()"
           (sort)="recordset.sort($event)"

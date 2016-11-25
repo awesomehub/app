@@ -11,7 +11,7 @@ import { ListCollection, ListSummary } from '../../state';
 @Component({
   template: `
     <content transparent="true" layout="compact">
-      <h3 class="content-heading">{{title}}</h3>
+      <h3 class="content-heading">{{title}} ({{(recordset$ | async).set.length}})</h3>
       <lists
         [recordset]="recordset$ | async"
         (needMore)="recordset.paginate()">
