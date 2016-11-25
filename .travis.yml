@@ -38,6 +38,7 @@ deploy:
   skip_cleanup: true
   script: scripts/deploy.sh $TRAVIS_TAG
   on:
+    branch: master
     node: "6"
 cache:
   directories:
