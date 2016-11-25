@@ -43,7 +43,7 @@ import { ListRepo } from '../../state';
       </list-repo-card>
       
     <div *ngIf="recordset.set.length == 0 && recordset.updated" class="mdl-cell mdl-cell--12-col no-list-repos">
-      <i class="icon icon-frown-o"></i> No Repositories found!
+      No Repositories found!
     </div>
     
     <infinite-scroll

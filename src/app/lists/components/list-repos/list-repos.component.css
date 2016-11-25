@@ -4,6 +4,11 @@
   margin: 0 auto;
 }
 
+.list-repos .no-list-repos {
+  font-size: 1.5rem;
+  color: rgba(255, 255, 255, 0.5);
+}
+
 .list-repos .repos-sort {
   position: absolute;
   top: 6px;
