@@ -28,7 +28,7 @@ export class SearchBarRouteComponent extends HeaderBarRouteComponent implements 
 
   private searchRoute: string;
   private cancelRoute: string;
-  private hasBack: boolean;
+  private hasBack: boolean = false;
 
   @ViewChild('input') private input: ElementRef;
 
@@ -60,8 +60,8 @@ export class SearchBarRouteComponent extends HeaderBarRouteComponent implements 
       .withLatestFrom(this.route.data, this.route.queryParams)
       .forEach(([url, {searchRouteMatch}, {q}]) => {
         const isSearch = new RegExp(searchRouteMatch).test(<string>url);
-        if (this.hasBack === undefined) {
-          this.hasBack = !isSearch;
+        if(!isSearch){
+          this.hasBack = true;
         }
         this.query = isSearch ? q || '' : '';
         this.cd.markForCheck();
