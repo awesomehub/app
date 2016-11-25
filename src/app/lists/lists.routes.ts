@@ -2,7 +2,8 @@ import { Routes } from '@angular/router';
 
 import {
   HomeRouteComponent, SearchRouteComponent, SearchBarRouteComponent,
-  ListHomeRouteComponent, ListAllRouteComponent, ListCategoryRouteComponent, ListCategoriesRouteComponent
+  ListHomeRouteComponent, ListAllRouteComponent, ListSearchRouteComponent,
+  ListCategoryRouteComponent, ListCategoriesRouteComponent
 } from './route-components';
 import { ListsDataResolver, ListDataResolver, ListCategoryDataResolver } from './services';
 
@@ -10,6 +11,7 @@ const listsSearchBarRoute = {
   path: '',
   component: SearchBarRouteComponent,
   data: {
+    placeholder: 'Search lists...',
     searchRoute: 'search',
     searchRouteMatch: '^\/search[\?|\;|\/]',
     cancelRoute: ''
@@ -63,6 +65,10 @@ export const routes: Routes = [
             component: ListAllRouteComponent
           },
           {
+            path: 'search',
+            component: ListSearchRouteComponent
+          },
+          {
             path: ':category',
             resolve: {
               category: ListCategoryDataResolver
@@ -75,8 +81,18 @@ export const routes: Routes = [
         path: '',
         component: ListCategoriesRouteComponent,
         outlet: 'drawer'
+      },
+      {
+        path: '',
+        component: SearchBarRouteComponent,
+        data: {
+          placeholder: 'Search this list...',
+          searchRoute: 'list/{{id}}/search',
+          searchRouteMatch: '^\/list\/[^\/]+\/search',
+          cancelRoute: 'list/{{id}}'
+        },
+        outlet: 'header-bar'
       }
-    ],
-
+    ]
   }
 ];

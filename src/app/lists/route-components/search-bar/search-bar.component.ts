@@ -10,7 +10,7 @@ import { HeaderBarRouteComponent, getRouterPath } from '../../../core';
 
 @Component({
   template: `
-    <input #input type="search" placeholder="Search Lists..."
+    <input #input type="search" [placeholder]="placeholder"
       [value]="query"
       (input)="search($event.target.value)" />
 `,
@@ -23,6 +23,7 @@ import { HeaderBarRouteComponent, getRouterPath } from '../../../core';
 })
 export class SearchBarRouteComponent extends HeaderBarRouteComponent implements OnInit {
 
+  public placeholder: string = 'Search...';
   public query: string = '';
 
   private searchRoute: string;
@@ -42,9 +43,16 @@ export class SearchBarRouteComponent extends HeaderBarRouteComponent implements 
     // Prevents input focus getting lost during typing due to component re-initiation
     this.input.nativeElement.focus();
 
-    this.route.data.forEach(({searchRoute, cancelRoute}) => {
-      this.searchRoute = searchRoute;
-      this.cancelRoute = cancelRoute;
+    this.route.data.forEach(({placeholder, searchRoute, cancelRoute, list}) => {
+      this.placeholder = placeholder;
+      if (list) {
+        this.searchRoute = searchRoute.replace('{{id}}', list.id);
+        this.cancelRoute = cancelRoute.replace('{{id}}', list.id);
+      } else {
+        this.searchRoute = searchRoute;
+        this.cancelRoute = cancelRoute;
+      }
+      this.cd.markForCheck();
     });
 
     this.store$

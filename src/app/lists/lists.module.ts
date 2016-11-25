@@ -5,7 +5,8 @@ import { EffectsModule } from '@ngrx/effects';
 import { SharedModule } from '../shared';
 import {
   HomeRouteComponent, SearchRouteComponent, SearchBarRouteComponent,
-  ListHomeRouteComponent, ListAllRouteComponent, ListCategoryRouteComponent, ListCategoriesRouteComponent
+  ListHomeRouteComponent, ListAllRouteComponent, ListSearchRouteComponent,
+  ListCategoryRouteComponent, ListCategoriesRouteComponent
 } from './route-components';
 import {
   ListsComponent, ListCardComponent, ListCategoriesComponent,
@@ -32,6 +33,7 @@ import { routes } from './lists.routes';
     SearchBarRouteComponent,
     ListHomeRouteComponent,
     ListAllRouteComponent,
+    ListSearchRouteComponent,
     ListCategoryRouteComponent,
     ListCategoriesRouteComponent,
     // Components

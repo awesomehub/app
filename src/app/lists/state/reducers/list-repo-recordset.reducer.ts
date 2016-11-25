@@ -11,6 +11,23 @@ export function listRepoRecordsetReducer(state: List, filters: RecordsetFilters,
       });
   }
 
+  if (filters['q']) {
+    const q = filters['q'].toLowerCase();
+    repos = repos
+      .filter(repo => {
+        if (!q) {
+          return true;
+        }
+        return (repo.author+'/'+repo.name).toLowerCase().indexOf(q) !== -1;
+      })
+      .sort((a, b) => {
+        if (q) {
+          return (a.author+'/'+a.name).toLowerCase().indexOf(q) - (b.author+'/'+b.name).toLowerCase().indexOf(q);
+        }
+        return 0;
+      });
+  }
+
   // clone the array if it wasn't cloned by above filters
   if (sorting.by && repos === state.entries['repo.github']) {
     repos = repos.slice(0);
