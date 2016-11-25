@@ -1,5 +1,4 @@
 import 'rxjs/add/operator/let';
-import 'rxjs/add/operator/skip';
 
 import { Component, OnInit, ViewEncapsulation, ChangeDetectionStrategy, ViewChild, ElementRef, Renderer } from '@angular/core';
 import { Store } from '@ngrx/store';
@@ -31,11 +30,10 @@ export class AppComponent implements OnInit {
     private renderer: Renderer) { }
 
   ngOnInit() {
-    // Run MDL after each navigation to update any new elements added (Skip on app startup)
+    // Run MDL after each navigation to update any new elements added
     this.store$
       .let(getRouterPath())
-      .skip(1)
-      .subscribe(url => {
+      .subscribe(() => {
         if ('componentHandler' in window) {
           window.componentHandler.upgradeAllRegistered();
         }
