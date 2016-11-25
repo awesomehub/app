@@ -38,7 +38,8 @@ deploy:
   skip_cleanup: true
   script: scripts/deploy.sh $TRAVIS_TAG
   on:
-    branch: master
+    all_branches: true
+    condition: TRAVIS_BRANCH="master" || ! -z "$TRAVIS_TAG"
     node: "6"
 cache:
   directories:
