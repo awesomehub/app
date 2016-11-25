@@ -11,7 +11,6 @@ export function listSummaryRecordsetReducer (state: ListCollection, filters: Rec
         if (!q) {
           return true;
         }
-
         return list.name.toLowerCase().indexOf(q) !== -1;
       })
       .sort((a, b) => {
