@@ -24,7 +24,7 @@ before_script:
   - sh -e /etc/init.d/xvfb start
   # Workaround for https://github.com/angular/angular-cli/issues/2799
   # see https://github.com/angular/angular-cli/pull/2881
-  - cp patches/ngtools-webpack-1.1.7/loader.js node_modules/@ngtools/webpack/src/loader.js
+  - cp patches/ngtools-webpack-1.1.6/loader.js node_modules/@ngtools/webpack/src/loader.js
 script:
   - cp .env.travis .env
   # - yarn run stat
