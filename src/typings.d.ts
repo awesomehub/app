@@ -1,10 +1,3 @@
-// .env variables
-declare var ENV: {
-    APP_ENV: string;
-    APP_URL: string;
-    API_URL: string;
-};
-
 // Material Design Lite typings
 interface MdlComponentHandler {
     upgradeDom(optJsClass: string, optCssClass: string): void;

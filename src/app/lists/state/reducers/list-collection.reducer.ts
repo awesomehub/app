@@ -1,5 +1,5 @@
-import { Action, ActionReducer } from '@ngrx/store';
-
+import { ActionReducer } from '@ngrx/store';
+import { Action } from '../../../common';
 import { ListSummaryResponse } from '../../../core';
 import { ListCollection, ListCollectionRecord, createListSummary } from '../models';
 import { ListCollectionActions } from '../actions';

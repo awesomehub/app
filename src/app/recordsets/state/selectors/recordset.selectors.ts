@@ -1,29 +1,23 @@
-import 'rxjs/add/operator/let';
-import 'rxjs/add/operator/filter';
-import 'rxjs/add/operator/switchMap';
-import 'rxjs/add/operator/distinctUntilChanged';
-import { Observable } from 'rxjs/Observable';
-
-import { Selector } from '../../../common';
+import { createSelector, createFeatureSelector } from '@ngrx/store';
+import { AppState } from '../../../app.state';
 import { Recordset } from '../models';
 
-export function getRecordsets(): Selector<any, Recordset<any>> {
-  return (state$: Observable<any>) => state$
-    .map(state => state.recordsets)
-    .distinctUntilChanged()
-    .switchMap((recordsets: Recordset<any>[]) => recordsets);
-}
+export const selectRecordsets = createFeatureSelector<AppState, Array<Recordset<any>>>(
+  'recordsets'
+);
 
-export function getRecordsetsForUpdate(reducer: string): Selector<any, Recordset<any>> {
-  return (state$: Observable<any>) => state$
-    .let(getRecordsets())
-    .filter((recordset: Recordset<any>) => recordset.reducer === reducer && recordset.updated === false)
-    .distinctUntilChanged();
-}
+export const selectRecordset = createSelector(
+  selectRecordsets,
+  (recordsets, props) => 
+    recordsets.find((recordset: Recordset<any>) => 
+      recordset.id === props.id
+    )
+);
 
-export function getRecordset(id: string): Selector<any, Recordset<any>> {
-  return (state$: Observable<any>) => state$
-    .let(getRecordsets())
-    .filter((recordset: Recordset<any>) => recordset.id === id)
-    .distinctUntilChanged();
-}
+export const selectRecordsetsForUpdate = createSelector(
+  selectRecordsets,
+  (recordsets, props) => 
+    recordsets.find((recordset: Recordset<any>) => 
+      recordset.reducer === props.reducer && recordset.updated === false
+    )
+);

@@ -1,5 +1,4 @@
-import { Action } from '@ngrx/store';
-
+import { Action } from '../../../common';
 import { ListCollection } from '../models';
 import { ListCollectionActions } from '../actions';
 import { listCollectionReducer } from './list-collection.reducer';

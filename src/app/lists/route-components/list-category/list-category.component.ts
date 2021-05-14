@@ -1,7 +1,6 @@
 import { Component, OnInit, OnDestroy, ViewEncapsulation, ChangeDetectionStrategy, Inject, forwardRef } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Observable } from 'rxjs/Observable';
-
+import { Observable } from 'rxjs';
 import { AppComponent } from '../../../app.component';
 import { PrimaryRouteComponent } from '../../../core';
 import { ListsConfig } from '../../lists.config';

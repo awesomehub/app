@@ -1,0 +1,187 @@
+@charset "UTF-8";
+
+@import "../node_modules/material-design-lite/dist/material.deep_purple-blue.min.css";
+
+/** Our icon font **/
+@import "./assets/css/icon-font.css";
+
+/* Typography */
+html, body, a, h1, h2, h3, h4,
+.mdl-layout__title, .mdl-layout-title {
+    font-weight: 300;
+}
+
+/* (Fixes) mdl issue that screws window scroll event */
+.mdl-layout__container {
+    position: relative;
+    height: auto;
+    width: 100%;
+}
+.mdl-layout {
+    height: auto;
+}
+.mdl-layout__drawer {
+    position: fixed;
+}
+
+/* Header */
+.mdl-layout__header {
+    background: linear-gradient(to bottom, rgba(120, 0, 210, 1), rgba(0, 0, 0, 0));
+}
+
+/*
+.mdl-layout__header, .mdl-layout__content {
+  transition-duration: .2s;
+  transition-timing-function: cubic-bezier(.4,0,.2,1);
+  transition-property: all;
+}
+*/
+
+.mdl-layout__header-row {
+    width: calc(100% - 16px);
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 0 8px !important;
+}
+
+.mdl-layout__header-row .mdl-navigation__link {
+    padding: 0 20px;
+}
+
+/* Header Bar */
+.header-bar {
+    display: table;
+}
+
+.mdl-layout.has-drawer.is-small-screen .list-search-bar {
+    display: table-cell;
+}
+
+.drawer-toggler {
+    display: table-cell;
+    padding: 0 15pt;
+    border: 0;
+    outline: none;
+    background: rgba(0, 0, 0, 0.15);
+    color: rgba(255, 255, 255, 0.5);
+    cursor: pointer;
+}
+
+.drawer-toggler:hover {
+    color: #fff;
+}
+
+.drawer-toggler .icon {
+    font-size: 2rem;
+    line-height: 100%;
+}
+
+/* Logo */
+a.logo {
+    font-family: 'Lobster', cursive;
+    text-decoration: none;
+    font-weight: 400;
+}
+
+.mdl-layout__header a.logo {
+    color: rgba(255,255,255, 0.85);
+    font-size: 30px;
+}
+
+.mdl-layout__header a.logo:hover {
+    color: #fff;
+}
+
+/* Ribbon */
+.ribbon {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 20rem;
+    background-color: #3F51B5;
+    background-image: url('assets/images/jumbotron-bg.jpg');
+    background-position: 50% 50%;
+    background-size: cover;
+}
+
+/* Content */
+.mdl-layout__content {
+    margin-top: 16px;
+}
+
+.content-heading {
+    color: #fff;
+    font-size: 2rem;
+    margin-top: 0;
+}
+
+/* Drawer */
+.drawer .mdl-layout__title {
+    padding-left: 16px;
+    border-bottom: 1px solid #ededed;
+}
+
+.drawer .mdl-navigation .mdl-navigation__link {
+    padding: 0 0 0 15px;
+    line-height: 44px;
+    margin-bottom: 1px;
+    border-left: 5px solid transparent;
+}
+
+.drawer .mdl-navigation .mdl-navigation__link:hover,
+.drawer .mdl-navigation .mdl-navigation__link--current {
+    background: none;
+    border-color: #0091ea;
+    color: #0074bc;
+}
+
+.drawer .mdl-navigation .mdl-navigation__link.level-1 {
+    padding-left: 20px;
+}
+
+.drawer .mdl-navigation .mdl-navigation__link.level-2 {
+    padding-left: 25px;
+}
+
+.drawer .mdl-navigation .divider {
+    border-bottom: 1px solid #ededed;
+    margin: 5px 0 5px 20px;
+}
+
+/* Buttons & Icons */
+.icon {
+    display: inline-block;
+    font-style: normal;
+    font-size: 24px;
+    line-height: 1;
+    letter-spacing: normal;
+    text-transform: none;
+    -webkit-font-smoothing: antialiased;
+    vertical-align: middle;
+}
+
+.mdl-button .icon {
+    font-size: 20px;
+    padding-right: 4px;
+}
+
+.mdl-button.mdl-button--icon .icon {
+    padding: 0;
+}
+
+/* Shared styles  */
+.score-diff {
+    color: #6cc644;
+}
+
+.score-diff::before {
+    content: "+";
+}
+
+.score-diff-down {
+    color: #bd2c00;
+}
+
+.score-diff-down::before {
+    content: "-";
+}

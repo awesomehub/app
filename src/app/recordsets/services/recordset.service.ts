@@ -1,19 +1,18 @@
-import 'rxjs/add/operator/let';
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/distinctUntilChanged';
-import { Observable } from 'rxjs/Observable';
-
-import { Store } from '@ngrx/store';
-
-import { Recordset, RecordsetSorting, RecordsetActions, getRecordset } from '../state';
+import { Store, select } from '@ngrx/store';
+import { Observable } from 'rxjs';
+import { distinctUntilChanged } from 'rxjs/operators';
+import { Recordset, RecordsetSorting, RecordsetActions, selectRecordset } from '../state';
+import { AppState } from '../../app.state';
 
 export class RecordsetService<T> {
 
-  private recordset$: Observable<Recordset<T>>;
+  private readonly recordset$: Observable<Recordset<T>>;
 
-  constructor(private id: string, private store$: Store<any>) {
-    this.recordset$ = store$.let(getRecordset(this.id))
-      .distinctUntilChanged();
+  constructor(private id: string, private store$: Store<AppState>) {
+    this.recordset$ = this.store$.pipe(
+      select(selectRecordset, { id: this.id }),
+      distinctUntilChanged()
+      );
   }
 
   fetch(): Observable<Recordset<T>> {

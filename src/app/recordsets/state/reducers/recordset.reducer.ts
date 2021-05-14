@@ -1,5 +1,4 @@
-import { Action } from '@ngrx/store';
-
+import { Action } from '../../../common';
 import { RecordsetActions } from '../actions';
 import { Recordset, RecordsetSorting, RecordsetRecord, RecordsetReducer } from '../models';
 

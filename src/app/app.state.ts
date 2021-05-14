@@ -1,22 +1,22 @@
-import { compose } from '@ngrx/core';
-import { RouterState } from '@ngrx/router-store';
-import { Reducers } from './common';
+import { ActionReducerMap, MetaReducer } from '@ngrx/store';
+import { RouterReducerState } from '@ngrx/router-store';
+import { routerReducer, coreMetaReducers } from './core';
 import { Recordsets } from './recordsets';
 import { ListCollections, Lists, listCollectionsReducer, listsReducer } from './lists';
-import { coreReducers, coreMetaReducers } from './core';
+import { recordsetsReducer } from './recordsets';
 
 export interface AppState {
-  router: RouterState;
+  router: RouterReducerState<any>;
   recordsets: Recordsets;
   collections: ListCollections;
   lists: Lists;
 }
 
-export const reducers: Reducers = {
+export const reducers: ActionReducerMap<AppState> = {
+	router: routerReducer,
+	recordsets: recordsetsReducer,
   collections: listCollectionsReducer,
   lists: listsReducer
 };
 
-export function rootReducer(state: any, action: any) {
-  return compose(...coreMetaReducers)(Object.assign(coreReducers, reducers))(state, action);
-}
+export const metaReducers: Array<MetaReducer<AppState>> = coreMetaReducers;

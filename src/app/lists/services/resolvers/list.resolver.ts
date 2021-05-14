@@ -1,13 +1,9 @@
-import 'rxjs/add/operator/let';
-import 'rxjs/add/operator/first';
-import 'rxjs/add/operator/toPromise';
-
 import { Injectable } from '@angular/core';
-import { Store } from '@ngrx/store';
+import { Store, select } from '@ngrx/store';
 import { Resolve, ActivatedRouteSnapshot } from '@angular/router';
-
+import { first, distinctUntilChanged } from 'rxjs/operators';
 import { AppState } from '../../../app.state';
-import { ListActions, List, getList } from '../../state';
+import { ListActions, List, selectList } from '../../state';
 
 @Injectable()
 export class ListDataResolver implements Resolve<any> {
@@ -21,9 +17,11 @@ export class ListDataResolver implements Resolve<any> {
       ListActions.fetch(id)
     );
 
-    return this.store$
-      .let(getList(id))
-      .first(({loaded}) => loaded)
-      .toPromise();
+    return this.store$.pipe(
+      select(selectList, { id: id }),
+      distinctUntilChanged(),
+      first(({loaded}) => loaded)
+    )
+    .toPromise()
   }
 }

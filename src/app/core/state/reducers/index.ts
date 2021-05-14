@@ -1,1 +1,1 @@
-export * from './reset.reducer';
+export * from './debug.reducer';

@@ -1,45 +1,38 @@
-import 'rxjs/add/operator/let';
-
-import { Component, OnInit, ViewEncapsulation, ChangeDetectionStrategy, ViewChild, ElementRef, Renderer } from '@angular/core';
+import { Component, OnInit, AfterViewChecked, ViewEncapsulation, ChangeDetectionStrategy, ViewChild, ElementRef, Renderer2 } from '@angular/core';
 import { Store } from '@ngrx/store';
-
 import { AppState } from './app.state';
 import { AppConfig } from './app.config';
-import { TitleService, PrimaryRouteComponent, DrawerRouteComponent, getRouterPath } from './core';
-
-// App-wide Styles
-import '../public/assets/css/main.css';
+import { TitleService, PrimaryRouteComponent, DrawerRouteComponent } from './core';
 
 @Component({
-  selector: 'app',
+  selector: 'app-root',
   templateUrl: './app.component.html',
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit, AfterViewChecked {
 
   public title: string;
   public drawer: DrawerRouteComponent;
 
-  @ViewChild('layout') private layout: ElementRef;
-  @ViewChild('drawerButton') private drawerButton: ElementRef;
+  @ViewChild('layout', { static: false }) private layout: ElementRef;
+  @ViewChild('drawerButton', { static: false }) private drawerButton: ElementRef;
 
   constructor (
     private store$: Store<AppState>,
     private titleService: TitleService,
-    private renderer: Renderer) { }
+    private renderer: Renderer2
+  ) {}
 
   ngOnInit() {
-    // Run MDL after each navigation to update any new elements added
-    this.store$
-      .let(getRouterPath())
-      .subscribe(() => {
-        if ('componentHandler' in window) {
-          window.componentHandler.upgradeAllRegistered();
-        }
-      });
-
     this.setHeaderTitle(AppConfig.NAME);
+  }
+
+  ngAfterViewChecked() {
+    // Run MDL after each render to update any new elements added
+    if ('componentHandler' in window) {
+      window.componentHandler.upgradeAllRegistered()
+    }
   }
 
   /**
@@ -60,7 +53,7 @@ export class AppComponent implements OnInit {
       return false;
     }
 
-    this.renderer.invokeElementMethod(drawerButton, 'click');
+    this.renderer.selectRootElement(drawerButton).click();
   }
 
   /**

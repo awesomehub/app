@@ -1,7 +1,6 @@
 import { Component, OnInit, OnDestroy, ViewEncapsulation, ChangeDetectionStrategy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Observable } from 'rxjs/Observable';
-
+import { Observable } from 'rxjs';
 import { PrimaryRouteComponent } from '../../../core';
 import { ListsConfig } from '../../lists.config';
 import { RecordsetFactoryService, RecordsetService, Recordset } from '../../../recordsets';

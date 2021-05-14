@@ -1,7 +1,7 @@
-import { Action } from '@ngrx/store';
+import { Action } from '../../../common';
 
 import { ListCollectionResponse } from '../../../core';
-import { Response } from '@angular/http';
+import { HttpErrorResponse } from '@angular/common/http';
 
 export class ListCollectionActions {
 
@@ -9,7 +9,7 @@ export class ListCollectionActions {
   static FETCH_SUCCESS  = '[LIST COLLECTION] FETCH SUCCESS';
   static FETCH          = '[LIST COLLECTION] FETCH';
 
-  static fetchFailed(id: string, response: Response): Action {
+  static fetchFailed(id: string, response: HttpErrorResponse): Action {
     return {
       type: ListCollectionActions.FETCH_FAILED,
       payload: Object.assign({}, response, { id })

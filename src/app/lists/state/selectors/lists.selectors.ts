@@ -1,44 +1,25 @@
-import 'rxjs/add/operator/let';
-import 'rxjs/add/operator/filter';
-import 'rxjs/add/operator/switchMap';
-import 'rxjs/add/operator/distinctUntilChanged';
-import { Observable } from 'rxjs/Observable';
-
+import { createSelector } from '@ngrx/store';
 import { AppState } from '../../../app.state';
-import { Selector } from '../../../common';
-import { ListCollections, Lists } from '../reducers';
 import { ListCollection, List } from '../models';
 
-export function getListCollections(): Selector<AppState, ListCollection> {
-  return (state$: Observable<AppState>) => state$
-    .map(state => state.collections)
-    .distinctUntilChanged()
-    .switchMap((collections: ListCollections) => {
-      // convert it to array so that we emit one collection at a time
-      return Object.keys(collections).map(key => collections[key]);
-    });
-}
+export const selectListCollections = (state: AppState) => 
+  Object.keys(state.collections).map(key => state.collections[key]);
 
-export function getListCollection(id: string): Selector<AppState, ListCollection> {
-  return (state$: Observable<AppState>) => state$
-    .let(getListCollections())
-    .filter((collection: ListCollection) => collection.id === id)
-    .distinctUntilChanged();
-}
+export const selectListCollection = createSelector(
+  selectListCollections,
+  (collections, props) => 
+    collections.find((collection: ListCollection) => 
+      collection.id === props.id
+    )
+);
 
-export function getLists(): Selector<AppState, List> {
-  return (state$: Observable<AppState>) => state$
-    .map(state => state.lists)
-    .distinctUntilChanged()
-    .switchMap((lists: Lists) => {
-      // convert it to array so that we emit one list at a time
-      return Object.keys(lists).map(key => lists[key]);
-    });
-}
+export const selectLists = (state: AppState) => 
+  Object.keys(state.lists).map(key => state.lists[key]);
 
-export function getList(id: string): Selector<AppState, List> {
-  return (state$: Observable<AppState>) => state$
-    .let(getLists())
-    .filter((list: List) => list.id === id)
-    .distinctUntilChanged();
-}
+export const selectList = createSelector(
+  selectLists,
+  (lists, props) => 
+    lists.find((list: List) => 
+      list.id === props.id
+    )
+);

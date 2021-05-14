@@ -1,14 +1,10 @@
-import 'rxjs/add/operator/let';
-import 'rxjs/add/operator/first';
-import 'rxjs/add/operator/toPromise';
-
 import { Injectable } from '@angular/core';
-import { Store } from '@ngrx/store';
+import { Store, select } from '@ngrx/store';
 import { Resolve, ActivatedRouteSnapshot } from '@angular/router';
-
+import { first, distinctUntilChanged } from 'rxjs/operators';
 import { AppState } from '../../../app.state';
 import { ListsConfig } from '../../lists.config';
-import { ListCollectionActions, ListCollection, getListCollection } from '../../state';
+import { ListCollectionActions, ListCollection, selectListCollection } from '../../state';
 
 @Injectable()
 export class ListsDataResolver implements Resolve<ListCollection> {
@@ -19,9 +15,11 @@ export class ListsDataResolver implements Resolve<ListCollection> {
       ListCollectionActions.fetch(ListsConfig.DEFAULT_LIST_COLLECTION)
     );
 
-    return this.store$
-      .let(getListCollection(ListsConfig.DEFAULT_LIST_COLLECTION))
-      .first(({loaded}) => loaded)
-      .toPromise();
+    return this.store$.pipe(
+      select(selectListCollection, { id: ListsConfig.DEFAULT_LIST_COLLECTION }),
+      distinctUntilChanged(),
+      first(({loaded}) => loaded)
+    )
+    .toPromise()
   }
 }

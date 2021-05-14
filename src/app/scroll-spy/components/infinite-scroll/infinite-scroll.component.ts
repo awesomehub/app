@@ -1,6 +1,3 @@
-import 'rxjs/add/operator/filter';
-import { Subscription } from 'rxjs/Subscription';
-
 import {
   Component,
   ChangeDetectionStrategy,
@@ -10,7 +7,8 @@ import {
   ElementRef,
   EventEmitter
 } from '@angular/core';
-
+import { Subscription } from 'rxjs';
+import { filter } from 'rxjs/operators';
 import { ScrollSpyService, ScrollSpyData } from '../../services';
 
 @Component({
@@ -44,7 +42,7 @@ export class InfiniteScrollComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.scroll_ = this.scrollSpy.getScrollData(this.debounce)
-      .filter(d => this.auto && !this.paused)
+      .pipe(filter(d => this.auto && !this.paused))
       .subscribe(data => this.evaluate(data));
   }
 

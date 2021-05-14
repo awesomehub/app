@@ -24,7 +24,9 @@ import { routes } from './lists.routes';
   imports: [
     SharedModule,
     RouterModule.forChild(routes),
-    EffectsModule.run(ListsEffects)
+    EffectsModule.forFeature([
+      ListsEffects
+    ])
   ],
   declarations: [
     // Route Components

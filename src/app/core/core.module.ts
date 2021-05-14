@@ -1,26 +1,35 @@
 import { NgModule, Optional, SkipSelf } from '@angular/core';
 import { BrowserModule, Title as TitleService } from '@angular/platform-browser';
 import { RouterModule }  from '@angular/router';
-import { HttpModule } from '@angular/http';
-import { RouterStoreModule } from '@ngrx/router-store';
+import { HttpClientModule } from '@angular/common/http';
+import { StoreRouterConnectingModule, RouterStateSerializer } from '@ngrx/router-store';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+
+import { environment } from '../../environments/environment';
 
 // Application-wide modules
 import { SharedModule } from '../shared';
 import { RecordsetsModule } from '../recordsets';
 import { ScrollSpyModule } from '../scroll-spy';
 
-import { ApiService, ActivatedRouteStream } from './services';
+// Application-wide components services and components
+import { ApiService, ActivatedRouteStream, CustomRouterStateSerializer } from './services';
 import { Error404Component } from './route-components';
 import { LoadingIndicatorComponent } from './components';
-import { routes } from './core.routes';
 
 @NgModule({
   imports: [
     BrowserModule,
-    HttpModule,
+    HttpClientModule,
     SharedModule,
-    RouterModule.forChild(routes),
-    RouterStoreModule.connectRouter(),
+    RouterModule.forChild([
+      // Routes for common error pages
+      { path: '404', component: Error404Component }
+    ]),
+    StoreRouterConnectingModule.forRoot(),
+    environment.production
+      ? []
+      : StoreDevtoolsModule.instrument({name: 'AwesomeHub'}),
     ScrollSpyModule.provideService(),
     RecordsetsModule.provideService()
   ],
@@ -34,6 +43,7 @@ import { routes } from './core.routes';
     LoadingIndicatorComponent
   ],
   providers: [
+    { provide: RouterStateSerializer, useClass: CustomRouterStateSerializer },
     TitleService,
     ApiService,
     ActivatedRouteStream

@@ -1,20 +1,3 @@
-import { RequestMethod } from '@angular/http';
-
-/**
- * Request Data
- */
-export interface RequestArgs {
-  method: RequestMethod;
-  search: string;
-  url: string;
-}
-
-export interface RequestOptions {
-  method?: RequestMethod;
-  query?: string;
-  url: string;
-}
-
 /**
  * Response Data
  */

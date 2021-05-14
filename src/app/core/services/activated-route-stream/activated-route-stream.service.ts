@@ -1,14 +1,11 @@
-import 'rxjs/add/operator/filter';
-import 'rxjs/add/operator/switchMap';
-import 'rxjs/add/operator/distinctUntilChanged';
-import { Observable } from 'rxjs/Observable';
-
 import { Injectable } from '@angular/core';
 import { Router, ActivatedRouteSnapshot, PRIMARY_OUTLET } from '@angular/router';
-import { Store } from '@ngrx/store';
+import { Store, select } from '@ngrx/store';
+import { Observable } from 'rxjs';
+import { switchMap, distinctUntilChanged, filter } from 'rxjs/operators';
 
 import { AppState } from "../../../app.state";
-import { getRouterPath } from "../../state";
+import { selectRouterState } from "../../state";
 
 @Injectable()
 export class ActivatedRouteStream {
@@ -16,17 +13,18 @@ export class ActivatedRouteStream {
   private stream: Observable<ActivatedRouteSnapshot>;
 
   constructor(private router: Router, private store$: Store<AppState>) {
-    this.stream = this.store$
-      .let(getRouterPath())
-      .switchMap(() => {
+     this.stream = this.store$.pipe(
+       select(selectRouterState),
+       distinctUntilChanged(),
+       switchMap(() => {
         return this.getChildRoutes(this.router.routerState.snapshot.root);
-      })
-      .distinctUntilChanged();
+      }),
+       distinctUntilChanged()
+     );
   }
 
   getOutletStream(outlet: string = PRIMARY_OUTLET): Observable<ActivatedRouteSnapshot> {
-    return this.stream
-      .filter(ar => ar.outlet === outlet);
+    return this.stream.pipe(filter(ar => ar.outlet === outlet));
   }
 
   private getChildRoutes(root: ActivatedRouteSnapshot) {
@@ -37,7 +35,6 @@ export class ActivatedRouteStream {
       }
       routes.push(...this.getChildRoutes(route));
     }
-
     return routes;
   }
 }

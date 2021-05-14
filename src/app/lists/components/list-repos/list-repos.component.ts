@@ -3,7 +3,7 @@ import {
   ViewEncapsulation,
   ChangeDetectionStrategy,
   Input, Output,
-  EventEmitter, ViewChild, Renderer
+  EventEmitter, ViewChild, Renderer2
 } from '@angular/core';
 
 import { Recordset, RecordsetSorting } from '../../../recordsets';
@@ -71,17 +71,17 @@ export class ListReposComponent implements AfterViewInit {
   @Output() needMore: EventEmitter<any> = new EventEmitter(false);
   @Output() sort: EventEmitter<RecordsetSorting> = new EventEmitter(false);
 
-  @ViewChild('sortbtn') private sortbtn;
-  @ViewChild('sortmenu') private sortmenu;
+  @ViewChild('sortbtn', { static: false }) private sortbtn;
+  @ViewChild('sortmenu', { static: false }) private sortmenu;
 
-  constructor(private renderer: Renderer) { }
+  constructor(private renderer: Renderer2) { }
 
   ngAfterViewInit () {
     if (this.sortable) {
       // workaround for poor MDL menu markup
       let id = ('repos-sort-' + Math.random()).replace(/\./g, '');
-      this.renderer.setElementAttribute(this.sortbtn.nativeElement, 'id', id);
-      this.renderer.setElementAttribute(this.sortmenu.nativeElement, 'for', id);
+      this.renderer.setAttribute(this.sortbtn.nativeElement, 'id', id);
+      this.renderer.setAttribute(this.sortmenu.nativeElement, 'for', id);
     }
   }
 

@@ -22,7 +22,8 @@ export var ColorGradient = (function () {
   };
 
   ColorGradient.prototype.getColor = function (number) {
-    return this.calcHex(number, this.colorStart.substring(0,2), this.colorEnd.substring(0,2))
+    return '#'
+      + this.calcHex(number, this.colorStart.substring(0,2), this.colorEnd.substring(0,2))
       + this.calcHex(number, this.colorStart.substring(2,4), this.colorEnd.substring(2,4))
       + this.calcHex(number, this.colorStart.substring(4,6), this.colorEnd.substring(4,6));
   };

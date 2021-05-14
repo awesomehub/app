@@ -1,6 +1,10 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
+
+// App state
+import { reducers, metaReducers } from './app.state';
 
 // App Root Component
 import { AppComponent } from './app.component';
@@ -11,15 +15,13 @@ import { CoreModule } from './core';
 // Feature Modules
 import { ListsModule } from './lists';
 
-// Our root reducer
-import { rootReducer } from './app.state';
-
 @NgModule({
   bootstrap: [ AppComponent ],
   declarations: [ AppComponent ],
   imports: [
     CoreModule,
-    StoreModule.provideStore(rootReducer),
+    StoreModule.forRoot(reducers, { metaReducers }),
+    EffectsModule.forRoot([]),
     RouterModule.forRoot([
       { path: '**', redirectTo: '404' },
     ]),
