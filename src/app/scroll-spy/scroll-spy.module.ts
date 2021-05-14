@@ -14,7 +14,7 @@ import { ScrollSpyService } from './services';
   ]
 })
 export class ScrollSpyModule {
-  static provideService(): ModuleWithProviders {
+  static provideService(): ModuleWithProviders<ScrollSpyModule> {
     return {
       ngModule: ScrollSpyModule,
       providers: [
