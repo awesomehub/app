@@ -9,17 +9,14 @@ import { ListRepo, ListRepoScoreService } from '@app/lists';
           <div *ngIf="!extendedScores" class="mdl-card__media" (click)="extendedScores=true"
                title="Show extended scores">
               <div class="score">
-                  <a>{{repo.score | number}}</a>
+                  <a>{{repo.score | ahScoreFormat}}</a>
                   <span *ngIf="repo.score_d !== 0" [ahScoreDiff]="repo.score_d"></span>
               </div>
               <div class="scores" [style.border-color]="scoreColorLegend[scoreColorLegend.length-1]">
-                  <span [ahListRepoScoreStyle]="repo.scores.p" scoreType="p"
-                        title="Popularity: {{repo.scores.p}}">P</span>
-                  <span [ahListRepoScoreStyle]="repo.scores.h" scoreType="h" title="Hotness: {{repo.scores.h}}">H</span>
-                  <span [ahListRepoScoreStyle]="repo.scores.a" scoreType="a"
-                        title="Activity: {{repo.scores.a}}">A</span>
-                  <span [ahListRepoScoreStyle]="repo.scores.m" scoreType="m"
-                        title="Maturity: {{repo.scores.m}}">M</span>
+                  <span [ahListRepoScoreStyle]="repo.scores.p" scoreType="p" title="Popularity: {{repo.scores.p | ahScoreFormat}}">P</span>
+                  <span [ahListRepoScoreStyle]="repo.scores.h" scoreType="h" title="Trending: {{repo.scores.h | ahScoreFormat}}">T</span>
+                  <span [ahListRepoScoreStyle]="repo.scores.a" scoreType="a" title="Activity: {{repo.scores.a | ahScoreFormat}}">A</span>
+                  <span [ahListRepoScoreStyle]="repo.scores.m" scoreType="m" title="Maturity: {{repo.scores.m | ahScoreFormat}}">M</span>
               </div>
           </div>
           <div *ngIf="extendedScores" class="mdl-card__media extended-scores"
@@ -27,28 +24,28 @@ import { ListRepo, ListRepoScoreService } from '@app/lists';
               <div [ahListRepoScoreStyle]="repo.scores.p" scoreType="p" title="Popularity Score">
                   <span class="score-seg">P</span>
                   <div class="score-seg-inf">
-                      {{repo.scores.p | number}}
+                      {{repo.scores.p | ahScoreFormat}}
                       <span *ngIf="repo.scores_d.p !== 0" [ahScoreDiff]="repo.scores_d.p"></span>
                   </div>
               </div>
-              <div [ahListRepoScoreStyle]="repo.scores.h" scoreType="h" title="Hotness Score">
-                  <span class="score-seg">H</span>
+              <div [ahListRepoScoreStyle]="repo.scores.h" scoreType="h" title="Trending Score">
+                  <span class="score-seg">T</span>
                   <div class="score-seg-inf">
-                      {{repo.scores.h | number}}
+                      {{repo.scores.h | ahScoreFormat}}
                       <span *ngIf="repo.scores_d.h !== 0" [ahScoreDiff]="repo.scores_d.h"></span>
                   </div>
               </div>
               <div [ahListRepoScoreStyle]="repo.scores.a" scoreType="a" title="Activity Score">
                   <span class="score-seg">A</span>
                   <div class="score-seg-inf">
-                      {{repo.scores.a | number}}
+                      {{repo.scores.a | ahScoreFormat}}
                       <span *ngIf="repo.scores_d.a !== 0" [ahScoreDiff]="repo.scores_d.a"></span>
                   </div>
               </div>
               <div [ahListRepoScoreStyle]="repo.scores.m" scoreType="m" title="Maturity Score">
                   <span class="score-seg">M</span>
                   <div class="score-seg-inf">
-                      {{repo.scores.m | number}}
+                      {{repo.scores.m | ahScoreFormat}}
                       <span *ngIf="repo.scores_d.m !== 0" [ahScoreDiff]="repo.scores_d.m"></span>
                   </div>
               </div>
