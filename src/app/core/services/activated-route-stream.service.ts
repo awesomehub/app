@@ -4,23 +4,23 @@ import { Store, select } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { switchMap, distinctUntilChanged, filter } from 'rxjs/operators';
 
-import { AppState } from "../../../app.state";
-import { selectRouterState } from "../../state";
+import { AppState } from "../../app.state";
+import { selectRouterState } from "../state";
 
 @Injectable()
-export class ActivatedRouteStream {
+export class ActivatedRouteStreamService {
 
   private stream: Observable<ActivatedRouteSnapshot>;
 
   constructor(private router: Router, private store$: Store<AppState>) {
-     this.stream = this.store$.pipe(
-       select(selectRouterState),
-       distinctUntilChanged(),
-       switchMap(() => {
+    this.stream = this.store$.pipe(
+      select(selectRouterState),
+      distinctUntilChanged(),
+      switchMap(() => {
         return this.getChildRoutes(this.router.routerState.snapshot.root);
       }),
-       distinctUntilChanged()
-     );
+      distinctUntilChanged()
+    );
   }
 
   getOutletStream(outlet: string = PRIMARY_OUTLET): Observable<ActivatedRouteSnapshot> {

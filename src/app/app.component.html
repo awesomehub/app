@@ -4,7 +4,7 @@
   <header class="mdl-layout__header mdl-layout__header--scroll mdl-color-text--white">
     <a #drawerButton style="display:none" class="mdl-layout__drawer-button"></a>
     <div class="mdl-layout__header-row">
-      <a class="mdl-layout-title logo" [routerLink]="['./']">{{title}}</a>
+      <a class="mdl-layout-title logo" [routerLink]="['./']">{{logo}}</a>
       <div class="mdl-layout-spacer"></div>
       <nav class="mdl-navigation">
         <a class="mdl-navigation__link" [routerLink]="['./']">Home</a>
@@ -36,5 +36,5 @@
   </main>
 
   <!-- Loading indicator -->
-  <loading-indicator></loading-indicator>
+  <ah-loading-indicator></ah-loading-indicator>
 </div>

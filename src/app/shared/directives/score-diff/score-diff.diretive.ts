@@ -1,19 +1,18 @@
 import { Directive, Input, ElementRef, Renderer2 } from '@angular/core';
 
 @Directive({
-  selector: '[scoreDiff]'
+  selector: '[ahScoreDiff]'
 })
 export class ScoreDiffDirective {
-
   private classes = [
     'score-diff',
     'score-diff-up',
     'score-diff-down'
   ];
 
-  constructor(private el: ElementRef, private renderer: Renderer2) { }
+  constructor(private el: ElementRef, private renderer: Renderer2) {}
 
-  @Input() set scoreDiff(diff: number) {
+  @Input() set ahScoreDiff(diff: number) {
     this.classes.forEach(c => {
       this._toggleClass(c, false);
     });

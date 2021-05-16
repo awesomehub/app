@@ -1,12 +1,8 @@
-import { Component, ChangeDetectionStrategy, ViewEncapsulation, Input } from '@angular/core';
+import { Component, ChangeDetectionStrategy, ViewEncapsulation, Input, HostBinding } from '@angular/core';
 
 @Component({
-  selector: 'spinner',
-  template: `<div class="mdl-spinner mdl-js-spinner" [class.is-active]="active"></div>`,
-  host: {
-    'class': 'spinner',
-    '[style.display]': '!active ? "none" : null',
-  },
+  selector: 'ah-spinner',
+  template: `<div class="mdl-spinner mdl-js-spinner is-active"></div>`,
   styles: [`
     .spinner {
       text-align: center;
@@ -17,4 +13,7 @@ import { Component, ChangeDetectionStrategy, ViewEncapsulation, Input } from '@a
 })
 export class SpinnerComponent {
   @Input() public active: boolean = false;
+
+  @HostBinding('class') private class = 'spinner';
+  @HostBinding('style.display') get displayStyle() { return !this.active ? "none" : null; };
 }

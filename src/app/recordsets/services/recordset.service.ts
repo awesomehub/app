@@ -12,7 +12,7 @@ export class RecordsetService<T> {
     this.recordset$ = this.store$.pipe(
       select(selectRecordset, { id: this.id }),
       distinctUntilChanged()
-      );
+    );
   }
 
   fetch(): Observable<Recordset<T>> {

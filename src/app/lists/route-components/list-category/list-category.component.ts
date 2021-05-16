@@ -1,31 +1,30 @@
 import { Component, OnInit, OnDestroy, ViewEncapsulation, ChangeDetectionStrategy, Inject, forwardRef } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
-import { AppComponent } from '../../../app.component';
-import { PrimaryRouteComponent } from '../../../core';
-import { ListsConfig } from '../../lists.config';
-import { RecordsetFactoryService, RecordsetService, Recordset } from '../../../recordsets';
-import { List, ListCategory, ListRepo } from '../../state';
+import { config } from '@constants';
+import { AppComponent } from '@app';
+import { PrimaryRouteComponent } from '@app/core';
+import { RecordsetFactoryService, RecordsetService, Recordset } from '@app/recordsets';
+import { List, ListCategory, ListRepo } from '@app/lists';
 
 @Component({
   template: `
-    <content transparent="true" layout="compact">
-      <list-repos
-          [heading]="category.title"
-          [recordset]="recordset$ | async"
-          (needMore)="recordset.paginate()"
-          (sort)="recordset.sort($event)"
-          [sortable]="true"
-          [infinite]="true"
-          [wide]="true">
-        </list-repos>
-    </content>
-`,
+      <ah-content transparent="true" layout="compact">
+          <ah-list-repos
+                  [heading]="category.title"
+                  [recordset]="recordset$ | async"
+                  (needMore)="recordset.paginate()"
+                  (sort)="recordset.sort($event)"
+                  [sortable]="true"
+                  [infinite]="true"
+                  [wide]="true">
+          </ah-list-repos>
+      </ah-content>
+  `,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ListCategoryRouteComponent extends PrimaryRouteComponent implements OnInit, OnDestroy {
-
   public title;
   public list: List;
   public category: ListCategory;
@@ -36,7 +35,8 @@ export class ListCategoryRouteComponent extends PrimaryRouteComponent implements
   constructor(
     private route: ActivatedRoute,
     private recordsetFactory: RecordsetFactoryService,
-    @Inject(forwardRef(() => AppComponent)) private app: AppComponent) {
+    @Inject(forwardRef(() => AppComponent)) private app: AppComponent
+  ) {
     super();
   }
 
@@ -48,9 +48,9 @@ export class ListCategoryRouteComponent extends PrimaryRouteComponent implements
 
       // Create repos recordset
       if (!this.recordset) {
-        this.recordset = this.recordsetFactory.create('category-repos', ListsConfig.LIST_REPO_RECORDSET, {
+        this.recordset = this.recordsetFactory.create('category-repos', config.lists.recordsets.repo, {
           parent: this.list.id,
-          size: ListsConfig.LIST_REPOS_PER_PAGE,
+          size: config.lists.listReposPageSize,
           sorting: {
             by: 'score',
             asc: false

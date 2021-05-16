@@ -1,5 +1,5 @@
-import { RecordsetFilters, RecordsetSorting } from '../../../recordsets';
-import { ListCollection, ListSummary } from '../models';
+import { RecordsetFilters, RecordsetSorting } from '@app/recordsets';
+import { ListCollection, ListSummary } from '@app/lists';
 
 export function listSummaryRecordsetReducer (state: ListCollection, filters: RecordsetFilters, sorting: RecordsetSorting): Array<ListSummary> {
   let lists = state.lists;

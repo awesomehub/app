@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { Resolve, ActivatedRouteSnapshot } from '@angular/router';
 import { first, distinctUntilChanged } from 'rxjs/operators';
-import { AppState } from '../../../app.state';
-import { ListActions, List, selectList } from '../../state';
+import { AppState } from '@app';
+import { ListActions, List, selectList } from '@app/lists';
 
 @Injectable()
 export class ListDataResolver implements Resolve<any> {
@@ -22,6 +22,6 @@ export class ListDataResolver implements Resolve<any> {
       distinctUntilChanged(),
       first(({loaded}) => loaded)
     )
-    .toPromise()
+      .toPromise()
   }
 }

@@ -1,13 +1,8 @@
-import { Component, ChangeDetectionStrategy, ViewEncapsulation, Input } from '@angular/core';
+import { Component, ChangeDetectionStrategy, ViewEncapsulation, Input, HostBinding } from '@angular/core';
 
 @Component({
-  selector: 'sidebar',
+  selector: 'ah-sidebar',
   template: `<ng-content></ng-content>`,
-  host: {
-    'class': 'sidebar mdl-cell mdl-cell--3-col',
-    '[class.mdl-color--white]': '!transparent || transparent == "false"',
-    '[class.mdl-shadow--4dp]': '!transparent || transparent == "false"'
-  },
   styles: [`
     .sidebar {
       border-radius: 2px;
@@ -18,5 +13,13 @@ import { Component, ChangeDetectionStrategy, ViewEncapsulation, Input } from '@a
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class LayoutSidebarComponent {
-  @Input('transparent') public transparent: any = false;
+  @Input('transparent') public transparent: boolean|string = false;
+
+  @HostBinding('class') get class() {
+    return 'sidebar mdl-cell mdl-cell--3-col' + (
+      !this.transparent || this.transparent === "false"
+        ? ' mdl-color--white mdl-shadow--4dp'
+        : ''
+    );
+  };
 }

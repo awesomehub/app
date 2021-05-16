@@ -2,18 +2,15 @@ import { NgModule, Optional, SkipSelf } from '@angular/core';
 import { BrowserModule, Title as TitleService } from '@angular/platform-browser';
 import { RouterModule }  from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
-import { StoreRouterConnectingModule, RouterStateSerializer } from '@ngrx/router-store';
-import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-
-import { environment } from '../../environments/environment';
+import { RouterStateSerializer, StoreRouterConnectingModule } from '@ngrx/router-store';
 
 // Application-wide modules
-import { SharedModule } from '../shared';
-import { RecordsetsModule } from '../recordsets';
-import { ScrollSpyModule } from '../scroll-spy';
+import { SharedModule } from '@app/shared';
+import { RecordsetsModule } from '@app/recordsets';
+import { ScrollSpyModule } from '@app/scroll-spy';
 
-// Application-wide components services and components
-import { ApiService, ActivatedRouteStream, CustomRouterStateSerializer } from './services';
+// Application-wide components and services
+import { ApiService, ActivatedRouteStreamService, CustomRouterStateSerializerService } from './services';
 import { Error404Component } from './route-components';
 import { LoadingIndicatorComponent } from './components';
 
@@ -22,14 +19,11 @@ import { LoadingIndicatorComponent } from './components';
     BrowserModule,
     HttpClientModule,
     SharedModule,
+    StoreRouterConnectingModule.forRoot(),
     RouterModule.forChild([
       // Routes for common error pages
       { path: '404', component: Error404Component }
     ]),
-    StoreRouterConnectingModule.forRoot(),
-    environment.production
-      ? []
-      : StoreDevtoolsModule.instrument({name: 'AwesomeHub'}),
     ScrollSpyModule.provideService(),
     RecordsetsModule.provideService()
   ],
@@ -43,10 +37,10 @@ import { LoadingIndicatorComponent } from './components';
     LoadingIndicatorComponent
   ],
   providers: [
-    { provide: RouterStateSerializer, useClass: CustomRouterStateSerializer },
+    { provide: RouterStateSerializer, useClass: CustomRouterStateSerializerService },
     TitleService,
     ApiService,
-    ActivatedRouteStream
+    ActivatedRouteStreamService
   ]
 })
 export class CoreModule {

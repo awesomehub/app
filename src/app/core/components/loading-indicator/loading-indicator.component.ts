@@ -1,26 +1,23 @@
-import { Component, ViewEncapsulation, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
+import { Component, ViewEncapsulation, ChangeDetectionStrategy, ChangeDetectorRef, HostBinding } from '@angular/core';
 import { Router, Event, NavigationStart, NavigationEnd, NavigationCancel, NavigationError } from '@angular/router';
 
 @Component({
-  selector: 'loading-indicator',
+  selector: 'ah-loading-indicator',
   styleUrls: [ './loading-indicator.component.css' ],
   template: `
-    <spinner [active]="spinner"></spinner>
+    <ah-spinner [active]="spinner"></ah-spinner>
     <div *ngIf="message" class="message">{{message}}</div>
 `,
-  host: {
-    'class': 'loading-indicator',
-    '[class.active]': 'active',
-  },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class LoadingIndicatorComponent {
-
-  public active: boolean = false;
-  public spinner: boolean = false;
+  public spinner = false;
   public message: string;
   private _timeout;
+
+  @HostBinding('class') private class = 'loading-indicator';
+  @HostBinding('class.active') public active = false;
 
   constructor(private router: Router, private ref: ChangeDetectorRef) {
     this.router.events.subscribe((e: Event) => {

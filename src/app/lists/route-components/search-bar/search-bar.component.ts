@@ -1,10 +1,14 @@
-import { Component, OnInit, AfterViewInit, ViewEncapsulation, ChangeDetectionStrategy, ChangeDetectorRef, ViewChild, ElementRef } from '@angular/core';
+import {
+  Component, OnInit, AfterViewInit, ViewEncapsulation,
+  ChangeDetectionStrategy, ChangeDetectorRef, ViewChild,
+  HostBinding, ElementRef
+} from '@angular/core';
 import { Location } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Store, select } from '@ngrx/store';
 import { withLatestFrom, distinctUntilChanged } from 'rxjs/operators';
-import { AppState } from '../../../app.state';
-import { HeaderBarRouteComponent, selectRouterState } from '../../../core';
+import { AppState } from '@app';
+import { HeaderBarRouteComponent, selectRouterState } from '@app/core';
 
 @Component({
   template: `
@@ -13,21 +17,18 @@ import { HeaderBarRouteComponent, selectRouterState } from '../../../core';
       (input)="search($event.target.value)" />
 `,
   styleUrls: ['./search-bar.component.css'],
-  host: {
-    'class': 'list-search-bar',
-  },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SearchBarRouteComponent extends HeaderBarRouteComponent implements OnInit, AfterViewInit {
-
-  public placeholder: string = 'Search...';
-  public query: string = '';
+  public placeholder = 'Search...';
+  public query = '';
 
   private searchRoute: string;
   private cancelRoute: string;
-  private hasBack: boolean = false;
+  private hasBack = false;
 
+  @HostBinding('class') private class = 'list-search-bar'
   @ViewChild('input', { static: false }) private input: ElementRef;
 
   constructor(
@@ -35,7 +36,8 @@ export class SearchBarRouteComponent extends HeaderBarRouteComponent implements 
     private route: ActivatedRoute,
     private store$: Store<AppState>,
     private location: Location,
-    private cd: ChangeDetectorRef) {
+    private cd: ChangeDetectorRef
+  ) {
     super();
   }
 
@@ -57,14 +59,14 @@ export class SearchBarRouteComponent extends HeaderBarRouteComponent implements 
       distinctUntilChanged(),
       withLatestFrom(this.route.data)
     )
-    .forEach(([{ url, queryParams: { q }}, {searchRouteMatch}]) => {
-      const isSearch = new RegExp(searchRouteMatch).test(<string>url);
-      if(!isSearch){
-        this.hasBack = true;
-      }
-      this.query = isSearch ? q || '' : '';
-      this.cd.markForCheck();
-    });
+      .forEach(([{ url, queryParams: { q }}, {searchRouteMatch}]) => {
+        const isSearch = new RegExp(searchRouteMatch).test(<string>url);
+        if(!isSearch){
+          this.hasBack = true;
+        }
+        this.query = isSearch ? q || '' : '';
+        this.cd.markForCheck();
+      });
   }
 
   ngAfterViewInit() {

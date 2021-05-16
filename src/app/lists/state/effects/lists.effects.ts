@@ -1,18 +1,20 @@
 import { Injectable } from '@angular/core';
 import { Store, select } from '@ngrx/store';
-import { Action } from '../../../common';
+import { Action } from '@app/common';
 import { Router } from '@angular/router';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { of } from 'rxjs';
 import { filter, map, tap, mergeMap, switchMap, catchError, distinctUntilChanged } from 'rxjs/operators';
-import { AppState } from '../../../app.state';
-import { ApiService } from '../../../core';
-import { ListsConfig } from '../../lists.config';
-import { selectListCollection, selectList } from '../selectors';
-import { ListCollectionActions, ListActions } from '../actions';
-import { listSummaryRecordsetReducer, listRepoRecordsetReducer } from '../reducers';
-import { ListCollection, ListSummary, List, ListRepo } from '../models';
-import { RecordsetActions, Recordset, selectRecordsetsForUpdate } from '../../../recordsets';
+import { config } from '@constants';
+import { AppState } from '@app';
+import { ApiService } from '@app/core';
+import { RecordsetActions, Recordset, selectRecordsetsForUpdate } from '@app/recordsets';
+import {
+  selectListCollection, selectList,
+  ListCollectionActions, ListActions,
+  listSummaryRecordsetReducer, listRepoRecordsetReducer,
+  ListCollection, ListSummary, List, ListRepo
+} from '@app/lists';
 
 @Injectable()
 export class ListsEffects {
@@ -64,7 +66,7 @@ export class ListsEffects {
 
   @Effect()
   updateListSummaryRecordsets$ = this.store$.pipe(
-    select(selectRecordsetsForUpdate, { reducer: ListsConfig.LIST_SUMMARY_RECORDSET }),
+    select(selectRecordsetsForUpdate, { reducer: config.lists.recordsets.summary }),
     distinctUntilChanged(),
     filter(r => r && !!r.parent),
     tap(val => console.log('BEFORE Filter', val)),
@@ -80,7 +82,7 @@ export class ListsEffects {
 
   @Effect()
   updateListRepoRecordsets$ = this.store$.pipe(
-    select(selectRecordsetsForUpdate, { reducer: ListsConfig.LIST_REPO_RECORDSET }),
+    select(selectRecordsetsForUpdate, { reducer: config.lists.recordsets.repo }),
     distinctUntilChanged(),
     filter(r => r && !!r.parent),
     switchMap((recordset: Recordset<ListRepo>) =>
@@ -98,5 +100,5 @@ export class ListsEffects {
       private api: ApiService,
       private store$: Store<AppState>,
       private router: Router
-  ) { }
+  ) {}
 }

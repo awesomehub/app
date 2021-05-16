@@ -1,18 +1,17 @@
 import { Component, OnInit, AfterViewChecked, ViewEncapsulation, ChangeDetectionStrategy, ViewChild, ElementRef, Renderer2 } from '@angular/core';
 import { Store } from '@ngrx/store';
+import { config } from '@constants';
 import { AppState } from './app.state';
-import { AppConfig } from './app.config';
 import { TitleService, PrimaryRouteComponent, DrawerRouteComponent } from './core';
 
 @Component({
-  selector: 'app-root',
+  selector: 'ah-root',
   templateUrl: './app.component.html',
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AppComponent implements OnInit, AfterViewChecked {
-
-  public title: string;
+  public logo = config.appname;
   public drawer: DrawerRouteComponent;
 
   @ViewChild('layout', { static: false }) private layout: ElementRef;
@@ -24,12 +23,10 @@ export class AppComponent implements OnInit, AfterViewChecked {
     private renderer: Renderer2
   ) {}
 
-  ngOnInit() {
-    this.setHeaderTitle(AppConfig.NAME);
-  }
+  ngOnInit() {}
 
   ngAfterViewChecked() {
-    // Run MDL after each render to update any new elements added
+    // Run MDL after each render to upgrade any new elements added
     if ('componentHandler' in window) {
       window.componentHandler.upgradeAllRegistered()
     }
@@ -43,26 +40,17 @@ export class AppComponent implements OnInit, AfterViewChecked {
    */
   toggleDrawer() {
     if (!this.drawer) {
-      return false;
+      return;
     }
 
     const layout: Element = this.layout.nativeElement;
     const drawerButton: Element = this.drawerButton.nativeElement;
 
     if (-1 === layout.className.indexOf('is-small-screen')) {
-      return false;
+      return;
     }
 
     this.renderer.selectRootElement(drawerButton).click();
-  }
-
-  /**
-   * Updates header title.
-   *
-   *  @param title string The component title
-   */
-  setHeaderTitle(title: string) {
-    this.title = title;
   }
 
   /**
@@ -72,7 +60,7 @@ export class AppComponent implements OnInit, AfterViewChecked {
    *  @param title string The component title
    */
   setPageTitle(title: string) {
-    let pageTitle = AppConfig.NAME;
+    let pageTitle = config.appname;
     if (title) {
       pageTitle = title + ' - ' + pageTitle;
     }

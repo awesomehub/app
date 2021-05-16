@@ -1,26 +1,26 @@
 import { Component, OnInit, OnDestroy, ViewEncapsulation, ChangeDetectionStrategy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
-import { PrimaryRouteComponent } from '../../../core';
-import { ListsConfig } from '../../lists.config';
-import { RecordsetFactoryService, RecordsetService, Recordset } from '../../../recordsets';
-import { ListCollection, ListSummary } from '../../state';
+import { config } from '@constants';
+import { PrimaryRouteComponent } from '@app/core';
+import { RecordsetFactoryService, RecordsetService, Recordset } from '@app/recordsets';
+import { ListCollection, ListSummary } from '@app/lists';
 
 @Component({
   template: `
-    <content transparent="true" layout="compact">
-      <h3 class="content-heading">Browse Lists</h3>
-      <lists
-        [recordset]="recordset$ | async"
-        (needMore)="recordset.paginate()">
-      </lists>
-    </content>
-`,
+      <ah-content transparent="true" layout="compact">
+          <h3 class="content-heading">Explore</h3>
+          <ah-lists
+                  [recordset]="recordset$ | async"
+                  (needMore)="recordset.paginate()">
+          </ah-lists>
+      </ah-content>
+  `,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class HomeRouteComponent extends PrimaryRouteComponent implements OnInit, OnDestroy {
-  public title = 'Home';
+  public title = 'Explore';
   public recordset: RecordsetService<ListSummary>;
   public recordset$: Observable<Recordset<ListSummary>>;
 
@@ -33,9 +33,9 @@ export class HomeRouteComponent extends PrimaryRouteComponent implements OnInit,
     let collection: ListCollection = this.route.snapshot.data['collection'];
 
     // Create the lists recordset
-    this.recordset = this.recordsetFactory.create('browse-lists', ListsConfig.LIST_SUMMARY_RECORDSET, {
+    this.recordset = this.recordsetFactory.create('browse-lists', config.lists.recordsets.summary, {
       parent: collection.id,
-      size: ListsConfig.LISTS_PER_PAGE
+      size: config.lists.listsPageSize
     });
 
     // Fetch the recordset observable

@@ -1,5 +1,5 @@
-import { RecordsetFilters, RecordsetSorting } from '../../../recordsets';
-import { List, ListRepo } from '../models';
+import { RecordsetFilters, RecordsetSorting } from '@app/recordsets';
+import { List, ListRepo } from '@app/lists';
 
 export function listRepoRecordsetReducer(state: List, filters: RecordsetFilters, sorting: RecordsetSorting): Array<ListRepo> {
   let repos: Array<ListRepo> = state.entries['repo.github'];
@@ -41,25 +41,25 @@ export function listRepoRecordsetReducer(state: List, filters: RecordsetFilters,
   }
 
   switch (sorting.by) {
-    case 'score':
-      repos = repos
-        .sort((a, b) => sorting.asc
-          ? a.score - b.score
-          : b.score - a.score
-        );
-      break;
+  case 'score':
+    repos = repos
+      .sort((a, b) => sorting.asc
+        ? a.score - b.score
+        : b.score - a.score
+      );
+    break;
 
-    case 'score.p':
-    case 'score.h':
-    case 'score.a':
-    case 'score.m':
-      let field = sorting.by.split('.')[1];
-      repos = repos
-        .sort((a, b) => sorting.asc
-          ? a.scores[field] - b.scores[field]
-          : b.scores[field] - a.scores[field]
-        );
-      break;
+  case 'score.p':
+  case 'score.h':
+  case 'score.a':
+  case 'score.m':
+    let field = sorting.by.split('.')[1];
+    repos = repos
+      .sort((a, b) => sorting.asc
+        ? a.scores[field] - b.scores[field]
+        : b.scores[field] - a.scores[field]
+      );
+    break;
   }
 
   return repos;

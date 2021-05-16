@@ -21,6 +21,7 @@
 
 .list-repos .repos-sort .mdl-button .icon {
   font-size: 16px;
+  margin-left: 8px;
 }
 
 .list-repos > .mdl-grid--no-spacing > .mdl-cell:not(:first-child) {

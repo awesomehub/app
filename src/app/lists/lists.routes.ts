@@ -1,5 +1,4 @@
 import { Routes } from '@angular/router';
-
 import {
   HomeRouteComponent, SearchRouteComponent, SearchBarRouteComponent,
   ListHomeRouteComponent, ListAllRouteComponent, ListSearchRouteComponent,

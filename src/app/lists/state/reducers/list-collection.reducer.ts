@@ -1,8 +1,7 @@
 import { ActionReducer } from '@ngrx/store';
-import { Action } from '../../../common';
-import { ListSummaryResponse } from '../../../core';
-import { ListCollection, ListCollectionRecord, createListSummary } from '../models';
-import { ListCollectionActions } from '../actions';
+import { Action } from '@app/common';
+import { ListSummaryResponse } from '@app/core';
+import { ListCollection, ListCollectionRecord, ListCollectionActions, createListSummary } from '@app/lists';
 
 const initialState: ListCollection = new ListCollectionRecord();
 

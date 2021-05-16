@@ -2,17 +2,12 @@ import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
+import { StoreDevtoolsModule } from "@ngrx/store-devtools";
 
-// App state
+import { config, environment } from "@constants";
 import { reducers, metaReducers } from './app.state';
-
-// App Root Component
 import { AppComponent } from './app.component';
-
-// Core Module
 import { CoreModule } from './core';
-
-// Feature Modules
 import { ListsModule } from './lists';
 
 @NgModule({
@@ -21,6 +16,10 @@ import { ListsModule } from './lists';
   imports: [
     CoreModule,
     StoreModule.forRoot(reducers, { metaReducers }),
+    StoreDevtoolsModule.instrument({
+      name: config.appname,
+      logOnly: environment.production
+    }),
     EffectsModule.forRoot([]),
     RouterModule.forRoot([
       { path: '**', redirectTo: '404' },

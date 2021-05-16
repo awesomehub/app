@@ -1,6 +1,7 @@
 import { ActionReducerMap, MetaReducer } from '@ngrx/store';
-import { RouterReducerState } from '@ngrx/router-store';
-import { routerReducer, coreMetaReducers } from './core';
+import { RouterReducerState, routerReducer } from '@ngrx/router-store';
+
+import { coreMetaReducers } from './core';
 import { Recordsets } from './recordsets';
 import { ListCollections, Lists, listCollectionsReducer, listsReducer } from './lists';
 import { recordsetsReducer } from './recordsets';
@@ -13,8 +14,8 @@ export interface AppState {
 }
 
 export const reducers: ActionReducerMap<AppState> = {
-	router: routerReducer,
-	recordsets: recordsetsReducer,
+  router: routerReducer,
+  recordsets: recordsetsReducer,
   collections: listCollectionsReducer,
   lists: listsReducer
 };

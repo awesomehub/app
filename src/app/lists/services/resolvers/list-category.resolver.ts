@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Router, Resolve, ActivatedRouteSnapshot } from '@angular/router';
-
-import { List, ListCategory } from '../../state';
+import { List, ListCategory } from '@app/lists';
 
 @Injectable()
 export class ListCategoryDataResolver implements Resolve<any> {

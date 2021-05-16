@@ -10,8 +10,7 @@
       ],
       "parserOptions": {
         "project": [
-          "tsconfig.json",
-          "e2e/tsconfig.json"
+          "tsconfig.json"
         ],
         "createDefaultProgram": true
       },
@@ -24,7 +23,7 @@
           "error",
           {
             "type": "attribute",
-            "prefix": "app",
+            "prefix": "ah",
             "style": "camelCase"
           }
         ],
@@ -32,7 +31,7 @@
           "error",
           {
             "type": "element",
-            "prefix": "app",
+            "prefix": "ah",
             "style": "kebab-case"
           }
         ]

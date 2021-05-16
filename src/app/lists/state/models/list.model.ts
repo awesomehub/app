@@ -1,4 +1,4 @@
-import { ListResponse } from '../../../core';
+import { ListResponse } from '@app/core';
 
 export interface List {
   id: string;

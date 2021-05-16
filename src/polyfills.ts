@@ -63,3 +63,9 @@ import 'zone.js';  // Included with Angular CLI.
 /***************************************************************************************************
  * APPLICATION IMPORTS
  */
+// Material Design Lite scripts
+import "material-design-lite/src/mdlComponentHandler.js"
+import "material-design-lite/src/layout/layout.js"
+import "material-design-lite/src/menu/menu.js"
+import "material-design-lite/src/spinner/spinner.js"
+import "material-design-lite/src/progress/progress.js"

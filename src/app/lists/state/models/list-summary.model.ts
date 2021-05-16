@@ -1,4 +1,4 @@
-import { ListSummaryResponse } from '../../../core';
+import { ListSummaryResponse } from '@app/core';
 
 export interface ListSummary {
   id: string;

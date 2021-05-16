@@ -1,21 +1,21 @@
 import { Injectable } from '@angular/core';
-
-import { ColorScale } from "../../util";
-import { ListsConfig } from "../../lists.config";
+import { config } from "@constants";
+import { ColorScale } from "@app/lists/util";
 
 @Injectable()
 export class ListRepoScoreService {
-
+  private theme = config.lists.listRepoScoreTheme
   public colorScales: {
     p, h, a, m: ColorScale;
   };
 
   constructor() {
+    const { p, h, a, m } = config.lists.listRepoScoreScale
     this.colorScales = {
-      p: new ColorScale(ListsConfig.LIST_REPO_SCORE_COLOR, 0, ListsConfig.LIST_REPO_SCORE_SCALE_P),
-      h: new ColorScale(ListsConfig.LIST_REPO_SCORE_COLOR, 0, ListsConfig.LIST_REPO_SCORE_SCALE_H),
-      a: new ColorScale(ListsConfig.LIST_REPO_SCORE_COLOR, 0, ListsConfig.LIST_REPO_SCORE_SCALE_A),
-      m: new ColorScale(ListsConfig.LIST_REPO_SCORE_COLOR, 0, ListsConfig.LIST_REPO_SCORE_SCALE_M),
+      p: new ColorScale(this.theme, 0, p),
+      h: new ColorScale(this.theme, 0, h),
+      a: new ColorScale(this.theme, 0, a),
+      m: new ColorScale(this.theme, 0, m),
     };
   }
 
@@ -39,7 +39,7 @@ export class ListRepoScoreService {
   }
 
   getScoreColors(): Array<string> {
-    return ListsConfig.LIST_REPO_SCORE_COLOR;
+    return this.theme;
   }
 
   isColorBright(hex: string) {

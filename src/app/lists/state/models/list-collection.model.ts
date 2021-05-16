@@ -1,4 +1,4 @@
-import { ListSummary } from './list-summary.model';
+import { ListSummary } from '@app/lists';
 
 export interface ListCollection {
   id: string;

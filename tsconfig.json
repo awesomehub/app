@@ -3,10 +3,10 @@
   "compilerOptions": {
     "baseUrl": "./",
     "outDir": "./dist/out-tsc",
-    //"forceConsistentCasingInFileNames": true,
+    "forceConsistentCasingInFileNames": true,
     //"strict": true,
-    //"noImplicitReturns": true,
-    //"noFallthroughCasesInSwitch": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
     "sourceMap": true,
     "declaration": false,
     "downlevelIteration": true,
@@ -18,12 +18,17 @@
     "lib": [
       "es2018",
       "dom"
-    ]
+    ],
+    "paths": {
+      "@constants": ["./src/constants"],
+      "@app": ["./src/app"],
+      "@app/*": ["./src/app/*"]
+    }
   },
   "angularCompilerOptions": {
-    //"enableI18nLegacyMessageIdFormat": false,
-    //"strictInjectionParameters": true,
-    //"strictInputAccessModifiers": true,
-    //"strictTemplates": true
+    "enableI18nLegacyMessageIdFormat": false,
+    "strictInjectionParameters": true,
+    "strictInputAccessModifiers": true,
+    //"strictTemplates": true,
   }
 }

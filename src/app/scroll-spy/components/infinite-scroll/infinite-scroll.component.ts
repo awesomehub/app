@@ -5,33 +5,30 @@ import {
   Input, Output,
   OnInit, OnDestroy,
   ElementRef,
-  EventEmitter
+  EventEmitter, HostBinding
 } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { filter } from 'rxjs/operators';
 import { ScrollSpyService, ScrollSpyData } from '../../services';
 
 @Component({
-  selector: 'infinite-scroll',
+  selector: 'ah-infinite-scroll',
   template: `
     <a *ngIf="!auto" href="javascript:void(0)" (click)="next.emit()">{{button}}</a>
 `,
-  host: {
-    '[class.infinite-scroll]': '!auto',
-    '[hidden]': 'paused'
-  },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class InfiniteScrollComponent implements OnInit, OnDestroy {
-
-  @Input() auto: boolean = true;
-  @Input() distance: number = 40;
-  @Input() debounce: number = 100;
-  @Input() paused: boolean = false;
-  @Input() button: string = 'Load more...';
+  @Input() auto = true;
+  @Input() distance = 40;
+  @Input() debounce = 100;
+  @Input() @HostBinding('hidden') paused = false;
+  @Input() button = 'Load more...';
 
   @Output() next: EventEmitter<any> = new EventEmitter(false);
+
+  @HostBinding('class.infinite-scroll') get classActive() { return !this.auto; };
 
   private el: Element;
   private scroll_: Subscription;

@@ -1,30 +1,29 @@
 import { Component, OnInit, OnDestroy, ViewEncapsulation, ChangeDetectionStrategy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
-import { PrimaryRouteComponent } from '../../../core';
-import { ListsConfig } from '../../lists.config';
-import { RecordsetFactoryService, RecordsetService, Recordset } from '../../../recordsets';
-import { List, ListRepo } from '../../state';
+import { config } from '@constants';
+import { PrimaryRouteComponent } from '@app/core';
+import { RecordsetFactoryService, RecordsetService, Recordset } from '@app/recordsets';
+import { List, ListRepo } from '@app/lists';
 
 @Component({
   template: `
-    <content transparent="true" layout="compact">
-      <list-repos class=""
-          heading="Search Results ({{(recordset$ | async).set.length}})"
-          [recordset]="recordset$ | async"
-          (needMore)="recordset.paginate()"
-          (sort)="recordset.sort($event)"
-          [sortable]="true"
-          [infinite]="true"
-          [wide]="true">
-        </list-repos>
-    </content>
-`,
+      <ah-content transparent="true" layout="compact">
+          <ah-list-repos class=""
+                         heading="Search Results ({{(recordset$ | async).set.length}})"
+                         [recordset]="recordset$ | async"
+                         (needMore)="recordset.paginate()"
+                         (sort)="recordset.sort($event)"
+                         [sortable]="true"
+                         [infinite]="true"
+                         [wide]="true">
+          </ah-list-repos>
+      </ah-content>
+  `,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ListSearchRouteComponent extends PrimaryRouteComponent implements OnInit, OnDestroy {
-
   public title;
   public list: List;
 
@@ -36,18 +35,19 @@ export class ListSearchRouteComponent extends PrimaryRouteComponent implements O
     private recordsetFactory: RecordsetFactoryService
   ) {
     super();
-  }
 
-  ngOnInit() {
     // Fetch resolved list
     this.route.data.forEach(({list}) => {
       this.list = list;
+      this.title = this.list.name + ' / Search Results';
     });
+  }
 
+  ngOnInit() {
     // Create repos recordset
-    this.recordset = this.recordsetFactory.create('search-repos', ListsConfig.LIST_REPO_RECORDSET, {
+    this.recordset = this.recordsetFactory.create('search-repos', config.lists.recordsets.repo, {
       parent: this.list.id,
-      size: ListsConfig.LIST_REPOS_PER_PAGE
+      size: config.lists.listReposPageSize
     });
 
     // Set recordset observable
@@ -61,9 +61,6 @@ export class ListSearchRouteComponent extends PrimaryRouteComponent implements O
         this.recordset.unfilter('q');
       }
     });
-
-    // Set page title
-    this.title = this.list.name + ' / Search Results';
   }
 
   ngOnDestroy() {

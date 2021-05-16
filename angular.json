@@ -35,7 +35,7 @@
       },
       "root": "",
       "sourceRoot": "src",
-      "prefix": "app",
+      "prefix": "ah",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
@@ -54,15 +54,7 @@
             "styles": [
               "src/styles.css"
             ],
-            "scripts": [
-              "node_modules/moment/moment.js",
-              "node_modules/material-design-lite/src/mdlComponentHandler.js",
-              "node_modules/material-design-lite/src/third_party/rAF.js",
-              "node_modules/material-design-lite/src/layout/layout.js",
-              "node_modules/material-design-lite/src/menu/menu.js",
-              "node_modules/material-design-lite/src/spinner/spinner.js",
-              "node_modules/material-design-lite/src/progress/progress.js"
-            ]
+            "scripts": []
           },
           "configurations": {
             "production": {

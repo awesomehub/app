@@ -1,10 +1,8 @@
-import { Action } from '../../../common';
-
-import { ListCollectionResponse } from '../../../core';
 import { HttpErrorResponse } from '@angular/common/http';
+import { Action } from '@app/common';
+import { ListCollectionResponse } from '@app/core';
 
 export class ListCollectionActions {
-
   static FETCH_FAILED   = '[LIST COLLECTION] FETCH FAILED';
   static FETCH_SUCCESS  = '[LIST COLLECTION] FETCH SUCCESS';
   static FETCH          = '[LIST COLLECTION] FETCH';

@@ -16,7 +16,7 @@ html, body, a, h1, h2, h3, h4,
     width: 100%;
 }
 .mdl-layout {
-    height: auto;
+    min-height: 100vh;
 }
 .mdl-layout__drawer {
     position: fixed;

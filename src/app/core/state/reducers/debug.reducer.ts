@@ -1,15 +1,14 @@
 import { ActionReducer } from '@ngrx/store';
-
-import { AppState } from '../../../app.state';
+import { AppState } from '@app';
 
 export function debugReducer(reducer: ActionReducer<AppState>): ActionReducer<AppState> {
-  return function(state, action) {
-    const newState = reducer(state, action);
-    console.log(`[DEBUG] action: ${action.type}`, {
-      payload: (<any>action).payload,
-      oldState: state,
-      newState
-    });
-    return newState;
+  return function (state, action) {
+    const result = reducer(state, action);
+    console.groupCollapsed(`[DEBUG REDUCER]: ${action.type}`);
+    console.log('prev state', state);
+    console.log('action', action);
+    console.log('next state', result);
+    console.groupEnd();
+    return result;
   };
 }

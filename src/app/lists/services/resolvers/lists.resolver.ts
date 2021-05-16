@@ -2,24 +2,26 @@ import { Injectable } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { Resolve, ActivatedRouteSnapshot } from '@angular/router';
 import { first, distinctUntilChanged } from 'rxjs/operators';
-import { AppState } from '../../../app.state';
-import { ListsConfig } from '../../lists.config';
-import { ListCollectionActions, ListCollection, selectListCollection } from '../../state';
+import { config } from '@constants';
+import { AppState } from '@app';
+import { ListCollectionActions, ListCollection, selectListCollection } from '@app/lists';
 
 @Injectable()
 export class ListsDataResolver implements Resolve<ListCollection> {
   constructor(private store$: Store<AppState>) {}
 
   resolve(route: ActivatedRouteSnapshot): Promise<ListCollection> {
+    const { defaultCollection } = config.lists
+
     this.store$.dispatch(
-      ListCollectionActions.fetch(ListsConfig.DEFAULT_LIST_COLLECTION)
+      ListCollectionActions.fetch(defaultCollection)
     );
 
     return this.store$.pipe(
-      select(selectListCollection, { id: ListsConfig.DEFAULT_LIST_COLLECTION }),
+      select(selectListCollection, { id: defaultCollection }),
       distinctUntilChanged(),
       first(({loaded}) => loaded)
     )
-    .toPromise()
+      .toPromise()
   }
 }

@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
-import { ScrollSpyModule } from '../scroll-spy';
+import { ScrollSpyModule } from '@app/scroll-spy';
 
 import {
   LayoutContentComponent,
@@ -9,7 +8,7 @@ import {
   SpinnerComponent
 } from './components';
 import { ScoreDiffDirective } from "./directives";
-import { MomentFormatPipe } from "./pipes";
+import { DateFormatPipe } from "./pipes";
 
 @NgModule({
   imports: [ CommonModule ],
@@ -17,7 +16,7 @@ import { MomentFormatPipe } from "./pipes";
     LayoutContentComponent,
     LayoutSidebarComponent,
     SpinnerComponent,
-    MomentFormatPipe,
+    DateFormatPipe,
     ScoreDiffDirective
   ],
   exports: [
@@ -26,7 +25,7 @@ import { MomentFormatPipe } from "./pipes";
     LayoutContentComponent,
     LayoutSidebarComponent,
     SpinnerComponent,
-    MomentFormatPipe,
+    DateFormatPipe,
     ScoreDiffDirective
   ]
 })

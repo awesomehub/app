@@ -1,24 +1,25 @@
 import { Component, Input, Output, EventEmitter, ViewEncapsulation, ChangeDetectionStrategy } from '@angular/core';
-
-import { List, ListCategory } from '../../state';
+import { List, ListCategory } from '@app/lists';
 
 @Component({
-  selector: 'list-categories',
+  selector: 'ah-list-categories',
   template: `
-    <div *ngFor="let category of categories">
-      <a [class]="'mdl-navigation__link level-'+depth" routerLinkActive="mdl-navigation__link--current"
-        [routerLink]="['/list', list.id, category.path]"
-        (click)="navigate.emit(category)">
-            {{category.title}} <span class="category-count">{{category.count.all | number}}</span>
-      </a>
-      <list-categories [list]="list" [depth]="depth+1" [parent]="category.id" (navigate)="navigate.emit($event)"></list-categories>
-    </div>
-`,
+      <div *ngFor="let category of categories">
+          <a [class]="'mdl-navigation__link level-'+depth" routerLinkActive="mdl-navigation__link--current"
+             [routerLink]="['/list', list.id, category.path]"
+             (click)="navigate.emit(category)">
+              {{category.title}} <span class="category-count">{{category.count.all | number}}</span>
+          </a>
+          <ah-list-categories
+                  [list]="list" [depth]="depth+1" [parent]="category.id" 
+                  (navigate)="navigate.emit($event)">
+          </ah-list-categories>
+      </div>
+  `,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ListCategoriesComponent {
-
   public categories: Array<ListCategory>;
 
   @Input() list: List;

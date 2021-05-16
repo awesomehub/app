@@ -1,1 +1,1 @@
-export * from './moment-format';
+export * from './date-format';
