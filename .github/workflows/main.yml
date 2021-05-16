@@ -29,6 +29,7 @@ jobs:
       - run: |
           pnpm run build
           pnpm run build
+          pnpm run build:sme
       - if: github.event_name == 'push'
         uses: actions/upload-artifact@v2
         with:

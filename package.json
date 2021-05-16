@@ -20,8 +20,9 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build && source-map-explorer dist/**/*.js --html dist/sme.report.html",
+    "build": "ng build",
     "build:debug": "ng build --watch --configuration development",
+    "build:sme": "source-map-explorer dist/**/*.js --html dist/sme.report.html",
     "serve": "serve dist",
     "lint": "ng lint"
   },
