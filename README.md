@@ -1,4 +1,4 @@
-# AwesomeHub Angular App
+# AwesomeHub App
 
 [![][ci-img]][ci-url] [![][netlify-img]][netlify-url] [![][website-img]][website-url] [![][angular-img]][angular-url]
 
@@ -22,7 +22,7 @@ but I originally used it because Angular Material was still in alpha at the time
 
 ```bash
 # Clone the repo
-$ git clone https://github.com/awesomehub/angular-app.git awesomehub-app
+$ git clone https://github.com/awesomehub/app.git awesomehub-app
 $ cd awesomehub-app
 
 # Install dependencies
@@ -44,8 +44,8 @@ $ pnpm start
 |`pnpm ng` or `ng`|Run Angular cli commands (eg. `ng generate module`)|
 
 
-[ci-url]: https://github.com/awesomehub/angular-app/actions/workflows/main.yml
-[ci-img]: https://img.shields.io/github/workflow/status/awesomehub/angular-app/CI/master?logo=github
+[ci-url]: https://github.com/awesomehub/app/actions/workflows/main.yml
+[ci-img]: https://img.shields.io/github/workflow/status/awesomehub/app/CI/master?logo=github
 [netlify-url]: https://app.netlify.com/sites/awesomehub/deploys
 [netlify-img]: https://img.shields.io/netlify/968920d6-f8ff-4967-93d7-9e55861c1174?logo=netlify&logoColor=white
 [angular-url]: https://github.com/angular/angular/releases/tag/12.0.0

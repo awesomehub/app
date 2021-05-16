@@ -1,5 +1,5 @@
 {
-  "name": "awesomehub-angular-app",
+  "name": "awesomehub-app",
   "version": "2.0.0",
   "private": true,
   "sideEffects": [
@@ -8,10 +8,10 @@
   ],
   "author": "Mohamed Elkholy <mohatt@pm.me>",
   "description": "Angular application for AwesomeHub",
-  "homepage": "https://github.com/awesomehub/angular-app",
+  "homepage": "https://github.com/awesomehub/app",
   "repository": {
     "type": "git",
-    "url": "https://github.com/awesomehub/angular-app.git"
+    "url": "https://github.com/awesomehub/app.git"
   },
   "engines": {
     "node": ">=12.14.1",
@@ -33,7 +33,7 @@
   ],
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/awesomehub/angular-app/issues"
+    "url": "https://github.com/awesomehub/app/issues"
   },
   "dependencies": {
     "@angular/common": "~12.0.0",
