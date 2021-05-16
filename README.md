@@ -12,12 +12,13 @@ I have recently managed to update the codebase to [Angular 12](https://v12.angul
 
 The App UI is built on top of the good old [Material Design Lite](https://getmdl.io/) UI library, It's much lighter than [Angular Material](https://material.angular.io/)
 but I originally used it because Angular Material was in alpha when I built this app.
-## Prerequisites
+
+## Setup
+
+### Prerequisites
 
 - Node >= 12.14.1
 - PNPM >= 6.0
-
-## Setup
 
 ```bash
 # Clone the repo

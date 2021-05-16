@@ -21,11 +21,14 @@ jobs:
           key: pnpm-install-v3-${{ hashFiles('**/pnpm-lock.yaml') }}
           restore-keys: |
             pnpm-install-v3-
+      - uses: pnpm/action-setup@v2.0.1
+        with:
+          version: 6
+          run_install: true
+      # The initial build fails for some reason so for now we will build twice
       - run: |
-          npm -g install pnpm@6
-          pnpm set verify-store-integrity false
-      - run: pnpm install
-      - run: pnpm run build
+        pnpm run build
+        pnpm run build
       - if: github.event_name == 'push'
         uses: actions/upload-artifact@v2
         with:
