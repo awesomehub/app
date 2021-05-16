@@ -23,7 +23,7 @@
     "build": "ng build && source-map-explorer dist/**/*.js --html dist/sme.report.html",
     "build:debug": "ng build --watch --configuration development",
     "serve": "serve dist",
-    "lint": "ng lint --fix"
+    "lint": "ng lint"
   },
   "keywords": [
     "app",
@@ -46,8 +46,8 @@
     "@ngrx/router-store": "~12.0.0",
     "@ngrx/store": "~12.0.0",
     "@ngrx/store-devtools": "^12.0.0",
-    "material-design-lite": "^1.3.0",
     "date-fns": "^2.21.3",
+    "material-design-lite": "^1.3.0",
     "rxjs": "~6.6.7",
     "tslib": "^2.2.0",
     "zone.js": "~0.11.4"

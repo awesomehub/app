@@ -41,15 +41,17 @@
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
             "outputPath": "dist",
+            "resourcesOutputPath": "static",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.app.json",
             "aot": false,
+            "sourceMap": true,
             "assets": [
               "src/_redirects",
-              "src/favicon.ico",
-              "src/assets"
+              "src/_headers",
+              "src/favicon.ico"
             ],
             "styles": [
               "src/styles.css"
@@ -82,7 +84,6 @@
               "optimization": true,
               "vendorChunk": false,
               "extractLicenses": true,
-              "sourceMap": true,
               "namedChunks": true
             },
             "development": {
@@ -90,7 +91,6 @@
               "optimization": false,
               "vendorChunk": true,
               "extractLicenses": false,
-              "sourceMap": true,
               "namedChunks": true
             }
           },
@@ -120,7 +120,8 @@
             "lintFilePatterns": [
               "src/**/*.ts",
               "src/**/*.html"
-            ]
+            ],
+            "fix": true
           }
         }
       }
