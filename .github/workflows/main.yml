@@ -27,8 +27,8 @@ jobs:
           run_install: true
       # The initial build fails for some reason so for now we will build twice
       - run: |
-        pnpm run build
-        pnpm run build
+          pnpm run build
+          pnpm run build
       - if: github.event_name == 'push'
         uses: actions/upload-artifact@v2
         with:
