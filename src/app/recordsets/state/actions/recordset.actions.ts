@@ -1,4 +1,4 @@
-import { Action } from '../../../common';
+import { Action } from '@app/common';
 import { RecordsetSorting, RecordsetReducer, RecordsetConstructorOptions } from '../models';
 
 export class RecordsetActions {

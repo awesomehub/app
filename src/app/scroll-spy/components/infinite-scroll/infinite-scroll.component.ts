@@ -9,7 +9,7 @@ import {
 } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { filter } from 'rxjs/operators';
-import { ScrollSpyService, ScrollSpyData } from '../../services';
+import { ScrollSpyService, ScrollSpyData } from '@app/scroll-spy';
 
 @Component({
   selector: 'ah-infinite-scroll',

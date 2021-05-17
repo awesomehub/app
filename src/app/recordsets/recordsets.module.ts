@@ -1,5 +1,4 @@
 import { NgModule, ModuleWithProviders } from '@angular/core';
-
 import { RecordsetFactoryService } from './services';
 
 @NgModule({})

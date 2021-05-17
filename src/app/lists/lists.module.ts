@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { EffectsModule } from '@ngrx/effects';
 
-import { SharedModule } from '../shared';
+import { SharedModule } from '@app/shared';
 import {
   HomeRouteComponent, SearchRouteComponent, SearchBarRouteComponent,
   ListHomeRouteComponent, ListAllRouteComponent, ListSearchRouteComponent,
@@ -13,10 +13,7 @@ import {
   ListReposComponent, ListRepoCardComponent
 } from './components';
 import { ListRepoScoreStyleDirective } from './directives';
-import {
-  ListsDataResolver, ListDataResolver,
-  ListCategoryDataResolver, ListRepoScoreService
-} from './services';
+import { ListsDataResolver, ListDataResolver, ListCategoryDataResolver, ListRepoScoreService } from './services';
 import { ListsEffects } from './state';
 import { routes } from './lists.routes';
 

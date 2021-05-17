@@ -1,5 +1,5 @@
 import { createSelector, createFeatureSelector } from '@ngrx/store';
-import { AppState } from '../../../app.state';
+import { AppState } from '@app';
 import { Recordset } from '../models';
 
 export const selectRecordsets = createFeatureSelector<AppState, Array<Recordset<any>>>(

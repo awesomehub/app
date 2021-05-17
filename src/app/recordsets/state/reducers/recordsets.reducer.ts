@@ -1,4 +1,4 @@
-import { Action } from '../../../common';
+import { Action } from '@app/common';
 import { RecordsetActions } from '../actions';
 import { recordsetReducer } from './recordset.reducer';
 import { Recordset } from '../models';

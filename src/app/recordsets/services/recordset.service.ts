@@ -1,8 +1,8 @@
 import { Store, select } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { distinctUntilChanged } from 'rxjs/operators';
+import { AppState } from '@app';
 import { Recordset, RecordsetSorting, RecordsetActions, selectRecordset } from '../state';
-import { AppState } from '../../app.state';
 
 export class RecordsetService<T> {
 
