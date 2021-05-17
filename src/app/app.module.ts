@@ -23,7 +23,7 @@ import { ListsModule } from './lists';
     EffectsModule.forRoot([]),
     RouterModule.forRoot([
       { path: '**', redirectTo: '404' },
-    ]),
+    ], { scrollPositionRestoration: "top" }),
     ListsModule
   ]
 })
