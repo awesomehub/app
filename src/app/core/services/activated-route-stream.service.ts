@@ -4,8 +4,8 @@ import { Store, select } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { switchMap, distinctUntilChanged, filter } from 'rxjs/operators';
 
-import { AppState } from "../../app.state";
-import { selectRouterState } from "../state";
+import { AppState } from "@app";
+import { selectRouterState } from "@app/core";
 
 @Injectable()
 export class ActivatedRouteStreamService {

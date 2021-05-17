@@ -1,4 +1,15 @@
-import { Component, OnInit, AfterViewChecked, ViewEncapsulation, ChangeDetectionStrategy, ViewChild, ElementRef, Renderer2 } from '@angular/core';
+import {
+  Component,
+  Inject,
+  ViewChild,
+  OnInit,
+  AfterViewChecked,
+  ViewEncapsulation,
+  ChangeDetectionStrategy,
+  ElementRef,
+  Renderer2
+} from '@angular/core';
+import { DOCUMENT } from "@angular/common";
 import { Store } from '@ngrx/store';
 import { config } from '@constants';
 import { AppState } from './app.state';
@@ -20,15 +31,17 @@ export class AppComponent implements OnInit, AfterViewChecked {
   constructor (
     private store$: Store<AppState>,
     private titleService: TitleService,
-    private renderer: Renderer2
+    private renderer: Renderer2,
+    @Inject(DOCUMENT) private document: Document
   ) {}
 
   ngOnInit() {}
 
   ngAfterViewChecked() {
     // Run MDL after each render to upgrade any new elements added
-    if ('componentHandler' in window) {
-      window.componentHandler.upgradeAllRegistered()
+    const { componentHandler } = this.document.defaultView
+    if (componentHandler) {
+      componentHandler.upgradeAllRegistered()
     }
   }
 

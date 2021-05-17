@@ -1,1 +1,1 @@
-export * from './scroll-spy';
+export * from './scroll-spy.service';
