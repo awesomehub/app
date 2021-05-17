@@ -1,0 +1,9 @@
+.infinite-scroll {
+  visibility: hidden;
+  padding: 16px;
+  text-align: center;
+}
+
+.infinite-scroll.disabled {
+  visibility: visible;
+}

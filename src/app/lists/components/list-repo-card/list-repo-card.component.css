@@ -1,5 +1,5 @@
 .list-repo-card {
-  min-height: 180px;
+  min-height: 185px;
 }
 
 .list-repo-inner {
@@ -25,10 +25,6 @@
   cursor: pointer;
 }
 
-.list-repo-inner .mdl-card__media:hover .score a {
-  text-decoration: underline;
-}
-
 .list-repo-inner .mdl-card__supporting-text {
   width: auto;
   position: relative;
@@ -41,7 +37,6 @@
 }
 
 .list-repo-inner h4 a {
-  text-decoration: none;
   white-space: nowrap;
 }
 
@@ -52,10 +47,6 @@
   height: 100%;
   position: absolute;
   top: 0;
-}
-
-.list-repo-inner h4 a:hover {
-  text-decoration: underline;
 }
 
 .list-repo-inner .repo-author {
@@ -106,7 +97,6 @@
 
 .list-repo-inner .score a {
   color: #0074bc;
-  text-decoration: none;
 }
 
 .list-repo-inner .score .score-diff {
@@ -209,6 +199,7 @@
   font-weight: 500;
   text-align: left;
   vertical-align: middle;
+  text-decoration: none;
 }
 
 @media (max-width: 479px) {

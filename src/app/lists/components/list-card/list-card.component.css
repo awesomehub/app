@@ -8,16 +8,8 @@
   margin: 10px 0 15px;
 }
 
-.list-card h4 a {
-  text-decoration: none;
-}
-
 .list-card:hover {
   background: #f0f0f0;
-}
-
-.list-card h4 a:hover {
-  text-decoration: underline;
 }
 
 .list-card .mdl-card__supporting-text {

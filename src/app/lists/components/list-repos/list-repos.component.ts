@@ -48,7 +48,7 @@ import { ListRepo } from '@app/lists';
 
           <ah-infinite-scroll
                   class="mdl-cell mdl-cell--12-col mdl-shadow--2dp"
-                  [auto]="infinite"
+                  [disabled]="!infinite"
                   [paused]="!recordset.pagination.hasNext || !recordset.updated"
                   (next)="needMore.emit()">
           </ah-infinite-scroll>
