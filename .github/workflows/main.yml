@@ -26,7 +26,8 @@ jobs:
           version: 6
           run_install: true
       # The initial build after pnpm install fails for some reason so for now we will build twice
-      - run: |
+      - name: Build
+        run: |
           pnpm build:debug
           pnpm build
           pnpm postbuild
@@ -45,6 +46,7 @@ jobs:
           repository: awesomehub/awesomehub.github.io
           token: ${{ secrets.PAT }}
           path: deploy
+      - run: rm -r deploy/dist/*
       - uses: actions/download-artifact@v2
         id: download
         with:
