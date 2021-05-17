@@ -7,7 +7,7 @@ on:
     branches: [ master ]
 
 jobs:
-  build:
+  Build:
     if: "!contains(github.event.head_commit.message, '[skip ci]')"
     runs-on: ubuntu-20.04
     steps:
@@ -25,19 +25,19 @@ jobs:
         with:
           version: 6
           run_install: true
-      # The initial build fails for some reason so for now we will build twice
+      # The initial build after pnpm install fails for some reason so for now we will build twice
       - run: |
-          pnpm run build
-          pnpm run build
-          pnpm run build:sme
+          pnpm build:debug
+          pnpm build
+          pnpm build:sme
       - if: github.event_name == 'push'
         uses: actions/upload-artifact@v2
         with:
           name: build-art
           path: dist
-  deploy:
+  Deploy:
     if: github.event_name == 'push'
-    needs: build
+    needs: Build
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v2

@@ -4,7 +4,7 @@
 
 This repository contains the sources for AwesomeHub Angular application.
 
-> Live production build can be found at [awesomehub.js.org](https://awesomehub.js.org)
+> Live production build can be found at [awesomehub.js.org][website-url]
 
 ## About
 The App was originaly built for educational purposes and to experiment with [Angular 2](https://v2.angular.io/), [NgRx](https://ngrx.io/) and [RxJS](https://www.learnrxjs.io/), but
@@ -38,10 +38,10 @@ $ pnpm start
 |---|---|
 |`pnpm start`|Start dev server @ `localhost:4200`|
 |`pnpm build`|Build production bundles to `./dist` directory|
-|`pnpm build:debug`|Build unoptimized production bundles to `./dist` directory and watch for changes|
+|`pnpm build:debug`|Build unoptimized production bundles for debugging purposes to `./dist` directory|
 |`pnpm serve`|Start web server @ `localhost:5000` to serve build artifacts from `./dist` directory|
 |`pnpm lint`|Lint TypeScript source with ESLint |
-|`pnpm ng` or `ng`|Run Angular cli commands (eg. `ng generate module`)|
+|`pnpm ng` or `ng`|Run Angular CLI commands (eg. `ng generate module`)|
 
 
 [ci-url]: https://github.com/awesomehub/app/actions/workflows/main.yml
