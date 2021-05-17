@@ -2,9 +2,9 @@ import { Injectable } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { Action } from '@app/common';
 import { Router } from '@angular/router';
-import { Actions, Effect, ofType } from '@ngrx/effects';
+import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { of } from 'rxjs';
-import { filter, map, tap, mergeMap, switchMap, catchError, distinctUntilChanged } from 'rxjs/operators';
+import { filter, map, mergeMap, switchMap, catchError, distinctUntilChanged } from 'rxjs/operators';
 import { config } from '@constants';
 import { AppState } from '@app';
 import { ApiService } from '@app/core';
@@ -19,19 +19,17 @@ import {
 @Injectable()
 export class ListsEffects {
 
-  @Effect()
-  show404$ = this.actions$.pipe(
+  show404$ = createEffect(() => this.actions$.pipe(
     ofType(ListCollectionActions.FETCH_FAILED, ListActions.FETCH_FAILED),
     filter(action => {
       this.router.navigate(['404']);
       return false;
     })
-  );
+  ));
 
-  @Effect()
-  loadListCollection$ = this.actions$.pipe(
+  loadListCollection$ = createEffect(() => this.actions$.pipe(
     ofType(ListCollectionActions.FETCH),
-    mergeMap((action: Action) => 
+    mergeMap((action: Action) =>
       this.store$.pipe(
         select(selectListCollection, { id: action.payload.id }),
         distinctUntilChanged()
@@ -44,12 +42,11 @@ export class ListsEffects {
         catchError(error => of(ListCollectionActions.fetchFailed(collection.id, error)))
       )
     )
-  );
+  ));
 
-  @Effect()
-  loadList$ = this.actions$.pipe(
+  loadList$ = createEffect(() => this.actions$.pipe(
     ofType(ListActions.FETCH),
-    mergeMap((action: Action) => 
+    mergeMap((action: Action) =>
       this.store$.pipe(
         select(selectList, { id: action.payload.id }),
         distinctUntilChanged()
@@ -62,14 +59,13 @@ export class ListsEffects {
         catchError(error => of(ListActions.fetchFailed(list.id, error)))
       )
     )
-  )
+  ));
 
-  @Effect()
-  updateListSummaryRecordsets$ = this.store$.pipe(
+  updateListSummaryRecordsets$ = createEffect(() => this.store$.pipe(
     select(selectRecordsetsForUpdate, { reducer: config.lists.recordsets.summary }),
     distinctUntilChanged(),
     filter(r => r && !!r.parent),
-    tap(val => console.log('BEFORE Filter', val)),
+    //tap(val => console.log('BEFORE Filter', val)),
     switchMap((recordset: Recordset<ListSummary>) =>
       this.store$.pipe(
         select(selectListCollection, { id: recordset.parent }),
@@ -78,10 +74,9 @@ export class ListsEffects {
         map((collection: ListCollection) => RecordsetActions.update(recordset.id, listSummaryRecordsetReducer, collection))
       )
     )
-  )
+  ));
 
-  @Effect()
-  updateListRepoRecordsets$ = this.store$.pipe(
+  updateListRepoRecordsets$ = createEffect(() => this.store$.pipe(
     select(selectRecordsetsForUpdate, { reducer: config.lists.recordsets.repo }),
     distinctUntilChanged(),
     filter(r => r && !!r.parent),
@@ -93,7 +88,7 @@ export class ListsEffects {
         map((list: List) => RecordsetActions.update(recordset.id, listRepoRecordsetReducer, list))
       )
     )
-  )
+  ));
 
   constructor(
       private actions$: Actions,
