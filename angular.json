@@ -49,8 +49,6 @@
             "aot": false,
             "sourceMap": true,
             "assets": [
-              "src/_redirects",
-              "src/_headers",
               "src/favicon.ico",
               "src/assets/data"
             ],

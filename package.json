@@ -22,7 +22,9 @@
     "start": "ng serve",
     "build": "ng build",
     "build:debug": "ng build --configuration development",
-    "build:sme": "source-map-explorer dist/**/*.js --html dist/sme.report.html",
+    "postbuild": "pnpm run postbuild:sme && pnpm run postbuild:script",
+    "postbuild:sme": "source-map-explorer dist/**/*.js --html dist/sme.report.html",
+    "postbuild:script": "node scripts/postbuild.mjs",
     "serve": "serve dist",
     "lint": "ng lint"
   },
