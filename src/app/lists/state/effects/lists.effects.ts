@@ -31,7 +31,7 @@ export class ListsEffects {
     ofType(ListCollectionActions.FETCH),
     mergeMap((action: Action) =>
       this.store$.pipe(
-        select(selectListCollection, { id: action.payload.id }),
+        select(selectListCollection(action.payload.id)),
         distinctUntilChanged()
       )
     ),
@@ -48,7 +48,7 @@ export class ListsEffects {
     ofType(ListActions.FETCH),
     mergeMap((action: Action) =>
       this.store$.pipe(
-        select(selectList, { id: action.payload.id }),
+        select(selectList(action.payload.id)),
         distinctUntilChanged()
       )
     ),
@@ -62,13 +62,12 @@ export class ListsEffects {
   ));
 
   updateListSummaryRecordsets$ = createEffect(() => this.store$.pipe(
-    select(selectRecordsetsForUpdate, { reducer: config.lists.recordsets.summary }),
+    select(selectRecordsetsForUpdate(config.lists.recordsets.summary)),
     distinctUntilChanged(),
     filter(r => r && !!r.parent),
-    //tap(val => console.log('BEFORE Filter', val)),
     switchMap((recordset: Recordset<ListSummary>) =>
       this.store$.pipe(
-        select(selectListCollection, { id: recordset.parent }),
+        select(selectListCollection(recordset.parent)),
         distinctUntilChanged(),
         filter(c => c && c.loaded),
         map((collection: ListCollection) => RecordsetActions.update(recordset.id, listSummaryRecordsetReducer, collection))
@@ -77,12 +76,12 @@ export class ListsEffects {
   ));
 
   updateListRepoRecordsets$ = createEffect(() => this.store$.pipe(
-    select(selectRecordsetsForUpdate, { reducer: config.lists.recordsets.repo }),
+    select(selectRecordsetsForUpdate(config.lists.recordsets.repo)),
     distinctUntilChanged(),
     filter(r => r && !!r.parent),
     switchMap((recordset: Recordset<ListRepo>) =>
       this.store$.pipe(
-        select(selectList, { id: recordset.parent }),
+        select(selectList(recordset.parent)),
         distinctUntilChanged(),
         filter(l => l && l.loaded),
         map((list: List) => RecordsetActions.update(recordset.id, listRepoRecordsetReducer, list))

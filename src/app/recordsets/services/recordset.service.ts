@@ -10,7 +10,7 @@ export class RecordsetService<T> {
 
   constructor(private id: string, private store$: Store<AppState>) {
     this.recordset$ = this.store$.pipe(
-      select(selectRecordset, { id: this.id }),
+      select(selectRecordset(this.id)),
       distinctUntilChanged()
     );
   }

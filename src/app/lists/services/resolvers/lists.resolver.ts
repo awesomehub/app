@@ -18,7 +18,7 @@ export class ListsDataResolver implements Resolve<ListCollection> {
     );
 
     return this.store$.pipe(
-      select(selectListCollection, { id: defaultCollection }),
+      select(selectListCollection(defaultCollection)),
       distinctUntilChanged(),
       first(({loaded}) => loaded)
     )

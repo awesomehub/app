@@ -7,7 +7,6 @@ import { ListActions, List, selectList } from '@app/lists';
 
 @Injectable()
 export class ListDataResolver implements Resolve<any> {
-
   constructor(private store$: Store<AppState>) {}
 
   resolve(route: ActivatedRouteSnapshot): Promise<List> {
@@ -18,7 +17,7 @@ export class ListDataResolver implements Resolve<any> {
     );
 
     return this.store$.pipe(
-      select(selectList, { id: id }),
+      select(selectList(id)),
       distinctUntilChanged(),
       first(({loaded}) => loaded)
     )
