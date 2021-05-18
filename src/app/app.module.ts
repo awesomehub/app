@@ -1,30 +1,38 @@
 import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
+
 import { StoreModule } from '@ngrx/store';
-import { EffectsModule } from '@ngrx/effects';
+import { StoreRouterConnectingModule } from "@ngrx/router-store";
 import { StoreDevtoolsModule } from "@ngrx/store-devtools";
+import { EffectsModule } from "@ngrx/effects";
 
 import { config, environment } from "@constants";
-import { reducers, metaReducers } from './app.state';
+import { CoreModule, RouterStateSerializerService } from '@app/core';
+import { ListsModule } from '@app/lists';
+
 import { AppComponent } from './app.component';
-import { CoreModule } from './core';
-import { ListsModule } from './lists';
+import { reducers, metaReducers } from './app.state';
 
 @NgModule({
-  bootstrap: [ AppComponent ],
-  declarations: [ AppComponent ],
+  bootstrap: [AppComponent],
+  declarations: [AppComponent],
   imports: [
-    CoreModule,
+    BrowserModule,
+    RouterModule.forRoot([
+      { path: '**', redirectTo: '404' },
+    ], { scrollPositionRestoration: "top" }),
     StoreModule.forRoot(reducers, { metaReducers }),
+    StoreRouterConnectingModule.forRoot({
+      serializer: RouterStateSerializerService
+    }),
     StoreDevtoolsModule.instrument({
       name: config.appname,
       logOnly: environment.production
     }),
     EffectsModule.forRoot([]),
-    RouterModule.forRoot([
-      { path: '**', redirectTo: '404' },
-    ], { scrollPositionRestoration: "top" }),
-    ListsModule
+    CoreModule,
+    ListsModule,
   ]
 })
-export class AppModule { }
+export class AppModule {}

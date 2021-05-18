@@ -1,19 +1,13 @@
 import {
-  Component,
-  Inject,
-  ViewChild,
-  OnInit,
-  AfterViewChecked,
-  ViewEncapsulation,
-  ChangeDetectionStrategy,
-  ElementRef,
-  Renderer2
+  Component, Inject, ViewChild, AfterViewChecked,
+  ViewEncapsulation, ChangeDetectionStrategy, ElementRef, Renderer2
 } from '@angular/core';
 import { DOCUMENT } from "@angular/common";
 import { Store } from '@ngrx/store';
+
 import { config } from '@constants';
-import { AppState } from './app.state';
-import { TitleService, PrimaryRouteComponent, DrawerRouteComponent } from './core';
+import { AppState } from '@app';
+import { TitleService, PrimaryRouteComponent, DrawerRouteComponent } from '@app/core';
 
 @Component({
   selector: 'ah-root',
@@ -21,7 +15,7 @@ import { TitleService, PrimaryRouteComponent, DrawerRouteComponent } from './cor
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class AppComponent implements OnInit, AfterViewChecked {
+export class AppComponent implements AfterViewChecked {
   public logo = config.appname;
   public drawer: DrawerRouteComponent;
 
@@ -34,8 +28,6 @@ export class AppComponent implements OnInit, AfterViewChecked {
     private renderer: Renderer2,
     @Inject(DOCUMENT) private document: Document
   ) {}
-
-  ngOnInit() {}
 
   ngAfterViewChecked() {
     // Run MDL after each render to upgrade any new elements added
