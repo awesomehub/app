@@ -66,11 +66,11 @@ import { ListRepo, ListRepoScoreService } from '@app/lists';
           <a class="meta" title="Language">
               <i class="icon icon-code"></i> {{repo.lang || 'None'}}
           </a>
-          <a class="meta" title="Last Pushed">
-              <i class="icon icon-repo-pushed"></i> Pushed {{repo.pushed | ahDateFormat}}
+          <a *ngIf="repo.lic" class="meta" title="Licence">
+              <i class="icon icon-licence"></i> {{repo.lic}}
           </a>
-          <a class="meta" title="Last Updated">
-              <i class="icon icon-pulse"></i> Updated {{repo.updated | ahDateFormat}}
+          <a class="meta" title="Last Pushed">
+              <i class="icon icon-pulse"></i> Pushed {{repo.pushed | ahDateFormat}}
           </a>
       </div>
   `,

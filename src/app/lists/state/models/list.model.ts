@@ -30,6 +30,7 @@ export interface ListRepo {
   name: string;
   desc: string;
   lang: string;
+  lic: string;
   cats: Array<number>;
   score: number;
   score_d: number;
