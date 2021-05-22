@@ -11,7 +11,7 @@ import { ListSummary } from '@app/lists';
       </div>
       <div class="mdl-card__actions mdl-card--border">
           <a class="meta" title="Score">
-              <i class="icon icon-flame"></i> {{list.score | number}}
+              <i class="icon icon-flame"></i> {{list.score | ahScoreFormat}}
           </a>
           <a class="meta" title="Entries Count">
               <i class="icon icon-repo"></i> {{list.entries | number}}
