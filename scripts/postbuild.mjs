@@ -1,6 +1,6 @@
 import fs from 'fs'
-import path from "path";
-import log from "npmlog";
+import path from 'path'
+import log from 'npmlog'
 
 function dist(filename = '') {
   return path.join(process.cwd(), 'dist', filename)
@@ -60,7 +60,12 @@ async function main() {
 }
 
 log.info('postbuild', 'Running postbuild script')
-main().catch(e => {
-  console.error(e)
-  process.exit(1)
-});
+main()
+  .then(() => {
+    log.info('postbuild', 'done!')
+    process.exit(0)
+  })
+  .catch(e => {
+    console.error(e)
+    process.exit(1)
+  })
