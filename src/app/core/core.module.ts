@@ -9,7 +9,7 @@ import { RecordsetsModule } from '@app/recordsets';
 import { ScrollSpyModule } from '@app/scroll-spy';
 
 // Application-wide components and services
-import { ApiService, ActivatedRouteStreamService } from './services';
+import { ApiService, AnalyticsService, ActivatedRouteStreamService } from './services';
 import { Error404Component } from './route-components';
 import { LoadingIndicatorComponent } from './components';
 
@@ -35,6 +35,7 @@ import { LoadingIndicatorComponent } from './components';
   ],
   providers: [
     TitleService,
+    AnalyticsService,
     ApiService,
     ActivatedRouteStreamService
   ]

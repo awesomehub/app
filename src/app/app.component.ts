@@ -1,5 +1,5 @@
 import {
-  Component, Inject, ViewChild, AfterViewChecked,
+  Component, Inject, ViewChild, AfterViewChecked, AfterViewInit,
   ViewEncapsulation, ChangeDetectionStrategy, ElementRef, Renderer2
 } from '@angular/core';
 import { DOCUMENT } from "@angular/common";
@@ -7,7 +7,7 @@ import { Store } from '@ngrx/store';
 
 import { config } from '@constants';
 import { AppState } from '@app';
-import { TitleService, PrimaryRouteComponent, DrawerRouteComponent } from '@app/core';
+import { TitleService, PrimaryRouteComponent, DrawerRouteComponent, AnalyticsService } from '@app/core';
 
 @Component({
   selector: 'ah-root',
@@ -15,7 +15,7 @@ import { TitleService, PrimaryRouteComponent, DrawerRouteComponent } from '@app/
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class AppComponent implements AfterViewChecked {
+export class AppComponent implements AfterViewChecked, AfterViewInit {
   public logo = config.appname;
   public drawer: DrawerRouteComponent;
 
@@ -26,6 +26,7 @@ export class AppComponent implements AfterViewChecked {
     private store$: Store<AppState>,
     private titleService: TitleService,
     private renderer: Renderer2,
+    private analyticsService: AnalyticsService,
     @Inject(DOCUMENT) private document: Document
   ) {}
 
@@ -35,6 +36,10 @@ export class AppComponent implements AfterViewChecked {
     if (componentHandler) {
       componentHandler.upgradeAllRegistered()
     }
+  }
+
+  ngAfterViewInit() {
+    this.analyticsService.initialize()
   }
 
   /**
