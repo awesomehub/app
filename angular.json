@@ -49,8 +49,9 @@
             "aot": false,
             "sourceMap": true,
             "assets": [
-              "src/favicon.ico",
-              "src/assets/data"
+              "src/assets/data",
+              "src/assets/images/favicons",
+              "src/manifest.json"
             ],
             "styles": [
               "src/styles.css"
