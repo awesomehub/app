@@ -12,7 +12,7 @@
 .list-repos .repos-sort {
   position: absolute;
   top: 6px;
-  right: 0;
+  right: 8px;
 }
 
 .list-repos .repos-sort .mdl-button {

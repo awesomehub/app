@@ -14,6 +14,11 @@
   color: rgba(255, 255, 255, 0.5);
 }
 
+.list-search-bar > input::placeholder {
+  color: rgba(255, 255, 255, 0.5);
+  opacity: 1;
+}
+
 .list-search-bar > input:focus {
   background: rgba(0, 0, 0, 0.12);
   color: rgba(255, 255, 255, 0.7);

@@ -10,13 +10,13 @@ import { ListSummary } from '@app/lists';
           {{list.desc}}
       </div>
       <div class="mdl-card__actions mdl-card--border">
-          <a class="meta" title="Score">
+          <a class="meta" title="Total entries">
+            <i class="icon icon-repo"></i> {{list.entries | number}}
+          </a>
+          <a class="meta" title="Average score">
               <i class="icon icon-flame"></i> {{list.score | ahScoreFormat}}
           </a>
-          <a class="meta" title="Entries Count">
-              <i class="icon icon-repo"></i> {{list.entries | number}}
-          </a>
-          <a class="meta" title="Last Updated">
+          <a class="meta" title="Last updated">
               <i class="icon icon-pulse"></i> Updated {{list.updated | ahDateFormat}}
           </a>
       </div>

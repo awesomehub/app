@@ -49,6 +49,7 @@ html, body, a, h1, h2, h3, h4,
 /* Header Bar */
 .header-bar {
     display: table;
+    margin-top: 15px;
 }
 
 .mdl-layout.has-drawer.is-small-screen .list-search-bar {
@@ -104,7 +105,7 @@ a.logo {
 
 /* Content */
 .mdl-layout__content {
-    margin-top: 16px;
+    margin-top: 15px;
 }
 
 .content-heading {
