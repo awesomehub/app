@@ -4,8 +4,11 @@
 @import "./assets/css/icon-font.css";
 
 /* Typography */
-html, body, a, h1, h2, h3, h4,
-.mdl-layout__title, .mdl-layout-title {
+html, body, input {
+  font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+}
+
+html, body, a, h1, h2, h3, h4 {
     font-weight: 300;
 }
 
@@ -27,19 +30,21 @@ html, body, a, h1, h2, h3, h4,
     background: linear-gradient(to bottom, rgba(120, 0, 210, 1), rgba(0, 0, 0, 0));
 }
 
-/*
 .mdl-layout__header, .mdl-layout__content {
   transition-duration: .2s;
   transition-timing-function: cubic-bezier(.4,0,.2,1);
-  transition-property: all;
+  transition-property: margin, width;
 }
-*/
+
+.mdl-layout__content {
+  transition-duration: .3s;
+}
 
 .mdl-layout__header-row {
     width: calc(100% - 16px);
     max-width: 1080px;
     margin: 0 auto;
-    padding: 0 8px !important;
+    padding: 0 12px !important;
 }
 
 .mdl-layout__header-row .mdl-navigation__link {
@@ -77,14 +82,19 @@ html, body, a, h1, h2, h3, h4,
 
 /* Logo */
 a.logo {
-    font-family: 'Lobster', cursive;
-    text-decoration: underline;
-    font-weight: 400;
 }
 
 .mdl-layout__header a.logo {
     color: rgba(255,255,255, 0.85);
-    font-size: 30px;
+}
+
+.mdl-layout__header a.logo svg {
+  fill: currentColor;
+  width: 200px;
+}
+
+.mdl-layout__header a.logo:hover svg .awesome-icon {
+  fill: #ffc107;
 }
 
 .mdl-layout__header a.logo:hover {
