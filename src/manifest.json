@@ -1,7 +1,7 @@
 {
   "name": "AwesomeHub",
   "short_name": "AwesomeHub",
-  "theme_color": "#7800d2",
+  "theme_color": "#673ab7",
   "background_color": "#fafafa",
   "scope": "/",
   "start_url": "/",

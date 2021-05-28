@@ -29,7 +29,7 @@ html, body, a, h1, h2, h3, h4 {
 
 /* Header */
 .mdl-layout__header {
-    background: linear-gradient(to bottom, rgba(120, 0, 210, 1), rgba(0, 0, 0, 0));
+  background: transparent;
 }
 
 .mdl-layout__header, .mdl-layout__content {
