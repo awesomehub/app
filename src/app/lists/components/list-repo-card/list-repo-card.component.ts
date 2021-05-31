@@ -10,7 +10,6 @@ import { ListRepo, ListRepoScoreService } from '@app/lists';
                title="Show extended scores">
               <div class="score">
                   <a>{{repo.score | ahScoreFormat}}</a>
-                  <span *ngIf="repo.score_d !== 0" [ahScoreDiff]="repo.score_d"></span>
               </div>
               <div class="scores" [style.border-color]="scoreColorLegend[scoreColorLegend.length-1]">
                   <span [ahListRepoScoreStyle]="repo.scores.p" scoreType="p" title="Popularity: {{repo.scores.p | ahScoreFormat}}">P</span>
@@ -25,28 +24,24 @@ import { ListRepo, ListRepoScoreService } from '@app/lists';
                   <span class="score-seg">P</span>
                   <div class="score-seg-inf">
                       {{repo.scores.p | ahScoreFormat}}
-                      <span *ngIf="repo.scores_d.p !== 0" [ahScoreDiff]="repo.scores_d.p"></span>
                   </div>
               </div>
               <div [ahListRepoScoreStyle]="repo.scores.a" scoreType="a" title="Activity score">
                   <span class="score-seg">A</span>
                   <div class="score-seg-inf">
                       {{repo.scores.a | ahScoreFormat}}
-                      <span *ngIf="repo.scores_d.a !== 0" [ahScoreDiff]="repo.scores_d.a"></span>
                   </div>
               </div>
               <div [ahListRepoScoreStyle]="repo.scores.m" scoreType="m" title="Maturity score">
                   <span class="score-seg">M</span>
                   <div class="score-seg-inf">
                       {{repo.scores.m | ahScoreFormat}}
-                      <span *ngIf="repo.scores_d.m !== 0" [ahScoreDiff]="repo.scores_d.m"></span>
                   </div>
               </div>
               <div [ahListRepoScoreStyle]="repo.scores.h" scoreType="h" title="Trending score">
                 <span class="score-seg">T</span>
                 <div class="score-seg-inf">
                   {{repo.scores.h | ahScoreFormat}}
-                  <span *ngIf="repo.scores_d.h !== 0" [ahScoreDiff]="repo.scores_d.h"></span>
                 </div>
               </div>
           </div>

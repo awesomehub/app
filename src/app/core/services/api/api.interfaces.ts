@@ -45,19 +45,11 @@ export interface ListRepoResponse {
   lang: string;
   cats: Array<number>;
   score: number;
-  score_d: number;
   scores: {
     p: number;
     h: number;
     a: number;
     m: number;
   };
-  scores_d: {
-    p: number;
-    h: number;
-    a: number;
-    m: number;
-  };
   pushed: number;
-  updated: number;
 }

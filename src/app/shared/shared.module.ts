@@ -7,7 +7,6 @@ import {
   LayoutSidebarComponent,
   SpinnerComponent
 } from './components';
-import { ScoreDiffDirective } from "./directives";
 import { DateFormatPipe, ScoreFormatPipe } from "./pipes";
 
 @NgModule({
@@ -17,8 +16,7 @@ import { DateFormatPipe, ScoreFormatPipe } from "./pipes";
     LayoutSidebarComponent,
     SpinnerComponent,
     DateFormatPipe,
-    ScoreFormatPipe,
-    ScoreDiffDirective
+    ScoreFormatPipe
   ],
   exports: [
     CommonModule,
@@ -27,8 +25,7 @@ import { DateFormatPipe, ScoreFormatPipe } from "./pipes";
     LayoutSidebarComponent,
     SpinnerComponent,
     DateFormatPipe,
-    ScoreFormatPipe,
-    ScoreDiffDirective
+    ScoreFormatPipe
   ]
 })
 export class SharedModule {}
