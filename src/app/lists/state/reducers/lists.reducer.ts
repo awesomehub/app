@@ -19,9 +19,11 @@ export function listsReducer(state: Lists = {}, action: Action): Lists {
 
   case ListActions.FETCH_SUCCESS:
   case ListActions.FETCH_FAILED:
-    return Object.assign({}, state, {
+    // We are not merging prev state to allow only one fetched list to be available at any time
+    // This is to reduce app memory consumption
+    return {
       [action.payload.id]: listReducer(state[action.payload.id], action)
-    });
+    };
 
   default:
     return state;
