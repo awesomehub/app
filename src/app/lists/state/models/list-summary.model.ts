@@ -19,6 +19,6 @@ export class ListSummaryRecord implements ListSummary {
 }
 
 export function createListSummary(data: ListSummaryResponse): ListSummary {
-  // we're directly mergin the response data because it's identical to our model
+  // we're directly merging the response data because it's identical to our model
   return Object.assign(new ListSummaryRecord(), data);
 }

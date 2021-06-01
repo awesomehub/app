@@ -8,11 +8,32 @@
   padding: 0;
 }
 
-.content {
+.content-wrapper .content {
   border-radius: 2px;
-  padding: 56px;
+  padding: 50px;
   animation-duration: 0.3s;
   min-height: 350px;
+}
+
+.content-wrapper .content > h1 {
+  margin-top: 0;
+  font-size: 50px;
+}
+
+.content-wrapper .content > p {
+  font-size: 20px;
+}
+
+.is-small-screen .content-wrapper .content {
+  padding: 26px;
+}
+
+.is-small-screen .content-wrapper .content > h1 {
+  font-size: 26px;
+}
+
+.is-small-screen .content-wrapper .content > p {
+  font-size: 16px;
 }
 
 .content-wrapper.with-sidebar {

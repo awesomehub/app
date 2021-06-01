@@ -47,6 +47,7 @@ html, body, a, h1, h2, h3, h4 {
   max-width: 1080px;
   margin: 0 auto;
   padding: 0 12px !important;
+  height: auto;
 }
 
 .mdl-layout__header-row .mdl-navigation__link {
@@ -56,7 +57,6 @@ html, body, a, h1, h2, h3, h4 {
 /* Header Bar */
 .header-bar {
   display: table;
-  margin-top: 15px;
 }
 
 .mdl-layout.has-drawer.is-small-screen .list-search-bar {
@@ -184,21 +184,4 @@ a:hover {
 
 .mdl-button.mdl-button--icon .icon {
   padding: 0;
-}
-
-/* Shared styles  */
-.score-diff {
-  color: #6cc644;
-}
-
-.score-diff::before {
-  content: "+";
-}
-
-.score-diff-down {
-  color: #bd2c00;
-}
-
-.score-diff-down::before {
-  content: "-";
 }
