@@ -47,7 +47,7 @@
             "sourceMap": true,
             "assets": [
               "src/assets/data",
-              "src/assets/images/favicons",
+              "src/assets/images",
               "src/manifest.json"
             ],
             "styles": [
