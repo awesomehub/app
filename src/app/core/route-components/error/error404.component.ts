@@ -19,4 +19,8 @@ export class Error404Component extends PrimaryRouteComponent {
       { name: 'robots', content: 'noindex' }
     ]
   };
+
+  constructor() {
+    super(false);
+  }
 }

@@ -4,7 +4,7 @@ import { RouteComponent, HelmetDefinition } from '@app/core';
 export abstract class PrimaryRouteComponent extends RouteComponent {
   public helmet: HelmetDefinition|BehaviorSubject<HelmetDefinition>;
 
-  constructor(createHelmet$ = true) {
+  protected constructor(createHelmet$ = true) {
     super();
 
     this.helmet = createHelmet$
