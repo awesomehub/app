@@ -34,7 +34,6 @@ import { List, ListRepo } from '@app/lists';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ListHomeRouteComponent extends PrimaryRouteComponent implements OnInit, OnDestroy {
-  public title;
   public list: List;
   public repos: {
     best: RecordsetService<ListRepo>;
@@ -45,18 +44,18 @@ export class ListHomeRouteComponent extends PrimaryRouteComponent implements OnI
     trending: Observable<Recordset<ListRepo>>;
   };
 
-  constructor(private route: ActivatedRoute, private recordsetFactory: RecordsetFactoryService) {
+  constructor(
+    private route: ActivatedRoute,
+    private recordsetFactory: RecordsetFactoryService
+  ) {
     super();
 
-    // Fetch resolved list
-    this.route.data.forEach(({list}) => {
-      this.list = list;
-      this.title = this.list.name;
-    });
+    this.list = route.snapshot.data.list;
   }
 
   ngOnInit() {
     const { recordsets, listReposPageSize } = config.lists
+
     // Create repos recordsets
     this.repos = {
       best: this.recordsetFactory.create('best-repos', recordsets.repo, {
@@ -82,6 +81,12 @@ export class ListHomeRouteComponent extends PrimaryRouteComponent implements OnI
       best: this.repos.best.fetch(),
       trending: this.repos.trending.fetch()
     };
+
+    // Update doc head
+    this.updateHelmet({
+      title: this.list.name,
+      description: this.list.desc
+    });
   }
 
   ngOnDestroy() {

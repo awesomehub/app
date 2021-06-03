@@ -5,9 +5,8 @@ import {
 import { DOCUMENT } from "@angular/common";
 import { Store } from '@ngrx/store';
 
-import { config } from '@constants';
 import { AppState } from '@app';
-import { TitleService, PrimaryRouteComponent, DrawerRouteComponent, AnalyticsService } from '@app/core';
+import { PrimaryRouteComponent, DrawerRouteComponent, AnalyticsService, HelmetService } from '@app/core';
 
 @Component({
   selector: 'ah-root',
@@ -16,7 +15,6 @@ import { TitleService, PrimaryRouteComponent, DrawerRouteComponent, AnalyticsSer
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AppComponent implements AfterViewChecked, AfterViewInit {
-  public logo = config.appname;
   public drawer: DrawerRouteComponent;
 
   @ViewChild('layout', { static: false }) private layout: ElementRef;
@@ -24,8 +22,8 @@ export class AppComponent implements AfterViewChecked, AfterViewInit {
 
   constructor (
     private store$: Store<AppState>,
-    private titleService: TitleService,
     private renderer: Renderer2,
+    private helmetService: HelmetService,
     private analyticsService: AnalyticsService,
     @Inject(DOCUMENT) private document: Document
   ) {}
@@ -64,27 +62,12 @@ export class AppComponent implements AfterViewChecked, AfterViewInit {
   }
 
   /**
-   * Updates the page title after appending the site name to the
-   *  component title.
-   *
-   *  @param title string The component title
-   */
-  setPageTitle(title: string) {
-    let pageTitle = config.appname;
-    if (title) {
-      pageTitle = title + ' - ' + pageTitle;
-    }
-
-    this.titleService.setTitle(pageTitle);
-  }
-
-  /**
    * Triggered when the main outlet is activated
    *
    * @param component PrimaryRouteComponent
    */
   onActivation(component: PrimaryRouteComponent) {
-    this.setPageTitle(component.title);
+    this.helmetService.apply(component.helmet);
   }
 
   /**
@@ -92,7 +75,9 @@ export class AppComponent implements AfterViewChecked, AfterViewInit {
    *
    * @param component PageComponent
    */
-  onDeactivation(component: PrimaryRouteComponent) { }
+  onDeactivation(component: PrimaryRouteComponent) {
+    this.helmetService.unsubscribe();
+  }
 
   /**
    * Triggered when the drawer outlet is activated

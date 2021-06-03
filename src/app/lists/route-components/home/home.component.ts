@@ -20,11 +20,16 @@ import { ListCollection, ListSummary } from '@app/lists';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class HomeRouteComponent extends PrimaryRouteComponent implements OnInit, OnDestroy {
-  public title = 'Explore';
+  public helmet = {
+    title: 'Explore'
+  };
   public recordset: RecordsetService<ListSummary>;
   public recordset$: Observable<Recordset<ListSummary>>;
 
-  constructor(private route: ActivatedRoute, private recordsetFactory: RecordsetFactoryService) {
+  constructor(
+    private route: ActivatedRoute,
+    private recordsetFactory: RecordsetFactoryService
+  ) {
     super();
   }
 

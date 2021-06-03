@@ -25,10 +25,8 @@ import { List, ListCategory, ListRepo } from '@app/lists';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ListCategoryRouteComponent extends PrimaryRouteComponent implements OnInit, OnDestroy {
-  public title;
   public list: List;
   public category: ListCategory;
-
   public recordset: RecordsetService<ListRepo>;
   public recordset$: Observable<Recordset<ListRepo>>;
 
@@ -38,40 +36,27 @@ export class ListCategoryRouteComponent extends PrimaryRouteComponent implements
     @Inject(forwardRef(() => AppComponent)) private app: AppComponent
   ) {
     super();
+
+    this.list = route.snapshot.data.list;
   }
 
   ngOnInit() {
-    // Fetch resolved list
-    this.route.data.forEach(({list, category}) => {
-      this.list = list;
-      this.category = category;
-
-      // Create repos recordset
-      if (!this.recordset) {
-        this.recordset = this.recordsetFactory.create('category-repos', config.lists.recordsets.repo, {
-          parent: this.list.id,
-          size: config.lists.listReposPageSize,
-          sorting: {
-            by: 'score',
-            asc: false
-          }
-        });
-        this.recordset$ = this.recordset.fetch();
+    this.recordset = this.recordsetFactory.create('category-repos', config.lists.recordsets.repo, {
+      parent: this.list.id,
+      size: config.lists.listReposPageSize,
+      sorting: {
+        by: 'score',
+        asc: false
       }
-
-      // Re-invoke Outlet deactivation event since it's not invoked when navigating
-      //  within the same component
-      this.app.onDeactivation(this);
-
-      // Set the category filter
-      this.recordset.filter('category', this.category.id);
-
-      // Set page title
-      this.title = this.list.name + ' / ' + this.category.title;
-
-      // Re-invoke Outlet activation eventsince it's not invoked when navigating
-      //  within the same component
-      this.app.onActivation(this);
+    });
+    this.recordset$ = this.recordset.fetch();
+    this.route.data.forEach(({ category }) => {
+      this.category = category;
+      this.recordset.filter('category', category.id);
+      this.updateHelmet({
+        title: this.list.name + ' / ' + category.title,
+        description: this.list.desc
+      });
     });
   }
 

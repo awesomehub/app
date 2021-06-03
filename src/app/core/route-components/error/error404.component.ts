@@ -13,5 +13,10 @@ import { PrimaryRouteComponent } from '../models';
   `
 })
 export class Error404Component extends PrimaryRouteComponent {
-  public title = 'Page not found';
+  public helmet = {
+    title: 'Page not found',
+    meta: [
+      { name: 'robots', content: 'noindex' }
+    ]
+  };
 }

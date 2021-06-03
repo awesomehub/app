@@ -9,7 +9,7 @@ import { ListCollection, ListSummary } from '@app/lists';
 @Component({
   template: `
       <ah-content transparent="true" layout="compact">
-          <h3 class="content-heading">{{title}} ({{(recordset$ | async).set.length}})</h3>
+          <h3 class="content-heading">{{helmet.title}} ({{(recordset$ | async).set.length}})</h3>
           <ah-lists
                   [recordset]="recordset$ | async"
                   (needMore)="recordset.paginate()">
@@ -20,7 +20,9 @@ import { ListCollection, ListSummary } from '@app/lists';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SearchRouteComponent extends PrimaryRouteComponent implements OnInit, OnDestroy {
-  public title = 'Search results';
+  public helmet = {
+    title: 'Search Results'
+  };
   public recordset: RecordsetService<ListSummary>;
   public recordset$: Observable<Recordset<ListSummary>>;
 

@@ -24,9 +24,7 @@ import { List, ListRepo } from '@app/lists';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ListSearchRouteComponent extends PrimaryRouteComponent implements OnInit, OnDestroy {
-  public title;
   public list: List;
-
   public recordset: RecordsetService<ListRepo>;
   public recordset$: Observable<Recordset<ListRepo>>;
 
@@ -36,11 +34,7 @@ export class ListSearchRouteComponent extends PrimaryRouteComponent implements O
   ) {
     super();
 
-    // Fetch resolved list
-    this.route.data.forEach(({list}) => {
-      this.list = list;
-      this.title = this.list.name + ' / Search Results';
-    });
+    this.list = route.snapshot.data.list;
   }
 
   ngOnInit() {
@@ -60,6 +54,12 @@ export class ListSearchRouteComponent extends PrimaryRouteComponent implements O
       } else {
         this.recordset.unfilter('q');
       }
+    });
+
+    // Update doc head
+    this.updateHelmet({
+      title: this.list.name + ' / Search Results',
+      description: this.list.desc
     });
   }
 

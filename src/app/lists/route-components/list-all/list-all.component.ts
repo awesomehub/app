@@ -24,23 +24,17 @@ import { List, ListRepo } from '@app/lists';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ListAllRouteComponent extends PrimaryRouteComponent implements OnInit, OnDestroy {
-  public title;
   public list: List;
-
   public recordset: RecordsetService<ListRepo>;
   public recordset$: Observable<Recordset<ListRepo>>;
 
   constructor(private route: ActivatedRoute, private recordsetFactory: RecordsetFactoryService) {
     super();
 
-    // Fetch resolved list
-    this.route.data.forEach(({list}) => {
-      this.list = list;
-    });
+    this.list = route.snapshot.data.list;
   }
 
   ngOnInit() {
-    // Create repos recordset
     this.recordset = this.recordsetFactory.create('all-repos', config.lists.recordsets.repo, {
       parent: this.list.id,
       size: config.lists.listReposPageSize,
@@ -49,12 +43,11 @@ export class ListAllRouteComponent extends PrimaryRouteComponent implements OnIn
         asc: false
       }
     });
-
-    // Set recordset observable
     this.recordset$ = this.recordset.fetch();
-
-    // Set page title
-    this.title = this.list.name + ' / All Repositories';
+    this.updateHelmet({
+      title: this.list.name + ' / All Repositories',
+      description: this.list.desc
+    });
   }
 
   ngOnDestroy() {

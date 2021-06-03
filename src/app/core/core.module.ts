@@ -1,5 +1,4 @@
 import { NgModule, Optional, SkipSelf } from '@angular/core';
-import { Title as TitleService } from '@angular/platform-browser';
 import { RouterModule }  from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 
@@ -9,7 +8,7 @@ import { RecordsetsModule } from '@app/recordsets';
 import { ScrollSpyModule } from '@app/scroll-spy';
 
 // Application-wide components and services
-import { ApiService, AnalyticsService, ActivatedRouteStreamService } from './services';
+import { HelmetService, ApiService, AnalyticsService, ActivatedRouteStreamService } from './services';
 import { Error404Component } from './route-components';
 import { LoadingIndicatorComponent } from './components';
 
@@ -34,7 +33,7 @@ import { LoadingIndicatorComponent } from './components';
     LoadingIndicatorComponent
   ],
   providers: [
-    TitleService,
+    HelmetService,
     AnalyticsService,
     ApiService,
     ActivatedRouteStreamService
@@ -43,9 +42,7 @@ import { LoadingIndicatorComponent } from './components';
 export class CoreModule {
   constructor (@Optional() @SkipSelf() parentModule: CoreModule) {
     if (parentModule) {
-      throw new Error ('CoreModule is already loaded. Import it in the AppModule only');
+      throw new Error ('CoreModule is already loaded.');
     }
   }
 }
-
-export { TitleService };
