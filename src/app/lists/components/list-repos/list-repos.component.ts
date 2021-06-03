@@ -24,7 +24,7 @@ import { ListRepo } from '@app/lists';
           <span *ngSwitchDefault>None</span>
         </span> <i class="icon icon-sort-desc"></i>
           </button>
-          <ul #sortmenu class="mdl-menu mdl-js-menu mdl-menu--bottom-right">
+          <ul #sortmenu class="mdl-menu mdl-js-menu mdl-menu--unaligned">
               <li class="mdl-menu__item mdl-menu__item--full-bleed-divider"
                   (click)="sort.emit({by: 'score', asc: false})">Overall Score
               </li>

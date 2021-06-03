@@ -15,6 +15,12 @@
   right: 8px;
 }
 
+.is-small-screen .list-repos .repos-sort {
+  position: relative;
+  top: -8px;
+  right: 0;
+}
+
 .list-repos .repos-sort .mdl-button {
   color: rgba(255,255,255,0.8);
 }

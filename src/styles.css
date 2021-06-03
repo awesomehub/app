@@ -30,6 +30,7 @@ html, body, a, h1, h2, h3, h4 {
 /* Header */
 .mdl-layout__header {
   background: transparent;
+  margin-top: 15px;
 }
 
 .mdl-layout__header, .mdl-layout__content {
@@ -51,12 +52,17 @@ html, body, a, h1, h2, h3, h4 {
 }
 
 .mdl-layout__header-row .mdl-navigation__link {
-  padding: 0 20px;
+  padding: 0 0 0 20px;
+}
+
+.mdl-layout__header-row .mdl-navigation__link .icon {
+  padding-right: 5px;
 }
 
 /* Header Bar */
 .header-bar {
   display: table;
+  margin-top: 15px;
 }
 
 .mdl-layout.has-drawer.is-small-screen .list-search-bar {
@@ -100,7 +106,7 @@ html, body, a, h1, h2, h3, h4 {
   position: absolute;
   top: 0;
   width: 100%;
-  height: 20rem;
+  height: 22rem;
   background-image: url('assets/css/images/jumbotron-bg.jpg');
   background-position: 50% 45%;
   background-size: cover;
