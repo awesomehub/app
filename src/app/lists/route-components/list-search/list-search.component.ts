@@ -9,8 +9,7 @@ import { List, ListRepo } from '@app/lists';
 @Component({
   template: `
       <ah-content transparent="true" layout="compact">
-          <ah-list-repos class=""
-                         heading="Search Results ({{(recordset$ | async).set.length}})"
+          <ah-list-repos heading="Search Results ({{(recordset$ | async).set.length}})"
                          [recordset]="recordset$ | async"
                          (needMore)="recordset.paginate()"
                          (sort)="recordset.sort($event)"

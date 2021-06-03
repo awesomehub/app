@@ -24,7 +24,7 @@ export class InfiniteScrollComponent implements OnInit, OnDestroy {
   @HostBinding('class') private class = 'infinite-scroll mdl-card'
 
   @Input() @HostBinding('class.disabled') disabled = false;
-  @Input() distance = 40;
+  @Input() distance = 500;
   @Input() debounce = 100;
   @Input() @HostBinding('hidden') paused = false;
   @Input() button = 'Load more...';

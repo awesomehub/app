@@ -25,8 +25,6 @@ import { ListSummary } from '@app/lists';
       <ah-spinner class="mdl-cell mdl-cell--12-col" [active]="!recordset.updated"></ah-spinner>
       <ah-infinite-scroll
               class="mdl-cell mdl-cell--12-col"
-              [distance]="80"
-              [debounce]="50"
               [paused]="!recordset.pagination.hasNext || !recordset.updated"
               (next)="needMore.emit()">
       </ah-infinite-scroll>
