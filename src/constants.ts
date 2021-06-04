@@ -17,7 +17,7 @@ export const config = {
   lists: {
     defaultCollection: 'all',
     listsPageSize: 20,
-    listReposPageSize: 25,
+    listReposPageSize: 24,
     // Recordset reducers constants
     recordsets: {
       summary: 'LIST_SUMMARY_RECORDSET',

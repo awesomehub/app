@@ -54,21 +54,22 @@ export class ListHomeRouteComponent extends PrimaryRouteComponent implements OnI
   }
 
   ngOnInit() {
-    const { recordsets, listReposPageSize } = config.lists
+    const recordsetReducer = config.lists.recordsets.repo
+    const recordsetSize = Math.round(config.lists.listReposPageSize / 2);
 
     // Create repos recordsets
     this.repos = {
-      best: this.recordsetFactory.create('best-repos', recordsets.repo, {
+      best: this.recordsetFactory.create('best-repos', recordsetReducer, {
         parent: this.list.id,
-        size: listReposPageSize,
+        size: recordsetSize,
         sorting: {
           by: 'score',
           asc: false
         }
       }),
-      trending: this.recordsetFactory.create('trending-repos', recordsets.repo, {
+      trending: this.recordsetFactory.create('trending-repos', recordsetReducer, {
         parent: this.list.id,
-        size: listReposPageSize,
+        size: recordsetSize,
         sorting: {
           by: 'score.h',
           asc: false

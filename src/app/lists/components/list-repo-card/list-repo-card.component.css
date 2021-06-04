@@ -42,8 +42,8 @@
 
 .list-repo-inner h4::after {
   content: '';
-  right: -6px;
-  width: 6em;
+  right: -16px;
+  width: 10%;
   height: 100%;
   position: absolute;
   top: 0;
@@ -70,7 +70,7 @@
   right: 0;
   top: 1.5em;
   height: 1.5em;
-  width: 6em;
+  width: 10%;
 }
 
 .list-repo-inner .repo-desc.no-desc {
