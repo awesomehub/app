@@ -45,7 +45,7 @@ $ pnpm start
 
 
 [ci-url]: https://github.com/awesomehub/app/actions/workflows/main.yml
-[ci-img]: https://img.shields.io/github/workflow/status/awesomehub/app/CI/master?logo=github
+[ci-img]: https://img.shields.io/github/actions/workflow/status/awesomehub/app/main.yml?branch=master
 [netlify-url]: https://app.netlify.com/sites/awesomehub/deploys
 [netlify-img]: https://img.shields.io/netlify/968920d6-f8ff-4967-93d7-9e55861c1174?logo=netlify&logoColor=white
 [angular-url]: https://github.com/angular/angular/releases/tag/12.0.0
