@@ -28,8 +28,8 @@ export class ListRepoScoreService {
   }
 
   getScoreColor(type: string, score: number): { bg: string, text: string } {
-    let legend = this.getScoreColors();
-    let color = this.getScoreColorScale(type).getColor(score);
+    const legend = this.getScoreColors();
+    const color = this.getScoreColorScale(type).getColor(score);
     return {
       bg: color,
       text: this.isColorBright(color)
@@ -38,13 +38,13 @@ export class ListRepoScoreService {
     };
   }
 
-  getScoreColors(): Array<string> {
+  getScoreColors(): string[] {
     return this.theme;
   }
 
   isColorBright(hex: string) {
     hex = hex.replace('#', '');
-    let r = parseInt(hex.substr(0, 2),16),
+    const r = parseInt(hex.substr(0, 2),16),
       g = parseInt(hex.substr(2, 2),16),
       b = parseInt(hex.substr(4, 2),16);
 

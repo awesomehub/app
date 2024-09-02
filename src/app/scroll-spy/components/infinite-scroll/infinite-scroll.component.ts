@@ -29,7 +29,7 @@ export class InfiniteScrollComponent implements OnInit, OnDestroy {
   @Input() @HostBinding('hidden') paused = false;
   @Input() button = 'Load more...';
 
-  @Output() next: EventEmitter<any> = new EventEmitter(false);
+  @Output() next = new EventEmitter<any>(false);
 
   private el: Element;
   private scroll_: Subscription;
@@ -45,10 +45,10 @@ export class InfiniteScrollComponent implements OnInit, OnDestroy {
   }
 
   evaluate(data: ScrollSpyData): void {
-    let rect = this.el.getBoundingClientRect();
+    const rect = this.el.getBoundingClientRect();
     // The distance between the element and the viewport bottom
-    let distance = rect.top - data.windowInnerHeight - rect.height;
-    let diff = distance - this.distance;
+    const distance = rect.top - data.windowInnerHeight - rect.height;
+    const diff = distance - this.distance;
 
     if (diff <= 0) {
       // Emit the event to load extra data

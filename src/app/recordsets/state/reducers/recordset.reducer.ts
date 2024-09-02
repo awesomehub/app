@@ -26,7 +26,7 @@ export function recordsetReducer(state: Recordset<any>, { type, payload }: Actio
       return state;
     }
 
-    let newFilters = Object.assign({}, state.filters);
+    const newFilters = Object.assign({}, state.filters);
     delete newFilters[payload.filterId];
 
     return Object.assign({}, state, {
@@ -35,7 +35,7 @@ export function recordsetReducer(state: Recordset<any>, { type, payload }: Actio
     });
 
   case RecordsetActions.SORT:
-    let {sorting}: {sorting: RecordsetSorting} = payload;
+    const {sorting}: {sorting: RecordsetSorting} = payload;
     if (sorting.by === state.sorting.by && sorting.asc === state.sorting.asc) {
       return state;
     }
@@ -65,13 +65,13 @@ export function recordsetReducer(state: Recordset<any>, { type, payload }: Actio
   }
 }
 
-function getUpdatedPagination(state: Recordset<any>, page: number = 1, pageSize?: number) {
-  let size = (pageSize === undefined) ? state.pagination.size : pageSize;
-  let pages = Math.ceil(state.set.length / size);
-  let current = Math.min(page, pages);
-  let hasNext = current < pages;
+function getUpdatedPagination(state: Recordset<any>, page = 1, pageSize?: number) {
+  const size = (pageSize === undefined) ? state.pagination.size : pageSize;
+  const pages = Math.ceil(state.set.length / size);
+  const current = Math.min(page, pages);
+  const hasNext = current < pages;
 
-  let slice = state.set.slice(0, current * size);
+  const slice = state.set.slice(0, current * size);
 
   return {
     pagination: { pages, current, size, hasNext },

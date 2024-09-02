@@ -75,9 +75,9 @@ import { ListRepo, ListRepoScoreService } from '@app/lists';
 export class ListRepoCardComponent {
   @HostBinding('class') private class = 'list-repo-card mdl-card';
   @Input() public repo: ListRepo;
-  @Input('extended') public extendedScores = false;
+  @Input() public extendedScores = false;
 
-  public scoreColorLegend: Array<string>;
+  public scoreColorLegend: string[];
 
   constructor(private repoScoreService: ListRepoScoreService) {
     this.scoreColorLegend = repoScoreService.getScoreColors();

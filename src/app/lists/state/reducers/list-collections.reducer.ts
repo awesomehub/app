@@ -2,9 +2,7 @@ import { Action } from '@app/common';
 import { ListCollection, ListCollectionActions } from '@app/lists';
 import { listCollectionReducer } from './list-collection.reducer';
 
-export type ListCollections = {
-  [index: string]: ListCollection;
-}
+export type ListCollections = Record<string, ListCollection>;
 
 export function listCollectionsReducer(state: ListCollections = {}, action: Action): ListCollections {
   switch (action.type) {

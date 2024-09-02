@@ -19,9 +19,9 @@ export interface ListResponse {
   name: string;
   desc: string;
   score: number;
-  cats: Array<ListCategoryResponse>;
+  cats: ListCategoryResponse[];
   entries: {
-    'repo.github': Array<ListRepoResponse>;
+    'repo.github': ListRepoResponse[];
   };
   updated: string;
 }
@@ -43,7 +43,7 @@ export interface ListRepoResponse {
   name: string;
   desc: string;
   lang: string;
-  cats: Array<number>;
+  cats: number[];
   score: number;
   scores: {
     p: number;

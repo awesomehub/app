@@ -1,6 +1,6 @@
 import { NgModule, Optional, SkipSelf } from '@angular/core';
 import { RouterModule }  from '@angular/router';
-import { HttpClientModule } from '@angular/common/http';
+import { provideHttpClient, withFetch } from '@angular/common/http';
 
 // Application-wide modules
 import { SharedModule } from '@app/shared';
@@ -18,7 +18,6 @@ import { LoadingIndicatorComponent } from './components';
       // Routes for common error pages
       { path: '404', component: Error404Component }
     ]),
-    HttpClientModule,
     SharedModule,
     ScrollSpyModule.provideService(),
     RecordsetsModule.provideService()
@@ -33,6 +32,7 @@ import { LoadingIndicatorComponent } from './components';
     LoadingIndicatorComponent
   ],
   providers: [
+    provideHttpClient(withFetch()),
     HelmetService,
     AnalyticsService,
     ApiService,

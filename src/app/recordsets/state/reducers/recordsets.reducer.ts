@@ -3,7 +3,7 @@ import { RecordsetActions } from '../actions';
 import { recordsetReducer } from './recordset.reducer';
 import { Recordset } from '../models';
 
-export type Recordsets = Array<Recordset<any>>;
+export type Recordsets = Recordset<any>[];
 
 export function recordsetsReducer(state: Recordsets = [], action: Action): Recordsets {
   switch (action.type) {

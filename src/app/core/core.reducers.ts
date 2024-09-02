@@ -3,6 +3,6 @@ import { AppState } from '@app';
 import { environment } from '@constants';
 import { debugReducer } from './state';
 
-export const coreMetaReducers: Array<MetaReducer<AppState>> = !environment.production
+export const coreMetaReducers: MetaReducer<AppState>[] = !environment.production
   ? [debugReducer]
   : [];

@@ -36,7 +36,7 @@ export class ListsComponent {
   @HostBinding('class') private class = 'list-collection mdl-grid';
 
   @Input() recordset: Recordset<ListSummary>;
-  @Output() needMore: EventEmitter<any> = new EventEmitter(false);
+  @Output() needMore = new EventEmitter<any>(false);
 
   trackByLists(i: number, list: ListSummary) {
     return list.id;

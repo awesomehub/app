@@ -4,7 +4,7 @@ import {
   ListHomeRouteComponent, ListAllRouteComponent, ListSearchRouteComponent,
   ListCategoryRouteComponent, ListCategoriesRouteComponent
 } from './route-components';
-import { ListsDataResolver, ListDataResolver, ListCategoryDataResolver } from './services';
+import { listsDataResolver, listDataResolver, listCategoryDataResolver } from './services';
 
 const listsSearchBarRoute = {
   path: '',
@@ -27,7 +27,7 @@ export const routes: Routes = [
         path: '',
         component: HomeRouteComponent,
         resolve: {
-          collection: ListsDataResolver
+          collection: listsDataResolver
         }
       },
       listsSearchBarRoute
@@ -40,7 +40,7 @@ export const routes: Routes = [
         path: '',
         component: SearchRouteComponent,
         resolve: {
-          collection: ListsDataResolver
+          collection: listsDataResolver
         }
       },
       listsSearchBarRoute
@@ -49,7 +49,7 @@ export const routes: Routes = [
   {
     path: 'list/:id',
     resolve: {
-      list: ListDataResolver
+      list: listDataResolver
     },
     children: [
       {
@@ -70,7 +70,7 @@ export const routes: Routes = [
           {
             path: ':category',
             resolve: {
-              category: ListCategoryDataResolver
+              category: listCategoryDataResolver
             },
             component: ListCategoryRouteComponent,
           }

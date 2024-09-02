@@ -13,7 +13,7 @@ import {
   ListReposComponent, ListRepoCardComponent
 } from './components';
 import { ListRepoScoreStyleDirective } from './directives';
-import { ListsDataResolver, ListDataResolver, ListCategoryDataResolver, ListRepoScoreService } from './services';
+import { ListRepoScoreService } from './services';
 import { ListsEffects } from './state';
 import { routes } from './lists.routes';
 
@@ -45,9 +45,6 @@ import { routes } from './lists.routes';
     ListRepoScoreStyleDirective
   ],
   providers: [
-    ListsDataResolver,
-    ListDataResolver,
-    ListCategoryDataResolver,
     ListRepoScoreService
   ]
 })

@@ -1,6 +1,10 @@
 import fs from 'fs'
 import path from 'path'
-import log from 'npmlog'
+import chalk from 'chalk'
+
+function log(level, subject, ...message) {
+  console.log(`${chalk.green(level)} ${chalk.blue(subject)} ${message.join(' ')}`)
+}
 
 function dist(filename = '') {
   return path.join(process.cwd(), 'dist', filename)
@@ -12,7 +16,7 @@ async function main() {
     throw new Error(`Can not find "${index}"`)
   }
 
-  log.info('task', 'Generating Netlify assets')
+  log('info', 'task', 'Generating Netlify assets')
   const defaultHeaders = {
     '*': [
       'X-Frame-Options: DENY',
@@ -41,7 +45,7 @@ async function main() {
       headers.get('').push(
         `Link: </${asset}>; rel=preload; as=${ext === '.css' ? 'style' : 'script'}`
       )
-      log.info('webpack:asset', asset)
+      log('info', 'webpack:asset', asset)
     }
   }
 
@@ -52,17 +56,17 @@ async function main() {
 
   const headersFile = dist('_headers')
   fs.writeFileSync(headersFile, headersData.join('\n\n') + '\n')
-  log.info('_headers', headersFile, 'done!')
+  log('info', '_headers', headersFile, 'done!')
 
-  const redirectssFile = dist('_redirects')
-  fs.writeFileSync(redirectssFile, '/*    /index.html   200\n')
-  log.info('_redirects', redirectssFile, 'done!')
+  const redirectsFile = dist('_redirects')
+  fs.writeFileSync(redirectsFile, '/*    /index.html   200\n')
+  log('info', '_redirects', redirectsFile, 'done!')
 }
 
-log.info('postbuild', 'Running postbuild script')
+log('info', 'postbuild', 'Running postbuild script')
 main()
   .then(() => {
-    log.info('postbuild', 'done!')
+    log('info', 'postbuild', 'done!')
     process.exit(0)
   })
   .catch(e => {

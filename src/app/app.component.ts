@@ -5,7 +5,6 @@ import {
 import { DOCUMENT } from "@angular/common";
 import { Store } from '@ngrx/store';
 
-import { AppState } from '@app';
 import { PrimaryRouteComponent, DrawerRouteComponent, AnalyticsService, HelmetService } from '@app/core';
 
 @Component({
@@ -21,7 +20,7 @@ export class AppComponent implements AfterViewChecked, AfterViewInit {
   @ViewChild('drawerButton', { static: false }) private drawerButton: ElementRef;
 
   constructor (
-    private store$: Store<AppState>,
+    private store$: Store,
     private renderer: Renderer2,
     private helmetService: HelmetService,
     private analyticsService: AnalyticsService,

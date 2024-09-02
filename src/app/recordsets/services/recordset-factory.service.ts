@@ -7,11 +7,9 @@ import { RecordsetService } from './recordset.service';
 @Injectable()
 export class RecordsetFactoryService {
 
-  static recordsets: {
-    [index: string]: RecordsetService<any>
-  } = {};
+  static recordsets: Record<string, RecordsetService<any>> = {};
 
-  constructor(private store$: Store<any>) {}
+  constructor(private store$: Store) {}
 
   create(id: string, reducer: string, options?: RecordsetConstructorOptions): RecordsetService<any> {
     if (RecordsetFactoryService.recordsets[id]) {

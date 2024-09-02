@@ -5,7 +5,7 @@ import { formatDistanceToNowStrict } from 'date-fns'
   name: 'ahDateFormat'
 })
 export class DateFormatPipe implements PipeTransform {
-  transform(date: Date | string | number, format: string = 'distance'): string {
+  transform(date: Date | string | number, format = 'distance'): string {
     if (typeof date === 'number') {
       // Convert to from seconds to milliseconds
       date = date*1000;

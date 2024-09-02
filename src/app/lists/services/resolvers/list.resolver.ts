@@ -1,26 +1,20 @@
-import { Injectable } from '@angular/core';
-import { Store, select } from '@ngrx/store';
-import { Resolve, ActivatedRouteSnapshot } from '@angular/router';
+import { inject } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { ResolveFn, ActivatedRouteSnapshot } from '@angular/router';
 import { first, distinctUntilChanged } from 'rxjs/operators';
-import { AppState } from '@app';
 import { ListActions, List, selectList } from '@app/lists';
 
-@Injectable()
-export class ListDataResolver implements Resolve<any> {
-  constructor(private store$: Store<AppState>) {}
+export const listDataResolver: ResolveFn<List> = (route: ActivatedRouteSnapshot) => {
+  const id = route.params['id'];
 
-  resolve(route: ActivatedRouteSnapshot): Promise<List> {
-    let id = route.params['id'];
+  const store$ = inject(Store)
+  store$.dispatch(
+    ListActions.fetch(id)
+  );
 
-    this.store$.dispatch(
-      ListActions.fetch(id)
-    );
-
-    return this.store$.pipe(
-      select(selectList(id)),
-      distinctUntilChanged(),
-      first(({loaded}) => loaded)
-    )
-      .toPromise()
-  }
+  return store$.select(selectList(id)).pipe(
+    distinctUntilChanged(),
+    first(({loaded}) => loaded)
+  )
+    .toPromise()
 }

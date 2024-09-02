@@ -28,7 +28,8 @@ import { reducers, metaReducers } from './app.state';
     }),
     StoreDevtoolsModule.instrument({
       name: config.appname,
-      logOnly: environment.production
+      logOnly: environment.production,
+      connectInZone: true
     }),
     EffectsModule.forRoot([]),
     CoreModule,

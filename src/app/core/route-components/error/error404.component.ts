@@ -13,7 +13,7 @@ import { PrimaryRouteComponent } from '../models';
   `
 })
 export class Error404Component extends PrimaryRouteComponent {
-  public helmet = {
+  public override helmet = {
     title: 'Page not found',
     meta: [
       { name: 'robots', content: 'noindex' }

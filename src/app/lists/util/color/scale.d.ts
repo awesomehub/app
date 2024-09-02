@@ -6,7 +6,7 @@ export declare class ColorScale {
      * @param min
      * @param max
      */
-  constructor(colors?: Array<string>, min?: number, max?: number);
+  constructor(colors?: string[], min?: number, max?: number);
 
   /**
      * Sets the scale domain.
@@ -21,7 +21,7 @@ export declare class ColorScale {
      *
      * @param colors
      */
-  setColors(colors: Array<string>);
+  setColors(colors: string[]);
 
   /**
      * Gets a color hex by number.

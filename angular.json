@@ -3,7 +3,10 @@
   "version": 1,
   "cli": {
     "packageManager": "pnpm",
-    "defaultCollection": "@angular-eslint/schematics"
+    "schematicCollections": [
+      "@angular-eslint/schematics",
+      "@ngrx/schematics"
+    ]
   },
   "newProjectRoot": "projects",
   "projects": {
@@ -28,6 +31,12 @@
         },
         "@schematics/angular:service": {
           "skipTests": true
+        },
+        "@angular-eslint/schematics:application": {
+          "setParserOptionsProject": true
+        },
+        "@angular-eslint/schematics:library": {
+          "setParserOptionsProject": true
         }
       },
       "root": "",
@@ -101,10 +110,10 @@
           },
           "configurations": {
             "production": {
-              "browserTarget": "awesomehub:build:production"
+              "buildTarget": "awesomehub:build:production"
             },
             "development": {
-              "browserTarget": "awesomehub:build:development"
+              "buildTarget": "awesomehub:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -112,7 +121,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "awesomehub:build"
+            "buildTarget": "awesomehub:build"
           }
         },
         "lint": {
@@ -127,6 +136,5 @@
         }
       }
     }
-  },
-  "defaultProject": "awesomehub"
+  }
 }

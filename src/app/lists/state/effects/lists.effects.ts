@@ -1,12 +1,11 @@
-import { Injectable } from '@angular/core';
-import { Store, select } from '@ngrx/store';
+import { Injectable, inject } from '@angular/core';
+import { Store } from '@ngrx/store';
 import { Action } from '@app/common';
 import { Router } from '@angular/router';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { of } from 'rxjs';
 import { filter, map, mergeMap, switchMap, catchError, distinctUntilChanged } from 'rxjs/operators';
 import { config } from '@constants';
-import { AppState } from '@app';
 import { ApiService } from '@app/core';
 import { RecordsetActions, Recordset, selectRecordsetsForUpdate } from '@app/recordsets';
 import {
@@ -16,22 +15,27 @@ import {
   ListCollection, ListSummary, List, ListRepo
 } from '@app/lists';
 
+// noinspection JSUnusedGlobalSymbols
 @Injectable()
 export class ListsEffects {
 
-  show404$ = createEffect(() => this.actions$.pipe(
+  private actions$ = inject(Actions)
+  private api = inject(ApiService)
+  private store$ = inject(Store)
+  private router = inject(Router)
+
+  show404$ = createEffect(() => { return this.actions$.pipe(
     ofType(ListCollectionActions.FETCH_FAILED, ListActions.FETCH_FAILED),
     filter(action => {
       this.router.navigate(['404']);
       return false;
     })
-  ));
+  ) });
 
-  loadListCollection$ = createEffect(() => this.actions$.pipe(
+  loadListCollection$ = createEffect(() => { return this.actions$.pipe(
     ofType(ListCollectionActions.FETCH),
     mergeMap((action: Action) =>
-      this.store$.pipe(
-        select(selectListCollection(action.payload.id)),
+      this.store$.select(selectListCollection(action.payload.id)).pipe(
         distinctUntilChanged()
       )
     ),
@@ -42,13 +46,12 @@ export class ListsEffects {
         catchError(error => of(ListCollectionActions.fetchFailed(collection.id, error)))
       )
     )
-  ));
+  ) });
 
-  loadList$ = createEffect(() => this.actions$.pipe(
+  loadList$ = createEffect(() => { return this.actions$.pipe(
     ofType(ListActions.FETCH),
     mergeMap((action: Action) =>
-      this.store$.pipe(
-        select(selectList(action.payload.id)),
+      this.store$.select(selectList(action.payload.id)).pipe(
         distinctUntilChanged()
       )
     ),
@@ -59,40 +62,29 @@ export class ListsEffects {
         catchError(error => of(ListActions.fetchFailed(list.id, error)))
       )
     )
-  ));
+  ) });
 
-  updateListSummaryRecordsets$ = createEffect(() => this.store$.pipe(
-    select(selectRecordsetsForUpdate(config.lists.recordsets.summary)),
+  updateListSummaryRecordsets$ = createEffect(() => { return this.store$.select(selectRecordsetsForUpdate(config.lists.recordsets.summary)).pipe(
     distinctUntilChanged(),
     filter(r => r && !!r.parent),
     switchMap((recordset: Recordset<ListSummary>) =>
-      this.store$.pipe(
-        select(selectListCollection(recordset.parent)),
+      this.store$.select(selectListCollection(recordset.parent)).pipe(
         distinctUntilChanged(),
         filter(c => c && c.loaded),
         map((collection: ListCollection) => RecordsetActions.update(recordset.id, listSummaryRecordsetReducer, collection))
       )
     )
-  ));
+  ) });
 
-  updateListRepoRecordsets$ = createEffect(() => this.store$.pipe(
-    select(selectRecordsetsForUpdate(config.lists.recordsets.repo)),
+  updateListRepoRecordsets$ = createEffect(() => { return this.store$.select(selectRecordsetsForUpdate(config.lists.recordsets.repo)).pipe(
     distinctUntilChanged(),
     filter(r => r && !!r.parent),
     switchMap((recordset: Recordset<ListRepo>) =>
-      this.store$.pipe(
-        select(selectList(recordset.parent)),
+      this.store$.select(selectList(recordset.parent)).pipe(
         distinctUntilChanged(),
         filter(l => l && l.loaded),
         map((list: List) => RecordsetActions.update(recordset.id, listRepoRecordsetReducer, list))
       )
     )
-  ));
-
-  constructor(
-      private actions$: Actions,
-      private api: ApiService,
-      private store$: Store<AppState>,
-      private router: Router
-  ) {}
+  ) });
 }

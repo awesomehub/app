@@ -26,8 +26,8 @@ import { LayoutSidebarComponent } from '../sidebar';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class LayoutContentComponent {
-  @Input('transparent') public transparent: any = false;
-  @Input('layout') public layout: string;
+  @Input() public transparent: any = false;
+  @Input() public layout: string;
   @ContentChildren(LayoutSidebarComponent) public sidebar: QueryList<LayoutSidebarComponent>;
 
   @HostBinding('class') private class = 'content-wrapper mdl-grid';

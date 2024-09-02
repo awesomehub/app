@@ -50,7 +50,7 @@ export class ListHomeRouteComponent extends PrimaryRouteComponent implements OnI
   ) {
     super();
 
-    this.list = route.snapshot.data.list;
+    this.list = route.snapshot.data['list'];
   }
 
   ngOnInit() {

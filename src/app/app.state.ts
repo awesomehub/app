@@ -19,4 +19,4 @@ export const reducers: ActionReducerMap<AppState> = {
   lists: listsReducer
 };
 
-export const metaReducers: Array<MetaReducer<AppState>> = coreMetaReducers;
+export const metaReducers: MetaReducer<AppState>[] = coreMetaReducers;

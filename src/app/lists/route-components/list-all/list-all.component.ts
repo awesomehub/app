@@ -31,7 +31,7 @@ export class ListAllRouteComponent extends PrimaryRouteComponent implements OnIn
   constructor(private route: ActivatedRoute, private recordsetFactory: RecordsetFactoryService) {
     super();
 
-    this.list = route.snapshot.data.list;
+    this.list = route.snapshot.data['list'];
   }
 
   ngOnInit() {

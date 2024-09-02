@@ -61,13 +61,13 @@ export class ListReposComponent implements AfterViewInit {
   @HostBinding('class') private class = 'list-repos';
 
   @Input() heading: string;
-  @Input() sortable: boolean = false;
-  @Input() infinite: boolean = false;
-  @Input() wide: boolean = true;
+  @Input() sortable = false;
+  @Input() infinite = false;
+  @Input() wide = true;
   @Input() recordset: Recordset<ListRepo>;
 
-  @Output() needMore: EventEmitter<any> = new EventEmitter(false);
-  @Output() sort: EventEmitter<RecordsetSorting> = new EventEmitter(false);
+  @Output() needMore = new EventEmitter<any>(false);
+  @Output() sort = new EventEmitter<RecordsetSorting>(false);
 
   @ViewChild('sortbtn', { static: false }) private sortbtn;
   @ViewChild('sortmenu', { static: false }) private sortmenu;
@@ -77,7 +77,7 @@ export class ListReposComponent implements AfterViewInit {
   ngAfterViewInit () {
     if (this.sortable) {
       // workaround for poor MDL menu markup
-      let id = ('repos-sort-' + Math.random()).replace(/\./g, '');
+      const id = ('repos-sort-' + Math.random()).replace(/\./g, '');
       this.renderer.setAttribute(this.sortbtn.nativeElement, 'id', id);
       this.renderer.setAttribute(this.sortmenu.nativeElement, 'for', id);
     }

@@ -12,7 +12,7 @@ import { Component, ChangeDetectionStrategy, ViewEncapsulation, Input, HostBindi
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SpinnerComponent {
-  @Input() public active: boolean = false;
+  @Input() public active = false;
 
   @HostBinding('class') private class = 'spinner';
   @HostBinding('style.display') get displayStyle() { return !this.active ? "none" : null; };

@@ -4,20 +4,16 @@ export interface Recordset<T> {
   reducer: string;
   parent: string;
   updated: boolean;
-  set: Array<T>;
-  slice: Array<T>;
+  set: T[];
+  slice: T[];
   filters: RecordsetFilters;
   sorting: RecordsetSorting;
   pagination: RecordsetPagination;
 }
 
-export interface RecordsetReducer<T, V> {
-  (state: T, filters: RecordsetFilters, sorting: RecordsetSorting): Array<V>;
-}
+export type RecordsetReducer<T, V> = (state: T, filters: RecordsetFilters, sorting: RecordsetSorting) => V[];
 
-export interface RecordsetFilters {
-  [index: string]: any;
-}
+export type RecordsetFilters = Record<string, any>;
 
 export interface RecordsetSorting {
   by: string;

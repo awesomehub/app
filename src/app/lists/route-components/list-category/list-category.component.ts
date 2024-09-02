@@ -37,7 +37,7 @@ export class ListCategoryRouteComponent extends PrimaryRouteComponent implements
   ) {
     super();
 
-    this.list = route.snapshot.data.list;
+    this.list = route.snapshot.data['list'];
   }
 
   ngOnInit() {

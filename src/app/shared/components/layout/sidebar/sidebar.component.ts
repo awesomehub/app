@@ -13,7 +13,7 @@ import { Component, ChangeDetectionStrategy, ViewEncapsulation, Input, HostBindi
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class LayoutSidebarComponent {
-  @Input('transparent') public transparent: boolean|string = false;
+  @Input() public transparent: boolean|string = false;
 
   @HostBinding('class') get class() {
     return 'sidebar mdl-cell mdl-cell--3-col' + (

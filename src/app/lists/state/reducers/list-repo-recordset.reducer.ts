@@ -1,8 +1,8 @@
 import { RecordsetFilters, RecordsetSorting } from '@app/recordsets';
 import { List, ListRepo } from '@app/lists';
 
-export function listRepoRecordsetReducer(state: List, filters: RecordsetFilters, sorting: RecordsetSorting): Array<ListRepo> {
-  let repos: Array<ListRepo> = state.entries['repo.github'];
+export function listRepoRecordsetReducer(state: List, filters: RecordsetFilters, sorting: RecordsetSorting): ListRepo[] {
+  let repos: ListRepo[] = state.entries['repo.github'];
 
   if (filters['category']) {
     repos = repos
@@ -53,7 +53,7 @@ export function listRepoRecordsetReducer(state: List, filters: RecordsetFilters,
   case 'score.h':
   case 'score.a':
   case 'score.m':
-    let field = sorting.by.split('.')[1];
+    const field = sorting.by.split('.')[1];
     repos = repos
       .sort((a, b) => sorting.asc
         ? a.scores[field] - b.scores[field]

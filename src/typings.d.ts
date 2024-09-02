@@ -2,7 +2,7 @@
 interface MdlComponentHandler {
   upgradeDom(optJsClass: string, optCssClass: string): void;
   upgradeElement(element: Element, optJsClass?: string): void;
-  upgradeElements(elements: Element | Array<Element> | NodeList | HTMLCollection): void;
+  upgradeElements(elements: Element | Element[] | NodeList | HTMLCollection): void;
   upgradeAllRegistered(): void;
   registerUpgradedCallback(jsClass: string, callback: (data?: any) => void): void;
   register(config: {
@@ -11,7 +11,7 @@ interface MdlComponentHandler {
     cssClass: string,
     widget: string | boolean | undefined
   }): void;
-  downgradeElements(nodes: Node | Array<Node> | NodeList): void;
+  downgradeElements(nodes: Node | Node[] | NodeList): void;
 }
 
 interface Window {

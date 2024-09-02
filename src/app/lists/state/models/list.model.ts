@@ -5,9 +5,9 @@ export interface List {
   name: string;
   desc: string;
   score: number;
-  cats: Array<ListCategory>;
+  cats: ListCategory[];
   entries: {
-    'repo.github': Array<ListRepo>;
+    'repo.github': ListRepo[];
   };
   updated: string;
   loaded: boolean;
@@ -31,7 +31,7 @@ export interface ListRepo {
   desc: string;
   lang: string;
   lic: string;
-  cats: Array<number>;
+  cats: number[];
   score: number;
   scores: {
     p: number;
@@ -57,7 +57,7 @@ export class ListRecord implements List {
 
 export class ListRecordFactory {
   static fromResponse(data: ListResponse): List {
-    // we're directly mergin the response data because it's identical to our model
+    // we're directly merging the response data because it's identical to our model
     return Object.assign(new ListRecord(), data, { loaded: true });
   }
 

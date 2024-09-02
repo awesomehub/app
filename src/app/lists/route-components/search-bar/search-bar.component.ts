@@ -5,9 +5,8 @@ import {
 } from '@angular/core';
 import { Location } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Store, select } from '@ngrx/store';
+import { Store } from '@ngrx/store';
 import { withLatestFrom, distinctUntilChanged } from 'rxjs/operators';
-import { AppState } from '@app';
 import { HeaderBarRouteComponent, selectRouterState } from '@app/core';
 
 @Component({
@@ -34,7 +33,7 @@ export class SearchBarRouteComponent extends HeaderBarRouteComponent implements 
   constructor(
     private router: Router,
     private route: ActivatedRoute,
-    private store$: Store<AppState>,
+    private store$: Store,
     private location: Location,
     private cd: ChangeDetectorRef
   ) {
@@ -54,13 +53,12 @@ export class SearchBarRouteComponent extends HeaderBarRouteComponent implements 
       this.cd.markForCheck();
     });
 
-    this.store$.pipe(
-      select(selectRouterState),
+    this.store$.select(selectRouterState).pipe(
       distinctUntilChanged(),
       withLatestFrom(this.route.data)
     )
       .forEach(([{ url, queryParams: { q }}, {searchRouteMatch}]) => {
-        const isSearch = new RegExp(searchRouteMatch).test(<string>url);
+        const isSearch = new RegExp(searchRouteMatch).test((url as string));
         if(!isSearch){
           this.hasBack = true;
         }

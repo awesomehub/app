@@ -7,47 +7,65 @@ on:
     branches: [ master ]
 
 jobs:
-  Build:
-    if: "!contains(github.event.head_commit.message, '[skip ci]')"
-    runs-on: ubuntu-20.04
+  Setup:
+    runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v2
+      - uses: actions/checkout@v4
+      - name: Bundled Node Version
+        run: |
+          echo "Node version: $(which node):$(node -v)"
+          echo "NPM version: $(which npm):$(npm -v)"
+      - uses: volta-cli/action@v4
         with:
-          node-version: 12
-      - uses: actions/cache@v2
+          token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Install PNPM
+        run: volta install pnpm
+      - name: Project Node Version
+        run: |
+          echo "Node version: $(which node):$(node -v)"
+          echo "NPM version: $(which npm):$(npm -v)"
+          echo "PNPM version: $(which pnpm):$(pnpm -v)"
+
+  Build:
+    needs: [Setup]
+    if: "!contains(github.event.head_commit.message, '[skip ci]')"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: volta-cli/action@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+      - uses: actions/cache@v4
         with:
           path: ~/.pnpm-store
           key: pnpm-install-v3-${{ hashFiles('**/pnpm-lock.yaml') }}
           restore-keys: |
             pnpm-install-v3-
-      - uses: pnpm/action-setup@v2.0.1
-        with:
-          version: 6
-          run_install: true
-      # The initial build after pnpm install fails for some reason so for now we will build twice
+      - name: Install PNPM
+        run: volta install pnpm
+      - name: Install Dependencies
+        run: pnpm install
+      - name: Lint
+        run: pnpm lint
       - name: Build
-        run: |
-          pnpm build:debug
-          pnpm build
-          pnpm postbuild
+        run: pnpm build
       - if: github.event_name == 'push'
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v4
         with:
           name: build-art
           path: dist
   Deploy:
+    needs: [Build]
     if: github.event_name == 'push'
-    needs: Build
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
         with:
           repository: awesomehub/awesomehub.github.io
           token: ${{ secrets.PAT }}
           path: deploy
       - run: rm -r deploy/dist/*
-      - uses: actions/download-artifact@v2
+      - uses: actions/download-artifact@v4
         id: download
         with:
           name: build-art

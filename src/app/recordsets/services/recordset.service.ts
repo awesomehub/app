@@ -1,16 +1,14 @@
-import { Store, select } from '@ngrx/store';
+import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { distinctUntilChanged } from 'rxjs/operators';
-import { AppState } from '@app';
 import { Recordset, RecordsetSorting, RecordsetActions, selectRecordset } from '../state';
 
 export class RecordsetService<T> {
 
   private readonly recordset$: Observable<Recordset<T>>;
 
-  constructor(private id: string, private store$: Store<AppState>) {
-    this.recordset$ = this.store$.pipe(
-      select(selectRecordset(this.id)),
+  constructor(private id: string, private store$: Store) {
+    this.recordset$ = this.store$.select(selectRecordset(this.id)).pipe(
       distinctUntilChanged()
     );
   }

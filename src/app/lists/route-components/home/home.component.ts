@@ -20,7 +20,7 @@ import { ListCollection, ListSummary } from '@app/lists';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class HomeRouteComponent extends PrimaryRouteComponent implements OnInit, OnDestroy {
-  public helmet = {
+  public override helmet = {
     title: 'Explore'
   };
   public recordset: RecordsetService<ListSummary>;
@@ -35,7 +35,7 @@ export class HomeRouteComponent extends PrimaryRouteComponent implements OnInit,
 
   ngOnInit() {
     // Get the resolved collection
-    let collection: ListCollection = this.route.snapshot.data['collection'];
+    const collection: ListCollection = this.route.snapshot.data['collection'];
 
     // Create the lists recordset
     this.recordset = this.recordsetFactory.create('browse-lists', config.lists.recordsets.summary, {

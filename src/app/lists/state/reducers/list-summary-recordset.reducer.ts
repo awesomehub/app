@@ -1,7 +1,7 @@
 import { RecordsetFilters, RecordsetSorting } from '@app/recordsets';
 import { ListCollection, ListSummary } from '@app/lists';
 
-export function listSummaryRecordsetReducer (state: ListCollection, filters: RecordsetFilters, sorting: RecordsetSorting): Array<ListSummary> {
+export function listSummaryRecordsetReducer (state: ListCollection, filters: RecordsetFilters, sorting: RecordsetSorting): ListSummary[] {
   let lists = state.lists;
 
   if (filters['q']) {

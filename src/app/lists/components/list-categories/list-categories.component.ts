@@ -20,15 +20,15 @@ import { List, ListCategory } from '@app/lists';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ListCategoriesComponent {
-  public categories: Array<ListCategory>;
+  public categories: ListCategory[];
 
   @Input() list: List;
-  @Input() depth: number = 0;
+  @Input() depth = 0;
   @Input() set parent(id: number) {
     this.categories = this.list.cats
       .filter((cat: ListCategory) => cat.parent === id)
       .sort((a,b) => a.order - b.order);
   }
 
-  @Output() navigate: EventEmitter<any> = new EventEmitter(false);
+  @Output() navigate = new EventEmitter<any>(false);
 }

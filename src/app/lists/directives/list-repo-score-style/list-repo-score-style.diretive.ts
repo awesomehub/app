@@ -11,10 +11,10 @@ export class ListRepoScoreStyleDirective {
     private renderer: Renderer2,
   ) {}
 
-  @Input('scoreType') scoreType: string;
+  @Input() scoreType: string;
   @Input()
   set ahListRepoScoreStyle(score: number) {
-    let colors = this.repoScoreService.getScoreColor(this.scoreType, score);
+    const colors = this.repoScoreService.getScoreColor(this.scoreType, score);
     this.renderer.setStyle(this.el.nativeElement, 'color', colors.text)
     this.renderer.setStyle(this.el.nativeElement, 'backgroundColor', colors.bg)
   }

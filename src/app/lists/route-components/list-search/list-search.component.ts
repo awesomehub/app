@@ -33,7 +33,7 @@ export class ListSearchRouteComponent extends PrimaryRouteComponent implements O
   ) {
     super();
 
-    this.list = route.snapshot.data.list;
+    this.list = route.snapshot.data['list'];
   }
 
   ngOnInit() {

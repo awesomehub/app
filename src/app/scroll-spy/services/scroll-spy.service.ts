@@ -17,16 +17,16 @@ export class ScrollSpyService {
     this.scroll$ = fromEvent(document.defaultView, 'scroll');
   }
 
-  public getScrollData(debounce: number = 100): Observable<ScrollSpyData> {
+  public getScrollData(debounce = 100): Observable<ScrollSpyData> {
     return this.scroll$.pipe(
       // Emit an initial data so that observers can update their view on pageload
-      startWith(<Event><any>{ target: this.document }),
+      startWith((({ target: this.document } as any) as Event)),
       debounceTime(debounce),
       map(event => {
         const { body, defaultView } = event.target as Document;
         return {
           windowInnerHeight: defaultView.innerHeight,
-          windowPageYOffset: defaultView.pageYOffset,
+          windowPageYOffset: defaultView.scrollY,
           bodyScrollHeight: body.scrollHeight
         };
       })

@@ -1,4 +1,4 @@
-import { Inject, Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { DOCUMENT, ɵDomAdapter as DomAdapter, ɵgetDOM as getDOM } from "@angular/common";
 import { MetaDefinition } from '@angular/platform-browser';
 
@@ -13,10 +13,11 @@ export interface HelmetDefinition {
 
 @Injectable()
 export class HelmetService {
-  private _dom: DomAdapter;
+  private readonly _doc: Document = inject(DOCUMENT);
+  private readonly _dom: DomAdapter;
   private _helmet: Subscription;
 
-  constructor(@Inject(DOCUMENT) private _doc: Document) {
+  constructor() {
     this._dom = getDOM();
   }
 

@@ -3,7 +3,7 @@ import { ListSummary } from '@app/lists';
 export interface ListCollection {
   id: string;
   loaded: boolean;
-  lists: Array<ListSummary>;
+  lists: ListSummary[];
 }
 
 export class ListCollectionRecord implements ListCollection {
