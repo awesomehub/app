@@ -18,12 +18,14 @@ jobs:
       - uses: volta-cli/action@v4
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-      - name: Install PNPM
-        run: volta install pnpm
       - name: Project Node Version
         run: |
           echo "Node version: $(which node):$(node -v)"
           echo "NPM version: $(which npm):$(npm -v)"
+      - name: Install PNPM
+        run: volta install pnpm
+      - name: PNPM Version
+        run: |
           echo "PNPM version: $(which pnpm):$(pnpm -v)"
 
   Build:
