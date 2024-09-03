@@ -4,9 +4,9 @@
 
 export const environment = {
   production: false,
-  apiUrl: "/assets/data",
-  ga: "G-XXXXX",
-};
+  apiUrl: '/assets/data',
+  ga: 'G-XXXXX',
+}
 
 /*
  * For easier debugging in development mode, you can import the following file

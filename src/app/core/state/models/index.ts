@@ -1,1 +1,1 @@
-export * from './router-state.model';
+export * from './router-state.model'

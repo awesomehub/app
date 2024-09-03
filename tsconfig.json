@@ -10,11 +10,7 @@
     },
     "target": "ES2022",
     "module": "ESNext",
-    "lib": [
-      "ES2022",
-      "DOM",
-      "DOM.Iterable"
-    ],
+    "lib": ["ES2022", "DOM", "DOM.Iterable"],
     //"strict": true,
     "forceConsistentCasingInFileNames": true,
     "noImplicitOverride": true,
@@ -34,7 +30,7 @@
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
     "strictInjectionParameters": true,
-    "strictInputAccessModifiers": true,
+    "strictInputAccessModifiers": true
     //"strictTemplates": true,
   }
 }

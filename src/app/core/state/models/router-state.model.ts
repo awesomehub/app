@@ -1,7 +1,7 @@
-import { Params } from '@angular/router';
+import { Params } from '@angular/router'
 
 export interface RouterState {
-  url: string;
-  params: Params;
-  queryParams: Params;
+  url: string
+  params: Params
+  queryParams: Params
 }

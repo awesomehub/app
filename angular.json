@@ -3,10 +3,7 @@
   "version": 1,
   "cli": {
     "packageManager": "pnpm",
-    "schematicCollections": [
-      "@angular-eslint/schematics",
-      "@ngrx/schematics"
-    ]
+    "schematicCollections": ["@angular-eslint/schematics", "@ngrx/schematics"]
   },
   "newProjectRoot": "projects",
   "projects": {
@@ -54,14 +51,8 @@
             "tsConfig": "tsconfig.app.json",
             "aot": false,
             "sourceMap": true,
-            "assets": [
-              "src/assets/data",
-              "src/assets/images",
-              "src/manifest.json"
-            ],
-            "styles": [
-              "src/styles.css"
-            ],
+            "assets": ["src/assets/data", "src/assets/images", "src/manifest.json"],
+            "styles": ["src/styles.css"],
             "scripts": []
           },
           "configurations": {
@@ -127,10 +118,7 @@
         "lint": {
           "builder": "@angular-eslint/builder:lint",
           "options": {
-            "lintFilePatterns": [
-              "src/**/*.ts",
-              "src/**/*.html"
-            ],
+            "lintFilePatterns": ["src/**/*.ts", "src/**/*.html"],
             "fix": true
           }
         }

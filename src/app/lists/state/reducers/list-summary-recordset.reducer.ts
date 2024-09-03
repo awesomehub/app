@@ -1,25 +1,29 @@
-import { RecordsetFilters, RecordsetSorting } from '@app/recordsets';
-import { ListCollection, ListSummary } from '@app/lists';
+import { RecordsetFilters, RecordsetSorting } from '@app/recordsets'
+import { ListCollection, ListSummary } from '@app/lists'
 
-export function listSummaryRecordsetReducer (state: ListCollection, filters: RecordsetFilters, sorting: RecordsetSorting): ListSummary[] {
-  let lists = state.lists;
+export function listSummaryRecordsetReducer(
+  state: ListCollection,
+  filters: RecordsetFilters,
+  sorting: RecordsetSorting,
+): ListSummary[] {
+  let lists = state.lists
 
   if (filters['q']) {
-    const q = filters['q'].toLowerCase();
+    const q = filters['q'].toLowerCase()
     lists = lists
-      .filter(list => {
+      .filter((list) => {
         if (!q) {
-          return true;
+          return true
         }
-        return list.name.toLowerCase().indexOf(q) !== -1;
+        return list.name.toLowerCase().indexOf(q) !== -1
       })
       .sort((a, b) => {
         if (q) {
-          return a.name.toLowerCase().indexOf(q) - b.name.toLowerCase().indexOf(q);
+          return a.name.toLowerCase().indexOf(q) - b.name.toLowerCase().indexOf(q)
         }
-        return 0;
-      });
+        return 0
+      })
   }
 
-  return lists;
+  return lists
 }

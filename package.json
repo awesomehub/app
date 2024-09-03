@@ -26,7 +26,8 @@
     "postbuild:sme": "source-map-explorer dist/**/*.js --html dist/sme.report.html",
     "postbuild:script": "node scripts/postbuild.mjs",
     "serve": "serve dist",
-    "lint": "ng lint"
+    "lint": "ng lint",
+    "format": "prettier --write \"**/*.json\" \"**/*.{j,t}s?(x)\" \"**/*.html\""
   },
   "keywords": [
     "app",
@@ -61,12 +62,15 @@
     "angular-eslint": "18.3.0",
     "@angular/cli": "18.2.2",
     "@angular/compiler-cli": "18.2.2",
+    "@eslint/js": "9.9.1",
     "@ngrx/eslint-plugin": "18.0.2",
     "@types/node": "18.19.48",
     "chalk": "^4.1.0",
-    "typescript-eslint": "8.1.0",
     "eslint": "9.9.1",
+    "eslint-config-prettier": "9.1.0",
+    "prettier": "3.3.3",
     "source-map-explorer": "2.5.3",
+    "typescript-eslint": "8.1.0",
     "typescript": "5.4.5"
   },
   "volta": {

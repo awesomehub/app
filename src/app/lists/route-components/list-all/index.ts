@@ -1,1 +1,1 @@
-export * from './list-all.component';
+export * from './list-all.component'

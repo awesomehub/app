@@ -1,1 +1,1 @@
-export * from './list-categories.component';
+export * from './list-categories.component'

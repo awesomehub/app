@@ -1,10 +1,15 @@
-import { Routes } from '@angular/router';
+import { Routes } from '@angular/router'
 import {
-  HomeRouteComponent, SearchRouteComponent, SearchBarRouteComponent,
-  ListHomeRouteComponent, ListAllRouteComponent, ListSearchRouteComponent,
-  ListCategoryRouteComponent, ListCategoriesRouteComponent
-} from './route-components';
-import { listsDataResolver, listDataResolver, listCategoryDataResolver } from './services';
+  HomeRouteComponent,
+  SearchRouteComponent,
+  SearchBarRouteComponent,
+  ListHomeRouteComponent,
+  ListAllRouteComponent,
+  ListSearchRouteComponent,
+  ListCategoryRouteComponent,
+  ListCategoriesRouteComponent,
+} from './route-components'
+import { listsDataResolver, listDataResolver, listCategoryDataResolver } from './services'
 
 const listsSearchBarRoute = {
   path: '',
@@ -12,11 +17,11 @@ const listsSearchBarRoute = {
   data: {
     placeholder: 'Search lists...',
     searchRoute: 'search',
-    searchRouteMatch: '^\/search[\?|\;|\/]',
-    cancelRoute: ''
+    searchRouteMatch: '^/search[?|;|/]',
+    cancelRoute: '',
   },
-  outlet: 'header-bar'
-};
+  outlet: 'header-bar',
+}
 
 export const routes: Routes = [
   {
@@ -27,11 +32,11 @@ export const routes: Routes = [
         path: '',
         component: HomeRouteComponent,
         resolve: {
-          collection: listsDataResolver
-        }
+          collection: listsDataResolver,
+        },
       },
-      listsSearchBarRoute
-    ]
+      listsSearchBarRoute,
+    ],
   },
   {
     path: 'search',
@@ -40,16 +45,16 @@ export const routes: Routes = [
         path: '',
         component: SearchRouteComponent,
         resolve: {
-          collection: listsDataResolver
-        }
+          collection: listsDataResolver,
+        },
       },
-      listsSearchBarRoute
-    ]
+      listsSearchBarRoute,
+    ],
   },
   {
     path: 'list/:id',
     resolve: {
-      list: listDataResolver
+      list: listDataResolver,
     },
     children: [
       {
@@ -61,25 +66,25 @@ export const routes: Routes = [
           },
           {
             path: 'all',
-            component: ListAllRouteComponent
+            component: ListAllRouteComponent,
           },
           {
             path: 'search',
-            component: ListSearchRouteComponent
+            component: ListSearchRouteComponent,
           },
           {
             path: ':category',
             resolve: {
-              category: listCategoryDataResolver
+              category: listCategoryDataResolver,
             },
             component: ListCategoryRouteComponent,
-          }
-        ]
+          },
+        ],
       },
       {
         path: '',
         component: ListCategoriesRouteComponent,
-        outlet: 'drawer'
+        outlet: 'drawer',
       },
       {
         path: '',
@@ -87,11 +92,11 @@ export const routes: Routes = [
         data: {
           placeholder: 'Search this list...',
           searchRoute: 'list/{{id}}/search',
-          searchRouteMatch: '^\/list\/[^\/]+\/search',
-          cancelRoute: 'list/{{id}}'
+          searchRouteMatch: '^/list/[^/]+/search',
+          cancelRoute: 'list/{{id}}',
         },
-        outlet: 'header-bar'
-      }
-    ]
-  }
-];
+        outlet: 'header-bar',
+      },
+    ],
+  },
+]

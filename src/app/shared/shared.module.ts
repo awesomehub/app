@@ -1,23 +1,13 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { ScrollSpyModule } from '@app/scroll-spy';
+import { NgModule } from '@angular/core'
+import { CommonModule } from '@angular/common'
+import { ScrollSpyModule } from '@app/scroll-spy'
 
-import {
-  LayoutContentComponent,
-  LayoutSidebarComponent,
-  SpinnerComponent
-} from './components';
-import { DateFormatPipe, ScoreFormatPipe } from "./pipes";
+import { LayoutContentComponent, LayoutSidebarComponent, SpinnerComponent } from './components'
+import { DateFormatPipe, ScoreFormatPipe } from './pipes'
 
 @NgModule({
-  imports: [ CommonModule ],
-  declarations: [
-    LayoutContentComponent,
-    LayoutSidebarComponent,
-    SpinnerComponent,
-    DateFormatPipe,
-    ScoreFormatPipe
-  ],
+  imports: [CommonModule],
+  declarations: [LayoutContentComponent, LayoutSidebarComponent, SpinnerComponent, DateFormatPipe, ScoreFormatPipe],
   exports: [
     CommonModule,
     ScrollSpyModule,
@@ -25,7 +15,7 @@ import { DateFormatPipe, ScoreFormatPipe } from "./pipes";
     LayoutSidebarComponent,
     SpinnerComponent,
     DateFormatPipe,
-    ScoreFormatPipe
-  ]
+    ScoreFormatPipe,
+  ],
 })
 export class SharedModule {}

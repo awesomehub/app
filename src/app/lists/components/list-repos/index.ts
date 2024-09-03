@@ -1,1 +1,1 @@
-export * from './list-repos.component';
+export * from './list-repos.component'

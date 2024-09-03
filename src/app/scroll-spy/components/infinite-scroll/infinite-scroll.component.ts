@@ -2,61 +2,66 @@ import {
   Component,
   ChangeDetectionStrategy,
   ViewEncapsulation,
-  Input, Output,
-  OnInit, OnDestroy,
+  Input,
+  Output,
+  OnInit,
+  OnDestroy,
   ElementRef,
-  EventEmitter, HostBinding
-} from '@angular/core';
-import { Subscription } from 'rxjs';
-import { filter } from 'rxjs/operators';
-import { ScrollSpyService, ScrollSpyData } from '@app/scroll-spy';
+  EventEmitter,
+  HostBinding,
+} from '@angular/core'
+import { Subscription } from 'rxjs'
+import { filter } from 'rxjs/operators'
+import { ScrollSpyService, ScrollSpyData } from '@app/scroll-spy'
 
 @Component({
   selector: 'ah-infinite-scroll',
-  styleUrls: [ 'infinite-scroll.component.css' ],
-  template: `
-    <a *ngIf="disabled" href="javascript:void(0)" (click)="next.emit()">{{button}}</a>
-`,
+  styleUrls: ['infinite-scroll.component.css'],
+  template: ` <a *ngIf="disabled" href="javascript:void(0)" (click)="next.emit()">{{ button }}</a> `,
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class InfiniteScrollComponent implements OnInit, OnDestroy {
   @HostBinding('class') private class = 'infinite-scroll mdl-card'
 
-  @Input() @HostBinding('class.disabled') disabled = false;
-  @Input() distance = 500;
-  @Input() debounce = 100;
-  @Input() @HostBinding('hidden') paused = false;
-  @Input() button = 'Load more...';
+  @Input() @HostBinding('class.disabled') disabled = false
+  @Input() distance = 500
+  @Input() debounce = 100
+  @Input() @HostBinding('hidden') paused = false
+  @Input() button = 'Load more...'
 
-  @Output() next = new EventEmitter<any>(false);
+  @Output() next = new EventEmitter<any>(false)
 
-  private el: Element;
-  private scroll_: Subscription;
+  private el: Element
+  private scroll_: Subscription
 
-  constructor(elRef: ElementRef, private scrollSpy: ScrollSpyService) {
-    this.el = elRef.nativeElement;
+  constructor(
+    elRef: ElementRef,
+    private scrollSpy: ScrollSpyService,
+  ) {
+    this.el = elRef.nativeElement
   }
 
   ngOnInit() {
-    this.scroll_ = this.scrollSpy.getScrollData(this.debounce)
-      .pipe(filter(d => !this.disabled && !this.paused))
-      .subscribe(data => this.evaluate(data));
+    this.scroll_ = this.scrollSpy
+      .getScrollData(this.debounce)
+      .pipe(filter((d) => !this.disabled && !this.paused))
+      .subscribe((data) => this.evaluate(data))
   }
 
   evaluate(data: ScrollSpyData): void {
-    const rect = this.el.getBoundingClientRect();
+    const rect = this.el.getBoundingClientRect()
     // The distance between the element and the viewport bottom
-    const distance = rect.top - data.windowInnerHeight - rect.height;
-    const diff = distance - this.distance;
+    const distance = rect.top - data.windowInnerHeight - rect.height
+    const diff = distance - this.distance
 
     if (diff <= 0) {
       // Emit the event to load extra data
-      this.next.emit();
+      this.next.emit()
     }
   }
 
   ngOnDestroy() {
-    this.scroll_.unsubscribe();
+    this.scroll_.unsubscribe()
   }
 }

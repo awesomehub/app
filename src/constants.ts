@@ -10,7 +10,7 @@ export const config = {
       lists: 'lists',
       list: 'list',
     },
-    timeout: 10000
+    timeout: 10000,
   },
 
   // Lists module
@@ -43,5 +43,5 @@ export const config = {
     id: 'string',
     settings: {},
     timeout: 10000,
-  }
+  },
 }

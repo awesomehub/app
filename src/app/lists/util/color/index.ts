@@ -1,3 +1,2 @@
-export * from './scale';
-export * from './gradient';
-
+export * from './scale'
+export * from './gradient'

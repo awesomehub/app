@@ -1,1 +1,1 @@
-export * from './lists.effects';
+export * from './lists.effects'
