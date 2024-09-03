@@ -11,7 +11,7 @@ export interface ListSummaryResponse {
   desc: string
   score: number
   entries: number
-  updated: string
+  updated: number
 }
 
 export interface ListResponse {
@@ -23,7 +23,7 @@ export interface ListResponse {
   entries: {
     'repo.github': ListRepoResponse[]
   }
-  updated: string
+  updated: number
 }
 
 export interface ListCategoryResponse {

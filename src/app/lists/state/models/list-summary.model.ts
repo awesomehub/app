@@ -6,7 +6,7 @@ export interface ListSummary {
   desc: string
   score: number
   entries: number
-  updated: string
+  updated: number
 }
 
 export class ListSummaryRecord implements ListSummary {

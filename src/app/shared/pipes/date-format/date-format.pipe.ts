@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core'
-import { formatDistanceToNowStrict } from 'date-fns'
+import { formatDistanceToNowStrict, fromUnixTime } from 'date-fns'
 
 @Pipe({
   name: 'ahDateFormat',
@@ -7,10 +7,10 @@ import { formatDistanceToNowStrict } from 'date-fns'
 export class DateFormatPipe implements PipeTransform {
   transform(date: Date | string | number, format = 'distance'): string {
     if (typeof date === 'number') {
-      // Convert to from seconds to milliseconds
-      date = date * 1000
+      // Convert from Unix timestamp (in seconds)
+      date = fromUnixTime(date)
     }
 
-    return formatDistanceToNowStrict(new Date(date), { addSuffix: true })
+    return formatDistanceToNowStrict(date, { addSuffix: true })
   }
 }
