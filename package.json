@@ -14,15 +14,15 @@
     "url": "https://github.com/awesomehub/app.git"
   },
   "engines": {
-    "node": ">=18.20.0",
-    "pnpm": ">=9.0"
+    "node": ">=18.0.0",
+    "npm": ">=10.0.0"
   },
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
     "build:debug": "ng build --configuration development",
-    "postbuild": "pnpm run postbuild:sme && pnpm run postbuild:script",
+    "postbuild": "npm run postbuild:sme && npm run postbuild:script",
     "postbuild:sme": "source-map-explorer dist/**/*.js --html dist/sme.report.html",
     "postbuild:script": "node scripts/postbuild.mjs",
     "serve": "serve dist",
@@ -71,7 +71,6 @@
   },
   "volta": {
     "node": "18.20.4",
-    "npm": "10.7.0",
-    "pnpm": "9.9.0"
+    "npm": "10.7.0"
   }
 }
