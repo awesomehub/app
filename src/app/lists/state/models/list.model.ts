@@ -25,6 +25,8 @@ export interface ListCategory {
   }
 }
 
+export type ListRepoScoreType = 'p' | 'h' | 'a' | 'm'
+
 export interface ListRepo {
   author: string
   name: string
@@ -33,12 +35,7 @@ export interface ListRepo {
   lic: string
   cats: number[]
   score: number
-  scores: {
-    p: number
-    h: number
-    a: number
-    m: number
-  }
+  scores: Record<ListRepoScoreType, number>
   pushed: number
 }
 

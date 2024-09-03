@@ -1,5 +1,5 @@
 import { Directive, ElementRef, Input, Renderer2 } from '@angular/core'
-import { ListRepoScoreService } from '@app/lists'
+import { ListRepoScoreService, ListRepoScoreType } from '@app/lists'
 
 @Directive({
   selector: '[ahListRepoScoreStyle]',
@@ -11,7 +11,7 @@ export class ListRepoScoreStyleDirective {
     private renderer: Renderer2,
   ) {}
 
-  @Input() scoreType: string
+  @Input() scoreType: ListRepoScoreType
   @Input()
   set ahListRepoScoreStyle(score: number) {
     const colors = this.repoScoreService.getScoreColor(this.scoreType, score)

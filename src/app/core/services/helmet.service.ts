@@ -48,7 +48,7 @@ export class HelmetService {
     }
 
     if (title !== undefined) {
-      this._doc.title = title ? title + ' - ' + config.appname : config.appname
+      this._doc.title = title ? title + ' - ' + config.name : config.name
       meta.unshift({ property: 'og:title', content: this._doc.title })
     }
 

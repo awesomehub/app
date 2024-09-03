@@ -2,7 +2,7 @@ export { environment } from './environments/environment'
 
 export const config = {
   // Application name
-  appname: 'AwesomeHub',
+  name: 'AwesomeHub',
 
   // Core module
   api: {

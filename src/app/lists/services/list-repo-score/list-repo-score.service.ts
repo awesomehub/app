@@ -1,16 +1,12 @@
 import { Injectable } from '@angular/core'
 import { config } from '@constants'
+import { ListRepoScoreType } from '@app/lists'
 import { ColorScale } from '@app/lists/util'
 
 @Injectable()
 export class ListRepoScoreService {
-  private theme = config.lists.listRepoScoreTheme
-  public colorScales: {
-    p
-    h
-    a
-    m: ColorScale
-  }
+  private readonly theme = config.lists.listRepoScoreTheme
+  private readonly colorScales: Record<ListRepoScoreType, ColorScale>
 
   constructor() {
     const { p, h, a, m } = config.lists.listRepoScoreScale
@@ -22,7 +18,7 @@ export class ListRepoScoreService {
     }
   }
 
-  getScoreColorScale(type: string): ColorScale {
+  getScoreColorScale(type: ListRepoScoreType): ColorScale {
     if (typeof this.colorScales[type] === 'undefined') {
       throw new ReferenceError(`Invalid score type provided '${type}'`)
     }
@@ -30,7 +26,7 @@ export class ListRepoScoreService {
     return this.colorScales[type]
   }
 
-  getScoreColor(type: string, score: number): { bg: string; text: string } {
+  getScoreColor(type: ListRepoScoreType, score: number): { bg: string; text: string } {
     const legend = this.getScoreColors()
     const color = this.getScoreColorScale(type).getColor(score)
     return {
