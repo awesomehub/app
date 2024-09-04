@@ -35,7 +35,7 @@ async function main() {
   }
   const headers = new Map(Object.entries(defaultHeaders))
   const html = fs.readFileSync(index, { encoding: 'utf-8'})
-  const matches = html.matchAll(/["']([^"'.]+\.[a-z0-9]{20})(\.(css|js))["']/gm)
+  const matches = html.matchAll(/["']([^"'.]+\.[a-z0-9]{16})(\.(css|js))["']/gm)
   for (const [, filename, ext] of matches) {
     const asset = filename + ext
     if (!headers.has(asset)) {

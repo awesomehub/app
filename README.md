@@ -7,7 +7,7 @@ This repository contains the sources for AwesomeHub Angular application.
 > Live production build can be found at [awesomehub.js.org][website-url]
 
 ## About
-The App was originaly built for educational purposes and to experiment with [Angular 2](https://v2.angular.io/), [NgRx](https://ngrx.io/) and [RxJS](https://www.learnrxjs.io/), but
+The App was originally built for educational purposes and to experiment with [Angular 2](https://v2.angular.io/), [NgRx](https://ngrx.io/) and [RxJS](https://www.learnrxjs.io/), but
 I have recently managed to update the codebase to [Angular 12](https://v12.angular.io/), then to [Angular 18](https://angular.dev/).
 
 The App UI is built on top of the good old [Material Design Lite](https://getmdl.io/) library, It's much lighter than [Angular Material](https://material.angular.io/)
