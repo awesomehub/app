@@ -57,29 +57,37 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - name: Get commit message
+        id: get_commit_message
+        run: |
+          COMMIT_MESSAGE_HEADER=$(git log -1 --pretty=%B | head -n 1 | sed "s/#/PR#/")
+          echo "header=${COMMIT_MESSAGE_HEADER}" >> $GITHUB_OUTPUT
+      - name: Cloning awesomehub/awesomehub.github.io
+        uses: actions/checkout@v4
         with:
           repository: awesomehub/awesomehub.github.io
           token: ${{ secrets.PAT }}
           path: deploy
-      - run: rm -r deploy/dist/*
+      - name: Prepare repository
+        run: rm -r deploy/dist/*
       - uses: actions/download-artifact@v4
-        id: download
         with:
           name: build-art
           path: deploy/dist
-      - uses: peter-evans/create-pull-request@v3
+      - name: Create deploy pull request
+        uses: peter-evans/create-pull-request@v7
         with:
           branch: staging
           path: deploy
           token: ${{ secrets.PAT }}
-          commit-message: ${{ github.event.head_commit.message }} ${{ github.event.head_commit.url }}
-          title: ${{ github.event.head_commit.message }}
+          commit-message: ${{ steps.get_commit_message.outputs.header }} ${{ github.event.head_commit.url }}
+          title: ${{ steps.get_commit_message.outputs.header }}
           body: |
             ## Build Information
             - ### Action
               ${{ github.workflow }} [#${{ github.run_number }}](https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }})
             - ### Commit
-              ${{ github.event.head_commit.message }} ${{ github.event.head_commit.url }}
+              ${{ steps.get_commit_message.outputs.header }} ${{ github.event.head_commit.url }}
             - ### Author
               @${{ github.actor }}
             ---
