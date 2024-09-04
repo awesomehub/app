@@ -40,6 +40,8 @@ jobs:
             npm-install-v3-
       - name: Install Dependencies
         run: npm ci
+      - name: Type Check
+        run: npm run typecheck
       - name: Lint
         run: npm run lint
       - name: Build
