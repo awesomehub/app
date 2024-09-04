@@ -8,7 +8,7 @@ This repository contains the sources for AwesomeHub Angular application.
 
 ## About
 The App was originaly built for educational purposes and to experiment with [Angular 2](https://v2.angular.io/), [NgRx](https://ngrx.io/) and [RxJS](https://www.learnrxjs.io/), but
-I have recently managed to update the codebase to [Angular 12](https://v12.angular.io/).
+I have recently managed to update the codebase to [Angular 12](https://v12.angular.io/), then to [Angular 18](https://angular.dev/).
 
 The App UI is built on top of the good old [Material Design Lite](https://getmdl.io/) library, It's much lighter than [Angular Material](https://material.angular.io/)
 but I originally used it because Angular Material was still in alpha at the time I built this app.
@@ -17,8 +17,8 @@ but I originally used it because Angular Material was still in alpha at the time
 
 ### Prerequisites
 
-- Node >= 12.14.1
-- PNPM >= 6.0
+- Node >= 18.0
+- NPM >= 10.0
 
 ```bash
 # Clone the repo
@@ -26,22 +26,24 @@ $ git clone https://github.com/awesomehub/app.git awesomehub-app
 $ cd awesomehub-app
 
 # Install dependencies
-$ pnpm install
+$ npm install
 
 # Start dev server
-$ pnpm start
+$ npm start
 ```
 
 ## Main Commands
 
-|Command|Description|
-|---|---|
-|`pnpm start`|Start dev server @ `localhost:4200`|
-|`pnpm build`|Build production bundles to `./dist` directory|
-|`pnpm build:debug`|Build unoptimized production bundles for debugging purposes to `./dist` directory|
-|`pnpm serve`|Start web server @ `localhost:5000` to serve build artifacts from `./dist` directory|
-|`pnpm lint`|Lint TypeScript source with ESLint |
-|`pnpm ng` or `ng`|Run Angular CLI commands (eg. `ng generate module`)|
+| Command               | Description                                                                          |
+|-----------------------|--------------------------------------------------------------------------------------|
+| `npm start`           | Start dev server @ `localhost:4200`                                                  |
+| `npm run build`       | Build production bundles to `./dist` directory                                       |
+| `npm run build:debug` | Build unoptimized production bundles for debugging purposes to `./dist` directory    |
+| `npm run serve`       | Start web server @ `localhost:5000` to serve build artifacts from `./dist` directory |
+| `npm run typechek`    | Check TypeScript source code                                                         |
+| `npm run lint`        | Lint source code with ESLint                                                         |
+| `npm run format`      | Format source code with Prettier                                                     |
+| `npm run ng` or `ng`  | Run Angular CLI commands (eg. `ng generate module`)                                  |
 
 
 [ci-url]: https://github.com/awesomehub/app/actions/workflows/main.yml
