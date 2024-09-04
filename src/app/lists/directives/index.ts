@@ -1,1 +1,1 @@
-export * from './list-repo-score-style';
+export * from './list-repo-score-style'

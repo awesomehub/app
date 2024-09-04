@@ -1,1 +1,1 @@
-export * from './recordset.model';
+export * from './recordset.model'

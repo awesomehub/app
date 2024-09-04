@@ -1,30 +1,32 @@
-import { NgModule } from '@angular/core';
-import { RouterModule } from '@angular/router';
-import { EffectsModule } from '@ngrx/effects';
+import { NgModule } from '@angular/core'
+import { RouterModule } from '@angular/router'
+import { EffectsModule } from '@ngrx/effects'
 
-import { SharedModule } from '@app/shared';
+import { SharedModule } from '@app/shared'
 import {
-  HomeRouteComponent, SearchRouteComponent, SearchBarRouteComponent,
-  ListHomeRouteComponent, ListAllRouteComponent, ListSearchRouteComponent,
-  ListCategoryRouteComponent, ListCategoriesRouteComponent
-} from './route-components';
+  HomeRouteComponent,
+  SearchRouteComponent,
+  SearchBarRouteComponent,
+  ListHomeRouteComponent,
+  ListAllRouteComponent,
+  ListSearchRouteComponent,
+  ListCategoryRouteComponent,
+  ListCategoriesRouteComponent,
+} from './route-components'
 import {
-  ListsComponent, ListCardComponent, ListCategoriesComponent,
-  ListReposComponent, ListRepoCardComponent
-} from './components';
-import { ListRepoScoreStyleDirective } from './directives';
-import { ListsDataResolver, ListDataResolver, ListCategoryDataResolver, ListRepoScoreService } from './services';
-import { ListsEffects } from './state';
-import { routes } from './lists.routes';
+  ListsComponent,
+  ListCardComponent,
+  ListCategoriesComponent,
+  ListReposComponent,
+  ListRepoCardComponent,
+} from './components'
+import { ListRepoScoreStyleDirective } from './directives'
+import { ListRepoScoreService } from './services'
+import { ListsEffects } from './state'
+import { routes } from './lists.routes'
 
 @NgModule({
-  imports: [
-    SharedModule,
-    RouterModule.forChild(routes),
-    EffectsModule.forFeature([
-      ListsEffects
-    ])
-  ],
+  imports: [SharedModule, RouterModule.forChild(routes), EffectsModule.forFeature([ListsEffects])],
   declarations: [
     // Route Components
     HomeRouteComponent,
@@ -42,13 +44,8 @@ import { routes } from './lists.routes';
     ListReposComponent,
     ListRepoCardComponent,
     // Directives
-    ListRepoScoreStyleDirective
+    ListRepoScoreStyleDirective,
   ],
-  providers: [
-    ListsDataResolver,
-    ListDataResolver,
-    ListCategoryDataResolver,
-    ListRepoScoreService
-  ]
+  providers: [ListRepoScoreService],
 })
 export class ListsModule {}

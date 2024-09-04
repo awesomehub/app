@@ -1,1 +1,1 @@
-export * from './list-repo-score-style.diretive';
+export * from './list-repo-score-style.diretive'

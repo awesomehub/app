@@ -1,52 +1,43 @@
-import { Injectable } from '@angular/core';
-import { Store } from '@ngrx/store';
+import { Injectable } from '@angular/core'
+import { Store } from '@ngrx/store'
 
-import { RecordsetActions, RecordsetConstructorOptions } from '../state';
-import { RecordsetService } from './recordset.service';
+import { RecordsetActions, RecordsetConstructorOptions } from '../state'
+import { RecordsetService } from './recordset.service'
 
 @Injectable()
 export class RecordsetFactoryService {
+  static recordsets: Record<string, RecordsetService<any>> = {}
 
-  static recordsets: {
-    [index: string]: RecordsetService<any>
-  } = {};
-
-  constructor(private store$: Store<any>) {}
+  constructor(private store$: Store) {}
 
   create(id: string, reducer: string, options?: RecordsetConstructorOptions): RecordsetService<any> {
     if (RecordsetFactoryService.recordsets[id]) {
       // Reset it if it's already created
-      this.store$.dispatch(
-        RecordsetActions.reset(id, reducer, options)
-      );
-      return RecordsetFactoryService.recordsets[id];
+      this.store$.dispatch(RecordsetActions.reset(id, reducer, options))
+      return RecordsetFactoryService.recordsets[id]
     }
 
-    this.store$.dispatch(
-      RecordsetActions.create(id, reducer, options)
-    );
+    this.store$.dispatch(RecordsetActions.create(id, reducer, options))
 
-    RecordsetFactoryService.recordsets[id] = new RecordsetService(id, this.store$);
+    RecordsetFactoryService.recordsets[id] = new RecordsetService(id, this.store$)
 
-    return RecordsetFactoryService.recordsets[id];
+    return RecordsetFactoryService.recordsets[id]
   }
 
   get(id: string): RecordsetService<any> {
     if (!RecordsetFactoryService.recordsets[id]) {
-      throw new Error(`Unable to find recordset '${id}', it must be created first.`);
+      throw new Error(`Unable to find recordset '${id}', it must be created first.`)
     }
 
-    return RecordsetFactoryService.recordsets[id];
+    return RecordsetFactoryService.recordsets[id]
   }
 
   destroy(id: string): void {
     if (!RecordsetFactoryService.recordsets[id]) {
-      throw new Error(`Unable to find recordset '${id}', it must be created first.`);
+      throw new Error(`Unable to find recordset '${id}', it must be created first.`)
     }
 
-    this.store$.dispatch(
-      RecordsetActions.destroy(id)
-    );
-    delete RecordsetFactoryService.recordsets[id];
+    this.store$.dispatch(RecordsetActions.destroy(id))
+    delete RecordsetFactoryService.recordsets[id]
   }
 }

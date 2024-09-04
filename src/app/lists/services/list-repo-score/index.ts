@@ -1,1 +1,1 @@
-export * from './list-repo-score.service';
+export * from './list-repo-score.service'

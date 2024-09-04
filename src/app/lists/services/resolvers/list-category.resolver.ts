@@ -1,19 +1,15 @@
-import { Injectable } from '@angular/core';
-import { Router, Resolve, ActivatedRouteSnapshot } from '@angular/router';
-import { List, ListCategory } from '@app/lists';
+import { inject } from '@angular/core'
+import { Router, ActivatedRouteSnapshot, ResolveFn } from '@angular/router'
+import { List, ListCategory } from '@app/lists'
 
-@Injectable()
-export class ListCategoryDataResolver implements Resolve<any> {
-  constructor(private router: Router) {}
-
-  resolve(route: ActivatedRouteSnapshot): ListCategory | boolean {
-    let list: List = route.parent.data['list'];
-    let category = list.cats.find(c => c.path === route.params['category']);
-    if (!category) {
-      this.router.navigate(['404']);
-      return false;
-    }
-
-    return category;
+export const listCategoryDataResolver: ResolveFn<ListCategory | boolean> = (route: ActivatedRouteSnapshot) => {
+  const router = inject(Router)
+  const list: List = route.parent.data['list']
+  const category = list.cats.find((c) => c.path === route.params['category'])
+  if (!category) {
+    router.navigate(['404'])
+    return false
   }
+
+  return category
 }

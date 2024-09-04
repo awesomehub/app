@@ -1,2 +1,2 @@
-export * from './list.actions';
-export * from './list-collection.actions';
+export * from './list.actions'
+export * from './list-collection.actions'

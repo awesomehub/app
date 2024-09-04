@@ -1,5 +1,3 @@
-import { RouteComponent } from './route-component.model';
+import { RouteComponent } from './route-component.model'
 
-export abstract class HeaderBarRouteComponent extends RouteComponent {
-
-}
+export abstract class HeaderBarRouteComponent extends RouteComponent {}

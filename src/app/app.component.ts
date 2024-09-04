@@ -1,31 +1,37 @@
 import {
-  Component, Inject, ViewChild, AfterViewChecked, AfterViewInit,
-  ViewEncapsulation, ChangeDetectionStrategy, ElementRef, Renderer2
-} from '@angular/core';
-import { DOCUMENT } from "@angular/common";
-import { Store } from '@ngrx/store';
+  Component,
+  Inject,
+  ViewChild,
+  AfterViewChecked,
+  AfterViewInit,
+  ViewEncapsulation,
+  ChangeDetectionStrategy,
+  ElementRef,
+  Renderer2,
+} from '@angular/core'
+import { DOCUMENT } from '@angular/common'
+import { Store } from '@ngrx/store'
 
-import { AppState } from '@app';
-import { PrimaryRouteComponent, DrawerRouteComponent, AnalyticsService, HelmetService } from '@app/core';
+import { PrimaryRouteComponent, DrawerRouteComponent, AnalyticsService, HelmetService } from '@app/core'
 
 @Component({
   selector: 'ah-root',
   templateUrl: './app.component.html',
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AppComponent implements AfterViewChecked, AfterViewInit {
-  public drawer: DrawerRouteComponent;
+  public drawer: DrawerRouteComponent
 
-  @ViewChild('layout', { static: false }) private layout: ElementRef;
-  @ViewChild('drawerButton', { static: false }) private drawerButton: ElementRef;
+  @ViewChild('layout', { static: false }) private layout: ElementRef
+  @ViewChild('drawerButton', { static: false }) private drawerButton: ElementRef
 
-  constructor (
-    private store$: Store<AppState>,
+  constructor(
+    private store$: Store,
     private renderer: Renderer2,
     private helmetService: HelmetService,
     private analyticsService: AnalyticsService,
-    @Inject(DOCUMENT) private document: Document
+    @Inject(DOCUMENT) private document: Document,
   ) {}
 
   ngAfterViewChecked() {
@@ -48,17 +54,17 @@ export class AppComponent implements AfterViewChecked, AfterViewInit {
    */
   toggleDrawer() {
     if (!this.drawer) {
-      return;
+      return
     }
 
-    const layout: Element = this.layout.nativeElement;
-    const drawerButton: Element = this.drawerButton.nativeElement;
+    const layout: Element = this.layout.nativeElement
+    const drawerButton: Element = this.drawerButton.nativeElement
 
     if (-1 === layout.className.indexOf('is-small-screen')) {
-      return;
+      return
     }
 
-    this.renderer.selectRootElement(drawerButton).click();
+    this.renderer.selectRootElement(drawerButton).click()
   }
 
   /**
@@ -67,7 +73,7 @@ export class AppComponent implements AfterViewChecked, AfterViewInit {
    * @param component PrimaryRouteComponent
    */
   onActivation(component: PrimaryRouteComponent) {
-    this.helmetService.apply(component.helmet);
+    this.helmetService.apply(component.helmet)
   }
 
   /**
@@ -76,7 +82,7 @@ export class AppComponent implements AfterViewChecked, AfterViewInit {
    * @param component PageComponent
    */
   onDeactivation(component: PrimaryRouteComponent) {
-    this.helmetService.unsubscribe();
+    this.helmetService.unsubscribe()
   }
 
   /**
@@ -85,7 +91,7 @@ export class AppComponent implements AfterViewChecked, AfterViewInit {
    * @param component DrawerRouteComponent
    */
   onDrawerActivation(component: DrawerRouteComponent) {
-    this.drawer = component;
+    this.drawer = component
   }
 
   /**
@@ -94,6 +100,6 @@ export class AppComponent implements AfterViewChecked, AfterViewInit {
    * @param component DrawerRouteComponent
    */
   onDrawerDeactivation(component: DrawerRouteComponent) {
-    this.drawer = null;
+    this.drawer = null
   }
 }

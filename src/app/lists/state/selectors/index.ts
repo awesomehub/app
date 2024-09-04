@@ -1,1 +1,1 @@
-export * from './lists.selectors';
+export * from './lists.selectors'

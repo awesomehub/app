@@ -1,1 +1,1 @@
-export * from './score-format.pipe';
+export * from './score-format.pipe'

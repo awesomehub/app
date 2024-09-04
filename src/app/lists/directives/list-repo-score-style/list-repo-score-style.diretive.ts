@@ -1,8 +1,8 @@
-import { Directive, ElementRef, Input, Renderer2 } from '@angular/core';
-import { ListRepoScoreService } from '@app/lists';
+import { Directive, ElementRef, Input, Renderer2 } from '@angular/core'
+import { ListRepoScoreService, ListRepoScoreType } from '@app/lists'
 
 @Directive({
-  selector: '[ahListRepoScoreStyle]'
+  selector: '[ahListRepoScoreStyle]',
 })
 export class ListRepoScoreStyleDirective {
   constructor(
@@ -11,10 +11,10 @@ export class ListRepoScoreStyleDirective {
     private renderer: Renderer2,
   ) {}
 
-  @Input('scoreType') scoreType: string;
+  @Input() scoreType: ListRepoScoreType
   @Input()
   set ahListRepoScoreStyle(score: number) {
-    let colors = this.repoScoreService.getScoreColor(this.scoreType, score);
+    const colors = this.repoScoreService.getScoreColor(this.scoreType, score)
     this.renderer.setStyle(this.el.nativeElement, 'color', colors.text)
     this.renderer.setStyle(this.el.nativeElement, 'backgroundColor', colors.bg)
   }

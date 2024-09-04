@@ -1,3 +1,1 @@
-export abstract class RouteComponent {
-
-}
+export abstract class RouteComponent {}
