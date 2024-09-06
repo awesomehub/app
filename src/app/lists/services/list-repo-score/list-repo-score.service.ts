@@ -11,10 +11,10 @@ export class ListRepoScoreService {
   constructor() {
     const { p, h, a, m } = config.lists.listRepoScoreScale
     this.colorScales = {
-      p: new ColorScale(this.theme, 0, p),
-      h: new ColorScale(this.theme, 0, h),
-      a: new ColorScale(this.theme, 0, a),
-      m: new ColorScale(this.theme, 0, m),
+      p: new ColorScale(this.theme, [0, p]),
+      h: new ColorScale(this.theme, [0, h]),
+      a: new ColorScale(this.theme, [0, a]),
+      m: new ColorScale(this.theme, [0, m]),
     }
   }
 
