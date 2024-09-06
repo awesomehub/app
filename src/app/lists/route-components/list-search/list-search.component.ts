@@ -10,7 +10,8 @@ import { List, ListRepo } from '@app/lists'
   template: `
     <ah-content transparent="true" layout="compact">
       <ah-list-repos
-        heading="Search Results ({{ (recordset$ | async).set.length }})"
+        heading="Search Results"
+        [count]="(recordset$ | async).set.length"
         [recordset]="recordset$ | async"
         (needMore)="recordset.paginate()"
         (sort)="recordset.sort($event)"

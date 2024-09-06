@@ -17,7 +17,10 @@ import { ListRepo } from '@app/lists'
   selector: 'ah-list-repos',
   styleUrls: ['list-repos.component.css'],
   template: `
-    <h3 *ngIf="heading" class="content-heading">{{ heading }}</h3>
+    <h3 *ngIf="heading" class="content-heading">
+      {{ heading }}
+      <span *ngIf="count">({{ count | number }})</span>
+    </h3>
     <div *ngIf="sortable" class="repos-sort">
       <button #sortbtn class="mdl-button mdl-js-button">
         <span [ngSwitch]="recordset.sorting.by">
@@ -69,6 +72,7 @@ export class ListReposComponent implements AfterViewInit {
   @HostBinding('class') private class = 'list-repos'
 
   @Input() heading: string
+  @Input() count: number
   @Input() sortable = false
   @Input() infinite = false
   @Input() wide = true

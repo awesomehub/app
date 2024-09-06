@@ -12,6 +12,7 @@ import { List, ListRepo } from '@app/lists'
       <ah-list-repos
         class=""
         heading="All Repositories"
+        [count]="list.entries['repo.github'].length"
         [recordset]="recordset$ | async"
         (needMore)="recordset.paginate()"
         (sort)="recordset.sort($event)"

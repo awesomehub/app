@@ -22,7 +22,7 @@ import { List } from '@app/lists'
         routerLinkActive="mdl-navigation__link--current"
         [routerLink]="['/list', list.id, 'all']"
         (click)="app.toggleDrawer()"
-        >All <span class="category-count">{{ allCount | number }}</span></a
+        >All</a
       >
       <ah-list-categories [list]="list" [parent]="0" (navigate)="app.toggleDrawer()"></ah-list-categories>
     </nav>
@@ -31,9 +31,8 @@ import { List } from '@app/lists'
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ListCategoriesRouteComponent extends DrawerRouteComponent {
-  public title
+  public title: string
   public list: List
-  public allCount: number
 
   constructor(
     private route: ActivatedRoute,
@@ -45,7 +44,6 @@ export class ListCategoriesRouteComponent extends DrawerRouteComponent {
     this.route.data.forEach((data: { list: List }) => {
       this.list = data.list
       this.title = this.list.name
-      this.allCount = this.list.entries['repo.github'].length
     })
   }
 }
