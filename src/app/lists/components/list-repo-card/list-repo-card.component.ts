@@ -107,6 +107,6 @@ export class ListRepoCardComponent {
   public scoreColorLegend: string[]
 
   constructor(private repoScoreService: ListRepoScoreService) {
-    this.scoreColorLegend = repoScoreService.getScoreColors()
+    this.scoreColorLegend = repoScoreService.getScoreColorTheme()
   }
 }
