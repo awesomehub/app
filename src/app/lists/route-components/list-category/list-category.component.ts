@@ -20,6 +20,7 @@ import { List, ListCategory, ListRepo } from '@app/lists'
     <ah-content transparent="true" layout="compact">
       <ah-list-repos
         [heading]="category.title"
+        [count]="category.count.all"
         [recordset]="recordset$ | async"
         (needMore)="recordset.paginate()"
         (sort)="recordset.sort($event)"
