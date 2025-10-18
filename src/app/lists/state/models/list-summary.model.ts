@@ -7,6 +7,7 @@ export interface ListSummary {
   score: number
   entries: number
   updated: number
+  url: string
 }
 
 export class ListSummaryRecord implements ListSummary {
@@ -16,6 +17,7 @@ export class ListSummaryRecord implements ListSummary {
   score = 0
   entries = 0
   updated = null
+  url = null
 }
 
 export function createListSummary(data: ListSummaryResponse): ListSummary {
