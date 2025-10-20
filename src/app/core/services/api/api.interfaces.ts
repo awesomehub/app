@@ -59,5 +59,5 @@ export interface ListRepoResponse {
     a: number
     m: number
   }
-  pushed: number
+  hglt: string
 }

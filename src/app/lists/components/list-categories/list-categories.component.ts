@@ -26,7 +26,7 @@ export class ListCategoriesComponent {
   @Input() list: List
   @Input() depth = 0
   @Input() set parent(id: number) {
-    this.categories = this.list.cats.filter((cat: ListCategory) => cat.parent === id).sort((a, b) => a.order - b.order)
+    this.categories = this.list.cats.filter((cat: ListCategory) => cat.parent === id)
   }
 
   @Output() navigate = new EventEmitter<any>(false)

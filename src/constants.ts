@@ -33,10 +33,10 @@ export const config = {
     // listRepoScoreTheme: ['#f2f0f7', '#dadaeb', '#bcbddc', '#9e9ac8', '#756bb1', '#54278f'],
     // Repo scores scales
     listRepoScoreScale: {
-      p: 100,
-      h: 100,
-      a: 100,
-      m: 100,
+      p: 1000,
+      h: 1000,
+      a: 1000,
+      m: 1000,
     },
   },
 
