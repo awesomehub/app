@@ -37,6 +37,7 @@ html, body, a, h1, h2, h3, h4 {
   transition-duration: .2s;
   transition-timing-function: cubic-bezier(.4, 0, .2, 1);
   transition-property: margin, width;
+  will-change: margin, width;
 }
 
 .mdl-layout__content {
