@@ -24,13 +24,14 @@ async function main() {
       'X-Content-Type-Options: nosniff',
       'Referrer-Policy: same-origin',
     ],
-    'index.html': [
+    '': [
       'Cache-Control: public, max-age=0, must-revalidate',
       'Link: <https://awesomehub.github.io>; rel=preconnect',
       'Link: <https://www.googletagmanager.com>; rel=preconnect',
       'Link: <https://www.google-analytics.com>; rel=preconnect',
       'Link: <https://fonts.gstatic.com>; rel=preconnect',
     ],
+    'list/*': [],
     'static/*': [
       'Cache-Control: public, max-age=31536000, immutable'
     ]
@@ -44,7 +45,7 @@ async function main() {
       headers.set(asset, [
         'Cache-Control: public, max-age=31536000, immutable'
       ])
-      headers.get('index.html').push(
+      headers.get('').push(
         `Link: </${asset}>; rel=preload; as=${ext === '.css' ? 'style' : 'script'}`
       )
       log('info', 'webpack:asset', asset)
@@ -52,6 +53,7 @@ async function main() {
   }
 
   const headersData = []
+  headers.set('list/*', headers.get('').concat(headers.get('list/*')))
   headers.forEach((pathHeaders, path) => {
     headersData.push(`/${path}\n  ${pathHeaders.join('\n  ')}`)
   })
