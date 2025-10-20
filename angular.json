@@ -51,7 +51,7 @@
             "tsConfig": "tsconfig.app.json",
             "aot": false,
             "sourceMap": true,
-            "assets": ["src/assets/data", "src/assets/images", "src/manifest.json"],
+            "assets": ["src/assets/data", "src/assets/images", "src/manifest.json", "src/robots.txt"],
             "styles": ["src/styles.css"],
             "scripts": []
           },
