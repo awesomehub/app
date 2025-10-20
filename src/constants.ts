@@ -7,8 +7,7 @@ export const config = {
   // Core module
   api: {
     endpoints: {
-      lists: 'lists',
-      list: 'list',
+      build: '/build.json',
     },
     timeout: 10000,
   },
@@ -34,10 +33,10 @@ export const config = {
     // listRepoScoreTheme: ['#f2f0f7', '#dadaeb', '#bcbddc', '#9e9ac8', '#756bb1', '#54278f'],
     // Repo scores scales
     listRepoScoreScale: {
-      p: 7500,
-      h: 2500,
-      a: 2500,
-      m: 7500,
+      p: 1000,
+      h: 1000,
+      a: 1000,
+      m: 1000,
     },
   },
 

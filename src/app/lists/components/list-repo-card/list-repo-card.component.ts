@@ -91,9 +91,9 @@ import { ListRepo, ListRepoScoreService } from '@app/lists'
       </div>
     </div>
     <div class="mdl-card__actions mdl-card--border">
-      <a class="meta" title="Language"> <i class="icon icon-code"></i> {{ repo.lang || 'None' }} </a>
-      <a *ngIf="repo.lic" class="meta" title="Licence"> <i class="icon icon-licence"></i> {{ repo.lic }} </a>
-      <a class="meta" title="Last pushed"> <i class="icon icon-pulse"></i> Pushed {{ repo.pushed | ahDateFormat }} </a>
+      <a class="meta" title="Language"> <i class="icon icon-code"></i> {{ repo.lang || 'None' }}</a>
+      <a *ngIf="repo.lic" class="meta" title="License"> <i class="icon icon-license"></i> {{ repo.lic }}</a>
+      <a class="meta" title="Last pushed"> <i class="icon icon-pulse"></i> {{ repo.hglt }}</a>
     </div>
   `,
   encapsulation: ViewEncapsulation.None,

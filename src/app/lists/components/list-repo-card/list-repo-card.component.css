@@ -182,7 +182,7 @@
 
 .list-repo-card .mdl-card__actions {
   /* 36px height + 8px padding */
-  padding: 8px;
+  padding: 8px 0;
   max-height: 52px;
 }
 

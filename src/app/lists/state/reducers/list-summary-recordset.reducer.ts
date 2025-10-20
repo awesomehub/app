@@ -23,6 +23,12 @@ export function listSummaryRecordsetReducer(
         }
         return 0
       })
+  } else {
+    lists = lists.slice(0).sort((a, b) => {
+      const aOrder = a.score + a.entries * 0.15
+      const bOrder = b.score + b.entries * 0.15
+      return bOrder - aOrder
+    })
   }
 
   return lists

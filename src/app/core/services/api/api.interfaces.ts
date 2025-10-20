@@ -1,3 +1,9 @@
+export interface BuildResponse {
+  number: string
+  date: string
+  urls: Record<string, string>
+}
+
 /**
  * Response Data
  */
@@ -12,6 +18,7 @@ export interface ListSummaryResponse {
   score: number
   entries: number
   updated: number
+  url: string
 }
 
 export interface ListResponse {
@@ -43,6 +50,7 @@ export interface ListRepoResponse {
   name: string
   desc: string
   lang: string
+  lic: string
   cats: number[]
   score: number
   scores: {
@@ -51,5 +59,5 @@ export interface ListRepoResponse {
     a: number
     m: number
   }
-  pushed: number
+  hglt: string
 }

@@ -36,7 +36,7 @@ export interface ListRepo {
   cats: number[]
   score: number
   scores: Record<ListRepoScoreType, number>
-  pushed: number
+  hglt: string
 }
 
 export class ListRecord implements List {
