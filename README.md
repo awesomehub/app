@@ -17,8 +17,8 @@ but I originally used it because Angular Material was still in alpha at the time
 
 ### Prerequisites
 
-- Node >= 18.19
-- NPM >= 10.2.3
+- Node >= 20
+- NPM >= 10
 
 ```bash
 # Clone the repo
