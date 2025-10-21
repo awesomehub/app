@@ -45,7 +45,10 @@
           "options": {
             "outputPath": "dist",
             "resourcesOutputPath": "static",
-            "index": "src/index.html",
+            "index": {
+              "input": "src/index.build.html",
+              "output": "index.html"
+            },
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.app.json",
@@ -67,14 +70,16 @@
               }
             ],
             "styles": ["src/styles.css"],
-            "scripts": []
+            "scripts": [],
+            "fileReplacements": [
+              {
+                "replace": "src/environment.ts",
+                "with": "src/environment.build.ts"
+              }
+            ]
           },
           "configurations": {
             "production": {
-              "index": {
-                "input": "src/index.prod.html",
-                "output": "index.html"
-              },
               "budgets": [
                 {
                   "type": "initial",
@@ -85,12 +90,6 @@
                   "type": "anyComponentStyle",
                   "maximumWarning": "2kb",
                   "maximumError": "4kb"
-                }
-              ],
-              "fileReplacements": [
-                {
-                  "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.prod.ts"
                 }
               ],
               "outputHashing": "all",

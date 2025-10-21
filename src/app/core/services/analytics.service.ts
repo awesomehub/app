@@ -18,7 +18,7 @@ export class AnalyticsService {
     /**/
   }
 
-  public event(event: string, params?: Record<string, any>) {
-    this.dataLayer.push({ event, ...params })
+  public event(eventName: string, params?: Record<string, any>) {
+    this.dataLayer.push('event', eventName, params)
   }
 }

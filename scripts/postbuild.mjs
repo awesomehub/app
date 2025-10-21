@@ -1,14 +1,5 @@
 import fs from 'fs'
-import path from 'path'
-import chalk from 'chalk'
-
-function log(level, subject, ...message) {
-  console.log(`${chalk.green(level)} ${chalk.blue(subject)} ${message.join(' ')}`)
-}
-
-function dist(filename = '') {
-  return path.join(process.cwd(), 'dist', filename)
-}
+import { dist, log, run } from './utils.mjs'
 
 async function main() {
   const index = dist('index.html')
@@ -27,7 +18,6 @@ async function main() {
     '': [
       'Cache-Control: public, max-age=0, must-revalidate',
       'Link: <https://www.googletagmanager.com>; rel=preconnect',
-      'Link: <https://www.google-analytics.com>; rel=preconnect',
       'Link: <https://fonts.gstatic.com>; rel=preconnect',
     ],
     'list/*': [],
@@ -72,13 +62,4 @@ async function main() {
   log('info', '_redirects', redirectsFile, 'done!')
 }
 
-log('info', 'postbuild', 'Running postbuild script')
-main()
-  .then(() => {
-    log('info', 'postbuild', 'done!')
-    process.exit(0)
-  })
-  .catch((e) => {
-    console.error(e)
-    process.exit(1)
-  })
+await run('postbuild', main)

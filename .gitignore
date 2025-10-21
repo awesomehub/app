@@ -1,5 +1,7 @@
 # Compiled output
 /dist
+/src/index.build.html
+/src/environment.build.ts
 /tmp
 /out-tsc
 /bazel-out
