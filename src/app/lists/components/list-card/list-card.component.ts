@@ -6,7 +6,6 @@ import { Router } from '@angular/router'
   selector: 'ah-list-card',
   styleUrls: ['list-card.component.css'],
   host: {
-    '[routerLink]': 'listRoute',
     '[attr.tabindex]': '0',
     '[attr.role]': "'link'",
   },
@@ -39,7 +38,7 @@ export class ListCardComponent {
   }
 
   @HostListener('click')
-  public onEnter(): void {
+  public onClick(): void {
     void this.router.navigate(this.listRoute)
   }
 }

@@ -3,6 +3,7 @@ import chalk from 'chalk'
 
 // Fetch env vars coming from Netlify with fallbacks
 export function getNetlifyEnv() {
+  console.log('process.env', process.env)
   const DEPLOY_TARGET = process.env['CONTEXT'] || 'dev'
   const DEPLOY_URL = process.env['DEPLOY_URL'] || 'http://localhost:4200'
   const BUILD_ID = process.env['BUILD_ID'] || 'dev-local'
