@@ -1,0 +1,7 @@
+[dev]
+  framework = "angular"
+  publish = "dist"
+  autoLaunch = false
+
+[build]
+  publish = "dist"

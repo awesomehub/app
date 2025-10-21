@@ -34,6 +34,12 @@ async function main() {
     'list/*': [],
     'static/*': [
       'Cache-Control: public, max-age=31536000, immutable'
+    ],
+    'data/*': [
+      'Cache-Control: public, max-age=31536000, immutable'
+    ],
+    'data/build.json': [
+      'Cache-Control: public, max-age=0, must-revalidate'
     ]
   }
   const headers = new Map(Object.entries(defaultHeaders))

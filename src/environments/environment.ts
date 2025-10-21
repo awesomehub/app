@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  apiUrl: '/assets/data',
+  apiUrl: '/data',
   ga: 'G-XXXXX',
 }
 

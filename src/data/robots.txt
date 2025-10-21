@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+Sitemap: https://awesomehub.js.org/sitemap.xml
+Host: https://awesomehub.js.org

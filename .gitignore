@@ -2,7 +2,7 @@
 
 # Compiled output
 /dist
-/src/assets/data
+/src/data/objects
 /tmp
 /out-tsc
 /bazel-out
