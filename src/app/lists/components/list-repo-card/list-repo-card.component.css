@@ -207,12 +207,6 @@
   flex-shrink: 1;
 }
 
-@media (max-width: 479px) {
-  .list-repo-card .meta:last-child {
-    display: none;
-  }
-}
-
 .list-repo-card .meta .icon {
   font-size: 16px;
   padding-right: 4px;
