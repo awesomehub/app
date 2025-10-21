@@ -26,7 +26,6 @@ async function main() {
     ],
     '': [
       'Cache-Control: public, max-age=0, must-revalidate',
-      'Link: <https://awesomehub.github.io>; rel=preconnect',
       'Link: <https://www.googletagmanager.com>; rel=preconnect',
       'Link: <https://www.google-analytics.com>; rel=preconnect',
       'Link: <https://fonts.gstatic.com>; rel=preconnect',
