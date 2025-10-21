@@ -7,37 +7,16 @@ on:
     branches: [ master ]
 
 jobs:
-  Setup:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - name: Bundled Node Version
-        run: |
-          echo "Node version: $(which node):$(node -v)"
-          echo "NPM version: $(which npm):$(npm -v)"
-      - uses: volta-cli/action@v4
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-      - name: Project Node Version
-        run: |
-          echo "Node version: $(which node):$(node -v)"
-          echo "NPM version: $(which npm):$(npm -v)"
-
   Build:
-    needs: [Setup]
     if: "!contains(github.event.head_commit.message, '[skip ci]')"
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: volta-cli/action@v4
+      - name: Set up Node.js
+        uses: actions/setup-node@v5
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-      - uses: actions/cache@v4
-        with:
-          path: ~/.npm
-          key: npm-install-v3-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            npm-install-v3-
+          node-version: 20
+          cache: npm
       - name: Install Dependencies
         run: npm ci
       - name: Type Check
