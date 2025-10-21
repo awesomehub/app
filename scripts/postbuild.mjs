@@ -31,28 +31,18 @@ async function main() {
       'Link: <https://fonts.gstatic.com>; rel=preconnect',
     ],
     'list/*': [],
-    'static/*': [
-      'Cache-Control: public, max-age=31536000, immutable'
-    ],
-    'data/*': [
-      'Cache-Control: public, max-age=31536000, immutable'
-    ],
-    'data/build.json': [
-      'Cache-Control: public, max-age=0, must-revalidate'
-    ]
+    'static/*': ['Cache-Control: public, max-age=31536000, immutable'],
+    'data/*': ['Cache-Control: public, max-age=31536000, immutable'],
+    'data/build.json': ['Cache-Control: public, max-age=0, must-revalidate'],
   }
   const headers = new Map(Object.entries(defaultHeaders))
-  const html = fs.readFileSync(index, { encoding: 'utf-8'})
+  const html = fs.readFileSync(index, { encoding: 'utf-8' })
   const matches = html.matchAll(/["']([^"'.]+\.[a-z0-9]{16})(\.(css|js))["']/gm)
   for (const [, filename, ext] of matches) {
     const asset = filename + ext
     if (!headers.has(asset)) {
-      headers.set(asset, [
-        'Cache-Control: public, max-age=31536000, immutable'
-      ])
-      headers.get('').push(
-        `Link: </${asset}>; rel=preload; as=${ext === '.css' ? 'style' : 'script'}`
-      )
+      headers.set(asset, ['Cache-Control: public, max-age=31536000, immutable'])
+      headers.get('').push(`Link: </${asset}>; rel=preload; as=${ext === '.css' ? 'style' : 'script'}`)
       log('info', 'webpack:asset', asset)
     }
   }
@@ -71,6 +61,8 @@ async function main() {
     { from: '/list/selfhosted/internet-of-things-iot', to: '/list/selfhosted/iot-platforms' },
     { from: '/list/selfhosted/proxy', to: '/list/selfhosted/networking%2Fproxy' },
     { from: '/list/selfhosted/money-budgeting', to: '/list/selfhosted/finance-budgeting' },
+    { from: '/list/selfhosted/note-taking-and-editors', to: '/list/selfhosted/note-taking-apps' },
+    { from: '/list/selfhosted/calendar-contacts', to: '/list/selfhosted/calendars-contacts' },
     { from: '/*', to: '/index.html', status: 200 },
   ]
 
@@ -86,7 +78,7 @@ main()
     log('info', 'postbuild', 'done!')
     process.exit(0)
   })
-  .catch(e => {
+  .catch((e) => {
     console.error(e)
     process.exit(1)
   })

@@ -7,6 +7,7 @@ This repository contains the sources for AwesomeHub Angular application.
 > Live production build can be found at [awesomehub.js.org][website-url]
 
 ## About
+
 The App was originally built for educational purposes and to experiment with [Angular 2](https://v2.angular.io/), [NgRx](https://ngrx.io/) and [RxJS](https://www.learnrxjs.io/), but
 I have recently managed to update the codebase to [Angular 12](https://v12.angular.io/), then to [Angular 18](https://angular.dev/).
 
@@ -35,7 +36,7 @@ $ npm start
 ## Main Commands
 
 | Command               | Description                                                                          |
-|-----------------------|--------------------------------------------------------------------------------------|
+| --------------------- | ------------------------------------------------------------------------------------ |
 | `npm start`           | Start dev server @ `localhost:4200`                                                  |
 | `npm run build`       | Build production bundles to `./dist` directory                                       |
 | `npm run build:debug` | Build unoptimized production bundles for debugging purposes to `./dist` directory    |
@@ -44,7 +45,6 @@ $ npm start
 | `npm run lint`        | Lint source code with ESLint                                                         |
 | `npm run format`      | Format source code with Prettier                                                     |
 | `npm run ng` or `ng`  | Run Angular CLI commands (eg. `ng generate module`)                                  |
-
 
 [ci-url]: https://github.com/awesomehub/app/actions/workflows/main.yml
 [ci-img]: https://img.shields.io/github/actions/workflow/status/awesomehub/app/main.yml?branch=master

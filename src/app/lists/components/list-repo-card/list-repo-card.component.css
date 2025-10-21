@@ -53,7 +53,7 @@
   font-size: 55%;
   display: block;
   line-height: 100%;
-  color: rgba(0,0,0,.54);
+  color: rgba(0, 0, 0, 0.54);
 }
 
 .list-repo-inner .repo-desc {
@@ -79,7 +79,7 @@
 
 .list-repo-inner h4::after,
 .list-repo-inner .repo-desc::after {
-  background: linear-gradient(to right, rgba(0,0,0,0) 0%, #fff 40%);
+  background: linear-gradient(to right, rgba(0, 0, 0, 0) 0%, #fff 40%);
 }
 
 .list-repo-inner .score {
@@ -127,7 +127,7 @@
 }
 
 .list-repo-inner .scores > span:last-child {
-    border-right: 0;
+  border-right: 0;
 }
 
 .list-repo-card:hover .list-repo-inner .scores > span {
@@ -181,6 +181,8 @@
 }
 
 .list-repo-card .mdl-card__actions {
+  display: flex;
+  align-items: center;
   /* 36px height + 8px padding */
   padding: 8px 0;
   max-height: 52px;
@@ -189,16 +191,20 @@
 .list-repo-card .meta {
   display: inline-block;
   position: relative;
-  color: rgba(0,0,0,.54);
+  color: rgba(0, 0, 0, 0.54);
   height: 36px;
   margin: 0;
-  padding-left: 15px;
+  padding-left: 14px;
   font-size: 13px;
   line-height: 36px;
   font-weight: 400;
-  text-align: left;
-  vertical-align: middle;
-  text-decoration: none;
+  white-space: nowrap;
+}
+
+.list-repo-card .meta.highlight {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  flex-shrink: 1;
 }
 
 @media (max-width: 479px) {

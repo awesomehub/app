@@ -1,13 +1,19 @@
-import { Component, Input, ViewEncapsulation, ChangeDetectionStrategy, HostBinding } from '@angular/core'
+import { Component, Input, ViewEncapsulation, ChangeDetectionStrategy, HostBinding, HostListener } from '@angular/core'
 import { ListSummary } from '@app/lists'
+import { Router } from '@angular/router'
 
 @Component({
   selector: 'ah-list-card',
   styleUrls: ['list-card.component.css'],
+  host: {
+    '[routerLink]': 'listRoute',
+    '[attr.tabindex]': '0',
+    '[attr.role]': "'link'",
+  },
   template: `
     <div class="mdl-card__supporting-text">
       <h4>
-        <a [routerLink]="['/list', list.id]">{{ list.name }}</a>
+        <a [routerLink]="listRoute">{{ list.name }}</a>
       </h4>
       {{ list.desc }}
     </div>
@@ -25,4 +31,15 @@ import { ListSummary } from '@app/lists'
 export class ListCardComponent {
   @HostBinding('class') private class = 'list-card mdl-card'
   @Input() public list: ListSummary
+
+  public constructor(private readonly router: Router) {}
+
+  public get listRoute(): (string | number)[] {
+    return ['/list', this.list.id]
+  }
+
+  @HostListener('click')
+  public onEnter(): void {
+    void this.router.navigate(this.listRoute)
+  }
 }

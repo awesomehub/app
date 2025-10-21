@@ -28,7 +28,7 @@
     "serve": "serve dist",
     "lint": "ng lint",
     "typecheck": "tsc --noEmit -p tsconfig.app.json",
-    "format": "prettier --write \"**/*.json\" \"**/*.{j,t}s?(x)\" \"**/*.html\""
+    "format": "prettier --write ."
   },
   "keywords": [
     "app",

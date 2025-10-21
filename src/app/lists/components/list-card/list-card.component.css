@@ -1,6 +1,12 @@
 .list-card {
   border-top: 5px solid #0091ea;
   min-height: 180px;
+  cursor: pointer;
+}
+
+.list-card:focus {
+  outline: 2px dotted #0091ea;
+  outline-offset: -3px;
 }
 
 .list-card h4 {
@@ -18,7 +24,7 @@
 
 .list-card .meta {
   position: relative;
-  color: rgba(0,0,0,.54);
+  color: rgba(0, 0, 0, 0.54);
   height: 36px;
   margin: 0;
   min-width: 60px;

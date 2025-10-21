@@ -42,13 +42,12 @@
 
 .content-wrapper.layout-compact .content,
 .content-wrapper.layout-compact .content > .mdl-grid,
-.content-wrapper.layout-compact .content > * > .mdl-grid{
+.content-wrapper.layout-compact .content > * > .mdl-grid {
   padding: 0;
 }
 
 .content-wrapper.layout-compact > .content.mdl-cell--12-col > .content-heading,
-.content-wrapper.layout-compact > .content.mdl-cell--12-col > * >.content-heading {
+.content-wrapper.layout-compact > .content.mdl-cell--12-col > * > .content-heading {
   margin-bottom: 16px;
   margin-left: 8px;
 }
-

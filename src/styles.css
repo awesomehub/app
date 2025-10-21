@@ -1,14 +1,22 @@
-@import "../node_modules/material-design-lite/dist/material.deep_purple-blue.min.css";
+@import '../node_modules/material-design-lite/dist/material.deep_purple-blue.min.css';
 
 /** Our icon font **/
-@import "./assets/css/icon-font.css";
+@import './assets/css/icon-font.css';
 
 /* Typography */
-html, body, input {
-  font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+html,
+body,
+input {
+  font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
 }
 
-html, body, a, h1, h2, h3, h4 {
+html,
+body,
+a,
+h1,
+h2,
+h3,
+h4 {
   font-weight: 300;
 }
 
@@ -33,15 +41,16 @@ html, body, a, h1, h2, h3, h4 {
   margin-top: 15px;
 }
 
-.mdl-layout__header, .mdl-layout__content {
-  transition-duration: .2s;
-  transition-timing-function: cubic-bezier(.4, 0, .2, 1);
+.mdl-layout__header,
+.mdl-layout__content {
+  transition-duration: 0.2s;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   transition-property: margin, width;
   will-change: margin, width;
 }
 
 .mdl-layout__content {
-  transition-duration: .3s;
+  transition-duration: 0.3s;
 }
 
 .mdl-layout__header-row {

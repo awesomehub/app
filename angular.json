@@ -3,10 +3,7 @@
   "version": 1,
   "cli": {
     "packageManager": "pnpm",
-    "schematicCollections": [
-      "@angular-eslint/schematics",
-      "@ngrx/schematics"
-    ]
+    "schematicCollections": ["@angular-eslint/schematics", "@ngrx/schematics"]
   },
   "newProjectRoot": "projects",
   "projects": {
@@ -60,11 +57,7 @@
               {
                 "glob": "**/*",
                 "input": "src/data",
-                "ignore": [
-                  "objects/**",
-                  "sitemap.xml",
-                  "robots.txt"
-                ],
+                "ignore": ["objects/**", "sitemap.xml", "robots.txt"],
                 "output": "/data/"
               },
               {
@@ -73,9 +66,7 @@
                 "output": "/"
               }
             ],
-            "styles": [
-              "src/styles.css"
-            ],
+            "styles": ["src/styles.css"],
             "scripts": []
           },
           "configurations": {
@@ -141,10 +132,7 @@
         "lint": {
           "builder": "@angular-eslint/builder:lint",
           "options": {
-            "lintFilePatterns": [
-              "src/**/*.ts",
-              "src/**/*.html"
-            ],
+            "lintFilePatterns": ["src/**/*.ts", "src/**/*.html"],
             "fix": true
           }
         }
