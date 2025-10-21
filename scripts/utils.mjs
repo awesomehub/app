@@ -6,7 +6,7 @@ export function getNetlifyEnv() {
   const DEPLOY_TARGET = process.env['CONTEXT'] || 'dev'
   const DEPLOY_URL = process.env['URL'] || 'http://localhost:4200'
   const BUILD_ID = process.env['BUILD_ID'] || 'dev-local'
-  const IS_PROD_LIVE = DEPLOY_TARGET === 'production'
+  const IS_PROD_LIVE = DEPLOY_URL === 'https://awesomehub.js.org'
 
   const DEFAULT_NODE_ENV = DEPLOY_TARGET === 'dev' ? 'development' : 'production'
   const NODE_ENV = process.env.NODE_ENV ?? DEFAULT_NODE_ENV
