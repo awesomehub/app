@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core'
+import { inject, Injectable } from '@angular/core'
 import { HttpClient } from '@angular/common/http'
 import { Observable, throwError } from 'rxjs'
 import { map, shareReplay, switchMap } from 'rxjs/operators'
@@ -9,8 +9,9 @@ import { BuildResponse, ListCollectionResponse, ListResponse } from './api.inter
 export class ApiService {
   private readonly apiBase: string
   private readonly build$: Observable<BuildResponse>
+  private readonly http = inject(HttpClient)
 
-  constructor(private http: HttpClient) {
+  constructor() {
     this.apiBase = `${environment.apiUrl}/`.replace(/\/$/, '')
     this.build$ = this.http
       .get<BuildResponse>(this.resolveUrl(config.api.endpoints.build))

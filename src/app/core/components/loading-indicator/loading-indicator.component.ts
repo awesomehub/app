@@ -1,11 +1,18 @@
-import { Component, ViewEncapsulation, ChangeDetectionStrategy, ChangeDetectorRef, HostBinding } from '@angular/core'
+import {
+  Component,
+  ViewEncapsulation,
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  HostBinding,
+  inject,
+} from '@angular/core'
 import { Router, Event, NavigationStart, NavigationEnd, NavigationCancel, NavigationError } from '@angular/router'
 
 @Component({
   selector: 'ah-loading-indicator',
   styleUrls: ['./loading-indicator.component.css'],
   template: `
-    <ah-spinner [active]="spinner"></ah-spinner>
+    <ah-spinner [active]="spinner" />
     @if (message) {
       <div class="message">{{ message }}</div>
     }
@@ -17,15 +24,15 @@ import { Router, Event, NavigationStart, NavigationEnd, NavigationCancel, Naviga
 export class LoadingIndicatorComponent {
   public spinner = false
   public message: string
-  private _timeout
+  private _timeout: NodeJS.Timeout
 
   @HostBinding('class') private class = 'loading-indicator'
   @HostBinding('class.active') public active = false
 
-  constructor(
-    private router: Router,
-    private ref: ChangeDetectorRef,
-  ) {
+  private router = inject(Router)
+  private ref = inject(ChangeDetectorRef)
+
+  constructor() {
     this.router.events.subscribe((e: Event) => {
       if (e instanceof NavigationStart) {
         this.activate()
