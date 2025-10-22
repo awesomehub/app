@@ -1,5 +1,4 @@
-import { Injectable, inject } from '@angular/core'
-import { DOCUMENT } from '@angular/common'
+import { Injectable, inject, DOCUMENT } from '@angular/core'
 
 @Injectable()
 export class AnalyticsService {
@@ -9,7 +8,7 @@ export class AnalyticsService {
   constructor() {
     const window = this.document.defaultView as any
     if (!Array.isArray(window.dataLayer)) {
-      console.error('GTM dataLayer is not initialized')
+      console.warn('GTM dataLayer is not initialized')
     }
     this.dataLayer = window.dataLayer ?? []
   }

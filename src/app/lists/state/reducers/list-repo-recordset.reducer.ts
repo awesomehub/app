@@ -1,5 +1,5 @@
 import { RecordsetFilters, RecordsetSorting } from '@app/recordsets'
-import { List, ListRepo } from '@app/lists'
+import type { List, ListRepo } from '../models'
 
 export function listRepoRecordsetReducer(
   state: List,

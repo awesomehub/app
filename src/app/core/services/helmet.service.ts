@@ -1,9 +1,8 @@
-import { Injectable, inject } from '@angular/core'
-import { DOCUMENT, ɵDomAdapter as DomAdapter, ɵgetDOM as getDOM } from '@angular/common'
+import { Injectable, inject, DOCUMENT } from '@angular/core'
+import { ɵDomAdapter as DomAdapter, ɵgetDOM as getDOM } from '@angular/common'
 import { MetaDefinition } from '@angular/platform-browser'
-
-import { config } from '@constants'
 import { Observable, Subscription } from 'rxjs'
+import { config } from '@constants'
 
 export interface HelmetDefinition {
   title?: string

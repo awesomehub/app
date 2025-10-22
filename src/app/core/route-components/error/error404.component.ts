@@ -1,5 +1,4 @@
 import { Component } from '@angular/core'
-
 import { PrimaryRouteComponent } from '../models'
 
 @Component({
@@ -9,6 +8,7 @@ import { PrimaryRouteComponent } from '../models'
       <p>The page you're looking for doesn't exist.</p>
     </ah-content>
   `,
+  standalone: false,
 })
 export class Error404Component extends PrimaryRouteComponent {
   public override helmet = {

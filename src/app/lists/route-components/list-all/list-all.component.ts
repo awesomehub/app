@@ -1,10 +1,10 @@
-import { Component, OnInit, OnDestroy, ViewEncapsulation, ChangeDetectionStrategy } from '@angular/core'
+import { Component, OnInit, OnDestroy, ViewEncapsulation, ChangeDetectionStrategy, inject } from '@angular/core'
 import { ActivatedRoute } from '@angular/router'
 import { Observable } from 'rxjs'
 import { config } from '@constants'
 import { PrimaryRouteComponent } from '@app/core'
 import { RecordsetFactoryService, RecordsetService, Recordset } from '@app/recordsets'
-import { List, ListRepo } from '@app/lists'
+import type { List, ListRepo } from '../../state'
 
 @Component({
   template: `
@@ -19,25 +19,23 @@ import { List, ListRepo } from '@app/lists'
         [sortable]="true"
         [infinite]="true"
         [wide]="true"
-      >
-      </ah-list-repos>
+      />
     </ah-content>
   `,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
 export class ListAllRouteComponent extends PrimaryRouteComponent implements OnInit, OnDestroy {
   public list: List
   public recordset: RecordsetService<ListRepo>
   public recordset$: Observable<Recordset<ListRepo>>
+  private route = inject(ActivatedRoute)
+  private recordsetFactory = inject(RecordsetFactoryService)
 
-  constructor(
-    private route: ActivatedRoute,
-    private recordsetFactory: RecordsetFactoryService,
-  ) {
+  constructor() {
     super()
-
-    this.list = route.snapshot.data['list']
+    this.list = this.route.snapshot.data['list']
   }
 
   ngOnInit() {

@@ -1,24 +1,27 @@
 import { Component, Input, Output, EventEmitter, ViewEncapsulation, ChangeDetectionStrategy } from '@angular/core'
-import { List, ListCategory } from '@app/lists'
+import type { List, ListCategory } from '../../state'
 
 @Component({
   selector: 'ah-list-categories',
   template: `
-    <div *ngFor="let category of categories">
-      <a
-        [class]="'mdl-navigation__link level-' + depth"
-        routerLinkActive="mdl-navigation__link--current"
-        [routerLink]="['/list', list.id, category.path]"
-        (click)="navigate.emit(category)"
-      >
-        {{ category.title }}
-      </a>
-      <ah-list-categories [list]="list" [depth]="depth + 1" [parent]="category.id" (navigate)="navigate.emit($event)">
-      </ah-list-categories>
-    </div>
+    @for (category of categories; track category) {
+      <div>
+        <a
+          [class]="'mdl-navigation__link level-' + depth"
+          routerLinkActive="mdl-navigation__link--current"
+          [routerLink]="['/list', list.id, category.path]"
+          (click)="navigate.emit(category)"
+        >
+          {{ category.title }}
+        </a>
+        <ah-list-categories [list]="list" [depth]="depth + 1" [parent]="category.id" (navigate)="navigate.emit($event)">
+        </ah-list-categories>
+      </div>
+    }
   `,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
 export class ListCategoriesComponent {
   public categories: ListCategory[]

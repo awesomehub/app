@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core'
 import { config } from '@constants'
-import { ListRepoScoreType } from '@app/lists'
-import { ColorScale } from '@app/lists/util'
+import { ColorScale } from '../../util'
+import type { ListRepoScoreType } from '../../state'
 
 @Injectable()
 export class ListRepoScoreService {

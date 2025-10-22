@@ -1,6 +1,5 @@
 import {
   Component,
-  Inject,
   ViewChild,
   AfterViewChecked,
   AfterViewInit,
@@ -8,17 +7,18 @@ import {
   ChangeDetectionStrategy,
   ElementRef,
   Renderer2,
+  DOCUMENT,
+  inject,
 } from '@angular/core'
-import { DOCUMENT } from '@angular/common'
 import { Store } from '@ngrx/store'
-
-import { PrimaryRouteComponent, DrawerRouteComponent, AnalyticsService, HelmetService } from '@app/core'
+import { PrimaryRouteComponent, DrawerRouteComponent, AnalyticsService, HelmetService } from './core'
 
 @Component({
   selector: 'ah-root',
   templateUrl: './app.component.html',
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
 export class AppComponent implements AfterViewChecked, AfterViewInit {
   public drawer: DrawerRouteComponent
@@ -26,13 +26,11 @@ export class AppComponent implements AfterViewChecked, AfterViewInit {
   @ViewChild('layout', { static: false }) private layout: ElementRef
   @ViewChild('drawerButton', { static: false }) private drawerButton: ElementRef
 
-  constructor(
-    private store$: Store,
-    private renderer: Renderer2,
-    private helmetService: HelmetService,
-    private analyticsService: AnalyticsService,
-    @Inject(DOCUMENT) private document: Document,
-  ) {}
+  private store$ = inject(Store)
+  private renderer = inject(Renderer2)
+  private helmetService = inject(HelmetService)
+  private analyticsService = inject(AnalyticsService)
+  private document = inject(DOCUMENT)
 
   ngAfterViewChecked() {
     // Run MDL after each render to upgrade any new elements added

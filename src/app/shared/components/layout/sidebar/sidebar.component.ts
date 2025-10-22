@@ -2,7 +2,7 @@ import { Component, ChangeDetectionStrategy, ViewEncapsulation, Input, HostBindi
 
 @Component({
   selector: 'ah-sidebar',
-  template: `<ng-content></ng-content>`,
+  template: `<ng-content />`,
   styles: [
     `
       .sidebar {
@@ -13,6 +13,7 @@ import { Component, ChangeDetectionStrategy, ViewEncapsulation, Input, HostBindi
   ],
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
 export class LayoutSidebarComponent {
   @Input() public transparent: boolean | string = false

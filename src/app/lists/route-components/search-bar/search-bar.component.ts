@@ -8,6 +8,7 @@ import {
   ViewChild,
   HostBinding,
   ElementRef,
+  inject,
 } from '@angular/core'
 import { Location } from '@angular/common'
 import { ActivatedRoute, Router } from '@angular/router'
@@ -26,6 +27,7 @@ interface SearchBarNavState extends Record<string, unknown> {
   styleUrls: ['./search-bar.component.css'],
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
 export class SearchBarRouteComponent extends HeaderBarRouteComponent implements OnInit, AfterViewInit {
   public placeholder = 'Search...'
@@ -41,18 +43,14 @@ export class SearchBarRouteComponent extends HeaderBarRouteComponent implements 
   // remembers we need to restore focus after a navigation triggered by clearing the query
   private focusAfterNavigation = false
 
+  private router = inject(Router)
+  private route = inject(ActivatedRoute)
+  private store$ = inject(Store)
+  private location = inject(Location)
+  private cd = inject(ChangeDetectorRef)
+
   @HostBinding('class') private class = 'list-search-bar'
   @ViewChild('input', { static: false }) private input: ElementRef
-
-  constructor(
-    private router: Router,
-    private route: ActivatedRoute,
-    private store$: Store,
-    private location: Location,
-    private cd: ChangeDetectorRef,
-  ) {
-    super()
-  }
 
   ngOnInit() {
     const navigationState = this.location.getState() as SearchBarNavState | undefined

@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core'
 import { CommonModule } from '@angular/common'
 import { ScrollSpyModule } from '@app/scroll-spy'
-
 import { LayoutContentComponent, LayoutSidebarComponent, SpinnerComponent } from './components'
 import { DateFormatPipe, ScoreFormatPipe } from './pipes'
 

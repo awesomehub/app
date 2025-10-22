@@ -7,34 +7,31 @@ import {
   EventEmitter,
   HostBinding,
 } from '@angular/core'
-import { Recordset } from '@app/recordsets'
-import { ListSummary } from '@app/lists'
+import type { Recordset } from '@app/recordsets'
+import type { ListSummary } from '../../state'
 
 @Component({
   selector: 'ah-lists',
   styleUrls: ['lists.component.css'],
   template: `
-    <ah-list-card
-      *ngFor="let list of recordset.slice; trackBy: trackByLists"
-      class="mdl-cell mdl-cell--12-col mdl-cell--6-col-desktop mdl-shadow--2dp"
-      [list]="list"
-    >
-    </ah-list-card>
+    @for (list of recordset.slice; track trackByLists($index, list)) {
+      <ah-list-card class="mdl-cell mdl-cell--12-col mdl-cell--6-col-desktop mdl-shadow--2dp" [list]="list" />
+    }
 
-    <div *ngIf="recordset.set.length === 0 && recordset.updated" class="mdl-cell mdl-cell--12-col no-lists">
-      No lists found!
-    </div>
+    @if (recordset.set.length === 0 && recordset.updated) {
+      <div class="mdl-cell mdl-cell--12-col no-lists">No lists found!</div>
+    }
 
-    <ah-spinner class="mdl-cell mdl-cell--12-col" [active]="!recordset.updated"></ah-spinner>
+    <ah-spinner class="mdl-cell mdl-cell--12-col" [active]="!recordset.updated" />
     <ah-infinite-scroll
       class="mdl-cell mdl-cell--12-col"
       [paused]="!recordset.pagination.hasNext || !recordset.updated"
       (next)="needMore.emit()"
-    >
-    </ah-infinite-scroll>
+    />
   `,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
 export class ListsComponent {
   @HostBinding('class') private class = 'list-collection mdl-grid'
@@ -42,7 +39,7 @@ export class ListsComponent {
   @Input() recordset: Recordset<ListSummary>
   @Output() needMore = new EventEmitter<any>(false)
 
-  trackByLists(i: number, list: ListSummary) {
+  trackByLists(_i: number, list: ListSummary) {
     return list.id
   }
 }
