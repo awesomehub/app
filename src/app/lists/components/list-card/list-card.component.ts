@@ -20,12 +20,12 @@ import type { ListSummary } from '../../state'
   template: `
     <div class="mdl-card__supporting-text">
       <h4>
-        <a [routerLink]="listRoute">{{ list.name }}</a>
+        <a [routerLink]="listRoute" title="View {{ list.name }} repositories">{{ list.name }}</a>
       </h4>
       {{ list.desc }}
     </div>
     <div class="mdl-card__actions mdl-card--border">
-      <a class="meta" title="Total entries"> <i class="icon icon-repo"></i> {{ list.entries | number }} </a>
+      <a class="meta" title="Total repositories"> <i class="icon icon-repo"></i> {{ list.entries | number }} </a>
       <a class="meta" title="Average score"> <i class="icon icon-flame"></i> {{ list.score | ahScoreFormat }} </a>
       <a class="meta" title="Last updated">
         <i class="icon icon-pulse"></i> Updated {{ list.updated | ahDateFormat }}
