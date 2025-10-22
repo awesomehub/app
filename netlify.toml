@@ -10,10 +10,10 @@
   package = "@netlify/plugin-lighthouse"
 
   [[plugins.inputs.audits]]
-    path = "/"
+    path = ""
 
   [[plugins.inputs.audits]]
-    path = "/list/selfhosted"
+    path = "list/selfhosted"
 
   [plugins.inputs.settings]
     preset = "desktop"
