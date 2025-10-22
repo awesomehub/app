@@ -39,11 +39,4 @@ export const config = {
       m: 1000,
     },
   },
-
-  // Analytics module
-  gtag: {
-    id: 'string',
-    settings: {},
-    timeout: 10000,
-  },
 }
