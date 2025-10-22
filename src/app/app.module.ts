@@ -3,10 +3,9 @@ import { BrowserModule } from '@angular/platform-browser'
 import { RouterModule } from '@angular/router'
 import { StoreModule } from '@ngrx/store'
 import { StoreRouterConnectingModule } from '@ngrx/router-store'
-import { StoreDevtoolsModule } from '@ngrx/store-devtools'
 import { EffectsModule } from '@ngrx/effects'
 
-import { config, environment } from '@constants'
+import { environmentProviders } from '@constants'
 import { CoreModule, RouterStateSerializerService } from '@app/core'
 import { ListsModule } from '@app/lists'
 
@@ -23,11 +22,7 @@ import { reducers, metaReducers } from './app.state'
     StoreRouterConnectingModule.forRoot({
       serializer: RouterStateSerializerService,
     }),
-    StoreDevtoolsModule.instrument({
-      name: config.name,
-      logOnly: environment.nodeEnv === 'production',
-      connectInZone: true,
-    }),
+    environmentProviders,
     EffectsModule.forRoot([]),
     CoreModule,
     ListsModule,

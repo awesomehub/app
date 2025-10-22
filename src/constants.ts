@@ -1,4 +1,4 @@
-export { environment } from './environment'
+export { environment, environmentProviders } from './environment'
 
 export const config = {
   // Application name
