@@ -25,11 +25,11 @@ import type { ListSummary } from '../../state'
       {{ list.desc }}
     </div>
     <div class="mdl-card__actions mdl-card--border">
-      <a class="meta" title="Total repositories"> <i class="icon icon-repo"></i> {{ list.entries | number }} </a>
-      <a class="meta" title="Average score"> <i class="icon icon-flame"></i> {{ list.score | ahScoreFormat }} </a>
-      <a class="meta" title="Last updated">
+      <span class="meta" title="Total repositories"><i class="icon icon-repo"></i> {{ list.entries | number }}</span>
+      <span class="meta" title="Average score"><i class="icon icon-flame"></i> {{ list.score | ahScoreFormat }}</span>
+      <span class="meta" title="Last updated">
         <i class="icon icon-pulse"></i> Updated {{ list.updated | ahDateFormat }}
-      </a>
+      </span>
     </div>
   `,
   encapsulation: ViewEncapsulation.None,
