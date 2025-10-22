@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core'
+import { NgModule, provideExperimentalZonelessChangeDetection } from '@angular/core'
 import { BrowserModule } from '@angular/platform-browser'
 import { RouterModule } from '@angular/router'
 import { StoreModule } from '@ngrx/store'
@@ -15,6 +15,7 @@ import { reducers, metaReducers } from './app.state'
 @NgModule({
   bootstrap: [AppComponent],
   declarations: [AppComponent],
+  providers: [provideExperimentalZonelessChangeDetection()],
   imports: [
     BrowserModule,
     RouterModule.forRoot([{ path: '**', redirectTo: '404' }], { scrollPositionRestoration: 'top' }),
