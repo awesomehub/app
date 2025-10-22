@@ -43,13 +43,14 @@ async function main() {
   const matches = html.matchAll(/=["']([\w.-]+-\w{8})(\.(css|js))["']/gm)
   for (const [, filename, ext] of matches) {
     const asset = filename + ext
-    if (!headers.has(asset)) {
-      headers.set(asset, [CACHE_CONTROL_IMMUTABLE])
-      headers.set(`${asset}.map`, [CACHE_CONTROL_IMMUTABLE])
+    const assetPath = asset.startsWith('/') ? asset : `/${asset}`
+    if (!headers.has(assetPath)) {
+      headers.set(assetPath, [CACHE_CONTROL_IMMUTABLE])
+      headers.set(`${assetPath}.map`, [CACHE_CONTROL_IMMUTABLE])
       if (ext === '.css') {
-        headers.get('/').push(`Link: </${asset}>; rel=preload; as=style`)
+        headers.get('/').push(`Link: <${assetPath}>; rel=preload; as=style`)
       }
-      log('info', 'webpack:asset', asset)
+      log('info', 'webpack:asset', assetPath)
     }
   }
 
