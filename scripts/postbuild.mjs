@@ -40,7 +40,7 @@ async function main() {
   log('info', 'task', 'Generating Netlify assets')
   const headers = new Map(Object.entries(DEFAULT_HEADERS))
   const html = fs.readFileSync(indexFile, { encoding: 'utf-8' })
-  const matches = html.matchAll(/=["']([^"'\-]+-[a-zA-Z0-9]{8})(\.(css|js))["']/gm)
+  const matches = html.matchAll(/=["']([\w.-]+-\w{8})(\.(css|js))["']/gm)
   for (const [, filename, ext] of matches) {
     const asset = filename + ext
     if (!headers.has(asset)) {
