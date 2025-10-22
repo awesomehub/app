@@ -17,7 +17,7 @@ const DEFAULT_HEADERS = {
     'Link: <https://fonts.gstatic.com>; rel=preconnect',
   ],
   '/list/*': [],
-  '/static/*': [CACHE_CONTROL_IMMUTABLE],
+  '/media/*': [CACHE_CONTROL_IMMUTABLE],
   '/data/*': [CACHE_CONTROL_IMMUTABLE],
   '/data/build.json': [CACHE_CONTROL_NO_CACHE],
 }

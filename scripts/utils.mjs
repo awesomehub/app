@@ -34,7 +34,7 @@ export function log(level, subject, ...messages) {
 }
 
 export function dist(filename = '') {
-  return path.join(process.cwd(), 'dist', filename)
+  return path.join(process.cwd(), 'dist/browser', filename)
 }
 
 export function src(filename = '') {

@@ -43,11 +43,7 @@
         "build": {
           "builder": "@angular/build:application",
           "options": {
-            "outputPath": {
-              "base": "dist",
-              "browser": "",
-              "media": "static"
-            },
+            "outputPath": "dist",
             "index": {
               "input": "src/index.build.html",
               "output": "index.html"
