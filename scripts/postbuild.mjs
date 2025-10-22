@@ -32,7 +32,9 @@ async function main() {
     const asset = filename + ext
     if (!headers.has(asset)) {
       headers.set(asset, ['Cache-Control: public, max-age=31536000, immutable'])
-      headers.get('').push(`Link: </${asset}>; rel=preload; as=${ext === '.css' ? 'style' : 'script'}`)
+      if (ext === '.css') {
+        headers.get('').push(`Link: </${asset}>; rel=preload; as=style`)
+      }
       log('info', 'webpack:asset', asset)
     }
   }
