@@ -5,3 +5,15 @@
 
 [build]
   publish = "dist/browser"
+
+[[plugins]]
+  package = "@netlify/plugin-lighthouse"
+
+  [[plugins.inputs.audits]]
+    path = "/"
+
+  [[plugins.inputs.audits]]
+    path = "/list/selfhosted"
+
+  [plugins.inputs.settings]
+    preset = "desktop"

@@ -63,6 +63,7 @@
     "@angular/compiler-cli": "^20.3.6",
     "@eslint/js": "^9.38.0",
     "@netlify/angular-runtime": "^3.0.0",
+    "@netlify/plugin-lighthouse": "^6.0.3",
     "@ngrx/eslint-plugin": "^20.0.1",
     "@types/node": "^20.19.22",
     "angular-eslint": "^20.4.0",
