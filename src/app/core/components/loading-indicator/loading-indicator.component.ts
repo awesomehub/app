@@ -24,7 +24,7 @@ import { Router, Event, NavigationStart, NavigationEnd, NavigationCancel, Naviga
 export class LoadingIndicatorComponent {
   public spinner = false
   public message: string
-  private _timeout: NodeJS.Timeout
+  private _timeout: ReturnType<typeof setTimeout>
 
   @HostBinding('class') private class = 'loading-indicator'
   @HostBinding('class.active') public active = false
