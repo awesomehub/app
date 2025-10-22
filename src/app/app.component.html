@@ -5,7 +5,7 @@
 >
   <!-- Header -->
   <header class="mdl-layout__header mdl-layout__header--scroll mdl-color-text--white">
-    <a #drawerButton class="mdl-layout__drawer-button hidden"></a>
+    <button #drawerButton class="mdl-layout__drawer-button hidden">Open side menu</button>
     <div class="mdl-layout__header-row">
       <a class="mdl-layout-title logo" [routerLink]="['./']" title="Home">
         <svg xmlns="http://www.w3.org/2000/svg" width="200" fill="currentColor" viewBox="0 0 1024 120">
@@ -31,11 +31,17 @@
     </div>
     <div class="header-bar mdl-layout__header-row">
       @if (drawer) {
-        <a class="drawer-toggler mdl-layout--small-screen-only" (click)="toggleDrawer()">
+        <a
+          href="javascript:void(0)"
+          class="drawer-toggler mdl-layout--small-screen-only"
+          (click)="toggleDrawer()"
+          title="Open side menu"
+          role="button"
+        >
           <i class="icon icon-bars"></i>
         </a>
       }
-      <router-outlet name="header-bar"></router-outlet>
+      <router-outlet name="header-bar" />
     </div>
   </header>
 
@@ -47,18 +53,14 @@
     @if (drawer) {
       <span class="mdl-layout__title">{{ drawer.title }}</span>
     }
-    <router-outlet
-      name="drawer"
-      (activate)="onDrawerActivation($event)"
-      (deactivate)="onDrawerDeactivation($event)"
-    ></router-outlet>
+    <router-outlet name="drawer" (activate)="onDrawerActivation($event)" (deactivate)="onDrawerDeactivation($event)" />
   </div>
 
   <!-- Main -->
   <main class="mdl-layout__content">
-    <router-outlet (activate)="onActivation($event)" (deactivate)="onDeactivation($event)"></router-outlet>
+    <router-outlet (activate)="onActivation($event)" (deactivate)="onDeactivation($event)" />
   </main>
 
   <!-- Loading indicator -->
-  <ah-loading-indicator></ah-loading-indicator>
+  <ah-loading-indicator />
 </div>

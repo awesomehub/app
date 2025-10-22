@@ -48,7 +48,7 @@ export class SearchBarRouteComponent extends HeaderBarRouteComponent implements 
   private cd = inject(ChangeDetectorRef)
 
   @HostBinding('class') private class = 'list-search-bar'
-  @ViewChild('input', { static: false }) private input: ElementRef
+  @ViewChild('input', { static: false }) private input: ElementRef<HTMLInputElement>
 
   ngOnInit() {
     const navigationState = this.location.getState() as SearchBarNavState | undefined

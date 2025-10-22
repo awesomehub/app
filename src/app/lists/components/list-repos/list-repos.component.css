@@ -5,8 +5,14 @@
 }
 
 .list-repos .no-list-repos {
-  font-size: 1.5rem;
-  color: rgba(255, 255, 255, 0.5);
+  font-size: 1.785rem;
+  color: rgba(255, 255, 255, 0.65);
+}
+
+@media (max-width: 479px) {
+  .list-repos .no-list-repos {
+    display: none;
+  }
 }
 
 .list-repos .repos-sort {

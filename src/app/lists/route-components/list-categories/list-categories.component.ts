@@ -17,15 +17,15 @@ import type { List } from '../../state'
       >
         Home
       </a>
-      <a class="divider"></a>
       <a
         class="mdl-navigation__link"
         routerLinkActive="mdl-navigation__link--current"
         [routerLink]="['/list', list.id, 'all']"
         (click)="app.toggleDrawer()"
       >
-        All
+        Browse All
       </a>
+      <a class="divider"></a>
       <ah-list-categories [list]="list" [parent]="0" (navigate)="app.toggleDrawer()" />
     </nav>
   `,

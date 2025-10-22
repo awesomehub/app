@@ -21,7 +21,7 @@ import type { ListRepo } from '../../state'
     @if (heading) {
       <h3 class="content-heading">
         {{ heading }}
-        @if (count) {
+        @if (count !== undefined) {
           <span>({{ count | number }})</span>
         }
       </h3>

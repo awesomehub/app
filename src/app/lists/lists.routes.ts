@@ -1,4 +1,4 @@
-import { Routes } from '@angular/router'
+import { Routes, Route } from '@angular/router'
 import {
   HomeRouteComponent,
   SearchRouteComponent,
@@ -11,7 +11,7 @@ import {
 } from './route-components'
 import { listsDataResolver, listDataResolver, listCategoryDataResolver } from './services'
 
-const listsSearchBarRoute = {
+const listsSearchBarRoute: Route = {
   path: '',
   component: SearchBarRouteComponent,
   data: {

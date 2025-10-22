@@ -1,5 +1,5 @@
 .list-repo-card {
-  min-height: 185px;
+  min-height: 180px;
 }
 
 .list-repo-inner {
@@ -8,17 +8,17 @@
   flex-grow: 1;
 }
 
-@media (max-width: 479px) {
-  .list-repo-inner {
-    flex-direction: column-reverse;
-  }
-}
-
 .list-repo-inner .mdl-card__media {
   min-width: 100px;
   background: none;
   display: flex;
   flex-direction: column;
+}
+
+@media (max-width: 479px) {
+  .list-repo-inner .mdl-card__media {
+    min-width: 80px;
+  }
 }
 
 .list-repo-inner .mdl-card__media:hover {
@@ -29,6 +29,7 @@
   width: auto;
   position: relative;
   flex-grow: 1;
+  padding: 16px 16px 8px;
 }
 
 .list-repo-inner h4 {
@@ -50,10 +51,10 @@
 }
 
 .list-repo-inner .repo-author {
-  font-size: 55%;
+  font-size: 65%;
   display: block;
   line-height: 100%;
-  color: rgba(0, 0, 0, 0.54);
+  color: rgba(0, 0, 0, 0.65);
 }
 
 .list-repo-inner .repo-desc {
@@ -199,6 +200,12 @@
   line-height: 36px;
   font-weight: 400;
   white-space: nowrap;
+}
+
+@media (max-width: 479px) {
+  .list-repo-card .meta.license {
+    display: none;
+  }
 }
 
 .list-repo-card .meta.highlight {
