@@ -2,6 +2,7 @@
 /dist
 /src/index.build.html
 /src/environment.build.ts
+/src/data/objects
 /tmp
 /out-tsc
 /bazel-out

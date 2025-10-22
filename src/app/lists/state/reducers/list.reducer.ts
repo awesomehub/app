@@ -1,7 +1,8 @@
 import { ActionReducer } from '@ngrx/store'
 import { Action } from '@app/common'
 import { ListResponse } from '@app/core'
-import { List, ListRecordFactory, ListActions } from '@app/lists'
+import { ListActions } from '../actions'
+import { List, ListRecordFactory } from '../models'
 
 export const listReducer: ActionReducer<List> = (state: List = null, { payload, type }: Action) => {
   switch (type) {

@@ -1,5 +1,6 @@
 import { BehaviorSubject } from 'rxjs'
-import { RouteComponent, HelmetDefinition } from '@app/core'
+import type { HelmetDefinition } from '../../services'
+import { RouteComponent } from './route-component.model'
 
 export abstract class PrimaryRouteComponent extends RouteComponent {
   public helmet: HelmetDefinition | BehaviorSubject<HelmetDefinition>

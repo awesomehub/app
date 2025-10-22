@@ -1,6 +1,6 @@
 import { inject } from '@angular/core'
 import { Router, ActivatedRouteSnapshot, ResolveFn } from '@angular/router'
-import { List, ListCategory } from '@app/lists'
+import type { List, ListCategory } from '../../state'
 
 export const listCategoryDataResolver: ResolveFn<ListCategory | boolean> = (route: ActivatedRouteSnapshot) => {
   const router = inject(Router)

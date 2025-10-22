@@ -1,5 +1,4 @@
 import { Component } from '@angular/core'
-
 import { PrimaryRouteComponent } from '../models'
 
 @Component({

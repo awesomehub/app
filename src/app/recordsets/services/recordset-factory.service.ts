@@ -1,14 +1,12 @@
-import { Injectable } from '@angular/core'
+import { inject, Injectable } from '@angular/core'
 import { Store } from '@ngrx/store'
-
 import { RecordsetActions, RecordsetConstructorOptions } from '../state'
 import { RecordsetService } from './recordset.service'
 
 @Injectable()
 export class RecordsetFactoryService {
   static recordsets: Record<string, RecordsetService<any>> = {}
-
-  constructor(private store$: Store) {}
+  private store$ = inject(Store)
 
   create(id: string, reducer: string, options?: RecordsetConstructorOptions): RecordsetService<any> {
     if (RecordsetFactoryService.recordsets[id]) {

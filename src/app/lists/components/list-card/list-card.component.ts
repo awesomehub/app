@@ -1,6 +1,14 @@
-import { Component, Input, ViewEncapsulation, ChangeDetectionStrategy, HostBinding, HostListener } from '@angular/core'
-import { ListSummary } from '@app/lists'
+import {
+  Component,
+  Input,
+  inject,
+  ViewEncapsulation,
+  ChangeDetectionStrategy,
+  HostBinding,
+  HostListener,
+} from '@angular/core'
 import { Router } from '@angular/router'
+import type { ListSummary } from '../../state'
 
 @Component({
   selector: 'ah-list-card',
@@ -31,8 +39,7 @@ import { Router } from '@angular/router'
 export class ListCardComponent {
   @HostBinding('class') private class = 'list-card mdl-card'
   @Input() public list: ListSummary
-
-  public constructor(private readonly router: Router) {}
+  private readonly router = inject(Router)
 
   public get listRoute(): (string | number)[] {
     return ['/list', this.list.id]

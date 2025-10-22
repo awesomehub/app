@@ -1,16 +1,15 @@
-import { Directive, ElementRef, Input, Renderer2 } from '@angular/core'
-import { ListRepoScoreService, ListRepoScoreType } from '@app/lists'
+import { Directive, ElementRef, inject, Input, Renderer2 } from '@angular/core'
+import { ListRepoScoreService } from '../../services'
+import type { ListRepoScoreType } from '../../state'
 
 @Directive({
   selector: '[ahListRepoScoreStyle]',
   standalone: false,
 })
 export class ListRepoScoreStyleDirective {
-  constructor(
-    private repoScoreService: ListRepoScoreService,
-    private el: ElementRef,
-    private renderer: Renderer2,
-  ) {}
+  private repoScoreService = inject(ListRepoScoreService)
+  private el = inject(ElementRef)
+  private renderer = inject(Renderer2)
 
   @Input() scoreType: ListRepoScoreType
   @Input()

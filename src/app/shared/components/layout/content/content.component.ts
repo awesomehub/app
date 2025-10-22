@@ -12,7 +12,7 @@ import { LayoutSidebarComponent } from '../sidebar'
 @Component({
   selector: 'ah-content',
   template: `
-    <ng-content select="sidebar"></ng-content>
+    <ng-content select="sidebar" />
     <div
       class="content mdl-cell"
       [ngClass]="{
@@ -21,7 +21,7 @@ import { LayoutSidebarComponent } from '../sidebar'
         'mdl-color--white mdl-shadow--4dp': !transparent || transparent === 'false',
       }"
     >
-      <ng-content></ng-content>
+      <ng-content />
     </div>
   `,
   styleUrls: ['content.component.css'],

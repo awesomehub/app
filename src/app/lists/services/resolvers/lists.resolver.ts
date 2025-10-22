@@ -3,7 +3,7 @@ import { Store } from '@ngrx/store'
 import { ResolveFn } from '@angular/router'
 import { first, distinctUntilChanged } from 'rxjs/operators'
 import { config } from '@constants'
-import { ListCollectionActions, ListCollection, selectListCollection } from '@app/lists'
+import { ListCollectionActions, ListCollection, selectListCollection } from '../../state'
 
 export const listsDataResolver: ResolveFn<ListCollection> = () => {
   const { defaultCollection } = config.lists

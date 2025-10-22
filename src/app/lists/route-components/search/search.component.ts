@@ -1,16 +1,16 @@
-import { Component, OnInit, OnDestroy, ViewEncapsulation, ChangeDetectionStrategy } from '@angular/core'
+import { Component, OnInit, OnDestroy, ViewEncapsulation, ChangeDetectionStrategy, inject } from '@angular/core'
 import { ActivatedRoute } from '@angular/router'
 import { Observable } from 'rxjs'
 import { config } from '@constants'
 import { PrimaryRouteComponent } from '@app/core'
 import { RecordsetFactoryService, RecordsetService, Recordset } from '@app/recordsets'
-import { ListCollection, ListSummary } from '@app/lists'
+import type { ListCollection, ListSummary } from '../../state'
 
 @Component({
   template: `
     <ah-content transparent="true" layout="compact">
       <h3 class="content-heading">{{ helmet.title }} ({{ (recordset$ | async).set.length }})</h3>
-      <ah-lists [recordset]="recordset$ | async" (needMore)="recordset.paginate()"> </ah-lists>
+      <ah-lists [recordset]="recordset$ | async" (needMore)="recordset.paginate()" />
     </ah-content>
   `,
   encapsulation: ViewEncapsulation.None,
@@ -23,11 +23,10 @@ export class SearchRouteComponent extends PrimaryRouteComponent implements OnIni
   }
   public recordset: RecordsetService<ListSummary>
   public recordset$: Observable<Recordset<ListSummary>>
+  private recordsetFactory = inject(RecordsetFactoryService)
+  private route = inject(ActivatedRoute)
 
-  constructor(
-    private route: ActivatedRoute,
-    private recordsetFactory: RecordsetFactoryService,
-  ) {
+  constructor() {
     super()
   }
 

@@ -1,5 +1,4 @@
-import { Inject, Injectable } from '@angular/core'
-import { DOCUMENT } from '@angular/common'
+import { Injectable, DOCUMENT, inject } from '@angular/core'
 import { Observable, fromEvent } from 'rxjs'
 import { map, debounceTime, startWith } from 'rxjs/operators'
 
@@ -12,9 +11,10 @@ export interface ScrollSpyData {
 @Injectable()
 export class ScrollSpyService {
   public scroll$: Observable<Event>
+  private document = inject(DOCUMENT)
 
-  constructor(@Inject(DOCUMENT) private document: Document) {
-    this.scroll$ = fromEvent(document.defaultView, 'scroll')
+  constructor() {
+    this.scroll$ = fromEvent(this.document.defaultView, 'scroll')
   }
 
   public getScrollData(debounce = 100): Observable<ScrollSpyData> {

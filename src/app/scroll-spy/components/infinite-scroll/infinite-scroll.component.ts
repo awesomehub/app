@@ -9,15 +9,20 @@ import {
   ElementRef,
   EventEmitter,
   HostBinding,
+  inject,
 } from '@angular/core'
 import { Subscription } from 'rxjs'
 import { filter } from 'rxjs/operators'
-import { ScrollSpyService, ScrollSpyData } from '@app/scroll-spy'
+import { ScrollSpyService, ScrollSpyData } from '../../services'
 
 @Component({
   selector: 'ah-infinite-scroll',
   styleUrls: ['infinite-scroll.component.css'],
-  template: ` <a *ngIf="disabled" href="javascript:void(0)" (click)="next.emit()">{{ button }}</a> `,
+  template: `
+    @if (disabled) {
+      <a href="javascript:void(0)" (click)="next.emit()">{{ button }}</a>
+    }
+  `,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: false,
@@ -36,11 +41,11 @@ export class InfiniteScrollComponent implements OnInit, OnDestroy {
   private el: Element
   private scroll_: Subscription
 
-  constructor(
-    elRef: ElementRef,
-    private scrollSpy: ScrollSpyService,
-  ) {
-    this.el = elRef.nativeElement
+  private scrollSpy = inject(ScrollSpyService)
+  private elRef = inject(ElementRef)
+
+  constructor() {
+    this.el = this.elRef.nativeElement
   }
 
   ngOnInit() {

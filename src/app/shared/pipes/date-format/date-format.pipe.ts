@@ -6,7 +6,7 @@ import { formatDistanceToNowStrict, fromUnixTime } from 'date-fns'
   standalone: false,
 })
 export class DateFormatPipe implements PipeTransform {
-  transform(date: Date | string | number, format = 'distance'): string {
+  transform(date: Date | string | number, _format = 'distance'): string {
     if (typeof date === 'number') {
       // Convert from Unix timestamp (in seconds)
       date = fromUnixTime(date)

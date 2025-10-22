@@ -2,7 +2,7 @@ import { Component, ChangeDetectionStrategy, ViewEncapsulation, Input, HostBindi
 
 @Component({
   selector: 'ah-sidebar',
-  template: `<ng-content></ng-content>`,
+  template: `<ng-content />`,
   styles: [
     `
       .sidebar {

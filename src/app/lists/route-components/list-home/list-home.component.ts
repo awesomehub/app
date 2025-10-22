@@ -1,10 +1,10 @@
-import { Component, ViewEncapsulation, ChangeDetectionStrategy, OnInit, OnDestroy } from '@angular/core'
+import { Component, ViewEncapsulation, ChangeDetectionStrategy, OnInit, OnDestroy, inject } from '@angular/core'
 import { ActivatedRoute } from '@angular/router'
 import { Observable } from 'rxjs'
 import { config } from '@constants'
 import { PrimaryRouteComponent } from '@app/core'
 import { RecordsetFactoryService, RecordsetService, Recordset } from '@app/recordsets'
-import { List, ListRepo } from '@app/lists'
+import type { List, ListRepo } from '../../state'
 
 @Component({
   template: `
@@ -18,8 +18,7 @@ import { List, ListRepo } from '@app/lists'
           [sortable]="false"
           [infinite]="false"
           [wide]="false"
-        >
-        </ah-list-repos>
+        />
         <ah-list-repos
           class="mdl-cell mdl-cell--6-col"
           heading="Trending Repositories"
@@ -28,8 +27,7 @@ import { List, ListRepo } from '@app/lists'
           [sortable]="false"
           [infinite]="false"
           [wide]="false"
-        >
-        </ah-list-repos>
+        />
       </div>
     </ah-content>
   `,
@@ -48,14 +46,13 @@ export class ListHomeRouteComponent extends PrimaryRouteComponent implements OnI
     best: Observable<Recordset<ListRepo>>
     trending: Observable<Recordset<ListRepo>>
   }
+  private recordsetFactory = inject(RecordsetFactoryService)
+  private route = inject(ActivatedRoute)
 
-  constructor(
-    private route: ActivatedRoute,
-    private recordsetFactory: RecordsetFactoryService,
-  ) {
+  constructor() {
     super()
 
-    this.list = route.snapshot.data['list']
+    this.list = this.route.snapshot.data['list']
   }
 
   ngOnInit() {

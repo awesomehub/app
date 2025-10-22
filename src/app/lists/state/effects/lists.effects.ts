@@ -8,18 +8,10 @@ import { filter, map, mergeMap, switchMap, catchError, distinctUntilChanged } fr
 import { config } from '@constants'
 import { ApiService } from '@app/core'
 import { RecordsetActions, Recordset, selectRecordsetsForUpdate } from '@app/recordsets'
-import {
-  selectListCollection,
-  selectList,
-  ListCollectionActions,
-  ListActions,
-  listSummaryRecordsetReducer,
-  listRepoRecordsetReducer,
-  ListCollection,
-  ListSummary,
-  List,
-  ListRepo,
-} from '@app/lists'
+import { ListCollection, ListSummary, List, ListRepo } from '../models'
+import { ListCollectionActions, ListActions } from '../actions'
+import { selectListCollection, selectList } from '../selectors'
+import { listRepoRecordsetReducer, listSummaryRecordsetReducer } from '../reducers'
 
 // noinspection JSUnusedGlobalSymbols
 @Injectable()
@@ -32,7 +24,7 @@ export class ListsEffects {
   show404$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(ListCollectionActions.FETCH_FAILED, ListActions.FETCH_FAILED),
-      filter((action) => {
+      filter(() => {
         this.router.navigate(['404'])
         return false
       }),

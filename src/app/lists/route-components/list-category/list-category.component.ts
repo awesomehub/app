@@ -4,8 +4,8 @@ import {
   OnDestroy,
   ViewEncapsulation,
   ChangeDetectionStrategy,
-  Inject,
   forwardRef,
+  inject,
 } from '@angular/core'
 import { ActivatedRoute } from '@angular/router'
 import { Observable } from 'rxjs'
@@ -13,7 +13,7 @@ import { config } from '@constants'
 import { AppComponent } from '@app'
 import { PrimaryRouteComponent } from '@app/core'
 import { RecordsetFactoryService, RecordsetService, Recordset } from '@app/recordsets'
-import { List, ListCategory, ListRepo } from '@app/lists'
+import type { List, ListCategory, ListRepo } from '../../state'
 
 @Component({
   template: `
@@ -27,8 +27,7 @@ import { List, ListCategory, ListRepo } from '@app/lists'
         [sortable]="true"
         [infinite]="true"
         [wide]="true"
-      >
-      </ah-list-repos>
+      />
     </ah-content>
   `,
   encapsulation: ViewEncapsulation.None,
@@ -40,15 +39,14 @@ export class ListCategoryRouteComponent extends PrimaryRouteComponent implements
   public category: ListCategory
   public recordset: RecordsetService<ListRepo>
   public recordset$: Observable<Recordset<ListRepo>>
+  private recordsetFactory = inject(RecordsetFactoryService)
+  private route = inject(ActivatedRoute)
+  public app = inject<AppComponent>(forwardRef(() => AppComponent))
 
-  constructor(
-    private route: ActivatedRoute,
-    private recordsetFactory: RecordsetFactoryService,
-    @Inject(forwardRef(() => AppComponent)) private app: AppComponent,
-  ) {
+  constructor() {
     super()
 
-    this.list = route.snapshot.data['list']
+    this.list = this.route.snapshot.data['list']
   }
 
   ngOnInit() {

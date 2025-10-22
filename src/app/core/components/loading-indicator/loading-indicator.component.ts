@@ -6,7 +6,9 @@ import { Router, Event, NavigationStart, NavigationEnd, NavigationCancel, Naviga
   styleUrls: ['./loading-indicator.component.css'],
   template: `
     <ah-spinner [active]="spinner"></ah-spinner>
-    <div *ngIf="message" class="message">{{ message }}</div>
+    @if (message) {
+      <div class="message">{{ message }}</div>
+    }
   `,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,

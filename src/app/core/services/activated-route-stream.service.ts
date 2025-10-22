@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core'
+import { inject, Injectable } from '@angular/core'
 import { Router, ActivatedRouteSnapshot, PRIMARY_OUTLET } from '@angular/router'
 import { Store } from '@ngrx/store'
 import { Observable } from 'rxjs'
@@ -9,11 +9,10 @@ import { selectRouterState } from '@app/core'
 @Injectable()
 export class ActivatedRouteStreamService {
   private readonly stream: Observable<ActivatedRouteSnapshot>
+  private readonly router = inject(Router)
+  private readonly store$ = inject(Store)
 
-  constructor(
-    private readonly router: Router,
-    private readonly store$: Store,
-  ) {
+  constructor() {
     this.stream = this.store$.select(selectRouterState).pipe(
       distinctUntilChanged(),
       switchMap(() => {
