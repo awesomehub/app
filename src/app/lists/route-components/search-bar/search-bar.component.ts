@@ -38,8 +38,6 @@ export class SearchBarRouteComponent extends HeaderBarRouteComponent implements 
   private hasBack = false
   // true when we landed on a search route with a preexisting query and should refocus on load
   private shouldAutoFocus = false
-  // prevents queueFocus from triggering multiple setTimeout focus calls in quick succession
-  private focusPending = false
   // remembers we need to restore focus after a navigation triggered by clearing the query
   private focusAfterNavigation = false
 
@@ -106,9 +104,12 @@ export class SearchBarRouteComponent extends HeaderBarRouteComponent implements 
     const path = this.searchRoute
     const queryParams = { q: query }
 
-    this.query === ''
-      ? this.router.navigate([path], { queryParams })
-      : this.router.navigate([path], { queryParams, replaceUrl: true })
+    if (this.query === '') {
+      const state: SearchBarNavState = { focusSearchAgain: true }
+      this.router.navigate([path], { queryParams, state })
+    } else {
+      this.router.navigate([path], { queryParams, replaceUrl: true })
+    }
 
     this.query = query
     this.cd.markForCheck()
@@ -121,8 +122,8 @@ export class SearchBarRouteComponent extends HeaderBarRouteComponent implements 
     if (this.hasBack) {
       this.location.back()
     } else {
-      const navigationExtras = this.focusAfterNavigation ? { state: { focusSearchAgain: true } } : undefined
-      this.router.navigate([this.cancelRoute], navigationExtras)
+      const state: SearchBarNavState = this.focusAfterNavigation ? { focusSearchAgain: true } : undefined
+      this.router.navigate([this.cancelRoute], { state })
     }
 
     this.cd.markForCheck()
@@ -130,23 +131,16 @@ export class SearchBarRouteComponent extends HeaderBarRouteComponent implements 
 
   // defers DOM focus until after change detection completes and the router stabilizes
   private queueFocus(): void {
-    if (this.focusPending) {
+    const shouldFocus = this.shouldAutoFocus || this.focusAfterNavigation
+    if (!shouldFocus || !this.input) {
       return
     }
-    this.focusPending = true
-    setTimeout(() => {
-      this.focusPending = false
-      const shouldFocus = this.shouldAutoFocus || this.focusAfterNavigation
-      if (!shouldFocus || !this.input) {
-        return
-      }
-      // consume the deferred focus flag so we only refocus once
-      if (this.focusAfterNavigation) {
-        this.clearFocusNavigationState()
-      }
-      this.focusAfterNavigation = false
-      this.input.nativeElement.focus()
-    })
+    // consume the deferred focus flag so we only refocus once
+    if (this.focusAfterNavigation) {
+      this.clearFocusNavigationState()
+    }
+    this.focusAfterNavigation = false
+    this.input.nativeElement.focus()
   }
 
   // removes the transient focus flag from history.state so reloads don't reapply it

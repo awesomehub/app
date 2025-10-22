@@ -18,7 +18,7 @@ but I originally used it because Angular Material was still in alpha at the time
 
 ### Prerequisites
 
-- Node >= 20
+- Node >= 20.19
 - NPM >= 10
 
 ```bash
@@ -50,7 +50,7 @@ $ npm start
 [ci-img]: https://img.shields.io/github/actions/workflow/status/awesomehub/app/main.yml?branch=master
 [netlify-url]: https://app.netlify.com/sites/awesomehub/deploys
 [netlify-img]: https://img.shields.io/netlify/968920d6-f8ff-4967-93d7-9e55861c1174?logo=netlify&logoColor=white
-[angular-url]: https://github.com/angular/angular/releases/tag/18.0.0
-[angular-img]: https://img.shields.io/badge/angular-v18-dd0131.svg?logo=angular
+[angular-url]: https://github.com/angular/angular/releases/tag/20.0.0
+[angular-img]: https://img.shields.io/badge/angular-v20-dd0131.svg?logo=angular
 [website-url]: https://awesomehub.js.org
 [website-img]: https://img.shields.io/website?logo=statuspal&url=https%3A%2F%2Fawesomehub.js.org
