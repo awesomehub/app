@@ -36,6 +36,7 @@ import { List, ListRepo } from '@app/lists'
   styleUrls: ['list-home.component.css'],
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
 export class ListHomeRouteComponent extends PrimaryRouteComponent implements OnInit, OnDestroy {
   public list: List

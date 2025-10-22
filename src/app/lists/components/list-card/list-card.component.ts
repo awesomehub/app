@@ -26,6 +26,7 @@ import { Router } from '@angular/router'
   `,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
 export class ListCardComponent {
   @HostBinding('class') private class = 'list-card mdl-card'

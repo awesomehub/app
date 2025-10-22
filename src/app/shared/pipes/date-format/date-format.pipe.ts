@@ -3,6 +3,7 @@ import { formatDistanceToNowStrict, fromUnixTime } from 'date-fns'
 
 @Pipe({
   name: 'ahDateFormat',
+  standalone: false,
 })
 export class DateFormatPipe implements PipeTransform {
   transform(date: Date | string | number, format = 'distance'): string {

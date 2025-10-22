@@ -2,6 +2,7 @@ import { Pipe, PipeTransform } from '@angular/core'
 
 @Pipe({
   name: 'ahScoreFormat',
+  standalone: false,
 })
 export class ScoreFormatPipe implements PipeTransform {
   transform(score: string | number): string {

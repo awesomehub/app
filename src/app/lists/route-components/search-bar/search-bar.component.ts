@@ -26,6 +26,7 @@ interface SearchBarNavState extends Record<string, unknown> {
   styleUrls: ['./search-bar.component.css'],
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
 export class SearchBarRouteComponent extends HeaderBarRouteComponent implements OnInit, AfterViewInit {
   public placeholder = 'Search...'

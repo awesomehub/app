@@ -98,6 +98,7 @@ import { ListRepo, ListRepoScoreService } from '@app/lists'
   `,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
 export class ListRepoCardComponent {
   @HostBinding('class') private class = 'list-repo-card mdl-card'

@@ -19,6 +19,7 @@ import { PrimaryRouteComponent, DrawerRouteComponent, AnalyticsService, HelmetSe
   templateUrl: './app.component.html',
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
 export class AppComponent implements AfterViewChecked, AfterViewInit {
   public drawer: DrawerRouteComponent

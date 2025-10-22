@@ -20,6 +20,7 @@ import { ScrollSpyService, ScrollSpyData } from '@app/scroll-spy'
   template: ` <a *ngIf="disabled" href="javascript:void(0)" (click)="next.emit()">{{ button }}</a> `,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
 export class InfiniteScrollComponent implements OnInit, OnDestroy {
   @HostBinding('class') private class = 'infinite-scroll mdl-card'

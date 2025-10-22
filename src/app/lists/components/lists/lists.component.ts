@@ -35,6 +35,7 @@ import { ListSummary } from '@app/lists'
   `,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
 export class ListsComponent {
   @HostBinding('class') private class = 'list-collection mdl-grid'

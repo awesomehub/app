@@ -10,6 +10,7 @@ import { Router, Event, NavigationStart, NavigationEnd, NavigationCancel, Naviga
   `,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
 export class LoadingIndicatorComponent {
   public spinner = false

@@ -67,6 +67,7 @@ import { ListRepo } from '@app/lists'
   `,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
 export class ListReposComponent implements AfterViewInit {
   @HostBinding('class') private class = 'list-repos'

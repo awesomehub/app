@@ -3,6 +3,7 @@ import { ListRepoScoreService, ListRepoScoreType } from '@app/lists'
 
 @Directive({
   selector: '[ahListRepoScoreStyle]',
+  standalone: false,
 })
 export class ListRepoScoreStyleDirective {
   constructor(

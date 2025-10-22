@@ -33,6 +33,7 @@ import { List, ListCategory, ListRepo } from '@app/lists'
   `,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
 export class ListCategoryRouteComponent extends PrimaryRouteComponent implements OnInit, OnDestroy {
   public list: List

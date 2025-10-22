@@ -27,6 +27,7 @@ import { LayoutSidebarComponent } from '../sidebar'
   styleUrls: ['content.component.css'],
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
 export class LayoutContentComponent {
   @Input() public transparent: any = false

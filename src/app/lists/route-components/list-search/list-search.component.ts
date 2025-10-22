@@ -24,6 +24,7 @@ import { List, ListRepo } from '@app/lists'
   `,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
 export class ListSearchRouteComponent extends PrimaryRouteComponent implements OnInit, OnDestroy {
   public list: List

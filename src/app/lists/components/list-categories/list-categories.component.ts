@@ -19,6 +19,7 @@ import { List, ListCategory } from '@app/lists'
   `,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
 export class ListCategoriesComponent {
   public categories: ListCategory[]

@@ -12,6 +12,7 @@ import { Component, ChangeDetectionStrategy, ViewEncapsulation, Input, HostBindi
   ],
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
 export class SpinnerComponent {
   @Input() public active = false

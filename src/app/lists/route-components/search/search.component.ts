@@ -15,6 +15,7 @@ import { ListCollection, ListSummary } from '@app/lists'
   `,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
 export class SearchRouteComponent extends PrimaryRouteComponent implements OnInit, OnDestroy {
   public override helmet = {
