@@ -10,7 +10,7 @@ import type { ListCollection, ListSummary } from '../../state'
   template: `
     <ah-content transparent="true" layout="compact">
       <h3 class="content-heading">Explore</h3>
-      <ah-lists [recordset]="recordset$ | async" (needMore)="recordset.paginate()" />
+      <ah-lists [key]="collection.id" [recordset]="recordset$ | async" (needMore)="recordset.paginate()" />
     </ah-content>
   `,
   encapsulation: ViewEncapsulation.None,
@@ -21,6 +21,7 @@ export class HomeRouteComponent extends PrimaryRouteComponent implements OnInit,
   public override helmet = {
     title: 'Explore',
   }
+  public collection: ListCollection
   public recordset: RecordsetService<ListSummary>
   public recordset$: Observable<Recordset<ListSummary>>
   private route = inject(ActivatedRoute)
@@ -28,15 +29,14 @@ export class HomeRouteComponent extends PrimaryRouteComponent implements OnInit,
 
   constructor() {
     super()
+    // Get the resolved collection
+    this.collection = this.route.snapshot.data['collection']
   }
 
   ngOnInit() {
-    // Get the resolved collection
-    const collection: ListCollection = this.route.snapshot.data['collection']
-
     // Create the lists recordset
     this.recordset = this.recordsetFactory.create('browse-lists', config.lists.recordsets.summary, {
-      parent: collection.id,
+      parent: this.collection.id,
       size: config.lists.listsPageSize,
     })
 

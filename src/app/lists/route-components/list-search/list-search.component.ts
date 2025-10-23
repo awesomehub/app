@@ -10,6 +10,7 @@ import type { List, ListRepo } from '../../state'
   template: `
     <ah-content transparent="true" layout="compact">
       <ah-list-repos
+        [key]="list.id + '-search'"
         heading="Search Results"
         [count]="(recordset$ | async).set.length"
         [recordset]="recordset$ | async"

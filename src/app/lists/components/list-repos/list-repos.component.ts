@@ -81,6 +81,7 @@ import type { ListRepo } from '../../state'
       }
 
       <ah-infinite-scroll
+        [key]="id"
         class="mdl-cell mdl-cell--12-col mdl-shadow--2dp"
         [disabled]="!infinite"
         [paused]="!recordset.pagination.hasNext || !recordset.updated"
@@ -94,7 +95,11 @@ import type { ListRepo } from '../../state'
 })
 export class ListReposComponent implements AfterViewInit {
   @HostBinding('class') private class = 'list-repos'
+  @HostBinding('attr.id') get id() {
+    return `list-repos-${this.key}`
+  }
 
+  @Input({ required: true }) key: string
   @Input() heading: string
   @Input() count: number
   @Input() sortable = false

@@ -24,6 +24,7 @@ import type { ListSummary } from '../../state'
 
     <ah-spinner class="mdl-cell mdl-cell--12-col" [active]="!recordset.updated" />
     <ah-infinite-scroll
+      [key]="id"
       class="mdl-cell mdl-cell--12-col"
       [paused]="!recordset.pagination.hasNext || !recordset.updated"
       (next)="needMore.emit()"
@@ -35,7 +36,11 @@ import type { ListSummary } from '../../state'
 })
 export class ListsComponent {
   @HostBinding('class') private class = 'list-collection mdl-grid'
+  @HostBinding('attr.id') get id() {
+    return `lists-${this.key}`
+  }
 
+  @Input({ required: true }) key: string
   @Input() recordset: Recordset<ListSummary>
   @Output() needMore = new EventEmitter<any>(false)
 

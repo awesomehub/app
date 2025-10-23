@@ -204,12 +204,14 @@ a:hover {
   padding-right: 0;
 }
 
-.icon-24 svg, .mdl-button.mdl-button--fab .icon svg {
+.icon-24 svg,
+.mdl-button.mdl-button--fab .icon svg {
   width: 24px;
   height: 24px;
 }
 
-.icon-28 svg, .mdl-button.mdl-button--fab .icon svg {
+.icon-28 svg,
+.mdl-button.mdl-button--fab .icon svg {
   width: 28px;
   height: 28px;
 }

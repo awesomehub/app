@@ -19,6 +19,7 @@ import type { List, ListCategory, ListRepo } from '../../state'
   template: `
     <ah-content transparent="true" layout="compact">
       <ah-list-repos
+        [key]="list.id + '-category-' + category.path"
         [heading]="category.title"
         [count]="category.count.all"
         [recordset]="recordset$ | async"

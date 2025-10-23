@@ -13,6 +13,7 @@ import {
 } from '@angular/core'
 import { Subscription } from 'rxjs'
 import { filter } from 'rxjs/operators'
+import { AnalyticsService } from '@app/core'
 import { ScrollSpyService, ScrollSpyData } from '../../services'
 
 @Component({
@@ -20,7 +21,7 @@ import { ScrollSpyService, ScrollSpyData } from '../../services'
   styleUrls: ['infinite-scroll.component.css'],
   template: `
     @if (disabled) {
-      <button class="mdl-button" (click)="next.emit()">{{ button }}</button>
+      <button class="mdl-button" (click)="loadNext()">{{ button }}</button>
     }
   `,
   encapsulation: ViewEncapsulation.None,
@@ -30,6 +31,10 @@ import { ScrollSpyService, ScrollSpyData } from '../../services'
 export class InfiniteScrollComponent implements OnInit, OnDestroy {
   @HostBinding('class') private class = 'infinite-scroll mdl-card'
 
+  @Input({ required: true }) set key(value: string) {
+    this.scrollViewKey = `scroll_${value}`
+    this.scrollViewTriggerCount = 0
+  }
   @Input() @HostBinding('class.disabled') disabled = false
   @Input() distance = 500
   @Input() debounce = 100
@@ -41,8 +46,12 @@ export class InfiniteScrollComponent implements OnInit, OnDestroy {
   private el: Element
   private scroll_: Subscription
 
+  private scrollViewKey: string
+  private scrollViewTriggerCount: number
+
   private scrollSpy = inject(ScrollSpyService)
   private elRef = inject(ElementRef)
+  private analytics = inject(AnalyticsService)
 
   constructor() {
     this.el = this.elRef.nativeElement
@@ -51,7 +60,7 @@ export class InfiniteScrollComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.scroll_ = this.scrollSpy
       .getScrollData(this.debounce)
-      .pipe(filter((d) => !this.disabled && !this.paused))
+      .pipe(filter(() => !this.disabled && !this.paused))
       .subscribe((data) => this.evaluate(data))
   }
 
@@ -63,8 +72,17 @@ export class InfiniteScrollComponent implements OnInit, OnDestroy {
 
     if (diff <= 0) {
       // Emit the event to load extra data
-      this.next.emit()
+      this.loadNext()
     }
+  }
+
+  loadNext() {
+    this.next.emit()
+    this.scrollViewTriggerCount++
+    this.analytics.event('infinite_scroll', {
+      scroll_view: this.scrollViewKey,
+      scroll_trigger_count: this.scrollViewTriggerCount,
+    })
   }
 
   ngOnDestroy() {

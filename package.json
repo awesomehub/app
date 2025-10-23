@@ -65,6 +65,7 @@
     "@netlify/angular-runtime": "^3.0.0",
     "@netlify/plugin-lighthouse": "^6.0.3",
     "@ngrx/eslint-plugin": "^20.1.0",
+    "@types/gtag.js": "^0.0.20",
     "@types/node": "^20.19.22",
     "angular-eslint": "^20.4.0",
     "chalk": "^4.1.2",

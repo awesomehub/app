@@ -1,25 +1,29 @@
 import fs from 'fs'
 import { src, log, run, getNetlifyEnv } from './utils.mjs'
 
-function makeHeadSnippet(isLiveProd = false) {
-  if (!isLiveProd) {
-    return '<meta name="robots" content="noindex, nofollow">'
+function makeHeadSnippet({ isLiveProd = false, measurementId = 'G-7BQJMP7YV8' } = {}) {
+  const lines = ['<!-- inject:head -->']
+
+  if (isLiveProd) {
+    lines.push(`<meta name="google-site-verification" content="rga0cjc2bjl14NvKIjo2vYsOiIUPrgZe5f-ngBD0320">`)
+  } else {
+    lines.push(`<meta name="robots" content="noindex, nofollow">`)
   }
 
-  const gtag = 'G-7BQJMP7YV8'
-  return `<!-- inject:head:start -->
-<meta name="google-site-verification" content="rga0cjc2bjl14NvKIjo2vYsOiIUPrgZe5f-ngBD0320" />
-<script async src="https://www.googletagmanager.com/gtag/js?id=${gtag}"></script>
-<script>
-  window.dataLayer = window.dataLayer || []
-  function gtag() {
-    dataLayer.push(arguments)
-  }
-  gtag('js', new Date())
+  lines.push(
+    `<script async src="https://www.googletagmanager.com/gtag/js?id=${measurementId}"></script>`,
+    `<script>
+window.dataLayer = window.dataLayer || []
+function gtag(){ dataLayer.push(arguments) }
+gtag('js', new Date())
+gtag('config', '${measurementId}', {
+  ${!isLiveProd ? `'debug_mode': true,` : ''}
+})
+</script>`,
+    '<!-- inject:head:end -->',
+  )
 
-  gtag('config', '${gtag}')
-</script>
-<!-- inject:head:end -->`
+  return lines.join('\n')
 }
 
 async function main() {
@@ -37,7 +41,7 @@ async function main() {
 
   const replaceVars = { NODE_ENV, DEPLOY_TARGET, DEPLOY_URL, BUILD_ID }
   const replaceBlocks = {
-    '<!-- inject:head -->': makeHeadSnippet(IS_PROD_LIVE),
+    '<!-- inject:head -->': makeHeadSnippet({ isLiveProd: IS_PROD_LIVE }),
   }
 
   let indexText = fs.readFileSync(indexFile, 'utf8')

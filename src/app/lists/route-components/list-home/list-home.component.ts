@@ -11,6 +11,7 @@ import type { List, ListRepo } from '../../state'
     <ah-content transparent="true" layout="compact">
       <div class="mdl-grid">
         <ah-list-repos
+          [key]="list.id + '-best'"
           class="mdl-cell mdl-cell--6-col"
           heading="Best Repositories"
           [recordset]="repos$.best | async"
@@ -20,6 +21,7 @@ import type { List, ListRepo } from '../../state'
           [wide]="false"
         />
         <ah-list-repos
+          [key]="list.id + '-trending'"
           class="mdl-cell mdl-cell--6-col"
           heading="Trending Repositories"
           [recordset]="repos$.trending | async"

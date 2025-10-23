@@ -3,21 +3,25 @@ import { Injectable, inject, DOCUMENT } from '@angular/core'
 @Injectable()
 export class AnalyticsService {
   private readonly document: Document = inject(DOCUMENT)
-  private readonly dataLayer: any[]
+  private readonly gtag: Gtag.Gtag
 
   constructor() {
     const window = this.document.defaultView as any
-    if (!Array.isArray(window.dataLayer)) {
-      console.warn('GTM dataLayer is not initialized')
+    if (typeof window?.gtag !== 'function') {
+      console.warn('Gtag is not initialized')
+      this.gtag = () => {
+        /* fallback */
+      }
+      return
     }
-    this.dataLayer = window.dataLayer ?? []
+    this.gtag = window.gtag
   }
 
   public initialize() {
-    /**/
+    /* We can't initialize Gtag here, as we are using enhanced measurement. */
   }
 
   public event(eventName: string, params?: Record<string, any>) {
-    this.dataLayer.push('event', eventName, params)
+    this.gtag('event', eventName, params)
   }
 }

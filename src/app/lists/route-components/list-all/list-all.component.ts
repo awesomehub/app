@@ -10,6 +10,7 @@ import type { List, ListRepo } from '../../state'
   template: `
     <ah-content transparent="true" layout="compact">
       <ah-list-repos
+        [key]="list.id + '-all'"
         class=""
         heading="All Repositories"
         [count]="list.entries['repo.github'].length"

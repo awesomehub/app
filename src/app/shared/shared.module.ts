@@ -1,12 +1,26 @@
 import { NgModule } from '@angular/core'
 import { CommonModule } from '@angular/common'
 import { ScrollSpyModule } from '@app/scroll-spy'
-import { LayoutContentComponent, LayoutSidebarComponent, SpinnerComponent, SvgSpiritComponent, SvgComponent } from './components'
+import {
+  LayoutContentComponent,
+  LayoutSidebarComponent,
+  SpinnerComponent,
+  SvgSpiritComponent,
+  SvgComponent,
+} from './components'
 import { DateFormatPipe, ScoreFormatPipe } from './pipes'
 
 @NgModule({
   imports: [CommonModule],
-  declarations: [LayoutContentComponent, LayoutSidebarComponent, SpinnerComponent, SvgSpiritComponent, SvgComponent, DateFormatPipe, ScoreFormatPipe],
+  declarations: [
+    LayoutContentComponent,
+    LayoutSidebarComponent,
+    SpinnerComponent,
+    SvgSpiritComponent,
+    SvgComponent,
+    DateFormatPipe,
+    ScoreFormatPipe,
+  ],
   exports: [
     CommonModule,
     ScrollSpyModule,
