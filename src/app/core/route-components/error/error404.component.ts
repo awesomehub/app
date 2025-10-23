@@ -4,8 +4,8 @@ import { PrimaryRouteComponent } from '../models'
 @Component({
   template: `
     <ah-content>
-      <h1>404: page not found!</h1>
-      <p>The page you're looking for doesn't exist.</p>
+      <h1>404: Not found!</h1>
+      <p>You just hit a route that doesn't exist.</p>
     </ah-content>
   `,
   standalone: false,
