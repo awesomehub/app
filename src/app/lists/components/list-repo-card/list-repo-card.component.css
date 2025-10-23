@@ -202,6 +202,12 @@
   white-space: nowrap;
 }
 
+.list-repo-card .meta svg {
+  width: 16px;
+  height: 16px;
+  vertical-align: sub;
+}
+
 @media (max-width: 479px) {
   .list-repo-card .meta.license {
     display: none;
@@ -215,6 +221,5 @@
 }
 
 .list-repo-card .meta .icon {
-  font-size: 16px;
-  padding-right: 4px;
+  padding-right: 6px;
 }

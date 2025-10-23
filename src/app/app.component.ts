@@ -16,6 +16,7 @@ import { PrimaryRouteComponent, DrawerRouteComponent, AnalyticsService, HelmetSe
 @Component({
   selector: 'ah-root',
   templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css'],
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: false,
@@ -63,6 +64,10 @@ export class AppComponent implements AfterViewChecked, AfterViewInit {
     }
 
     this.renderer.selectRootElement(drawerButton).click()
+  }
+
+  scrollTop() {
+    this.layout.nativeElement.scrollIntoView({ behavior: 'smooth' })
   }
 
   /**

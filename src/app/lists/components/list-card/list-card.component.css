@@ -23,24 +23,20 @@
 }
 
 .list-card .meta {
-  position: relative;
+  display: inline-flex;
   color: rgba(0, 0, 0, 0.54);
   height: 36px;
   margin: 0;
-  min-width: 60px;
   padding-left: 13px;
-  display: inline-block;
   font-size: 14px;
   font-weight: 400;
   text-align: left;
-  line-height: 36px;
-  vertical-align: middle;
+  align-items: center;
   text-decoration: none;
 }
 
 .list-card .meta .icon {
-  font-size: 20px;
-  padding-right: 4px;
+  padding-right: 6px;
 }
 
 .list-card .mdl-button {

@@ -101,11 +101,11 @@ import type { ListRepo } from '../../state'
       </div>
     </div>
     <div class="mdl-card__actions mdl-card--border">
-      <span class="meta" title="Language"><i class="icon icon-code"></i> {{ repo.lang || 'None' }}</span>
+      <span class="meta" title="Language"><ah-svg key="code" class="icon" />{{ repo.lang || 'None' }}</span>
       @if (repo.lic) {
-        <span class="meta license" title="License"><i class="icon icon-license"></i> {{ repo.lic }}</span>
+        <span class="meta license" title="License"><ah-svg key="license" class="icon" />{{ repo.lic }}</span>
       }
-      <span class="meta highlight" title="Score Highlight"><i class="icon icon-pulse"></i> {{ repo.hglt }}</span>
+      <span class="meta highlight" title="Score Highlight"><ah-svg key="pulse" class="icon" />{{ repo.hglt }}</span>
     </div>
   `,
   encapsulation: ViewEncapsulation.None,

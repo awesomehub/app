@@ -67,7 +67,7 @@
                 "output": "/"
               }
             ],
-            "styles": ["src/styles.css"],
+            "styles": ["material-design-lite/dist/material.deep_purple-blue.min.css"],
             "scripts": [],
             "fileReplacements": [
               {
@@ -82,13 +82,13 @@
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "500kb",
-                  "maximumError": "2mb"
+                  "maximumWarning": "600kb",
+                  "maximumError": "1mb"
                 },
                 {
                   "type": "anyComponentStyle",
-                  "maximumWarning": "2kb",
-                  "maximumError": "4kb"
+                  "maximumWarning": "4kb",
+                  "maximumError": "8kb"
                 }
               ],
               "outputHashing": "all",
