@@ -9,9 +9,12 @@ import {
   Renderer2,
   DOCUMENT,
   inject,
+  OnDestroy,
+  ChangeDetectorRef,
 } from '@angular/core'
-import { Store } from '@ngrx/store'
+import { Subscription } from 'rxjs'
 import { PrimaryRouteComponent, DrawerRouteComponent, AnalyticsService, HelmetService } from './core'
+import { ScrollSpyService } from './scroll-spy'
 
 @Component({
   selector: 'ah-root',
@@ -21,17 +24,21 @@ import { PrimaryRouteComponent, DrawerRouteComponent, AnalyticsService, HelmetSe
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: false,
 })
-export class AppComponent implements AfterViewChecked, AfterViewInit {
+export class AppComponent implements AfterViewChecked, AfterViewInit, OnDestroy {
   public drawer: DrawerRouteComponent
+  public scrollPastFold: boolean
 
   @ViewChild('layout', { static: false }) private layout: ElementRef
   @ViewChild('drawerButton', { static: false }) private drawerButton: ElementRef
 
-  private store$ = inject(Store)
-  private renderer = inject(Renderer2)
-  private helmetService = inject(HelmetService)
-  private analyticsService = inject(AnalyticsService)
+  private scroll_: Subscription
+
+  private cd = inject(ChangeDetectorRef)
   private document = inject(DOCUMENT)
+  private renderer = inject(Renderer2)
+  private helmet = inject(HelmetService)
+  private scrollSpy = inject(ScrollSpyService)
+  private analytics = inject(AnalyticsService)
 
   ngAfterViewChecked() {
     // Run MDL after each render to upgrade any new elements added
@@ -42,7 +49,16 @@ export class AppComponent implements AfterViewChecked, AfterViewInit {
   }
 
   ngAfterViewInit() {
-    this.analyticsService.initialize()
+    this.analytics.initialize()
+    this.scroll_ = this.scrollSpy
+      .getScrollData(500, 'throttle')
+      .subscribe(({ windowPageYOffset, windowInnerHeight }) => {
+        const condition = windowPageYOffset > windowInnerHeight
+        if (condition !== this.scrollPastFold) {
+          this.scrollPastFold = condition
+          this.cd.markForCheck()
+        }
+      })
   }
 
   /**
@@ -76,7 +92,7 @@ export class AppComponent implements AfterViewChecked, AfterViewInit {
    * @param component PrimaryRouteComponent
    */
   onActivation(component: PrimaryRouteComponent) {
-    this.helmetService.apply(component.helmet)
+    this.helmet.apply(component.helmet)
   }
 
   /**
@@ -85,7 +101,7 @@ export class AppComponent implements AfterViewChecked, AfterViewInit {
    * @param component PageComponent
    */
   onDeactivation(component: PrimaryRouteComponent) {
-    this.helmetService.unsubscribe()
+    this.helmet.unsubscribe()
   }
 
   /**
@@ -104,5 +120,9 @@ export class AppComponent implements AfterViewChecked, AfterViewInit {
    */
   onDrawerDeactivation(component: DrawerRouteComponent) {
     this.drawer = null
+  }
+
+  ngOnDestroy() {
+    this.scroll_.unsubscribe()
   }
 }

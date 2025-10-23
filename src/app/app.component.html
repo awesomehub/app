@@ -2,6 +2,7 @@
   #layout
   class="mdl-layout mdl-layout--fixed-header mdl-js-layout mdl-color--grey-100"
   [class.mdl-layout--fixed-drawer]="drawer"
+  [class.scroll-past-fold]="scrollPastFold"
 >
   <!-- Header -->
   <header class="mdl-layout__header mdl-layout__header--scroll mdl-color-text--white">
@@ -48,11 +49,14 @@
   <!-- Main -->
   <main class="mdl-layout__content">
     <router-outlet (activate)="onActivation($event)" (deactivate)="onDeactivation($event)" />
+    <button class="scroll-top mdl-button mdl-button--fab" (click)="scrollTop()" title="Go to top">
+      <ah-svg key="chevrons-up" class="icon" />
+    </button>
   </main>
 
   <!-- Loading indicator -->
   <ah-loading-indicator />
-
-  <!-- Icons spirit -->
-  <ah-svg-spirit />
 </div>
+
+<!-- Global SVG spirit -->
+<ah-svg-spirit />
