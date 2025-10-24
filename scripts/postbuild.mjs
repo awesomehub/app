@@ -16,7 +16,7 @@ const DEFAULT_HEADERS = {
     'Link: <https://www.googletagmanager.com>; rel=preconnect',
     'Link: <https://fonts.gstatic.com>; rel=preconnect',
     'Link: </assets/images/jumbotron-bg.jpg>; rel=preload; as=image; fetchpriority=high',
-    'Link: </data/build.json>; rel=preload; as=fetch',
+    'Link: </data/build.json>; rel=preload; as=fetch; crossorigin',
   ],
   '/list/*': [],
   '/manifest.webmanifest': [

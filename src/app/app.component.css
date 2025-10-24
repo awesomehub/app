@@ -95,11 +95,13 @@ h4 {
 }
 
 /* Logo */
-.mdl-layout__header a.logo {
+.mdl-layout__header a.logo img {
   opacity: 0.85;
+  width: 240px;
+  height: auto;
 }
 
-.mdl-layout__header a.logo:hover {
+.mdl-layout__header a.logo:hover img {
   opacity: 1;
 }
 
