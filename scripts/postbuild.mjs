@@ -53,9 +53,9 @@ async function main() {
     if (!headers.has(assetPath)) {
       headers.set(assetPath, [CACHE_CONTROL_IMMUTABLE])
       headers.set(`${assetPath}.map`, [CACHE_CONTROL_IMMUTABLE])
-      if (ext === '.css') {
-        pageHeaders.push(`Link: <${assetPath}>; rel=preload; as=style`)
-      }
+      pageHeaders.push(
+        `Link: <${assetPath}>; rel=preload; as=${ext === '.css' ? 'style' : 'script'}; crossorigin=same-origin`,
+      )
       log('info', 'build:asset:html', assetPath)
     }
   }
