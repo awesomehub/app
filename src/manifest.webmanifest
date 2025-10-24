@@ -1,6 +1,8 @@
 {
   "name": "AwesomeHub",
   "short_name": "AwesomeHub",
+  "description": "Hub for awesome github repositories.",
+  "categories": ["productivity", "utilities"],
   "theme_color": "#673ab7",
   "background_color": "#fafafa",
   "scope": "/",

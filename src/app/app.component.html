@@ -9,7 +9,7 @@
     <button #drawerButton class="mdl-layout__drawer-button hidden">Open side menu</button>
     <div class="mdl-layout__header-row">
       <a class="mdl-layout-title logo" [routerLink]="['./']" title="Home">
-        <ah-svg key="logo" width="200" viewBox="0 0 1024 120" />
+        <img src="assets/images/logo.svg" width="200" alt="Awesomehub logo" fetchpriority="high" />
       </a>
       <div class="mdl-layout-spacer"></div>
       <nav class="mdl-navigation">
@@ -36,7 +36,7 @@
   </header>
 
   <!-- Ribbon -->
-  <div class="ribbon mdl-color--primary"></div>
+  <div class="ribbon mdl-color--primary" style="background-image: url('assets/images/jumbotron-bg.jpg')"></div>
 
   <!-- Drawer outlet -->
   <div class="mdl-layout__drawer drawer">

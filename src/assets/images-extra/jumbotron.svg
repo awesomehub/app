@@ -1,0 +1,46 @@
+<svg viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <!-- Page gradient -->
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#4a1587"/>
+      <stop offset="1" stop-color="#ac4abd"/>
+    </linearGradient>
+
+    <!-- Panel gradients -->
+    <linearGradient id="panelA" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#7B2BC9"/>
+      <stop offset="1" stop-color="#9E44F0"/>
+    </linearGradient>
+    <linearGradient id="panelB" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#6A22B9"/>
+      <stop offset="1" stop-color="#8E3FE3"/>
+    </linearGradient>
+    <linearGradient id="panelC" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#5E1EAB"/>
+      <stop offset="1" stop-color="#7F30D4"/>
+    </linearGradient>
+    <linearGradient id="panelD" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#4a1587"/>
+      <stop offset="1" stop-color="#ac4abd"/>
+    </linearGradient>
+
+    <!-- Soft shadow filter -->
+    <filter id="shadow" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="0" dy="12" stdDeviation="10" flood-color="#000" flood-opacity=".45"/>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="100%" height="100%" fill="url(#bg)"/>
+
+  <!-- Panels group (rotate slightly) -->
+  <g transform="translate(150,0) rotate(-18 432 384)">
+    <!-- Each panel is same size, shifted to create steps -->
+    <rect x="0" y="-60" width="800" height="680" rx="0" fill="url(#panelC)" filter="url(#shadow)" opacity="0.9"/>
+    <rect x="60" y="-10" width="800" height="680" rx="0" fill="url(#panelB)" filter="url(#shadow)" opacity="0.9"/>
+    <rect x="100" y="40"  width="800" height="680" rx="0" fill="url(#panelA)" filter="url(#shadow)" opacity="0.95"/>
+    <rect x="160" y="90"  width="800" height="680" rx="0" fill="url(#panelD)" filter="url(#shadow)" opacity="0.95"/>
+    <rect x="220" y="140" width="800" height="680" rx="0" fill="url(#panelB)" filter="url(#shadow)" opacity="0.95"/>
+    <rect x="280" y="190" width="800" height="680" rx="0" fill="url(#panelA)" filter="url(#shadow)" opacity="0.95"/>
+  </g>
+</svg>

@@ -1,7 +1,6 @@
 import { Component, ChangeDetectionStrategy, ViewEncapsulation } from '@angular/core'
 
 export type SvgSpiritKey =
-  | 'logo'
   | 'star'
   | 'graph'
   | 'globe'

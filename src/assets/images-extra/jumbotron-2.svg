@@ -1,0 +1,12 @@
+<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1600 800'>
+  <rect fill='#40115E' width='1600' height='800'/>
+  <g fill-opacity='1'>
+    <polygon  fill='#531873' points='800 100 0 200 0 800 1600 800 1600 200'/>
+    <polygon  fill='#661f87' points='800 200 0 400 0 800 1600 800 1600 400'/>
+    <polygon  fill='#7a279b' points='800 300 0 600 0 800 1600 800 1600 600'/>
+    <polygon  fill='#8f31ad' points='1600 800 800 400 0 800'/>
+    <polygon  fill='#a33bbf' points='1280 800 800 500 320 800'/>
+    <polygon  fill='#b051c4' points='533.3 800 1066.7 800 800 600'/>
+    <polygon  fill='#BB69C8' points='684.1 800 914.3 800 800 700'/>
+  </g>
+</svg>
