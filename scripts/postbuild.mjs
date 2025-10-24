@@ -15,6 +15,7 @@ const DEFAULT_HEADERS = {
     CACHE_CONTROL_NO_CACHE,
     'Link: <https://www.googletagmanager.com>; rel=preconnect',
     'Link: <https://fonts.gstatic.com>; rel=preconnect',
+    'Link: </assets/images/jumbotron-bg.jpg>; rel=preload; as=image; fetchpriority=high',
   ],
   '/list/*': [],
   '/media/*': [CACHE_CONTROL_IMMUTABLE],

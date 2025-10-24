@@ -54,7 +54,7 @@
             "sourceMap": true,
             "assets": [
               "src/assets/images",
-              "src/manifest.json",
+              "src/manifest.webmanifest",
               {
                 "glob": "**/*",
                 "input": "src/data",
