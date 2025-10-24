@@ -67,7 +67,7 @@ async function main() {
         if (asset.kind === 'url-token' && !asset.path.startsWith('data:')) {
           if (asset.path.endsWith('.woff2')) {
             const filePath = `/${asset.path}`
-            pageHeaders.push(`Link: <${filePath}>; rel=preload; as=font`)
+            pageHeaders.push(`Link: <${filePath}>; rel=preload; as=font; crossorigin=same-origin`)
             log('info', `build:asset:${key}`, filePath)
           }
         }
