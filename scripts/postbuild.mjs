@@ -1,8 +1,15 @@
 import fs from 'fs'
-import { dist, log, run } from './utils.mjs'
+import { dist, listDistFiles, log, run } from './utils.mjs'
 
 const CACHE_CONTROL_NO_CACHE = 'Cache-Control: public, max-age=0, must-revalidate'
 const CACHE_CONTROL_IMMUTABLE = 'Cache-Control: public, max-age=31536000, immutable'
+
+const DEFAULT_PAGE_HEADERS = [
+  CACHE_CONTROL_NO_CACHE,
+  'Link: <https://www.googletagmanager.com>; rel=preconnect',
+  'Link: <https://fonts.gstatic.com>; rel=preconnect',
+  'Link: </assets/images/jumbotron-bg.jpg>; rel=preload; as=image; fetchpriority=high',
+]
 
 const DEFAULT_HEADERS = {
   '/*': [
@@ -11,21 +18,10 @@ const DEFAULT_HEADERS = {
     'X-Content-Type-Options: nosniff',
     'Referrer-Policy: same-origin',
   ],
-  '/': [
-    CACHE_CONTROL_NO_CACHE,
-    'Link: <https://www.googletagmanager.com>; rel=preconnect',
-    'Link: <https://fonts.gstatic.com>; rel=preconnect',
-    'Link: </assets/images/jumbotron-bg.jpg>; rel=preload; as=image; fetchpriority=high',
-    'Link: </data/build.json>; rel=preload; as=fetch; crossorigin',
-  ],
-  '/list/*': [],
-  '/manifest.webmanifest': [
-    'Content-Type: application/manifest+json',
-    CACHE_CONTROL_NO_CACHE,
-  ],
+  '/': ['[data-page]'],
+  '/404': ['[page]'],
   '/media/*': [CACHE_CONTROL_IMMUTABLE],
-  '/data/*': [CACHE_CONTROL_IMMUTABLE],
-  '/data/build.json': [CACHE_CONTROL_NO_CACHE],
+  '/manifest.webmanifest': ['Content-Type: application/manifest+json', CACHE_CONTROL_NO_CACHE],
 }
 
 const DEFAULT_REDIRECTS = [
@@ -47,6 +43,8 @@ async function main() {
   }
 
   log('info', 'task', 'Generating Netlify assets')
+  const pageHeaders = [...DEFAULT_PAGE_HEADERS]
+  const dataPageHeaders = [...DEFAULT_PAGE_HEADERS]
   const headers = new Map(Object.entries(DEFAULT_HEADERS))
   const html = fs.readFileSync(indexFile, { encoding: 'utf-8' })
   const matches = html.matchAll(/=["']([\w.-]+-\w{8})(\.(css|js))["']/gm)
@@ -57,16 +55,45 @@ async function main() {
       headers.set(assetPath, [CACHE_CONTROL_IMMUTABLE])
       headers.set(`${assetPath}.map`, [CACHE_CONTROL_IMMUTABLE])
       if (ext === '.css') {
-        headers.get('/').push(`Link: <${assetPath}>; rel=preload; as=style`)
+        pageHeaders.push(`Link: <${assetPath}>; rel=preload; as=style`)
       }
-      log('info', 'webpack:asset', assetPath)
+      log('info', 'build:asset', assetPath)
+    }
+  }
+
+  const dataFiles = listDistFiles('data')
+  for (const file of dataFiles) {
+    if (!file.endsWith('.json')) continue
+
+    const filePath = `/${file}`
+    const link = `Link: <${filePath}>; rel=preload; as=fetch; crossorigin`
+    log('info', 'data:asset', filePath)
+
+    if (filePath === '/data/build.json') {
+      headers.set(filePath, [CACHE_CONTROL_NO_CACHE])
+      dataPageHeaders.push(link)
+      continue
+    }
+
+    if (/\/all\.\w+\.json$/.test(filePath)) {
+      headers.set(filePath, [CACHE_CONTROL_IMMUTABLE])
+      dataPageHeaders.push(link)
+      continue
+    }
+
+    const match = filePath.match(/(\/list\/[\w.-]+)\.\w+\.json$/)
+    if (match) {
+      headers.set(filePath, [CACHE_CONTROL_IMMUTABLE])
+      headers.set(match[1], ['[data-page]', link])
     }
   }
 
   const headersData = []
-  headers.set('/list/*', headers.get('/').concat(headers.get('/list/*')))
   headers.forEach((pathHeaders, path) => {
-    headersData.push(`${path}\n  ${pathHeaders.join('\n  ')}`)
+    const compiledHeaders = pathHeaders
+      .flatMap((header) => (header === '[page]' ? pageHeaders : header === '[data-page]' ? dataPageHeaders : header))
+      .join('\n  ')
+    headersData.push(`${path}\n  ${compiledHeaders}`)
   })
 
   const headersFile = dist('_headers')

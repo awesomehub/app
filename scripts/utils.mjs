@@ -1,3 +1,4 @@
+import fs from 'fs'
 import path from 'path'
 import chalk from 'chalk'
 
@@ -15,6 +16,25 @@ export function getNetlifyEnv() {
   log('info', 'netlifyEnv', netlifyEnv)
 
   return netlifyEnv
+}
+
+export function listDistFiles(rootDir) {
+  const result = []
+  const distRoot = dist()
+
+  function walk(dir) {
+    for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
+      const fullPath = path.join(dir, entry.name)
+      if (entry.isDirectory()) {
+        walk(fullPath)
+      } else if (entry.isFile()) {
+        result.push(path.relative(distRoot, fullPath).split(path.sep).join('/'))
+      }
+    }
+  }
+
+  walk(dist(rootDir))
+  return result.toSorted()
 }
 
 export async function run(name, main) {
