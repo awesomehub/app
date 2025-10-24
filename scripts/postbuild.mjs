@@ -98,7 +98,7 @@ async function main() {
     const match = filePath.match(/(\/list\/[\w.-]+)\.\w+\.json$/)
     if (match) {
       headers.set(filePath, [CACHE_CONTROL_IMMUTABLE])
-      headers.set(match[1], ['[data-page]'])
+      headers.set(match[1], ['[data-page]', link])
     }
   }
 
