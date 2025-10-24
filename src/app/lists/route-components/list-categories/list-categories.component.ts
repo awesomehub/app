@@ -1,6 +1,6 @@
 import { Component, ViewEncapsulation, ChangeDetectionStrategy, forwardRef, inject } from '@angular/core'
 import { ActivatedRoute } from '@angular/router'
-import { AppComponent } from '@app'
+import { AppComponent } from '@app/app.component'
 import { DrawerRouteComponent } from '@app/core'
 import type { List } from '../../state'
 

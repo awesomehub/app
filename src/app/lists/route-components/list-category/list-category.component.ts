@@ -10,7 +10,7 @@ import {
 import { ActivatedRoute } from '@angular/router'
 import { Observable } from 'rxjs'
 import { config } from '@constants'
-import { AppComponent } from '@app'
+import { AppComponent } from '@app/app.component'
 import { PrimaryRouteComponent } from '@app/core'
 import { RecordsetFactoryService, RecordsetService, Recordset } from '@app/recordsets'
 import type { List, ListCategory, ListRepo } from '../../state'

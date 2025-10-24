@@ -5,7 +5,6 @@
     "outDir": "./dist/out-tsc",
     "paths": {
       "@constants": ["./src/constants"],
-      "@app": ["./src/app"],
       "@app/*": ["./src/app/*"]
     },
     "target": "ES2022",

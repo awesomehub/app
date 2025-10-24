@@ -1,3 +1,4 @@
+import { enableProdMode, ModuleWithProviders } from '@angular/core'
 import { StoreDevtoolsModule } from '@ngrx/store-devtools'
 
 const BUILD_ID = '{{BUILD_ID}}' as string
@@ -13,16 +14,23 @@ export const environment = {
   apiUrl: '/data',
 }
 
-export const environmentProviders =
-  NODE_ENV === 'production'
-    ? []
-    : [
-        StoreDevtoolsModule.instrument({
-          name: 'AwesomeHub',
-          maxAge: 25,
-          connectInZone: true,
-        }),
-      ]
+const environmentProviders: ModuleWithProviders<{}>[] = []
+
+if (NODE_ENV === 'production') {
+  enableProdMode()
+}
+
+/* __DEV:START__ */
+environmentProviders.push(
+  StoreDevtoolsModule.instrument({
+    name: 'AwesomeHub',
+    maxAge: 25,
+    connectInZone: true,
+  }),
+)
+/* __DEV:END__ */
+
+export { environmentProviders }
 
 /*
  * For easier debugging in development mode, you can import the following file

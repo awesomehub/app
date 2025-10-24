@@ -1,5 +1,5 @@
 import { createSelector } from '@ngrx/store'
-import { AppState } from '@app'
+import type { AppState } from '@app/app.state'
 
 export const selectListCollections = (state: AppState) =>
   Object.keys(state.collections).map((key) => state.collections[key])

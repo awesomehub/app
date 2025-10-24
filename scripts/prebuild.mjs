@@ -50,6 +50,9 @@ async function main() {
   for (const [key, value] of Object.entries(replaceVars)) {
     indexText = indexText.replace(new RegExp(`{{${key}}}`, 'g'), value)
     envText = envText.replace(new RegExp(`{{${key}}}`, 'g'), value)
+    if (NODE_ENV !== 'development') {
+      envText = envText.replace(/\/\*\s*__DEV:START__\s*\*\/[\s\S]*?\/\*\s*__DEV:END__\s*\*\//g, '')
+    }
   }
 
   for (const [key, value] of Object.entries(replaceBlocks)) {
