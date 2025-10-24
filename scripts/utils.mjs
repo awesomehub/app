@@ -37,6 +37,11 @@ export function listDistFiles(rootDir) {
   return result.toSorted()
 }
 
+export function distJSON(filename) {
+  const filePath = dist(filename)
+  return JSON.parse(fs.readFileSync(filePath, 'utf8'))
+}
+
 export async function run(name, main) {
   try {
     log('info', name, `Running ${name} script`)

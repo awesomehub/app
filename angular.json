@@ -67,7 +67,7 @@
                 "output": "/"
               }
             ],
-            "styles": ["material-design-lite/dist/material.deep_purple-blue.min.css"],
+            "styles": ["src/styles.css"],
             "scripts": [],
             "fileReplacements": [
               {

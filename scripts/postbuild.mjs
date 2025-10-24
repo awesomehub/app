@@ -1,5 +1,5 @@
 import fs from 'fs'
-import { dist, listDistFiles, log, run } from './utils.mjs'
+import { dist, distJSON, listDistFiles, log, run } from './utils.mjs'
 
 const CACHE_CONTROL_NO_CACHE = 'Cache-Control: public, max-age=0, must-revalidate'
 const CACHE_CONTROL_IMMUTABLE = 'Cache-Control: public, max-age=31536000, immutable'
@@ -7,7 +7,6 @@ const CACHE_CONTROL_IMMUTABLE = 'Cache-Control: public, max-age=31536000, immuta
 const DEFAULT_PAGE_HEADERS = [
   CACHE_CONTROL_NO_CACHE,
   'Link: <https://www.googletagmanager.com>; rel=preconnect',
-  'Link: <https://fonts.gstatic.com>; rel=preconnect',
   'Link: </assets/images/jumbotron-bg.jpg>; rel=preload; as=image; fetchpriority=high',
 ]
 
@@ -44,7 +43,7 @@ async function main() {
 
   log('info', 'task', 'Generating Netlify assets')
   const pageHeaders = [...DEFAULT_PAGE_HEADERS]
-  const dataPageHeaders = [...DEFAULT_PAGE_HEADERS]
+  const dataPageHeaders = []
   const headers = new Map(Object.entries(DEFAULT_HEADERS))
   const html = fs.readFileSync(indexFile, { encoding: 'utf-8' })
   const matches = html.matchAll(/=["']([\w.-]+-\w{8})(\.(css|js))["']/gm)
@@ -57,7 +56,22 @@ async function main() {
       if (ext === '.css') {
         pageHeaders.push(`Link: <${assetPath}>; rel=preload; as=style`)
       }
-      log('info', 'build:asset', assetPath)
+      log('info', 'build:asset:html', assetPath)
+    }
+  }
+
+  const statsJson = distJSON('../stats.json')
+  for (const [key, output] of Object.entries(statsJson.outputs)) {
+    if (output.entryPoint === 'angular:styles/global:styles') {
+      for (const asset of output.imports) {
+        if (asset.kind === 'url-token' && !asset.path.startsWith('data:')) {
+          if (asset.path.endsWith('.woff2')) {
+            const filePath = `/${asset.path}`
+            pageHeaders.push(`Link: <${filePath}>; rel=preload; as=font`)
+            log('info', `build:asset:${key}`, filePath)
+          }
+        }
+      }
     }
   }
 
@@ -66,7 +80,7 @@ async function main() {
     if (!file.endsWith('.json')) continue
 
     const filePath = `/${file}`
-    const link = `Link: <${filePath}>; rel=preload; as=fetch; crossorigin`
+    const link = `Link: <${filePath}>; rel=preload; as=fetch; crossorigin=same-origin`
     log('info', 'data:asset', filePath)
 
     if (filePath === '/data/build.json') {
@@ -91,7 +105,9 @@ async function main() {
   const headersData = []
   headers.forEach((pathHeaders, path) => {
     const compiledHeaders = pathHeaders
-      .flatMap((header) => (header === '[page]' ? pageHeaders : header === '[data-page]' ? dataPageHeaders : header))
+      .flatMap((header) =>
+        header === '[page]' ? pageHeaders : header === '[data-page]' ? [...pageHeaders, ...dataPageHeaders] : header,
+      )
       .join('\n  ')
     headersData.push(`${path}\n  ${compiledHeaders}`)
   })
