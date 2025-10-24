@@ -20,7 +20,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build --stats-json",
+    "build": "ng build",
     "prestart": "node scripts/prebuild.mjs",
     "prebuild": "node scripts/prebuild.mjs",
     "postbuild": "npm run postbuild:stats && npm run postbuild:script",

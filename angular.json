@@ -75,7 +75,8 @@
                 "with": "src/environment.build.ts"
               }
             ],
-            "browser": "src/main.ts"
+            "browser": "src/main.ts",
+            "statsJson": true
           },
           "configurations": {
             "production": {
