@@ -18,6 +18,10 @@ const DEFAULT_HEADERS = {
     'Link: </assets/images/jumbotron-bg.jpg>; rel=preload; as=image; fetchpriority=high',
   ],
   '/list/*': [],
+  '/manifest.webmanifest': [
+    'Content-Type: application/manifest+json',
+    CACHE_CONTROL_NO_CACHE,
+  ],
   '/media/*': [CACHE_CONTROL_IMMUTABLE],
   '/data/*': [CACHE_CONTROL_IMMUTABLE],
   '/data/build.json': [CACHE_CONTROL_NO_CACHE],
