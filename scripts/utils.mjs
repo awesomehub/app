@@ -34,7 +34,7 @@ export function listDistFiles(rootDir) {
   }
 
   walk(dist(rootDir))
-  return result
+  return result.toSorted()
 }
 
 export async function run(name, main) {

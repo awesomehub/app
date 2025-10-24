@@ -18,9 +18,8 @@ const DEFAULT_HEADERS = {
     'X-Content-Type-Options: nosniff',
     'Referrer-Policy: same-origin',
   ],
-  '/': [...DEFAULT_PAGE_HEADERS],
-  '/404': [...DEFAULT_PAGE_HEADERS],
-  '/list/*': [...DEFAULT_PAGE_HEADERS],
+  '/': ['[data-page]'],
+  '/404': ['[page]'],
   '/media/*': [CACHE_CONTROL_IMMUTABLE],
   '/manifest.webmanifest': ['Content-Type: application/manifest+json', CACHE_CONTROL_NO_CACHE],
 }
@@ -44,6 +43,8 @@ async function main() {
   }
 
   log('info', 'task', 'Generating Netlify assets')
+  const pageHeaders = [...DEFAULT_PAGE_HEADERS]
+  const dataPageHeaders = [...DEFAULT_PAGE_HEADERS]
   const headers = new Map(Object.entries(DEFAULT_HEADERS))
   const html = fs.readFileSync(indexFile, { encoding: 'utf-8' })
   const matches = html.matchAll(/=["']([\w.-]+-\w{8})(\.(css|js))["']/gm)
@@ -54,12 +55,9 @@ async function main() {
       headers.set(assetPath, [CACHE_CONTROL_IMMUTABLE])
       headers.set(`${assetPath}.map`, [CACHE_CONTROL_IMMUTABLE])
       if (ext === '.css') {
-        const link = `Link: <${assetPath}>; rel=preload; as=style`
-        headers.get('/').push(link)
-        headers.get('/404').push(link)
-        headers.get('/list/*').push(link)
+        pageHeaders.push(`Link: <${assetPath}>; rel=preload; as=style`)
       }
-      log('info', 'webpack:asset', assetPath)
+      log('info', 'build:asset', assetPath)
     }
   }
 
@@ -67,33 +65,35 @@ async function main() {
   for (const file of dataFiles) {
     if (!file.endsWith('.json')) continue
 
-    log('info', 'data:asset', `/${file}`)
-    const link = `Link: </${file}>; rel=preload; as=fetch; crossorigin`
+    const filePath = `/${file}`
+    const link = `Link: <${filePath}>; rel=preload; as=fetch; crossorigin`
+    log('info', 'data:asset', filePath)
 
-    if (file === 'data/build.json') {
-      headers.get('/').push(link)
-      headers.get('/list/*').push(link)
-      headers.set(`/${file}`, [CACHE_CONTROL_NO_CACHE])
+    if (filePath === '/data/build.json') {
+      headers.set(filePath, [CACHE_CONTROL_NO_CACHE])
+      dataPageHeaders.push(link)
       continue
     }
 
-    if (/\/all\.\w+\.json$/.test(file)) {
-      headers.get('/').push(link)
-      headers.get('/list/*').push(link)
-      headers.set(`/${file}`, [CACHE_CONTROL_IMMUTABLE])
+    if (/\/all\.\w+\.json$/.test(filePath)) {
+      headers.set(filePath, [CACHE_CONTROL_IMMUTABLE])
+      dataPageHeaders.push(link)
       continue
     }
 
-    const match = file.match(/(\/list\/[\w.-]+)\.\w+\.json$/)
+    const match = filePath.match(/(\/list\/[\w.-]+)\.\w+\.json$/)
     if (match) {
-      headers.set(`/${file}`, [CACHE_CONTROL_IMMUTABLE])
-      headers.set(match[1], [link])
+      headers.set(filePath, [CACHE_CONTROL_IMMUTABLE])
+      headers.set(match[1], ['[data-page]', link])
     }
   }
 
   const headersData = []
   headers.forEach((pathHeaders, path) => {
-    headersData.push(`${path}\n  ${pathHeaders.join('\n  ')}`)
+    const compiledHeaders = pathHeaders
+      .flatMap((header) => (header === '[page]' ? pageHeaders : header === '[data-page]' ? dataPageHeaders : header))
+      .join('\n  ')
+    headersData.push(`${path}\n  ${compiledHeaders}`)
   })
 
   const headersFile = dist('_headers')
