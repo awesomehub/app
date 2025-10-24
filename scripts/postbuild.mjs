@@ -1,8 +1,15 @@
 import fs from 'fs'
-import { dist, log, run } from './utils.mjs'
+import { dist, listDistFiles, log, run } from './utils.mjs'
 
 const CACHE_CONTROL_NO_CACHE = 'Cache-Control: public, max-age=0, must-revalidate'
 const CACHE_CONTROL_IMMUTABLE = 'Cache-Control: public, max-age=31536000, immutable'
+
+const DEFAULT_PAGE_HEADERS = [
+  CACHE_CONTROL_NO_CACHE,
+  'Link: <https://www.googletagmanager.com>; rel=preconnect',
+  'Link: <https://fonts.gstatic.com>; rel=preconnect',
+  'Link: </assets/images/jumbotron-bg.jpg>; rel=preload; as=image; fetchpriority=high',
+]
 
 const DEFAULT_HEADERS = {
   '/*': [
@@ -11,21 +18,11 @@ const DEFAULT_HEADERS = {
     'X-Content-Type-Options: nosniff',
     'Referrer-Policy: same-origin',
   ],
-  '/': [
-    CACHE_CONTROL_NO_CACHE,
-    'Link: <https://www.googletagmanager.com>; rel=preconnect',
-    'Link: <https://fonts.gstatic.com>; rel=preconnect',
-    'Link: </assets/images/jumbotron-bg.jpg>; rel=preload; as=image; fetchpriority=high',
-    'Link: </data/build.json>; rel=preload; as=fetch; crossorigin',
-  ],
-  '/list/*': [],
-  '/manifest.webmanifest': [
-    'Content-Type: application/manifest+json',
-    CACHE_CONTROL_NO_CACHE,
-  ],
+  '/': [...DEFAULT_PAGE_HEADERS],
+  '/404': [...DEFAULT_PAGE_HEADERS],
+  '/list/*': [...DEFAULT_PAGE_HEADERS],
   '/media/*': [CACHE_CONTROL_IMMUTABLE],
-  '/data/*': [CACHE_CONTROL_IMMUTABLE],
-  '/data/build.json': [CACHE_CONTROL_NO_CACHE],
+  '/manifest.webmanifest': ['Content-Type: application/manifest+json', CACHE_CONTROL_NO_CACHE],
 }
 
 const DEFAULT_REDIRECTS = [
@@ -57,14 +54,44 @@ async function main() {
       headers.set(assetPath, [CACHE_CONTROL_IMMUTABLE])
       headers.set(`${assetPath}.map`, [CACHE_CONTROL_IMMUTABLE])
       if (ext === '.css') {
-        headers.get('/').push(`Link: <${assetPath}>; rel=preload; as=style`)
+        const link = `Link: <${assetPath}>; rel=preload; as=style`
+        headers.get('/').push(link)
+        headers.get('/404').push(link)
+        headers.get('/list/*').push(link)
       }
       log('info', 'webpack:asset', assetPath)
     }
   }
 
+  const dataFiles = listDistFiles('data')
+  for (const file of dataFiles) {
+    if (!file.endsWith('.json')) continue
+
+    log('info', 'data:asset', `/${file}`)
+    const link = `Link: </${file}>; rel=preload; as=fetch; crossorigin`
+
+    if (file === 'data/build.json') {
+      headers.get('/').push(link)
+      headers.get('/list/*').push(link)
+      headers.set(`/${file}`, [CACHE_CONTROL_NO_CACHE])
+      continue
+    }
+
+    if (/\/all\.\w+\.json$/.test(file)) {
+      headers.get('/').push(link)
+      headers.get('/list/*').push(link)
+      headers.set(`/${file}`, [CACHE_CONTROL_IMMUTABLE])
+      continue
+    }
+
+    const match = file.match(/(\/list\/[\w.-]+)\.\w+\.json$/)
+    if (match) {
+      headers.set(`/${file}`, [CACHE_CONTROL_IMMUTABLE])
+      headers.set(match[1], [link])
+    }
+  }
+
   const headersData = []
-  headers.set('/list/*', headers.get('/').concat(headers.get('/list/*')))
   headers.forEach((pathHeaders, path) => {
     headersData.push(`${path}\n  ${pathHeaders.join('\n  ')}`)
   })
