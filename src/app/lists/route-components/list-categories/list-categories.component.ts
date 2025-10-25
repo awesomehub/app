@@ -25,7 +25,7 @@ import type { List } from '../../state'
       >
         Browse All
       </a>
-      <a class="divider"></a>
+      <span class="divider"></span>
       <ah-list-categories [list]="list" [parent]="0" (navigate)="app.toggleDrawer()" />
     </nav>
   `,
