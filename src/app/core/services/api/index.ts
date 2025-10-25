@@ -1,2 +1,2 @@
-export * from './api.service'
+export * from './local-api.service'
 export * from './api.interfaces'

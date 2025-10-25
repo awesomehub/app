@@ -6,7 +6,7 @@ import { Actions, createEffect, ofType } from '@ngrx/effects'
 import { of } from 'rxjs'
 import { filter, map, mergeMap, switchMap, catchError, distinctUntilChanged } from 'rxjs/operators'
 import { config } from '@constants'
-import { ApiService } from '@app/core'
+import { LocalApiService } from '@app/core'
 import { RecordsetActions, Recordset, selectRecordsetsForUpdate } from '@app/recordsets'
 import { ListCollection, ListSummary, List, ListRepo } from '../models'
 import { ListCollectionActions, ListActions } from '../actions'
@@ -17,7 +17,7 @@ import { listRepoRecordsetReducer, listSummaryRecordsetReducer } from '../reduce
 @Injectable()
 export class ListsEffects {
   private actions$ = inject(Actions)
-  private api = inject(ApiService)
+  private api = inject(LocalApiService)
   private store$ = inject(Store)
   private router = inject(Router)
 

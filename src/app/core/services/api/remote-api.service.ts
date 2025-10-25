@@ -6,7 +6,7 @@ import { config, environment } from '@constants'
 import { BuildResponse, ListCollectionResponse, ListResponse } from './api.interfaces'
 
 @Injectable()
-export class ApiService {
+export class RemoteApiService {
   private readonly apiBase: string
   private readonly build$: Observable<BuildResponse>
   private readonly http = inject(HttpClient)

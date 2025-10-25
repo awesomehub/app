@@ -1,5 +1,5 @@
 import fs from 'fs'
-import { dist, distJSON, listDistFiles, log, run } from './utils.mjs'
+import { dist, distJSON, log, run } from './utils.mjs'
 
 const CACHE_CONTROL_NO_CACHE = 'Cache-Control: public, max-age=0, must-revalidate'
 const CACHE_CONTROL_IMMUTABLE = 'Cache-Control: public, max-age=31536000, immutable'
@@ -17,7 +17,7 @@ const DEFAULT_HEADERS = {
     'X-Content-Type-Options: nosniff',
     'Referrer-Policy: same-origin',
   ],
-  '/': ['[data-page]'],
+  '/': ['[page]'],
   '/404': ['[page]'],
   '/media/*': [CACHE_CONTROL_IMMUTABLE],
   '/manifest.webmanifest': ['Content-Type: application/manifest+json', CACHE_CONTROL_NO_CACHE],
@@ -43,7 +43,6 @@ async function main() {
 
   log('info', 'task', 'Generating Netlify assets')
   const pageHeaders = [...DEFAULT_PAGE_HEADERS]
-  const dataPageHeaders = []
   const headers = new Map(Object.entries(DEFAULT_HEADERS))
   const html = fs.readFileSync(indexFile, { encoding: 'utf-8' })
   const matches = html.matchAll(/=["']([\w.-]+-\w{8})(\.(css|js))["']/gm)
@@ -52,7 +51,6 @@ async function main() {
     const assetPath = asset.startsWith('/') ? asset : `/${asset}`
     if (!headers.has(assetPath)) {
       headers.set(assetPath, [CACHE_CONTROL_IMMUTABLE])
-      headers.set(`${assetPath}.map`, [CACHE_CONTROL_IMMUTABLE])
       pageHeaders.push(
         `Link: <${assetPath}>; rel=preload; as=${ext === '.css' ? 'style' : 'script; crossorigin=same-origin'}`,
       )
@@ -73,42 +71,37 @@ async function main() {
         }
       }
     }
-  }
 
-  const dataFiles = listDistFiles('data')
-  for (const file of dataFiles) {
-    if (!file.endsWith('.json')) continue
-
-    const filePath = `/${file}`
-    const link = `Link: <${filePath}>; rel=preload; as=fetch; crossorigin=same-origin`
-    log('info', 'data:asset', filePath)
-
-    if (filePath === '/data/build.json') {
-      headers.set(filePath, [CACHE_CONTROL_NO_CACHE])
-      dataPageHeaders.push(link)
-      continue
+    const addTo = (page) => {
+      output.imports
+        .filter((imp) => imp.kind === 'import-statement')
+        .map((imp) => imp.path)
+        .concat(key)
+        .forEach((path) => {
+          const filePath = `/${path}`
+          const link = `Link: <${filePath}>; rel=modulepreload; crossorigin=same-origin`
+          headers.set(filePath, [CACHE_CONTROL_IMMUTABLE])
+          headers.get(page).push(link)
+          log('info', 'data:asset', page, filePath)
+        })
     }
 
-    if (/\/all\.\w+\.json$/.test(filePath)) {
-      headers.set(filePath, [CACHE_CONTROL_IMMUTABLE])
-      dataPageHeaders.push(link)
-      continue
-    }
-
-    const match = filePath.match(/(\/list\/[\w.-]+)\.\w+\.json$/)
-    if (match) {
-      headers.set(filePath, [CACHE_CONTROL_IMMUTABLE])
-      headers.set(match[1], ['[data-page]', link])
+    let listMatch, collectionMatch
+    for (const entryPoint of Object.keys(output.inputs)) {
+      if ((listMatch = entryPoint.match(/src\/data(\/list\/[\w.-]+)\.js$/))) {
+        headers.set(listMatch[1], ['[page]'])
+        addTo(listMatch[1])
+        break
+      } else if ((collectionMatch = entryPoint.match(/src\/data(\/collection\/all)\.js$/))) {
+        addTo('/')
+        break
+      }
     }
   }
 
   const headersData = []
   headers.forEach((pathHeaders, path) => {
-    const compiledHeaders = pathHeaders
-      .flatMap((header) =>
-        header === '[page]' ? pageHeaders : header === '[data-page]' ? [...pageHeaders, ...dataPageHeaders] : header,
-      )
-      .join('\n  ')
+    const compiledHeaders = pathHeaders.flatMap((header) => (header === '[page]' ? pageHeaders : header)).join('\n  ')
     headersData.push(`${path}\n  ${compiledHeaders}`)
   })
 
