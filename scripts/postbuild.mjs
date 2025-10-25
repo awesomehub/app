@@ -72,7 +72,6 @@ async function main() {
       }
     }
 
-    const listMatch = output.entryPoint?.match(/src\/data(\/list\/[\w.-]+)\.js$/)
     const addTo = (page) => {
       output.imports
         .filter((imp) => imp.kind === 'import-statement')
@@ -87,14 +86,16 @@ async function main() {
         })
     }
 
-    if (listMatch) {
-      headers.set(listMatch[1], ['[page]'])
-      addTo(listMatch[1])
-    }
-
-    const collectionMatch = output.entryPoint?.match(/src\/data(\/collection\/all)\.js$/)
-    if (collectionMatch) {
-      addTo('/')
+    let listMatch, collectionMatch
+    for (const entryPoint of Object.keys(output.inputs)) {
+      if ((listMatch = entryPoint.match(/src\/data(\/list\/[\w.-]+)\.js$/))) {
+        headers.set(listMatch[1], ['[page]'])
+        addTo(listMatch[1])
+        break
+      } else if ((collectionMatch = entryPoint.match(/src\/data(\/collection\/all)\.js$/))) {
+        addTo('/')
+        break
+      }
     }
   }
 
