@@ -29,8 +29,9 @@ import { ScrollSpyService } from './scroll-spy'
 export class AppComponent implements AfterViewChecked, AfterViewInit, OnDestroy {
   public drawer: DrawerRouteComponent
   public scrollPastFold: boolean
-  public currentRoute = '/'
-  public entryRoute = '/'
+  public initialNavigation = true
+  public currentRoute?: string
+  public entryRoute?: string
   public breadcrumbs: readonly AppBreadcrumbSegment[] = []
 
   @ViewChild('layout', { static: false }) private layout: ElementRef
@@ -62,6 +63,9 @@ export class AppComponent implements AfterViewChecked, AfterViewInit, OnDestroy 
       .subscribe(({ urlAfterRedirects }) => {
         this.entryRoute ??= urlAfterRedirects
         this.currentRoute = urlAfterRedirects
+        if (this.entryRoute !== this.currentRoute) {
+          this.initialNavigation = false
+        }
         this.breadcrumbs = this.buildBreadcrumbs(urlAfterRedirects)
         this.cd.markForCheck()
       })
