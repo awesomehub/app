@@ -8,9 +8,9 @@ import type { ListRepo } from '../../state'
   template: `
     <div class="list-repo-inner">
       @if (!extendedScores) {
-        <div class="mdl-card__media" (click)="extendedScores = true" title="Show extended scores">
+        <div class="mdl-card__media" (click)="extendedScores = true" title="Show extended scores" role="button">
           <div class="score">
-            <a>{{ repo.score | ahScoreFormat }}</a>
+            <span>{{ repo.score | ahScoreFormat }}</span>
           </div>
           <div class="scores" [style.border-color]="scoreColorLegend[scoreColorLegend.length - 1]">
             <span

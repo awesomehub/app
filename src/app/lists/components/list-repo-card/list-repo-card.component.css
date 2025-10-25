@@ -96,8 +96,13 @@
   flex-direction: column;
 }
 
-.list-repo-inner .score a {
+.list-repo-inner .score span {
   color: #0074bc;
+  font-weight: 300;
+}
+
+.list-repo-inner .score:hover span {
+  text-decoration: underline;
 }
 
 .list-repo-inner .score .score-diff {

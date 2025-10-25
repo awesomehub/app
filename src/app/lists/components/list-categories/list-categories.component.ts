@@ -14,8 +14,12 @@ import type { List, ListCategory } from '../../state'
         >
           {{ category.title }}
         </a>
-        <ah-list-categories [list]="list" [depth]="depth + 1" [parent]="category.id" (navigate)="navigate.emit($event)">
-        </ah-list-categories>
+        <ah-list-categories
+          [list]="list"
+          [depth]="depth + 1"
+          [parent]="category.id"
+          (navigate)="navigate.emit($event)"
+        />
       </div>
     }
   `,
