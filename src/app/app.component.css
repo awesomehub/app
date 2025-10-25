@@ -64,6 +64,7 @@ h4 {
 
 .mdl-layout__header-row .mdl-navigation__link {
   padding: 0 0 0 20px;
+  white-space: nowrap;
 }
 
 .mdl-layout__header-row .mdl-navigation__link .icon {
@@ -108,16 +109,28 @@ h4 {
 }
 
 .mdl-layout__header-row .breadcrumbs {
+  display: flex;
+  flex-shrink: 1;
   height: 28px;
   line-height: 32px;
   font-size: 20px;
   padding-left: 8px;
   color: #fff;
   opacity: 0.85;
+  overflow: hidden;
 }
 
 .mdl-layout__header-row .breadcrumbs .breadcrumbs__link {
   color: #fff;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.mdl-layout__header-row .breadcrumbs .breadcrumbs__link:nth-child(4) {
+  flex-shrink: 1;
+  min-width: 1ch;
 }
 
 .mdl-layout__header-row .breadcrumbs .breadcrumbs__separator {
@@ -129,9 +142,13 @@ h4 {
   opacity: 1;
 }
 
-@media (max-width: 479px) {
-  .mdl-layout__header-row .breadcrumbs {
+@media (max-width: 768px) {
+  .mdl-layout__header-row .breadcrumbs > * {
     display: none;
+  }
+  .mdl-layout__header-row .breadcrumbs *:nth-child(1),
+  .mdl-layout__header-row .breadcrumbs *:nth-child(2) {
+    display: block;
   }
 }
 

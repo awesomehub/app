@@ -18,11 +18,6 @@ import { filter } from 'rxjs/operators'
 import { PrimaryRouteComponent, DrawerRouteComponent, AnalyticsService, HelmetService } from './core'
 import { ScrollSpyService } from './scroll-spy'
 
-interface AppBreadcrumbSegment {
-  label: string
-  route: string[]
-}
-
 @Component({
   selector: 'ah-root',
   templateUrl: './app.component.html',
@@ -168,4 +163,9 @@ export class AppComponent implements AfterViewChecked, AfterViewInit, OnDestroy 
 
     return breadcrumbs
   }
+}
+
+interface AppBreadcrumbSegment {
+  label: string
+  route: string[]
 }

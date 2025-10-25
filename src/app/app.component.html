@@ -17,9 +17,11 @@
           @for (crumb of breadcrumbs; track $index) {
             <span class="breadcrumbs__separator">/</span>
             @if ($last) {
-              <span class="breadcrumbs__link">{{ crumb.label }}</span>
+              <span class="breadcrumbs__link" [title]="crumb.label">{{ crumb.label }}</span>
             } @else {
-              <a [routerLink]="crumb.route" class="breadcrumbs__link">{{ crumb.label }}</a>
+              <a [routerLink]="crumb.route" class="breadcrumbs__link" [title]="crumb.label">
+                {{ crumb.label }}
+              </a>
             }
           }
         </nav>
