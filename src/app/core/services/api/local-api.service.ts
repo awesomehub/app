@@ -6,11 +6,21 @@ import { ListCollectionResponse, ListResponse } from './api.interfaces'
 @Injectable()
 export class LocalApiService {
   fetchList(id: string): Observable<ListResponse> {
-    return this.fromImportPromise<ListResponse>(async () => import(`../../../../data/list/${id}.js`))
+    return this.fromImportPromise<ListResponse>(
+      async () =>
+        import(`../../../../data/list/${id}.json`, {
+          with: { type: 'json' },
+        }),
+    )
   }
 
   fetchListCollection(id: string): Observable<ListCollectionResponse> {
-    return this.fromImportPromise<ListCollectionResponse>(async () => import(`../../../../data/collection/${id}.js`))
+    return this.fromImportPromise<ListCollectionResponse>(
+      async () =>
+        import(`../../../../data/collection/${id}.json`, {
+          with: { type: 'json' },
+        }),
+    )
   }
 
   private fromImportPromise<T>(fn: () => Promise<{ default: T }>): Observable<T> {

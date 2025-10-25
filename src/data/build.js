@@ -1,1 +1,0 @@
-export default {"number":"20251025.4","date":"2025-10-25T01:46:30+00:00","hashed":false,"urls":{"all":"collection\/all"}}
