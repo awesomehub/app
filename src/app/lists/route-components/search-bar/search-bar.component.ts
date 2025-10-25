@@ -21,9 +21,7 @@ interface SearchBarNavState extends Record<string, unknown> {
 }
 
 @Component({
-  template: `
-    <input #input type="search" [placeholder]="placeholder" [value]="query" (input)="search($event.target.value)" />
-  `,
+  template: ` <input #input type="search" [placeholder]="placeholder" [value]="query" (input)="search($event)" /> `,
   styleUrls: ['./search-bar.component.css'],
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -93,7 +91,8 @@ export class SearchBarRouteComponent extends HeaderBarRouteComponent implements 
     }
   }
 
-  search(query: string): void {
+  search(e: Event): void {
+    const query = (e.target as HTMLInputElement).value
     if (query === '') {
       // clearing the query navigates away; remember to restore focus once routing settles
       this.focusAfterNavigation = true

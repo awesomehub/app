@@ -152,6 +152,12 @@ h4 {
   }
 }
 
+@media (max-width: 479px) {
+  .mdl-layout__header-row .breadcrumbs {
+    display: none;
+  }
+}
+
 /* Ribbon */
 .ribbon {
   position: absolute;

@@ -45,7 +45,7 @@ export class LoadingIndicatorComponent {
       }
 
       if (e instanceof NavigationError) {
-        this.halt('An error has occured, please try reloading the page')
+        this.halt('An error has occurred, please try reloading the page')
       }
     })
   }
