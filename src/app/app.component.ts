@@ -12,7 +12,9 @@ import {
   OnDestroy,
   ChangeDetectorRef,
 } from '@angular/core'
+import { Router, NavigationEnd } from '@angular/router'
 import { Subscription } from 'rxjs'
+import { filter } from 'rxjs/operators'
 import { PrimaryRouteComponent, DrawerRouteComponent, AnalyticsService, HelmetService } from './core'
 import { ScrollSpyService } from './scroll-spy'
 
@@ -27,15 +29,19 @@ import { ScrollSpyService } from './scroll-spy'
 export class AppComponent implements AfterViewChecked, AfterViewInit, OnDestroy {
   public drawer: DrawerRouteComponent
   public scrollPastFold: boolean
+  public currentRoute: string
+  public entryRoute: string
 
   @ViewChild('layout', { static: false }) private layout: ElementRef
   @ViewChild('drawerButton', { static: false }) private drawerButton: ElementRef
 
   private scroll_: Subscription
+  private router_: Subscription
 
   private cd = inject(ChangeDetectorRef)
   private document = inject(DOCUMENT)
   private renderer = inject(Renderer2)
+  private router = inject(Router)
   private helmet = inject(HelmetService)
   private scrollSpy = inject(ScrollSpyService)
   private analytics = inject(AnalyticsService)
@@ -50,6 +56,12 @@ export class AppComponent implements AfterViewChecked, AfterViewInit, OnDestroy 
 
   ngAfterViewInit() {
     this.analytics.initialize()
+    this.router_ = this.router.events
+      .pipe(filter((e) => e instanceof NavigationEnd))
+      .subscribe(({ urlAfterRedirects }) => {
+        this.entryRoute ??= urlAfterRedirects
+        this.currentRoute = urlAfterRedirects
+      })
     this.scroll_ = this.scrollSpy
       .getScrollData(500, 'throttle')
       .subscribe(({ windowPageYOffset, windowInnerHeight }) => {
@@ -123,6 +135,7 @@ export class AppComponent implements AfterViewChecked, AfterViewInit, OnDestroy 
   }
 
   ngOnDestroy() {
+    this.router_.unsubscribe()
     this.scroll_.unsubscribe()
   }
 }

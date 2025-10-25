@@ -3,6 +3,7 @@
   class="mdl-layout mdl-layout--fixed-header mdl-js-layout mdl-color--grey-100"
   [class.mdl-layout--fixed-drawer]="drawer"
   [class.scroll-past-fold]="scrollPastFold"
+  [class.no-transition]="entryRoute === currentRoute"
 >
   <!-- Header -->
   <header class="mdl-layout__header mdl-layout__header--scroll mdl-color-text--white">

@@ -48,6 +48,12 @@ h4 {
   transition-duration: 0.3s;
 }
 
+.no-transition .mdl-layout__header,
+.no-transition .mdl-layout__drawer,
+.no-transition .mdl-layout__content {
+  transition: none;
+}
+
 .mdl-layout__header-row {
   width: calc(100% - 16px);
   max-width: 1080px;
