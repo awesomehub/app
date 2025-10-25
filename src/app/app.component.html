@@ -12,6 +12,18 @@
       <a class="mdl-layout-title logo" [routerLink]="['./']" title="Home">
         <img src="assets/images/logo.svg" width="600" height="70" alt="Awesomehub logo" fetchpriority="high" />
       </a>
+      @if (breadcrumbs.length) {
+        <nav class="breadcrumbs" aria-label="Breadcrumb">
+          @for (crumb of breadcrumbs; track $index) {
+            <span class="breadcrumbs__separator">/</span>
+            @if ($last) {
+              <span class="breadcrumbs__link">{{ crumb.label }}</span>
+            } @else {
+              <a [routerLink]="crumb.route" class="breadcrumbs__link">{{ crumb.label }}</a>
+            }
+          }
+        </nav>
+      }
       <div class="mdl-layout-spacer"></div>
       <nav class="mdl-navigation">
         <a class="mdl-navigation__link" href="//github.com/awesomehub" target="_blank">
@@ -42,7 +54,7 @@
   <!-- Drawer outlet -->
   <div class="mdl-layout__drawer drawer">
     @if (drawer) {
-      <span class="mdl-layout__title">{{ drawer.title }}</span>
+      <h2 class="mdl-layout__title">{{ drawer.title }}</h2>
     }
     <router-outlet name="drawer" (activate)="onDrawerActivation($event)" (deactivate)="onDrawerDeactivation($event)" />
   </div>

@@ -101,14 +101,38 @@ h4 {
 }
 
 /* Logo */
-.mdl-layout__header a.logo img {
+.mdl-layout__header-row .logo img {
   opacity: 0.85;
   width: 240px;
   height: auto;
 }
 
-.mdl-layout__header a.logo:hover img {
+.mdl-layout__header-row .breadcrumbs {
+  height: 28px;
+  line-height: 32px;
+  font-size: 20px;
+  padding-left: 8px;
+  color: #fff;
+  opacity: 0.85;
+}
+
+.mdl-layout__header-row .breadcrumbs .breadcrumbs__link {
+  color: #fff;
+}
+
+.mdl-layout__header-row .breadcrumbs .breadcrumbs__separator {
+  padding: 0 4px;
+}
+
+.mdl-layout__header-row:hover .logo img,
+.mdl-layout__header-row:hover .breadcrumbs {
   opacity: 1;
+}
+
+@media (max-width: 479px) {
+  .mdl-layout__header-row .breadcrumbs {
+    display: none;
+  }
 }
 
 /* Ribbon */
@@ -150,6 +174,7 @@ h4 {
 .drawer .mdl-layout__title {
   padding-left: 16px;
   border-bottom: 1px solid #ededed;
+  margin: 0;
 }
 
 .drawer .mdl-navigation .mdl-navigation__link {

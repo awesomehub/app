@@ -18,6 +18,11 @@ import { filter } from 'rxjs/operators'
 import { PrimaryRouteComponent, DrawerRouteComponent, AnalyticsService, HelmetService } from './core'
 import { ScrollSpyService } from './scroll-spy'
 
+interface AppBreadcrumbSegment {
+  label: string
+  route: string[]
+}
+
 @Component({
   selector: 'ah-root',
   templateUrl: './app.component.html',
@@ -29,8 +34,9 @@ import { ScrollSpyService } from './scroll-spy'
 export class AppComponent implements AfterViewChecked, AfterViewInit, OnDestroy {
   public drawer: DrawerRouteComponent
   public scrollPastFold: boolean
-  public currentRoute: string
-  public entryRoute: string
+  public currentRoute = '/'
+  public entryRoute = '/'
+  public breadcrumbs: readonly AppBreadcrumbSegment[] = []
 
   @ViewChild('layout', { static: false }) private layout: ElementRef
   @ViewChild('drawerButton', { static: false }) private drawerButton: ElementRef
@@ -61,6 +67,8 @@ export class AppComponent implements AfterViewChecked, AfterViewInit, OnDestroy 
       .subscribe(({ urlAfterRedirects }) => {
         this.entryRoute ??= urlAfterRedirects
         this.currentRoute = urlAfterRedirects
+        this.breadcrumbs = this.buildBreadcrumbs(urlAfterRedirects)
+        this.cd.markForCheck()
       })
     this.scroll_ = this.scrollSpy
       .getScrollData(500, 'throttle')
@@ -137,5 +145,27 @@ export class AppComponent implements AfterViewChecked, AfterViewInit, OnDestroy 
   ngOnDestroy() {
     this.router_.unsubscribe()
     this.scroll_.unsubscribe()
+  }
+
+  private buildBreadcrumbs(url: string): AppBreadcrumbSegment[] {
+    // @todo a bit hacky because list category routes url-encoded, need to fix
+    const segments = decodeURIComponent(url).split('/').filter(Boolean)
+    const breadcrumbs: AppBreadcrumbSegment[] = []
+    const pathSegments: string[] = []
+
+    for (const segment of segments) {
+      pathSegments.push(segment)
+      if (segment === 'list') {
+        // Skip the ^/list/ segment when rendering breadcrumbs
+        continue
+      }
+
+      breadcrumbs.push({
+        label: segment,
+        route: ['/', ...pathSegments],
+      })
+    }
+
+    return breadcrumbs
   }
 }
