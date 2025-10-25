@@ -46,21 +46,16 @@
             "outputPath": "dist",
             "index": {
               "input": "src/index.build.html",
-              "output": "index.html"
+              "output": "index.html",
+              "preloadInitial": false
             },
             "polyfills": ["src/polyfills.ts"],
             "tsConfig": "tsconfig.app.json",
             "aot": false,
-            "sourceMap": true,
+            "sourceMap": false,
             "assets": [
               "src/assets/images",
               "src/manifest.webmanifest",
-              {
-                "glob": "**/*",
-                "input": "src/data",
-                "ignore": ["objects/**", "sitemap.xml", "robots.txt"],
-                "output": "/data/"
-              },
               {
                 "glob": "{sitemap.xml,robots.txt}",
                 "input": "src/data",
@@ -75,8 +70,7 @@
                 "with": "src/environment.build.ts"
               }
             ],
-            "browser": "src/main.ts",
-            "statsJson": true
+            "browser": "src/main.ts"
           },
           "configurations": {
             "production": {
@@ -96,7 +90,8 @@
               "aot": true,
               "optimization": true,
               "extractLicenses": true,
-              "namedChunks": true
+              "namedChunks": true,
+              "statsJson": true
             },
             "development": {
               "optimization": false,

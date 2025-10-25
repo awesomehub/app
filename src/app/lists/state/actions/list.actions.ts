@@ -1,13 +1,13 @@
-import { HttpErrorResponse } from '@angular/common/http'
-import { Action } from '@app/common'
-import { ListResponse } from '@app/core'
+import type { HttpErrorResponse } from '@angular/common/http'
+import type { Action } from '@app/common'
+import type { ListResponse } from '@app/core'
 
 export class ListActions {
   static FETCH_FAILED = '[LIST] FETCH FAILED'
   static FETCH_SUCCESS = '[LIST] FETCH SUCCESS'
   static FETCH = '[LIST] FETCH'
 
-  static fetchFailed(id: string, response: HttpErrorResponse): Action {
+  static fetchFailed(id: string, response: HttpErrorResponse | Error): Action {
     return {
       type: ListActions.FETCH_FAILED,
       payload: Object.assign({}, response, { id }),

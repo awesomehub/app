@@ -1,6 +1,5 @@
 import { NgModule, Optional, SkipSelf } from '@angular/core'
 import { RouterModule } from '@angular/router'
-import { provideHttpClient, withFetch } from '@angular/common/http'
 
 // Application-wide modules
 import { SharedModule } from '@app/shared'
@@ -8,7 +7,7 @@ import { RecordsetsModule } from '@app/recordsets'
 import { ScrollSpyModule } from '@app/scroll-spy'
 
 // Application-wide components and services
-import { HelmetService, ApiService, AnalyticsService, ActivatedRouteStreamService } from './services'
+import { HelmetService, LocalApiService, AnalyticsService, ActivatedRouteStreamService } from './services'
 import { Error404Component } from './route-components'
 import { LoadingIndicatorComponent } from './components'
 
@@ -24,7 +23,7 @@ import { LoadingIndicatorComponent } from './components'
   ],
   declarations: [Error404Component, LoadingIndicatorComponent],
   exports: [SharedModule, Error404Component, LoadingIndicatorComponent],
-  providers: [provideHttpClient(withFetch()), HelmetService, AnalyticsService, ApiService, ActivatedRouteStreamService],
+  providers: [HelmetService, AnalyticsService, LocalApiService, ActivatedRouteStreamService],
 })
 export class CoreModule {
   constructor(@Optional() @SkipSelf() parentModule: CoreModule) {
