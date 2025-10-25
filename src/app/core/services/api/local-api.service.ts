@@ -10,13 +10,14 @@ export class LocalApiService {
   }
 
   fetchListCollection(id: string): Observable<ListCollectionResponse> {
-    return this.fromImportPromise<ListCollectionResponse>(
-      async () => import(`../../../../data/collection/${id}.js`),
-    )
+    return this.fromImportPromise<ListCollectionResponse>(async () => import(`../../../../data/collection/${id}.js`))
   }
 
   private fromImportPromise<T>(fn: () => Promise<{ default: T }>): Observable<T> {
     // fn() to ensure import promise does throw synchronously
-    return from(fn()).pipe(map((mod) => mod.default), shareReplay({ bufferSize: 1, refCount: false }))
+    return from(fn()).pipe(
+      map((mod) => mod.default),
+      shareReplay({ bufferSize: 1, refCount: false }),
+    )
   }
 }

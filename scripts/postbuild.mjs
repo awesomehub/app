@@ -73,21 +73,28 @@ async function main() {
     }
 
     const listMatch = output.entryPoint?.match(/src\/data(\/list\/[\w.-]+)\.js$/)
+    const addTo = (page) => {
+      output.imports
+        .filter((imp) => imp.kind === 'import-statement')
+        .map((imp) => imp.path)
+        .concat(key)
+        .forEach((path) => {
+          const filePath = `/${path}`
+          const link = `Link: <${filePath}>; rel=modulepreload; crossorigin=same-origin`
+          headers.set(filePath, [CACHE_CONTROL_IMMUTABLE])
+          headers.get(page).push(link)
+          log('info', 'data:asset', page, filePath)
+        })
+    }
+
     if (listMatch) {
-      const filePath = `/${key}`
-      const link = `Link: <${filePath}>; rel=modulepreload; crossorigin=same-origin`
-      headers.set(filePath, [CACHE_CONTROL_IMMUTABLE])
-      headers.set(listMatch[1], ['[page]', link])
-      log('info', `data${listMatch[1]}`, filePath)
+      headers.set(listMatch[1], ['[page]'])
+      addTo(listMatch[1])
     }
 
     const collectionMatch = output.entryPoint?.match(/src\/data(\/collection\/all)\.js$/)
     if (collectionMatch) {
-      const filePath = `/${key}`
-      const link = `Link: <${filePath}>; rel=modulepreload; crossorigin=same-origin`
-      headers.set(filePath, [CACHE_CONTROL_IMMUTABLE])
-      headers.get('/').push(link)
-      log('info', `data${collectionMatch[1]}`, filePath)
+      addTo('/')
     }
   }
 
