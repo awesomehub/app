@@ -18,10 +18,6 @@
   background: #f0f0f0;
 }
 
-.list-card .mdl-card__supporting-text {
-  flex-grow: 1;
-}
-
 .list-card .meta {
   display: inline-flex;
   color: rgba(0, 0, 0, 0.54);

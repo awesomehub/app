@@ -73,7 +73,7 @@ export const routes: Routes = [
             component: ListSearchRouteComponent,
           },
           {
-            path: ':category',
+            path: '**',
             resolve: {
               category: listCategoryDataResolver,
             },

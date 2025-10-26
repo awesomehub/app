@@ -9,7 +9,7 @@ import type { List, ListCategory } from '../../state'
         <a
           [class]="'mdl-navigation__link level-' + depth"
           routerLinkActive="mdl-navigation__link--current"
-          [routerLink]="['/list', list.id, category.path]"
+          [routerLink]="['/list', list.id].concat(category.path.split('/'))"
           (click)="navigate.emit(category)"
         >
           {{ category.title }}

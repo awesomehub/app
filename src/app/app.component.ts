@@ -147,8 +147,7 @@ export class AppComponent implements AfterViewChecked, AfterViewInit, OnDestroy 
   }
 
   private buildBreadcrumbs(url: string): AppBreadcrumbSegment[] {
-    // @todo a bit hacky because list category routes url-encoded, need to fix
-    const segments = decodeURIComponent(url).split('/').filter(Boolean)
+    const segments = url.split('?')[0].split('/').filter(Boolean)
     const breadcrumbs: AppBreadcrumbSegment[] = []
     const pathSegments: string[] = []
 

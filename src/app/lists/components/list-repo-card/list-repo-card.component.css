@@ -28,7 +28,6 @@
 .list-repo-inner .mdl-card__supporting-text {
   width: auto;
   position: relative;
-  flex-grow: 1;
   padding: 16px 16px 8px;
 }
 
