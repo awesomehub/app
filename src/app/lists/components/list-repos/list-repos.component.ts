@@ -8,6 +8,7 @@ import {
   EventEmitter,
   ViewChild,
   Renderer2,
+  ElementRef,
   HostBinding,
   inject,
 } from '@angular/core'
@@ -110,8 +111,8 @@ export class ListReposComponent implements AfterViewInit {
   @Output() needMore = new EventEmitter<any>(false)
   @Output() sort = new EventEmitter<RecordsetSorting>(false)
 
-  @ViewChild('sortbtn', { static: false }) private sortbtn
-  @ViewChild('sortmenu', { static: false }) private sortmenu
+  @ViewChild('sortbtn', { static: false }) private sortbtn: ElementRef<HTMLButtonElement>
+  @ViewChild('sortmenu', { static: false }) private sortmenu: ElementRef<HTMLUListElement>
 
   private renderer = inject(Renderer2)
 

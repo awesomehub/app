@@ -1,4 +1,5 @@
 import fs from 'fs'
+import { PurgeCSS } from 'purgecss'
 import { dist, distJSON, log, run } from './utils.mjs'
 
 const CACHE_CONTROL_NO_CACHE = 'Cache-Control: public, max-age=0, must-revalidate'
@@ -57,15 +58,20 @@ async function main() {
   }
 
   // Inline styles
+  log('info', 'task', `Running PurgeCSS`)
   const match = html.match(/<link\s+[^>]*rel=["']stylesheet["'][^>]*href=["'](styles-\w{8}\.css)["'][^>]*>/i)
   if (!match) {
     log('error', 'No styles.css link found in index.html')
     process.exit(1)
   }
   const stylesFile = dist(match[1])
-  const stylesText = fs.readFileSync(stylesFile, 'utf-8')
+  const purgeCSSResult = await new PurgeCSS().purge({
+    content: [dist('index.html'), dist('*.js')],
+    css: [stylesFile],
+  })
+  const stylesText = purgeCSSResult[0].css.length
   fs.writeFileSync(dist('index.html'), html.replace(match[0], `<style>${stylesText}</style>`))
-  log('info', 'index.html', `inlined ${stylesFile}`)
+  log('info', 'index.html', `inlined /${match[1]}`)
 
   const statsJson = distJSON('../stats.json')
   for (const [key, output] of Object.entries(statsJson.outputs)) {
