@@ -45,7 +45,7 @@ async function main() {
   const pageHeaders = [...DEFAULT_PAGE_HEADERS]
   const headers = new Map(Object.entries(DEFAULT_HEADERS))
   const html = fs.readFileSync(indexFile, { encoding: 'utf-8' })
-  const matches = html.matchAll(/=["']([\w.-]+-\w{8})(\.(css|js))["']/gm)
+  const matches = html.matchAll(/=["']([\w.-]+-\w{8})(\.(css))["']/gm)
   for (const [, filename, ext] of matches) {
     const asset = filename + ext
     const assetPath = asset.startsWith('/') ? asset : `/${asset}`
@@ -89,8 +89,8 @@ async function main() {
     let listMatch, collectionMatch
     for (const entryPoint of Object.keys(output.inputs)) {
       if ((listMatch = entryPoint.match(/src\/data(\/list\/[\w.-]+)\.json$/))) {
-        headers.set(listMatch[1], ['[page]'])
-        addTo(listMatch[1])
+        // headers.set(listMatch[1], ['[page]'])
+        // addTo(listMatch[1])
         break
       } else if ((collectionMatch = entryPoint.match(/src\/data(\/collection\/all)\.json$/))) {
         addTo('/')
