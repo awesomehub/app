@@ -81,7 +81,7 @@ async function main() {
           const filePath = `/${path}`
           const link = `Link: <${filePath}>; rel=modulepreload; crossorigin=same-origin`
           headers.set(filePath, [CACHE_CONTROL_IMMUTABLE])
-          headers.get(page).push(link)
+          // headers.get(page).push(link)
           log('info', 'data:asset', page, filePath)
         })
     }
