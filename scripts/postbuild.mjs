@@ -78,7 +78,7 @@ async function main() {
     if (output.entryPoint === 'angular:styles/global:styles') {
       for (const asset of output.imports) {
         if (asset.kind === 'url-token' && !asset.path.startsWith('data:')) {
-          if (/(regular|300|500)-\w{8}\.woff2$/.test(asset.path)) {
+          if (/\.woff2$/.test(asset.path)) {
             const filePath = `/${asset.path}`
             pageHeaders.push(`Link: <${filePath}>; rel=preload; as=font; crossorigin=same-origin`)
             log('info', `build:asset:${key}`, filePath)
