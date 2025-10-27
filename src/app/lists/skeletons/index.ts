@@ -1,0 +1,5 @@
+export * from './home-skeleton.component'
+export * from './list-home-skeleton.component'
+export * from './list-all-skeleton.component'
+export * from './drawer-skeleton.component'
+export * from './search-bar-skeleton.component'

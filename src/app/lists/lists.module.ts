@@ -20,6 +20,13 @@ import {
   ListReposComponent,
   ListRepoCardComponent,
 } from './components'
+import {
+  HomeSkeletonComponent,
+  ListHomeSkeletonComponent,
+  ListAllSkeletonComponent,
+  DrawerSkeletonComponent,
+  SearchBarSkeletonComponent,
+} from './skeletons'
 import { ListRepoScoreStyleDirective } from './directives'
 import { ListRepoScoreService } from './services'
 import { ListsEffects } from './state'
@@ -43,6 +50,12 @@ import { routes } from './lists.routes'
     ListCategoriesComponent,
     ListReposComponent,
     ListRepoCardComponent,
+    // Skeletons
+    HomeSkeletonComponent,
+    ListHomeSkeletonComponent,
+    ListAllSkeletonComponent,
+    DrawerSkeletonComponent,
+    SearchBarSkeletonComponent,
     // Directives
     ListRepoScoreStyleDirective,
   ],

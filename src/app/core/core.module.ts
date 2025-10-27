@@ -4,6 +4,7 @@ import { RouterModule } from '@angular/router'
 // Application-wide modules
 import { SharedModule } from '@app/shared'
 import { RecordsetsModule } from '@app/recordsets'
+import { SkeletonModule } from '@app/skeleton'
 import { ScrollSpyModule } from '@app/scroll-spy'
 
 // Application-wide components and services
@@ -18,6 +19,7 @@ import { LoadingIndicatorComponent } from './components'
       { path: '404', component: Error404Component },
     ]),
     SharedModule,
+    SkeletonModule.provideService(),
     ScrollSpyModule.provideService(),
     RecordsetsModule.provideService(),
   ],

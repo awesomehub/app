@@ -1,7 +1,7 @@
 <div
   #layout
   class="mdl-layout mdl-layout--fixed-header mdl-js-layout mdl-color--grey-100"
-  [class.mdl-layout--fixed-drawer]="drawer"
+  [class.mdl-layout--fixed-drawer]="drawer || drawerSkeleton"
   [class.scroll-past-fold]="scrollPastFold"
   [class.no-transition]="initialNavigation"
 >
@@ -47,6 +47,7 @@
         </a>
       }
       <router-outlet name="header-bar" />
+      <ah-skeleton-outlet name="header-bar" />
     </div>
   </header>
 
@@ -58,12 +59,19 @@
     @if (drawer) {
       <h2 class="mdl-layout__title">{{ drawer.title }}</h2>
     }
-    <router-outlet name="drawer" (activate)="onDrawerActivation($event)" (deactivate)="onDrawerDeactivation($event)" />
+    <router-outlet name="drawer" (activate)="onDrawerActivation($event)" (deactivate)="onDrawerDeactivation()" />
+    <ah-skeleton-outlet
+      name="drawer"
+      (activate)="onDrawerSkeletonActivation($event)"
+      (deactivate)="onDrawerSkeletonDeactivation()"
+    />
   </div>
 
   <!-- Main -->
   <main class="mdl-layout__content">
-    <router-outlet (activate)="onActivation($event)" (deactivate)="onDeactivation($event)" />
+    <router-outlet (activate)="onActivation($event)" (deactivate)="onDeactivation()" />
+    <ah-skeleton-outlet />
+
     <button class="scroll-top mdl-button mdl-button--fab" (click)="scrollTop()" title="Go to top">
       <ah-svg key="chevrons-up" class="icon" />
     </button>

@@ -9,12 +9,20 @@ import {
   ListCategoryRouteComponent,
   ListCategoriesRouteComponent,
 } from './route-components'
+import {
+  HomeSkeletonComponent,
+  ListHomeSkeletonComponent,
+  ListAllSkeletonComponent,
+  DrawerSkeletonComponent,
+  SearchBarSkeletonComponent,
+} from './skeletons'
 import { listsDataResolver, listDataResolver, listCategoryDataResolver } from './services'
 
 const listsSearchBarRoute: Route = {
   path: '',
   component: SearchBarRouteComponent,
   data: {
+    skeleton: SearchBarSkeletonComponent,
     placeholder: 'Search lists...',
     searchRoute: 'search',
     searchRouteMatch: '^/search[?|;|/]',
@@ -34,6 +42,7 @@ export const routes: Routes = [
         resolve: {
           collection: listsDataResolver,
         },
+        data: { skeleton: HomeSkeletonComponent },
       },
       listsSearchBarRoute,
     ],
@@ -47,6 +56,7 @@ export const routes: Routes = [
         resolve: {
           collection: listsDataResolver,
         },
+        data: { skeleton: HomeSkeletonComponent },
       },
       listsSearchBarRoute,
     ],
@@ -63,14 +73,17 @@ export const routes: Routes = [
           {
             path: '',
             component: ListHomeRouteComponent,
+            data: { skeleton: ListHomeSkeletonComponent },
           },
           {
             path: 'all',
             component: ListAllRouteComponent,
+            data: { skeleton: ListAllSkeletonComponent },
           },
           {
             path: 'search',
             component: ListSearchRouteComponent,
+            data: { skeleton: ListAllSkeletonComponent },
           },
           {
             path: '**',
@@ -78,6 +91,7 @@ export const routes: Routes = [
               category: listCategoryDataResolver,
             },
             component: ListCategoryRouteComponent,
+            data: { skeleton: ListAllSkeletonComponent },
           },
         ],
       },
@@ -85,11 +99,13 @@ export const routes: Routes = [
         path: '',
         component: ListCategoriesRouteComponent,
         outlet: 'drawer',
+        data: { skeleton: DrawerSkeletonComponent },
       },
       {
         path: '',
         component: SearchBarRouteComponent,
         data: {
+          skeleton: SearchBarSkeletonComponent,
           placeholder: 'Search this list...',
           searchRoute: 'list/{{id}}/search',
           searchRouteMatch: '^/list/[^/]+/search',
