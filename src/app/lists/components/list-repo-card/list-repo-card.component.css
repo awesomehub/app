@@ -124,7 +124,7 @@
   font-size: 12px;
   background: #505050;
   text-align: center;
-  font-weight: bold;
+  font-weight: 500;
   color: #fff;
   text-indent: -9999px;
   border-right: 1px solid #f3f3f3;
@@ -156,7 +156,7 @@
   justify-content: center;
   min-width: 25px;
   font-size: 12px;
-  font-weight: bold;
+  font-weight: 500;
   border-left: 1px solid #fff;
 }
 
@@ -165,7 +165,7 @@
   flex-grow: 1;
   align-items: center;
   font-size: 12px;
-  font-weight: bold;
+  font-weight: 500;
 }
 
 .list-repo-inner .extended-scores .score-seg,
