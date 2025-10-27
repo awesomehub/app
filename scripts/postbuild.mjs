@@ -46,7 +46,7 @@ async function main() {
   const pageHeaders = [...DEFAULT_PAGE_HEADERS]
   const headers = new Map(Object.entries(DEFAULT_HEADERS))
   const html = fs.readFileSync(indexFile, { encoding: 'utf-8' })
-  const matches = html.matchAll(/=["']([\w.-]+-\w{8})(\.css)["']/gm)
+  const matches = html.matchAll(/=["']([\w.-]+-\w{8})\.(css|js)["']/gm)
   for (const [, filename, ext] of matches) {
     const asset = filename + ext
     const assetPath = asset.startsWith('/') ? asset : `/${asset}`
@@ -95,7 +95,7 @@ async function main() {
         .forEach((path) => {
           const filePath = `/${path}`
           headers.set(filePath, [CACHE_CONTROL_IMMUTABLE])
-          // headers.get(page).push(`Link: <${filePath}>; rel=modulepreload; crossorigin=same-origin`)
+          headers.get(page).push(`Link: <${filePath}>; rel=modulepreload; crossorigin=same-origin`)
           log('info', 'data:asset', page, filePath)
         })
     }
