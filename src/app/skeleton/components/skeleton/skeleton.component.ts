@@ -33,7 +33,7 @@ export class SkeletonComponent {
 
   @HostBinding('class')
   get mainClasses() {
-    const clx = this.color === 'dark' ? ['skl-dark'] : ['skl-light']
+    const clx = [this.color === 'dark' ? 'skl-dark' : 'skl-light']
     if (this.type === 'card') {
       clx.push('skl-card mdl-card mdl-cell mdl-shadow--2dp')
     } else if (this.type === 'heading') {

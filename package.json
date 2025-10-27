@@ -67,7 +67,7 @@
     "@ngrx/eslint-plugin": "^20.1.0",
     "@types/gtag.js": "^0.0.20",
     "@types/node": "^20.19.22",
-    "angular-eslint": "^20.4.0",
+    "angular-eslint": "^20.5.0",
     "chalk": "^4.1.2",
     "esbuild-visualizer": "^0.7.0",
     "eslint": "^9.38.0",
