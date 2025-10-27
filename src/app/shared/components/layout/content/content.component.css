@@ -9,6 +9,7 @@
 }
 
 .content-wrapper .content {
+  position: relative;
   border-radius: 2px;
   padding: 50px;
   animation-duration: 0.3s;

@@ -51,7 +51,7 @@ import type { ListRepo } from '../../state'
               }
             }
           </span>
-          <i class="icon icon-sort-desc"></i>
+          <ah-svg key="sort-desc" class="icon" />
         </button>
         <ul #sortmenu class="mdl-menu mdl-js-menu mdl-menu--unaligned">
           <li
