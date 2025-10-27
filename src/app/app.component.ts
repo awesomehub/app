@@ -11,12 +11,15 @@ import {
   inject,
   OnDestroy,
   ChangeDetectorRef,
+  ViewChildren,
+  QueryList,
 } from '@angular/core'
 import { Router, NavigationEnd } from '@angular/router'
 import { Subscription } from 'rxjs'
 import { filter } from 'rxjs/operators'
 import { PrimaryRouteComponent, DrawerRouteComponent, AnalyticsService, HelmetService } from './core'
 import { ScrollSpyService } from './scroll-spy'
+import { SkeletonOutletDirective, SkeletonService } from './skeleton'
 
 @Component({
   selector: 'ah-root',
@@ -28,6 +31,7 @@ import { ScrollSpyService } from './scroll-spy'
 })
 export class AppComponent implements AfterViewChecked, AfterViewInit, OnDestroy {
   public drawer: DrawerRouteComponent
+  public drawerSkeleton = null
   public scrollPastFold: boolean
   public initialNavigation = true
   public currentRoute?: string
@@ -36,6 +40,7 @@ export class AppComponent implements AfterViewChecked, AfterViewInit, OnDestroy 
 
   @ViewChild('layout', { static: false }) private layout: ElementRef
   @ViewChild('drawerButton', { static: false }) private drawerButton: ElementRef
+  @ViewChildren(SkeletonOutletDirective) skeletons: QueryList<SkeletonOutletDirective>
 
   private scroll_: Subscription
   private router_: Subscription
@@ -44,6 +49,7 @@ export class AppComponent implements AfterViewChecked, AfterViewInit, OnDestroy 
   private document = inject(DOCUMENT)
   private renderer = inject(Renderer2)
   private router = inject(Router)
+  private skeleton = inject(SkeletonService)
   private helmet = inject(HelmetService)
   private scrollSpy = inject(ScrollSpyService)
   private analytics = inject(AnalyticsService)
@@ -57,6 +63,7 @@ export class AppComponent implements AfterViewChecked, AfterViewInit, OnDestroy 
   }
 
   ngAfterViewInit() {
+    this.skeleton.initialize(this.skeletons)
     this.analytics.initialize()
     this.router_ = this.router.events
       .pipe(filter((e) => e instanceof NavigationEnd))
@@ -114,36 +121,30 @@ export class AppComponent implements AfterViewChecked, AfterViewInit, OnDestroy 
     this.helmet.apply(component.helmet)
   }
 
-  /**
-   * Triggered when the main outlet is deactivated
-   *
-   * @param component PageComponent
-   */
-  onDeactivation(component: PrimaryRouteComponent) {
+  onDeactivation() {
     this.helmet.unsubscribe()
   }
 
-  /**
-   * Triggered when the drawer outlet is activated
-   *
-   * @param component DrawerRouteComponent
-   */
   onDrawerActivation(component: DrawerRouteComponent) {
     this.drawer = component
   }
 
-  /**
-   * Triggered when the drawer outlet is deactivated
-   *
-   * @param component DrawerRouteComponent
-   */
-  onDrawerDeactivation(component: DrawerRouteComponent) {
+  onDrawerSkeletonActivation(component: any) {
+    this.drawerSkeleton = component
+  }
+
+  onDrawerDeactivation() {
     this.drawer = null
+  }
+
+  onDrawerSkeletonDeactivation() {
+    this.drawerSkeleton = null
   }
 
   ngOnDestroy() {
     this.router_.unsubscribe()
     this.scroll_.unsubscribe()
+    this.skeleton.destroy()
   }
 
   private buildBreadcrumbs(url: string): AppBreadcrumbSegment[] {

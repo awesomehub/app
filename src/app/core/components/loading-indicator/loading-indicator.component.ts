@@ -31,10 +31,15 @@ export class LoadingIndicatorComponent {
 
   private router = inject(Router)
   private ref = inject(ChangeDetectorRef)
+  private initialNavigation = true
 
   constructor() {
     this.router.events.subscribe((e: Event) => {
       if (e instanceof NavigationStart) {
+        if (this.initialNavigation) {
+          this.initialNavigation = false
+          return
+        }
         this.activate()
         return
       }

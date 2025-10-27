@@ -21,7 +21,7 @@ interface SearchBarNavState extends Record<string, unknown> {
 }
 
 @Component({
-  template: ` <input #input type="search" [placeholder]="placeholder" [value]="query" (input)="search($event)" /> `,
+  template: `<input #input type="search" [placeholder]="placeholder" [value]="query" (input)="search($event)" />`,
   styleUrls: ['./search-bar.component.css'],
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,

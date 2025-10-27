@@ -45,15 +45,13 @@ async function main() {
   const pageHeaders = [...DEFAULT_PAGE_HEADERS]
   const headers = new Map(Object.entries(DEFAULT_HEADERS))
   const html = fs.readFileSync(indexFile, { encoding: 'utf-8' })
-  const matches = html.matchAll(/=["']([\w.-]+-\w{8})(\.(css|js))["']/gm)
+  const matches = html.matchAll(/=["']([\w.-]+-\w{8})(\.css)["']/gm)
   for (const [, filename, ext] of matches) {
     const asset = filename + ext
     const assetPath = asset.startsWith('/') ? asset : `/${asset}`
     if (!headers.has(assetPath)) {
       headers.set(assetPath, [CACHE_CONTROL_IMMUTABLE])
-      pageHeaders.push(
-        `Link: <${assetPath}>; rel=preload; as=${ext === '.css' ? 'style' : 'script; crossorigin=same-origin'}`,
-      )
+      // pageHeaders.push(`Link: <${assetPath}>; rel=preload; as=${ext === '.css' ? 'style' : 'script; crossorigin=same-origin'}`)
       log('info', 'build:asset:html', assetPath)
     }
   }
@@ -63,7 +61,7 @@ async function main() {
     if (output.entryPoint === 'angular:styles/global:styles') {
       for (const asset of output.imports) {
         if (asset.kind === 'url-token' && !asset.path.startsWith('data:')) {
-          if (asset.path.endsWith('.woff2')) {
+          if (/(regular|300)-\w{8}\.woff2$/.test(asset.path)) {
             const filePath = `/${asset.path}`
             pageHeaders.push(`Link: <${filePath}>; rel=preload; as=font; crossorigin=same-origin`)
             log('info', `build:asset:${key}`, filePath)
@@ -79,9 +77,8 @@ async function main() {
         .concat(key)
         .forEach((path) => {
           const filePath = `/${path}`
-          const link = `Link: <${filePath}>; rel=modulepreload; crossorigin=same-origin`
           headers.set(filePath, [CACHE_CONTROL_IMMUTABLE])
-          headers.get(page).push(link)
+          // headers.get(page).push(`Link: <${filePath}>; rel=modulepreload; crossorigin=same-origin`)
           log('info', 'data:asset', page, filePath)
         })
     }
