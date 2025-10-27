@@ -46,7 +46,7 @@ async function main() {
   const pageHeaders = [...DEFAULT_PAGE_HEADERS]
   const headers = new Map(Object.entries(DEFAULT_HEADERS))
   const html = fs.readFileSync(indexFile, { encoding: 'utf-8' })
-  const matches = html.matchAll(/=["']([\w.-]+-\w{8})\.(css|js)["']/gm)
+  const matches = html.matchAll(/=["']([\w.-]+-\w{8})(\.(?:css|js))["']/gm)
   for (const [, filename, ext] of matches) {
     const asset = filename + ext
     const assetPath = asset.startsWith('/') ? asset : `/${asset}`
