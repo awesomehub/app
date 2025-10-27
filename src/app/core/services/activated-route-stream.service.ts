@@ -3,8 +3,7 @@ import { Router, ActivatedRouteSnapshot, PRIMARY_OUTLET } from '@angular/router'
 import { Store } from '@ngrx/store'
 import { Observable } from 'rxjs'
 import { switchMap, distinctUntilChanged, filter } from 'rxjs/operators'
-
-import { selectRouterState } from '@app/core'
+import { selectRouterState } from '../state'
 
 @Injectable()
 export class ActivatedRouteStreamService {
@@ -15,14 +14,12 @@ export class ActivatedRouteStreamService {
   constructor() {
     this.stream = this.store$.select(selectRouterState).pipe(
       distinctUntilChanged(),
-      switchMap(() => {
-        return this.getChildRoutes(this.router.routerState.snapshot.root)
-      }),
+      switchMap(() => this.getChildRoutes(this.router.routerState.snapshot.root)),
       distinctUntilChanged(),
     )
   }
 
-  getOutletStream(outlet: string = PRIMARY_OUTLET): Observable<ActivatedRouteSnapshot> {
+  getOutletStream(outlet = PRIMARY_OUTLET): Observable<ActivatedRouteSnapshot> {
     return this.stream.pipe(filter((ar) => ar.outlet === outlet))
   }
 

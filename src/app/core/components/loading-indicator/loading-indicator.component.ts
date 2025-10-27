@@ -36,6 +36,7 @@ export class LoadingIndicatorComponent {
   constructor() {
     this.router.events.subscribe((e: Event) => {
       if (e instanceof NavigationStart) {
+        // we already render skeletons on initial navigation
         if (this.initialNavigation) {
           this.initialNavigation = false
           return

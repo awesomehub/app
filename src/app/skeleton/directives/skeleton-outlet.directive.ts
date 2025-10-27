@@ -1,4 +1,5 @@
 import { Directive, Input, inject, ComponentRef, ViewContainerRef, Type, Output, EventEmitter } from '@angular/core'
+import { PRIMARY_OUTLET } from '@angular/router'
 
 @Directive({
   // eslint-disable-next-line @angular-eslint/directive-selector
@@ -7,7 +8,7 @@ import { Directive, Input, inject, ComponentRef, ViewContainerRef, Type, Output,
   standalone: false,
 })
 export class SkeletonOutletDirective<C = any> {
-  @Input() name = 'primary'
+  @Input() name = PRIMARY_OUTLET
   @Output() activate = new EventEmitter<C>(false)
   @Output() deactivate = new EventEmitter<C>(false)
 

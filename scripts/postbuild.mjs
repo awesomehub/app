@@ -61,8 +61,7 @@ async function main() {
   log('info', 'task', `Running PurgeCSS`)
   const match = html.match(/<link\s+[^>]*rel=["']stylesheet["'][^>]*href=["'](styles-\w{8}\.css)["'][^>]*>/i)
   if (!match) {
-    log('error', 'No styles.css link found in index.html')
-    process.exit(1)
+    throw new Error('No styles.css link found in index.html')
   }
   const stylesFile = dist(match[1])
   const purgeCSSResult = await new PurgeCSS().purge({
