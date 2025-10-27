@@ -103,8 +103,9 @@ async function main() {
     let listMatch, collectionMatch
     for (const entryPoint of Object.keys(output.inputs)) {
       if ((listMatch = entryPoint.match(/src\/data(\/list\/[\w.-]+)\.json$/))) {
-        headers.set(listMatch[1], ['[page]'])
-        addTo(listMatch[1])
+        const listRoute = `${listMatch[1]}/*`
+        headers.set(listRoute, ['[page]'])
+        addTo(listRoute)
         break
       } else if ((collectionMatch = entryPoint.match(/src\/data(\/collection\/all)\.json$/))) {
         addTo('/')
