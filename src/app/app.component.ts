@@ -70,11 +70,13 @@ export class AppComponent implements AfterViewChecked, AfterViewInit, OnDestroy 
       .subscribe(({ urlAfterRedirects }) => {
         this.entryRoute ??= urlAfterRedirects
         this.currentRoute = urlAfterRedirects
-        if (this.entryRoute !== this.currentRoute) {
-          this.initialNavigation = false
-        }
         this.breadcrumbs = this.buildBreadcrumbs(urlAfterRedirects)
         this.cd.markForCheck()
+        setTimeout(() => {
+          this.initialNavigation = false
+          this.router_.unsubscribe()
+          this.cd.markForCheck()
+        }, 500)
       })
     this.scroll_ = this.scrollSpy
       .getScrollData(500, 'throttle')
