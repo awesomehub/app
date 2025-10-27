@@ -69,7 +69,7 @@ async function main() {
     content: [dist('index.html'), dist('*.js')],
     css: [stylesFile],
   })
-  const stylesText = purgeCSSResult[0].css.length
+  const stylesText = purgeCSSResult[0].css
   fs.writeFileSync(dist('index.html'), html.replace(match[0], `<style>${stylesText}</style>`))
   log('info', 'index.html', `inlined /${match[1]}`)
 
