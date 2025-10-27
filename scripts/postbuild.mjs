@@ -56,6 +56,17 @@ async function main() {
     }
   }
 
+  // Inline styles
+  const match = html.match(/<link\s+[^>]*rel=["']stylesheet["'][^>]*href=["'](styles-\w{8}\.css)["'][^>]*>/i)
+  if (!match) {
+    log('error', 'No styles.css link found in index.html')
+    process.exit(1)
+  }
+  const stylesFile = dist(match[1])
+  const stylesText = fs.readFileSync(stylesFile, 'utf-8')
+  fs.writeFileSync(dist('index.html'), html.replace(match[0], `<style>${stylesText}</style>`))
+  log('info', 'index.html', `inlined ${stylesFile}`)
+
   const statsJson = distJSON('../stats.json')
   for (const [key, output] of Object.entries(statsJson.outputs)) {
     if (output.entryPoint === 'angular:styles/global:styles') {
