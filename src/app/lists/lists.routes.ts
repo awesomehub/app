@@ -107,9 +107,9 @@ export const routes: Routes = [
         data: {
           skeleton: SearchBarSkeletonComponent,
           placeholder: 'Search this list...',
-          searchRoute: 'list/{{id}}/search',
+          searchRoute: 'list/:id/search',
           searchRouteMatch: '^/list/[^/]+/search',
-          cancelRoute: 'list/{{id}}',
+          cancelRoute: 'list/:id',
         },
         outlet: 'header-bar',
       },

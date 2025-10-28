@@ -44,6 +44,7 @@ export class SkeletonService {
         }
 
         skeleton.clear()
+        skeletons.delete(outlet)
       })
   }
 

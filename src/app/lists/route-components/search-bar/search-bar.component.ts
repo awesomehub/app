@@ -57,8 +57,8 @@ export class SearchBarRouteComponent extends HeaderBarRouteComponent implements 
     this.route.data.forEach(({ placeholder, searchRoute, cancelRoute, list }) => {
       this.placeholder = placeholder
       if (list) {
-        this.searchRoute = searchRoute.replace('{{id}}', list.id)
-        this.cancelRoute = cancelRoute.replace('{{id}}', list.id)
+        this.searchRoute = searchRoute.replace(':id', list.id)
+        this.cancelRoute = cancelRoute.replace(':id', list.id)
       } else {
         this.searchRoute = searchRoute
         this.cancelRoute = cancelRoute
