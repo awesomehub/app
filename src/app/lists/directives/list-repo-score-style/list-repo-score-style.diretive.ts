@@ -7,15 +7,15 @@ import type { ListRepoScoreType } from '../../state'
   standalone: false,
 })
 export class ListRepoScoreStyleDirective {
-  private repoScoreService = inject(ListRepoScoreService)
-  private el = inject(ElementRef)
+  private repoScore = inject(ListRepoScoreService)
+  private el: ElementRef<HTMLElement> = inject(ElementRef)
   private renderer = inject(Renderer2)
 
   @Input() scoreType: ListRepoScoreType
   @Input()
   set ahListRepoScoreStyle(score: number) {
-    const colors = this.repoScoreService.getScoreColor(this.scoreType, score)
-    this.renderer.setStyle(this.el.nativeElement, 'color', colors.text)
-    this.renderer.setStyle(this.el.nativeElement, 'backgroundColor', colors.bg)
+    const { text, bg } = this.repoScore.getScoreColor(this.scoreType, score)
+    this.renderer.setStyle(this.el.nativeElement, 'color', text)
+    this.renderer.setStyle(this.el.nativeElement, 'backgroundColor', bg)
   }
 }

@@ -21,15 +21,26 @@ interface SearchBarNavState extends Record<string, unknown> {
 }
 
 @Component({
-  template: `<input #input type="search" [placeholder]="placeholder" [value]="query" (input)="search($event)" />`,
+  template: `
+    <input
+      #input
+      name="q"
+      type="search"
+      autocomplete="off"
+      spellcheck="false"
+      [placeholder]="placeholder"
+      [value]="query"
+      (input)="search($event)"
+    />
+  `,
   styleUrls: ['./search-bar.component.css'],
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: false,
 })
 export class SearchBarRouteComponent extends HeaderBarRouteComponent implements OnInit, AfterViewInit {
-  public placeholder = 'Search...'
-  public query = ''
+  protected placeholder = 'Search...'
+  protected query = ''
 
   private searchRoute: string
   private cancelRoute: string
@@ -46,7 +57,7 @@ export class SearchBarRouteComponent extends HeaderBarRouteComponent implements 
   private cd = inject(ChangeDetectorRef)
 
   @HostBinding('class') private class = 'list-search-bar'
-  @ViewChild('input', { static: false }) private input: ElementRef<HTMLInputElement>
+  @ViewChild('input', { static: true }) private input: ElementRef<HTMLInputElement>
 
   ngOnInit() {
     const navigationState = this.location.getState() as SearchBarNavState | undefined
@@ -91,11 +102,13 @@ export class SearchBarRouteComponent extends HeaderBarRouteComponent implements 
     }
   }
 
-  search(e: Event): void {
+  protected search(e: Event): void {
     const query = (e.target as HTMLInputElement).value
     if (query === '') {
       // clearing the query navigates away; remember to restore focus once routing settles
       this.focusAfterNavigation = true
+      this.query = ''
+      this.cd.markForCheck()
       this.cancel()
       return
     }
@@ -114,9 +127,7 @@ export class SearchBarRouteComponent extends HeaderBarRouteComponent implements 
     this.cd.markForCheck()
   }
 
-  cancel(): void {
-    this.query = ''
-
+  private cancel(): void {
     // If search is the very first page then go to the $cancelRoute
     if (this.hasBack) {
       this.location.back()
@@ -124,8 +135,6 @@ export class SearchBarRouteComponent extends HeaderBarRouteComponent implements 
       const state: SearchBarNavState = this.focusAfterNavigation ? { focusSearchAgain: true } : undefined
       this.router.navigate([this.cancelRoute], { state })
     }
-
-    this.cd.markForCheck()
   }
 
   // defers DOM focus until after change detection completes and the router stabilizes

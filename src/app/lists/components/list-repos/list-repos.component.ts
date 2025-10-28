@@ -29,7 +29,7 @@ import type { ListRepo } from '../../state'
     }
     @if (sortable) {
       <div class="repos-sort">
-        <button #sortbtn class="mdl-button mdl-js-button">
+        <button #sortBtn class="mdl-button mdl-js-button">
           <span>
             @switch (recordset.sorting.by) {
               @case ('score') {
@@ -54,7 +54,7 @@ import type { ListRepo } from '../../state'
           </span>
           <ah-svg key="sort-desc" class="icon" />
         </button>
-        <ul #sortmenu class="mdl-menu mdl-js-menu mdl-menu--unaligned">
+        <ul #sortMenu class="mdl-menu mdl-js-menu mdl-menu--unaligned">
           <li
             class="mdl-menu__item mdl-menu__item--full-bleed-divider"
             (click)="sort.emit({ by: 'score', asc: false })"
@@ -111,8 +111,8 @@ export class ListReposComponent implements AfterViewInit {
   @Output() needMore = new EventEmitter<any>(false)
   @Output() sort = new EventEmitter<RecordsetSorting>(false)
 
-  @ViewChild('sortbtn', { static: false }) private sortbtn: ElementRef<HTMLButtonElement>
-  @ViewChild('sortmenu', { static: false }) private sortmenu: ElementRef<HTMLUListElement>
+  @ViewChild('sortBtn', { static: false }) private sortBtn: ElementRef<HTMLButtonElement>
+  @ViewChild('sortMenu', { static: false }) private sortMenu: ElementRef<HTMLUListElement>
 
   private renderer = inject(Renderer2)
 
@@ -120,8 +120,8 @@ export class ListReposComponent implements AfterViewInit {
     if (this.sortable) {
       // workaround for poor MDL menu markup
       const id = ('repos-sort-' + Math.random()).replace(/\./g, '')
-      this.renderer.setAttribute(this.sortbtn.nativeElement, 'id', id)
-      this.renderer.setAttribute(this.sortmenu.nativeElement, 'for', id)
+      this.renderer.setAttribute(this.sortBtn.nativeElement, 'id', id)
+      this.renderer.setAttribute(this.sortMenu.nativeElement, 'for', id)
     }
   }
 

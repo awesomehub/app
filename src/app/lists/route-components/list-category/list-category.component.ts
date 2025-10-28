@@ -1,16 +1,7 @@
-import {
-  Component,
-  OnInit,
-  OnDestroy,
-  ViewEncapsulation,
-  ChangeDetectionStrategy,
-  forwardRef,
-  inject,
-} from '@angular/core'
+import { Component, OnInit, OnDestroy, ViewEncapsulation, ChangeDetectionStrategy, inject } from '@angular/core'
 import { ActivatedRoute } from '@angular/router'
 import { Observable } from 'rxjs'
 import { config } from '@constants'
-import { AppComponent } from '@app/app.component'
 import { PrimaryRouteComponent } from '@app/core'
 import { RecordsetFactoryService, RecordsetService, Recordset } from '@app/recordsets'
 import type { List, ListCategory, ListRepo } from '../../state'
@@ -42,7 +33,6 @@ export class ListCategoryRouteComponent extends PrimaryRouteComponent implements
   public recordset$: Observable<Recordset<ListRepo>>
   private recordsetFactory = inject(RecordsetFactoryService)
   private route = inject(ActivatedRoute)
-  public app = inject<AppComponent>(forwardRef(() => AppComponent))
 
   constructor() {
     super()

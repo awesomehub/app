@@ -14,17 +14,17 @@ export interface HelmetDefinition {
 @Injectable()
 export class HelmetService {
   private readonly router: Router = inject(Router)
-  private readonly _doc: Document = inject(DOCUMENT)
-  private readonly _dom: DomAdapter
-  private _helmet: Subscription
+  private readonly doc: Document = inject(DOCUMENT)
+  private readonly dom: DomAdapter
+  private helmet_: Subscription
 
   constructor() {
-    this._dom = getDOM()
+    this.dom = getDOM()
   }
 
   public apply(helmet: HelmetDefinition | Observable<HelmetDefinition>): void {
     if (helmet instanceof Observable) {
-      this._helmet = helmet.subscribe({
+      this.helmet_ = helmet.subscribe({
         next: (value) => this.applyDefinition(value),
       })
 
@@ -35,9 +35,9 @@ export class HelmetService {
   }
 
   public unsubscribe() {
-    if (this._helmet) {
-      this._helmet.unsubscribe()
-      this._helmet = null
+    if (this.helmet_) {
+      this.helmet_.unsubscribe()
+      this.helmet_ = null
     }
   }
 
@@ -53,21 +53,21 @@ export class HelmetService {
     }
 
     if (title !== undefined) {
-      this._doc.title = title ? title + ' - ' + config.name : config.name
-      meta.unshift({ property: 'og:title', content: this._doc.title })
+      this.doc.title = title ? title + ' - ' + config.name : config.name
+      meta.unshift({ property: 'og:title', content: this.doc.title })
     }
 
     if (meta.length) {
-      const fragElem = this._doc.createDocumentFragment()
+      const fragElem = this.doc.createDocumentFragment()
       meta.forEach((tag) => {
         const props = Object.keys(tag)
         const attr = tag['rel'] ? 'rel' : tag.name ? 'name' : 'property'
-        let elem: HTMLMetaElement = this._doc.querySelector(`meta[${attr}="${tag[attr]}"]`)
+        let elem: HTMLMetaElement = this.doc.querySelector(`meta[${attr}="${tag[attr]}"]`)
 
         if (elem) {
           // If the MetaDefinition has no content, remove the corresponding tag
           if ((attr === 'rel' && !tag['href']) || (attr !== 'rel' && !tag.content)) {
-            return this._dom.remove(elem)
+            return this.dom.remove(elem)
           }
           // Remove obsolete props
           elem.getAttributeNames().forEach((prop: string) => {
@@ -76,7 +76,7 @@ export class HelmetService {
             }
           })
         } else {
-          elem = this._dom.createElement('meta') as HTMLMetaElement
+          elem = this.dom.createElement('meta') as HTMLMetaElement
         }
 
         props.forEach((prop: string) => elem.setAttribute(prop, tag[prop]))
@@ -84,7 +84,7 @@ export class HelmetService {
       })
 
       // Insert right after <base> element
-      const baseElem = this._doc.getElementsByTagName('base')[0]
+      const baseElem = this.doc.getElementsByTagName('base')[0]
       baseElem.parentNode.insertBefore(fragElem, baseElem.nextSibling)
     }
   }

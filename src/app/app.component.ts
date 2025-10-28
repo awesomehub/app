@@ -6,7 +6,6 @@ import {
   ViewEncapsulation,
   ChangeDetectionStrategy,
   ElementRef,
-  Renderer2,
   DOCUMENT,
   inject,
   OnDestroy,
@@ -30,24 +29,23 @@ import { SkeletonOutletDirective, SkeletonService } from './skeleton'
   standalone: false,
 })
 export class AppComponent implements AfterViewChecked, AfterViewInit, OnDestroy {
-  public drawer: DrawerRouteComponent
-  public drawerSkeleton = null
-  public scrollPastFold: boolean
-  public initialNavigation = true
-  public currentRoute?: string
-  public entryRoute?: string
-  public breadcrumbs: readonly AppBreadcrumbSegment[] = []
+  protected drawer: DrawerRouteComponent
+  protected drawerSkeleton = null
+  protected scrollPastFold: boolean
+  protected initialNavigation = true
+  protected currentRoute?: string
+  protected entryRoute?: string
+  protected breadcrumbs: readonly AppBreadcrumbSegment[] = []
 
-  @ViewChild('layout', { static: false }) private layout: ElementRef
-  @ViewChild('drawerButton', { static: false }) private drawerButton: ElementRef
-  @ViewChildren(SkeletonOutletDirective) skeletons: QueryList<SkeletonOutletDirective>
+  @ViewChild('layout', { static: true }) private layout: ElementRef<HTMLDivElement>
+  @ViewChild('drawerButton', { static: true }) private drawerButton: ElementRef<HTMLButtonElement>
+  @ViewChildren(SkeletonOutletDirective) private skeletons: QueryList<SkeletonOutletDirective>
 
   private scroll_: Subscription
   private router_: Subscription
 
   private cd = inject(ChangeDetectorRef)
   private document = inject(DOCUMENT)
-  private renderer = inject(Renderer2)
   private router = inject(Router)
   private skeleton = inject(SkeletonService)
   private helmet = inject(HelmetService)
@@ -110,14 +108,15 @@ export class AppComponent implements AfterViewChecked, AfterViewInit, OnDestroy 
       return
     }
 
-    const layout: Element = this.layout.nativeElement
-    const drawerButton: Element = this.drawerButton.nativeElement
+    const layout = this.layout.nativeElement
+    const drawerButton = this.drawerButton.nativeElement
 
-    if (-1 === layout.className.indexOf('is-small-screen')) {
+    if (!layout.classList.contains('is-small-screen')) {
       return
     }
 
-    this.renderer.selectRootElement(drawerButton).click()
+    // trigger MDL drawer click handler
+    drawerButton.click()
   }
 
   scrollTop() {

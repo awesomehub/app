@@ -23,7 +23,7 @@ import { Router, Event, NavigationStart, NavigationEnd, NavigationCancel, Naviga
 })
 export class LoadingIndicatorComponent {
   protected message: string
-  private _timeout: ReturnType<typeof setTimeout>
+  private timeout: ReturnType<typeof setTimeout>
 
   @HostBinding('class') private class = 'loading-indicator'
   @HostBinding('class.active') protected active = false
@@ -61,7 +61,7 @@ export class LoadingIndicatorComponent {
     this.spinner = false
     this.message = message
     this.ref.markForCheck()
-    this._timeout = setTimeout(() => {
+    this.timeout = setTimeout(() => {
       this.spinner = true
       this.ref.markForCheck()
     }, 1000)
@@ -71,7 +71,7 @@ export class LoadingIndicatorComponent {
     this.active = false
     this.spinner = false
     this.message = null
-    clearTimeout(this._timeout)
+    clearTimeout(this.timeout)
     this.ref.markForCheck()
   }
 
@@ -79,7 +79,7 @@ export class LoadingIndicatorComponent {
     this.active = true
     this.spinner = false
     this.message = message
-    clearTimeout(this._timeout)
+    clearTimeout(this.timeout)
     this.ref.markForCheck()
   }
 }
