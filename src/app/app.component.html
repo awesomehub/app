@@ -35,19 +35,21 @@
       </nav>
     </div>
     <div class="header-bar mdl-layout__header-row">
-      @if (drawer) {
-        <a
-          href="javascript:void(0)"
-          class="drawer-toggler mdl-layout--small-screen-only"
-          (click)="toggleDrawer()"
-          title="Open side menu"
-          role="button"
-        >
-          <ah-svg key="bars" class="icon icon-28" />
-        </a>
-      }
-      <router-outlet name="header-bar" />
-      <ah-skeleton-outlet name="header-bar" />
+      <div class="header-bar__inner">
+        @if (drawer) {
+          <a
+            href="javascript:void(0)"
+            class="drawer-toggler mdl-layout--small-screen-only"
+            (click)="toggleDrawer()"
+            title="Open side menu"
+            role="button"
+          >
+            <ah-svg key="bars" class="icon icon-28" />
+          </a>
+        }
+        <router-outlet name="header-bar" />
+        <ah-skeleton-outlet name="header-bar" />
+      </div>
     </div>
   </header>
 

@@ -74,8 +74,17 @@ h4 {
 
 /* Header Bar */
 .header-bar {
-  display: table;
   margin-top: 15px;
+}
+
+.header-bar__inner {
+  display: flex;
+  width: 100%;
+  overflow: hidden;
+}
+
+.header-bar__inner > ng-component {
+  flex-grow: 1;
 }
 
 .mdl-layout.has-drawer.is-small-screen .list-search-bar {
@@ -83,22 +92,19 @@ h4 {
 }
 
 .drawer-toggler {
-  display: table-cell;
+  display: inline-flex;
   padding: 0 15pt;
   border: 0;
   outline: none;
   background: rgba(0, 0, 0, 0.15);
   color: rgba(255, 255, 255, 0.5);
   cursor: pointer;
+  align-self: stretch;
+  align-items: center;
 }
 
 .drawer-toggler:hover {
   color: #fff;
-}
-
-.drawer-toggler .icon {
-  font-size: 2rem;
-  line-height: 100%;
 }
 
 /* Logo */
@@ -230,6 +236,7 @@ h4 {
 .mdl-card,
 .mdl-menu,
 .mdl-menu__outline,
+.header-bar__inner,
 .skl-block,
 .mdl-button:not(.mdl-button--fab) {
   border-radius: 10px;

@@ -3,7 +3,6 @@
   height: 36px;
   position: relative;
   overflow: hidden;
-  border-radius: 2px;
 }
 
 .skl-block::after {
