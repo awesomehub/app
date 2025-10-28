@@ -3,15 +3,19 @@
   position: fixed;
   inset: 0;
   z-index: 999;
-  background: rgba(255, 255, 255, 0.25);
-  backdrop-filter: blur(2px);
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  pointer-events: all;
 }
 
 .loading-indicator.active {
   display: flex;
+}
+
+.loading-indicator.active.blur {
+  background: rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(2px);
 }
 
 .loading-indicator .message {

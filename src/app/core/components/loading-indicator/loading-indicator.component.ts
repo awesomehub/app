@@ -22,12 +22,12 @@ import { Router, Event, NavigationStart, NavigationEnd, NavigationCancel, Naviga
   standalone: false,
 })
 export class LoadingIndicatorComponent {
-  public spinner = false
-  public message: string
+  protected message: string
   private _timeout: ReturnType<typeof setTimeout>
 
   @HostBinding('class') private class = 'loading-indicator'
-  @HostBinding('class.active') public active = false
+  @HostBinding('class.active') protected active = false
+  @HostBinding('class.blur') protected spinner = false
 
   private router = inject(Router)
   private ref = inject(ChangeDetectorRef)
@@ -56,7 +56,7 @@ export class LoadingIndicatorComponent {
     })
   }
 
-  activate(message: string = null) {
+  private activate(message: string = null) {
     this.active = true
     this.spinner = false
     this.message = message
@@ -67,7 +67,7 @@ export class LoadingIndicatorComponent {
     }, 1000)
   }
 
-  deactivate() {
+  private deactivate() {
     this.active = false
     this.spinner = false
     this.message = null
@@ -75,7 +75,7 @@ export class LoadingIndicatorComponent {
     this.ref.markForCheck()
   }
 
-  halt(message: string = null) {
+  private halt(message: string = null) {
     this.active = true
     this.spinner = false
     this.message = message
