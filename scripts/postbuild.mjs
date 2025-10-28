@@ -94,7 +94,7 @@ async function main() {
         .forEach((path) => {
           const filePath = `/${path}`
           headers.set(filePath, [CACHE_CONTROL_IMMUTABLE])
-          headers.get(page).push(`Link: <${filePath}>; rel=modulepreload; crossorigin=same-origin`)
+          // headers.get(page).push(`Link: <${filePath}>; rel=modulepreload; crossorigin=same-origin`)
           log('info', 'data:asset', page, filePath)
         })
     }
