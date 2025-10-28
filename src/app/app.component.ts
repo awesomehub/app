@@ -58,6 +58,15 @@ export class AppComponent implements AfterViewChecked, AfterViewInit, OnDestroy 
     // Run MDL after each render to upgrade any new elements added
     const { componentHandler } = this.document.defaultView
     if (componentHandler) {
+      componentHandler.registerUpgradedCallback('MaterialLayout', (elm) => {
+        // this callback runs once after MDL is loaded
+        // It's necessary to remove invalid `aria-hidden: true` on desktop
+        requestAnimationFrame(() => {
+          if (!elm.classList.contains('is-small-screen')) {
+            elm.MaterialLayout.drawer_.removeAttribute('aria-hidden')
+          }
+        })
+      })
       componentHandler.upgradeAllRegistered()
     }
   }

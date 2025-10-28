@@ -5,6 +5,12 @@ interface MdlComponentHandler {
   upgradeElements(elements: Element | Element[] | NodeList | HTMLCollection): void
   upgradeAllRegistered(): void
   registerUpgradedCallback(jsClass: string, callback: (data?: any) => void): void
+  registerUpgradedCallback(
+    jsClass: 'MaterialLayout',
+    callback: (
+      data?: HTMLDivElement & { MaterialLayout?: Record<'content_' | 'drawer_' | 'header_', HTMLDivElement> },
+    ) => void,
+  ): void
   register(config: {
     constructor: () => void
     classAsString: string
