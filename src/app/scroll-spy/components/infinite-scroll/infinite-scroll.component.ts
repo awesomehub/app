@@ -21,7 +21,7 @@ import { ScrollSpyService, ScrollSpyData } from '../../services'
   styleUrls: ['infinite-scroll.component.css'],
   template: `
     @if (disabled) {
-      <button class="mdl-button" (click)="loadNext()">{{ button }}</button>
+      <button class="mdl-button mdl-js-button" (click)="loadNext()">{{ button }}</button>
     }
   `,
   encapsulation: ViewEncapsulation.None,
