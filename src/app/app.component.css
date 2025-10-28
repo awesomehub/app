@@ -226,6 +226,15 @@ h4 {
   margin: 5px 0 5px 20px;
 }
 
+/* Border Radius */
+.mdl-card,
+.mdl-menu,
+.mdl-menu__outline,
+.skl-block,
+.mdl-button:not(.mdl-button--fab) {
+  border-radius: 10px;
+}
+
 /* Cards */
 .mdl-card {
   min-height: auto;
