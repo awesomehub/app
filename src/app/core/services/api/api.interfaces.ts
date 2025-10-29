@@ -52,6 +52,7 @@ export interface ListRepoResponse {
   lang: string
   lic: string
   cats: number[]
+  rank: 1 | 3 | 5 | 10 | 50 | 90 | 100
   score: number
   scores: {
     p: number

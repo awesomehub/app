@@ -11,8 +11,11 @@ import type { ListRepo } from '../../state'
         <div class="mdl-card__media" (click)="extendedScores = true" title="Show extended scores" role="button">
           <div class="score">
             <span>{{ repo.score | ahScoreFormat }}</span>
+            @if (shouldShowRank) {
+              <span class="score-rank">Top {{ repo.rank }}%</span>
+            }
           </div>
-          <div class="scores" [style.border-color]="scoreColorLegend[scoreColorLegend.length - 1]">
+          <div class="scores" [style.border-color]="scoreScaleMaxColor">
             <span
               [ahListRepoScoreStyle]="repo.scores.p"
               scoreType="p"
@@ -47,7 +50,7 @@ import type { ListRepo } from '../../state'
       @if (extendedScores) {
         <div
           class="mdl-card__media extended-scores"
-          [style.border-color]="scoreColorLegend[scoreColorLegend.length - 1]"
+          [style.border-color]="scoreScaleMaxColor"
           (click)="extendedScores = false"
         >
           <div [ahListRepoScoreStyle]="repo.scores.p" scoreType="p" title="Popularity score">
@@ -117,10 +120,17 @@ export class ListRepoCardComponent {
   @Input() public repo: ListRepo
   @Input() public extendedScores = false
 
-  public scoreColorLegend: string[]
-  private repoScoreService = inject(ListRepoScoreService)
+  protected scoreScaleMax: number
+  protected scoreScaleMaxColor: string
 
   constructor() {
-    this.scoreColorLegend = this.repoScoreService.getScoreColorTheme()
+    const repoScore = inject(ListRepoScoreService)
+    const [max, maxColor] = repoScore.getScoreColorScale('m').getMax()
+    this.scoreScaleMax = max
+    this.scoreScaleMaxColor = maxColor
+  }
+
+  get shouldShowRank() {
+    return this.repo.rank <= 50 && this.repo.score >= this.scoreScaleMax * 0.4
   }
 }

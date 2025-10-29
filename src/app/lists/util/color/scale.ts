@@ -6,6 +6,8 @@ import { ColorGradient } from './gradient'
 export class ColorScale {
   private readonly min: number
   private readonly max: number
+  private readonly minColor: string
+  private readonly MaxColor: string
   private readonly colors: string[]
   private readonly gradients: ColorGradient[]
 
@@ -28,6 +30,16 @@ export class ColorScale {
 
     // Set gradients
     this.gradients = this.calculateGradients()
+    this.minColor = this.getColor(this.min)
+    this.MaxColor = this.getColor(this.max)
+  }
+
+  getMin(): [number, string] {
+    return [this.min, this.minColor]
+  }
+
+  getMax(): [number, string] {
+    return [this.max, this.MaxColor]
   }
 
   /**
@@ -35,7 +47,7 @@ export class ColorScale {
    */
   getColor(position: number) {
     if (isNaN(position)) {
-      throw new TypeError(`'Invalid color position provided "${position}"`)
+      throw new TypeError(`Invalid color position provided "${position}"`)
     }
 
     if (this.gradients.length === 1) {

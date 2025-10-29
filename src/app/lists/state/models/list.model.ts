@@ -9,7 +9,7 @@ export interface List {
   entries: {
     'repo.github': ListRepo[]
   }
-  updated: string
+  updated: number
   loaded: boolean
 }
 
@@ -34,6 +34,7 @@ export interface ListRepo {
   lang: string
   lic: string
   cats: number[]
+  rank: 1 | 3 | 5 | 10 | 50 | 90 | 100
   score: number
   scores: Record<ListRepoScoreType, number>
   hglt: string
