@@ -6,36 +6,29 @@ export function listRepoRecordsetReducer(
   filters: RecordsetFilters,
   sorting: RecordsetSorting,
 ): ListRepo[] {
-  let repos: ListRepo[] = state.entries['repo.github']
+  let repos = state.entries['repo.github']
 
-  if (filters['category']) {
-    repos = repos.filter((repo) => {
-      return repo.cats.indexOf(filters['category']) !== -1
-    })
+  const category = filters['category']
+  if (category) {
+    repos = repos.filter((repo) => repo.cats.includes(category))
   }
 
-  if (filters['q']) {
-    const q = filters['q'].toLowerCase()
-    let _scores = {}
+  const query = filters['q']?.toLowerCase().trim()
+  if (query) {
+    const queryScores = new Map<string, number>()
     repos = repos
       .filter((repo) => {
-        if (!q) {
-          return true
-        }
-        const id = repo.author + '/' + repo.name
-        _scores[id] = id.toLowerCase().indexOf(q)
-        if (_scores[id] === -1) {
-          _scores[id] = repo.desc.toLowerCase().indexOf(q)
-        }
-        return _scores[id] !== -1
+        const key = `${repo.author}/${repo.name}`
+        let score = key.toLowerCase().indexOf(query)
+        if (score === -1) score = repo.desc.toLowerCase().indexOf(query)
+        if (score !== -1) queryScores.set(key, score)
+        return score !== -1
       })
       .sort((a, b) => {
-        if (q) {
-          return _scores[a.author + '/' + a.name] - _scores[b.author + '/' + b.name]
-        }
-        return 0
+        const sa = queryScores.get(`${a.author}/${a.name}`)!
+        const sb = queryScores.get(`${b.author}/${b.name}`)!
+        return sa - sb
       })
-    _scores = undefined
   }
 
   // clone the array if it wasn't cloned by above filters

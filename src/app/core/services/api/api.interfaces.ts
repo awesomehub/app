@@ -4,11 +4,10 @@ export interface BuildResponse {
   urls: Record<string, string>
 }
 
-/**
- * Response Data
- */
 export interface ListCollectionResponse {
+  id: string
   lists: ListSummaryResponse[]
+  entries: number
 }
 
 export interface ListSummaryResponse {

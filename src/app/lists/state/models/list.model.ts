@@ -1,65 +1,38 @@
-import { ListResponse } from '@app/core'
+import { ListResponse, ListCategoryResponse, ListRepoResponse } from '@app/core'
 
-export interface List {
-  id: string
-  name: string
-  desc: string
-  score: number
+export interface List extends ListResponse {
   cats: ListCategory[]
   entries: {
     'repo.github': ListRepo[]
   }
-  updated: number
   loaded: boolean
 }
 
-export interface ListCategory {
-  id: number
-  title: string
-  path: string
-  parent: number
-  order: number
-  count: {
-    all: number
-    'repo.github': number
-  }
-}
+export interface ListCategory extends ListCategoryResponse {}
 
-export type ListRepoScoreType = 'p' | 'h' | 'a' | 'm'
+export interface ListRepo extends ListRepoResponse {}
 
-export interface ListRepo {
-  author: string
-  name: string
-  desc: string
-  lang: string
-  lic: string
-  cats: number[]
-  rank: 1 | 3 | 5 | 10 | 50 | 90 | 100
-  score: number
-  scores: Record<ListRepoScoreType, number>
-  hglt: string
-}
-
-export class ListRecord implements List {
-  id = null
-  name = null
-  desc = null
-  score = 0
-  cats = []
-  entries = {
-    'repo.github': [],
-  }
-  updated = null
-  loaded = false
-}
+export type ListRepoScoreType = keyof ListRepo['scores']
 
 export class ListRecordFactory {
-  static fromResponse(data: ListResponse): List {
-    // we're directly merging the response data because it's identical to our model
-    return Object.assign(new ListRecord(), data, { loaded: true })
+  static initialState: List = {
+    id: null,
+    name: null,
+    desc: null,
+    score: 0,
+    cats: [],
+    entries: {
+      'repo.github': [],
+    },
+    updated: null,
+    loaded: false,
   }
 
-  static empty(id: string = null): List {
-    return Object.assign(new ListRecord(), { id })
+  static fromResponse(data: ListResponse): List {
+    return { ...this.initialState, ...data, loaded: true }
+  }
+
+  static create(data?: Partial<List>): List {
+    return { ...this.initialState, ...data }
   }
 }

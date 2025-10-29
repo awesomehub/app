@@ -86,6 +86,6 @@ export class InfiniteScrollComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.scroll_.unsubscribe()
+    this.scroll_?.unsubscribe()
   }
 }

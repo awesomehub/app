@@ -1,13 +1,29 @@
-import { ListSummary } from './list-summary.model'
+import { ListCollectionResponse, ListSummaryResponse } from '@app/core'
 
-export interface ListCollection {
-  id: string
-  loaded: boolean
+export interface ListSummary extends ListSummaryResponse {}
+
+export interface ListCollection extends ListCollectionResponse {
   lists: ListSummary[]
+  loaded: boolean
 }
 
-export class ListCollectionRecord implements ListCollection {
-  id = null
-  loaded = false
-  lists = []
+export class ListCollectionFactory {
+  static initialState: ListCollection = {
+    id: null,
+    loaded: false,
+    lists: [],
+    entries: 0,
+  }
+
+  static fromResponse(data: ListCollectionResponse): ListCollection {
+    return {
+      ...this.initialState,
+      ...data,
+      loaded: true,
+    }
+  }
+
+  static create(data?: Partial<ListCollection>): ListCollection {
+    return { ...this.initialState, ...data }
+  }
 }

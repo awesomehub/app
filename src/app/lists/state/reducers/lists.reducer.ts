@@ -10,10 +10,10 @@ export function listsReducer(state: Lists = {}, action: Action): Lists {
       if (state[action.payload.id]) {
         return state
       }
-
-      return Object.assign({}, state, {
+      return {
+        ...state,
         [action.payload.id]: listReducer(undefined, action),
-      })
+      }
 
     case ListActions.FETCH_SUCCESS:
     case ListActions.FETCH_FAILED:

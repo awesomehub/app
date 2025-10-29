@@ -8,21 +8,11 @@ export function listSummaryRecordsetReducer(
 ): ListSummary[] {
   let lists = state.lists
 
-  if (filters['q']) {
-    const q = filters['q'].toLowerCase()
+  const query = filters['q']?.toLowerCase().trim()
+  if (query) {
     lists = lists
-      .filter((list) => {
-        if (!q) {
-          return true
-        }
-        return list.name.toLowerCase().indexOf(q) !== -1
-      })
-      .sort((a, b) => {
-        if (q) {
-          return a.name.toLowerCase().indexOf(q) - b.name.toLowerCase().indexOf(q)
-        }
-        return 0
-      })
+      .filter((list) => list.name.toLowerCase().indexOf(query) !== -1)
+      .sort((a, b) => a.name.toLowerCase().indexOf(query) - b.name.toLowerCase().indexOf(query))
   } else {
     lists = lists.slice(0).sort((a, b) => {
       const aOrder = a.score + a.entries * 0.15
