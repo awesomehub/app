@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router'
 import { Observable } from 'rxjs'
 import { config } from '@constants'
 import { PrimaryRouteComponent } from '@app/core'
-import { RecordsetFactoryService, RecordsetService, Recordset } from '@app/recordsets'
+import { RecordsetRegistryService, RecordsetService, Recordset } from '@app/recordsets'
 import type { List, ListRepo } from '../../state'
 
 @Component({
@@ -30,7 +30,7 @@ export class ListSearchRouteComponent extends PrimaryRouteComponent implements O
   public list: List
   public recordset: RecordsetService<ListRepo>
   public recordset$: Observable<Recordset<ListRepo>>
-  private recordsetFactory = inject(RecordsetFactoryService)
+  private recordsetRegistry = inject(RecordsetRegistryService)
   private route = inject(ActivatedRoute)
 
   constructor() {
@@ -41,7 +41,7 @@ export class ListSearchRouteComponent extends PrimaryRouteComponent implements O
 
   ngOnInit() {
     // Create repos recordset
-    this.recordset = this.recordsetFactory.create('search-repos', config.lists.recordsets.repo, {
+    this.recordset = this.recordsetRegistry.register('search-repos', config.lists.recordsets.repo, {
       parent: this.list.id,
       size: config.lists.listReposPageSize,
     })
@@ -66,6 +66,6 @@ export class ListSearchRouteComponent extends PrimaryRouteComponent implements O
   }
 
   ngOnDestroy() {
-    this.recordsetFactory.destroy('search-repos')
+    this.recordsetRegistry.destroy('search-repos')
   }
 }

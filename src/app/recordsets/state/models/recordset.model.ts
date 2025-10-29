@@ -33,40 +33,29 @@ export interface RecordsetConstructorOptions {
   size?: number
 }
 
-export class RecordsetRecord implements Recordset<any> {
-  id = null
-  reducer = null
-  parent = null
-  updated = false
-  set = []
-  slice = []
-  filters = {}
-  sorting = {
-    by: null,
-    asc: true,
-  }
-  pagination = {
-    pages: 0,
-    current: 0,
-    size: 10,
-    hasNext: false,
+export class RecordsetFactory {
+  static get initialState(): Recordset<any> {
+    return {
+      id: null,
+      reducer: null,
+      parent: null,
+      updated: false,
+      set: [],
+      slice: [],
+      filters: {},
+      sorting: { by: null, asc: true },
+      pagination: { pages: 0, current: 0, size: 10, hasNext: false },
+    }
   }
 
-  constructor(id: string, reducer: string, options?: RecordsetConstructorOptions) {
-    this.id = id
-    this.reducer = reducer
-
-    if (options.parent) {
-      this.parent = options.parent
-    }
-    if (options.filters) {
-      this.filters = options.filters
-    }
-    if (options.sorting) {
-      this.sorting = options.sorting
-    }
-    if (options.size) {
-      this.pagination.size = options.size
-    }
+  static create(id: string, reducer: string, options?: RecordsetConstructorOptions): Recordset<any> {
+    const rs = this.initialState
+    rs.id = id
+    rs.reducer = reducer
+    if (options?.parent) rs.parent = options.parent
+    if (options?.filters) rs.filters = options.filters
+    if (options?.sorting) rs.sorting = options.sorting
+    if (options?.size) rs.pagination.size = options.size
+    return rs
   }
 }

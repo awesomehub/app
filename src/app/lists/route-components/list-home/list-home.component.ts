@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router'
 import { Observable } from 'rxjs'
 import { config } from '@constants'
 import { PrimaryRouteComponent } from '@app/core'
-import { RecordsetFactoryService, RecordsetService, Recordset } from '@app/recordsets'
+import { RecordsetRegistryService, RecordsetService, Recordset } from '@app/recordsets'
 import type { List, ListRepo } from '../../state'
 
 @Component({
@@ -48,7 +48,7 @@ export class ListHomeRouteComponent extends PrimaryRouteComponent implements OnI
     best: Observable<Recordset<ListRepo>>
     trending: Observable<Recordset<ListRepo>>
   }
-  private recordsetFactory = inject(RecordsetFactoryService)
+  private recordsetRegistry = inject(RecordsetRegistryService)
   private route = inject(ActivatedRoute)
 
   constructor() {
@@ -63,7 +63,7 @@ export class ListHomeRouteComponent extends PrimaryRouteComponent implements OnI
 
     // Create repos recordsets
     this.repos = {
-      best: this.recordsetFactory.create('best-repos', recordsetReducer, {
+      best: this.recordsetRegistry.register('best-repos', recordsetReducer, {
         parent: this.list.id,
         size: recordsetSize,
         sorting: {
@@ -71,7 +71,7 @@ export class ListHomeRouteComponent extends PrimaryRouteComponent implements OnI
           asc: false,
         },
       }),
-      trending: this.recordsetFactory.create('trending-repos', recordsetReducer, {
+      trending: this.recordsetRegistry.register('trending-repos', recordsetReducer, {
         parent: this.list.id,
         size: recordsetSize,
         sorting: {
@@ -95,7 +95,7 @@ export class ListHomeRouteComponent extends PrimaryRouteComponent implements OnI
   }
 
   ngOnDestroy() {
-    this.recordsetFactory.destroy('best-repos')
-    this.recordsetFactory.destroy('trending-repos')
+    this.recordsetRegistry.destroy('best-repos')
+    this.recordsetRegistry.destroy('trending-repos')
   }
 }

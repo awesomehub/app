@@ -8,22 +8,20 @@ export interface ListCollection extends ListCollectionResponse {
 }
 
 export class ListCollectionFactory {
-  static initialState: ListCollection = {
-    id: null,
-    loaded: false,
-    lists: [],
-    entries: 0,
-  }
-
-  static fromResponse(data: ListCollectionResponse): ListCollection {
+  static get initialState(): ListCollection {
     return {
-      ...this.initialState,
-      ...data,
-      loaded: true,
+      id: null,
+      loaded: false,
+      lists: [],
+      entries: 0,
     }
   }
 
+  static fromResponse(data: ListCollectionResponse): ListCollection {
+    return Object.assign(this.initialState, data, { loaded: true })
+  }
+
   static create(data?: Partial<ListCollection>): ListCollection {
-    return { ...this.initialState, ...data }
+    return Object.assign(this.initialState, data)
   }
 }

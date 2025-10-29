@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router'
 import { Observable } from 'rxjs'
 import { config } from '@constants'
 import { PrimaryRouteComponent } from '@app/core'
-import { RecordsetFactoryService, RecordsetService, Recordset } from '@app/recordsets'
+import { RecordsetRegistryService, RecordsetService, Recordset } from '@app/recordsets'
 import type { List, ListRepo } from '../../state'
 
 @Component({
@@ -32,7 +32,7 @@ export class ListAllRouteComponent extends PrimaryRouteComponent implements OnIn
   public recordset: RecordsetService<ListRepo>
   public recordset$: Observable<Recordset<ListRepo>>
   private route = inject(ActivatedRoute)
-  private recordsetFactory = inject(RecordsetFactoryService)
+  private recordsetRegistry = inject(RecordsetRegistryService)
 
   constructor() {
     super()
@@ -40,7 +40,7 @@ export class ListAllRouteComponent extends PrimaryRouteComponent implements OnIn
   }
 
   ngOnInit() {
-    this.recordset = this.recordsetFactory.create('all-repos', config.lists.recordsets.repo, {
+    this.recordset = this.recordsetRegistry.register('all-repos', config.lists.recordsets.repo, {
       parent: this.list.id,
       size: config.lists.listReposPageSize,
       sorting: {
@@ -56,6 +56,6 @@ export class ListAllRouteComponent extends PrimaryRouteComponent implements OnIn
   }
 
   ngOnDestroy() {
-    this.recordsetFactory.destroy('all-repos')
+    this.recordsetRegistry.destroy('all-repos')
   }
 }

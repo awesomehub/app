@@ -117,8 +117,8 @@ import type { ListRepo } from '../../state'
 })
 export class ListRepoCardComponent {
   @HostBinding('class') private class = 'list-repo-card mdl-card'
-  @Input() public repo: ListRepo
-  @Input() public extendedScores = false
+  @Input() repo: ListRepo
+  @Input() extendedScores = false
 
   protected scoreScaleMax: number
   protected scoreScaleMaxColor: string

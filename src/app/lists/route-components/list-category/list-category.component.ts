@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router'
 import { Observable } from 'rxjs'
 import { config } from '@constants'
 import { PrimaryRouteComponent } from '@app/core'
-import { RecordsetFactoryService, RecordsetService, Recordset } from '@app/recordsets'
+import { RecordsetRegistryService, RecordsetService, Recordset } from '@app/recordsets'
 import type { List, ListCategory, ListRepo } from '../../state'
 
 @Component({
@@ -31,7 +31,7 @@ export class ListCategoryRouteComponent extends PrimaryRouteComponent implements
   public category: ListCategory
   public recordset: RecordsetService<ListRepo>
   public recordset$: Observable<Recordset<ListRepo>>
-  private recordsetFactory = inject(RecordsetFactoryService)
+  private recordsetRegistry = inject(RecordsetRegistryService)
   private route = inject(ActivatedRoute)
 
   constructor() {
@@ -41,7 +41,7 @@ export class ListCategoryRouteComponent extends PrimaryRouteComponent implements
   }
 
   ngOnInit() {
-    this.recordset = this.recordsetFactory.create('category-repos', config.lists.recordsets.repo, {
+    this.recordset = this.recordsetRegistry.register('category-repos', config.lists.recordsets.repo, {
       parent: this.list.id,
       size: config.lists.listReposPageSize,
       sorting: {
@@ -61,6 +61,6 @@ export class ListCategoryRouteComponent extends PrimaryRouteComponent implements
   }
 
   ngOnDestroy() {
-    this.recordsetFactory.destroy('category-repos')
+    this.recordsetRegistry.destroy('category-repos')
   }
 }

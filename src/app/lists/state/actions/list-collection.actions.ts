@@ -10,23 +10,21 @@ export class ListCollectionActions {
   static fetchFailed(id: string, response: HttpErrorResponse | Error): Action {
     return {
       type: ListCollectionActions.FETCH_FAILED,
-      payload: Object.assign({}, response, { id }),
+      payload: { ...response, id },
     }
   }
 
   static fetchSuccess(id: string, data: ListCollectionResponse): Action {
     return {
       type: ListCollectionActions.FETCH_SUCCESS,
-      payload: Object.assign({}, data, { id }),
+      payload: { ...data, id },
     }
   }
 
   static fetch(id: string): Action {
     return {
       type: ListCollectionActions.FETCH,
-      payload: {
-        id,
-      },
+      payload: { id },
     }
   }
 }

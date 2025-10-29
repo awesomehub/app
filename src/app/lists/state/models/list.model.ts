@@ -15,24 +15,26 @@ export interface ListRepo extends ListRepoResponse {}
 export type ListRepoScoreType = keyof ListRepo['scores']
 
 export class ListRecordFactory {
-  static initialState: List = {
-    id: null,
-    name: null,
-    desc: null,
-    score: 0,
-    cats: [],
-    entries: {
-      'repo.github': [],
-    },
-    updated: null,
-    loaded: false,
+  static get initialState(): List {
+    return {
+      id: null,
+      name: null,
+      desc: null,
+      score: 0,
+      cats: [],
+      entries: {
+        'repo.github': [],
+      },
+      updated: null,
+      loaded: false,
+    }
   }
 
   static fromResponse(data: ListResponse): List {
-    return { ...this.initialState, ...data, loaded: true }
+    return Object.assign(this.initialState, data, { loaded: true })
   }
 
   static create(data?: Partial<List>): List {
-    return { ...this.initialState, ...data }
+    return Object.assign(this.initialState, data)
   }
 }

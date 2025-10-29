@@ -69,7 +69,7 @@ import type { ListRepo } from '../../state'
       </div>
     }
     <div class="mdl-grid" [class.mdl-grid--no-spacing]="!wide">
-      @for (repo of recordset.slice; track trackByRepos($index, repo)) {
+      @for (repo of recordset.slice; track getRepoSlug(repo)) {
         <ah-list-repo-card
           [repo]="repo"
           class="mdl-cell mdl-cell--12-col mdl-shadow--2dp"
@@ -119,13 +119,13 @@ export class ListReposComponent implements AfterViewInit {
   ngAfterViewInit() {
     if (this.sortable) {
       // workaround for poor MDL menu markup
-      const id = ('repos-sort-' + Math.random()).replace(/\./g, '')
+      const id = `${this.id}-sort`
       this.renderer.setAttribute(this.sortBtn.nativeElement, 'id', id)
       this.renderer.setAttribute(this.sortMenu.nativeElement, 'for', id)
     }
   }
 
-  trackByRepos(_i: number, repo: ListRepo) {
-    return repo.author + '/' + repo.name
+  getRepoSlug(repo: ListRepo) {
+    return `${repo.author}/${repo.name}`
   }
 }

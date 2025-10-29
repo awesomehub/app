@@ -1,12 +1,12 @@
 import { NgModule, ModuleWithProviders } from '@angular/core'
-import { RecordsetFactoryService } from './services'
+import { RecordsetRegistryService } from './services'
 
 @NgModule({})
 export class RecordsetsModule {
   static provideService(): ModuleWithProviders<RecordsetsModule> {
     return {
       ngModule: RecordsetsModule,
-      providers: [RecordsetFactoryService],
+      providers: [RecordsetRegistryService],
     }
   }
 }

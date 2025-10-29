@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router'
 import { Observable } from 'rxjs'
 import { config } from '@constants'
 import { PrimaryRouteComponent } from '@app/core'
-import { RecordsetFactoryService, RecordsetService, Recordset } from '@app/recordsets'
+import { RecordsetRegistryService, RecordsetService, Recordset } from '@app/recordsets'
 import type { ListCollection, ListSummary } from '../../state'
 
 @Component({
@@ -24,7 +24,7 @@ export class SearchRouteComponent extends PrimaryRouteComponent implements OnIni
   public collection: ListCollection
   public recordset: RecordsetService<ListSummary>
   public recordset$: Observable<Recordset<ListSummary>>
-  private recordsetFactory = inject(RecordsetFactoryService)
+  private recordsetRegistry = inject(RecordsetRegistryService)
   private route = inject(ActivatedRoute)
 
   constructor() {
@@ -35,7 +35,7 @@ export class SearchRouteComponent extends PrimaryRouteComponent implements OnIni
 
   ngOnInit() {
     // Create the lists recordset
-    this.recordset = this.recordsetFactory.create('search-lists', config.lists.recordsets.summary, {
+    this.recordset = this.recordsetRegistry.register('search-lists', config.lists.recordsets.summary, {
       parent: this.collection.id,
       size: config.lists.listsPageSize,
     })
@@ -54,6 +54,6 @@ export class SearchRouteComponent extends PrimaryRouteComponent implements OnIni
   }
 
   ngOnDestroy() {
-    this.recordsetFactory.destroy('search-lists')
+    this.recordsetRegistry.destroy('search-lists')
   }
 }
