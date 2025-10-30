@@ -7,7 +7,9 @@ import { Component, ViewEncapsulation, ChangeDetectionStrategy, HostBinding, Inp
       <div class="mdl-card__supporting-text">
         <div class="skl-block skl-title"></div>
         <div class="skl-block skl-text"></div>
-        <div class="skl-block skl-text short"></div>
+        @if (lines > 1) {
+          <div class="skl-block skl-text short"></div>
+        }
       </div>
       <div class="mdl-card__actions mdl-card--border">
         <span class="meta">
@@ -30,6 +32,7 @@ import { Component, ViewEncapsulation, ChangeDetectionStrategy, HostBinding, Inp
 export class SkeletonComponent {
   @Input() type: 'card' | 'block' | 'heading' = 'block'
   @Input() color: 'dark' | 'light' = 'light'
+  @Input() lines: 1 | 2 = 2
 
   @HostBinding('class')
   get mainClasses() {

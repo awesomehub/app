@@ -8,8 +8,9 @@ import { Component, ViewEncapsulation, ChangeDetectionStrategy } from '@angular/
         @for (placeholder of placeholders; track placeholder) {
           <ah-skeleton
             type="card"
+            [lines]="1"
             class="mdl-cell--12-col mdl-cell--6-col-desktop"
-            style="border-top: 5px solid #0091ea;"
+            style="border-top: 5px solid #0091ea; min-height: 170px"
           />
         }
       </div>
@@ -20,5 +21,5 @@ import { Component, ViewEncapsulation, ChangeDetectionStrategy } from '@angular/
   standalone: false,
 })
 export class HomeSkeletonComponent {
-  protected readonly placeholders = Array.from({ length: 6 }, (_, index) => index)
+  protected readonly placeholders = Array.from({ length: 8 }, (_, index) => index)
 }

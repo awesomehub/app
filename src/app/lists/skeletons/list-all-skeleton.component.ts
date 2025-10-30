@@ -32,5 +32,5 @@ import { Component, ViewEncapsulation, ChangeDetectionStrategy } from '@angular/
   standalone: false,
 })
 export class ListAllSkeletonComponent {
-  protected readonly placeholders = Array.from({ length: 6 }, (_, index) => index)
+  protected readonly placeholders = Array.from({ length: 8 }, (_, index) => index)
 }
