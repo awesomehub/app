@@ -2275,13 +2275,10 @@
     <loc>https://awesomehub.js.org/list/selfhosted/support-ticketing</loc>
   </url>
   <url>
-    <loc>https://awesomehub.js.org/list/selfhosted/web</loc>
+    <loc>https://awesomehub.js.org/list/selfhosted/url-shorteners</loc>
   </url>
   <url>
-    <loc>https://awesomehub.js.org/list/selfhosted/web/servers</loc>
-  </url>
-  <url>
-    <loc>https://awesomehub.js.org/list/selfhosted/web/url-shorteners</loc>
+    <loc>https://awesomehub.js.org/list/selfhosted/web-servers</loc>
   </url>
   <url>
     <loc>https://awesomehub.js.org/list/symfony</loc>

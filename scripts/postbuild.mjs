@@ -26,13 +26,14 @@ const DEFAULT_HEADERS = {
 
 const DEFAULT_REDIRECTS = [
   { from: '/list/selfhosted/internet-of-things-iot', to: '/list/selfhosted/iot-platforms' },
-  { from: '/list/selfhosted/proxy', to: '/list/selfhosted/networking%2Fproxy' },
+  { from: '/list/selfhosted/proxy', to: '/list/selfhosted/networking/proxy' },
   { from: '/list/selfhosted/money-budgeting', to: '/list/selfhosted/finance-budgeting' },
   { from: '/list/selfhosted/note-taking-and-editors', to: '/list/selfhosted/note-taking-apps' },
   { from: '/list/selfhosted/calendar-contacts', to: '/list/selfhosted/calendars-contacts' },
   { from: '/list/selfhosted/genealogy', to: '/list/selfhosted/genealogy-tools' },
   { from: '/list/selfhosted/pastebins', to: '/list/selfhosted/pastebin-tools' },
-  { from: '/list/selfhosted/polls-events', to: '/list/selfhosted/events%2Fpolls' },
+  { from: '/list/selfhosted/polls-events', to: '/list/selfhosted/events/polls' },
+  { from: '/list/selfhosted/photo-and-video-galleries', to: '/list/selfhosted/media' },
   { from: '/*', to: '/index.html', status: 200 },
 ]
 
