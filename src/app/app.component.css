@@ -28,6 +28,7 @@ h4 {
 
 .mdl-layout__drawer {
   position: fixed;
+  overflow: visible;
 }
 
 /* Header */

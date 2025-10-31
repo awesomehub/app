@@ -24,6 +24,7 @@ export interface ListResponse {
   id: string
   name: string
   desc: string
+  copyright?: string
   score: number
   cats: ListCategoryResponse[]
   entries: {

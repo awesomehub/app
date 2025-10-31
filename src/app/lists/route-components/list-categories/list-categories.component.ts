@@ -25,6 +25,16 @@ import type { List } from '../../state'
       >
         Browse All
       </a>
+      @if (list.copyright) {
+        <div class="list-copyright">
+          <button id="list-copyright-btn" class="mdl-button mdl-js-button">
+            <ah-svg key="info" class="icon icon-24" />
+          </button>
+          <div for="list-copyright-btn" class="mdl-menu mdl-js-menu mdl-menu--unaligned">
+            <ah-markdown [value]="list.copyright" />
+          </div>
+        </div>
+      }
       <span class="divider"></span>
       <ah-list-categories [list]="list" [parent]="0" (navigate)="app.toggleDrawer()" />
     </nav>

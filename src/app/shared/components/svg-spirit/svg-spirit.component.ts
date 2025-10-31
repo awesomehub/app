@@ -14,6 +14,7 @@ export type SvgSpiritKey =
   | 'code'
   | 'license'
   | 'chevrons-up'
+  | 'info'
 
 @Component({
   selector: 'ah-svg-spirit',

@@ -1,2 +1,2 @@
-export * from './date-format'
-export * from './score-format'
+export * from './date-format.pipe'
+export * from './score-format.pipe'

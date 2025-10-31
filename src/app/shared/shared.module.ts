@@ -9,6 +9,7 @@ import {
   SvgSpiritComponent,
   SvgComponent,
 } from './components'
+import { MarkdownDirective } from './directives'
 import { DateFormatPipe, ScoreFormatPipe } from './pipes'
 
 @NgModule({
@@ -19,6 +20,7 @@ import { DateFormatPipe, ScoreFormatPipe } from './pipes'
     SpinnerComponent,
     SvgSpiritComponent,
     SvgComponent,
+    MarkdownDirective,
     DateFormatPipe,
     ScoreFormatPipe,
   ],
@@ -28,11 +30,12 @@ import { DateFormatPipe, ScoreFormatPipe } from './pipes'
     ScrollSpyModule,
     LayoutContentComponent,
     LayoutSidebarComponent,
+    SvgSpiritComponent,
+    SvgComponent,
+    MarkdownDirective,
     SpinnerComponent,
     DateFormatPipe,
     ScoreFormatPipe,
-    SvgSpiritComponent,
-    SvgComponent,
   ],
 })
 export class SharedModule {}
