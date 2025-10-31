@@ -19,10 +19,18 @@ export function listRepoRecordsetReducer(
     repos = repos
       .filter((repo) => {
         const key = `${repo.author}/${repo.name}`
-        let score = key.toLowerCase().indexOf(query)
-        if (score === -1) score = repo.desc.toLowerCase().indexOf(query)
-        if (score !== -1) queryScores.set(key, score)
-        return score !== -1
+        let score: number
+
+        // weights: title → desc → tags
+        if ((score = key.toLowerCase().indexOf(query)) !== -1)
+          queryScores.set(key, score)
+        else if ((score = repo.desc.toLowerCase().indexOf(query)) !== -1)
+          queryScores.set(key, 100 + score)
+        else if ((score = repo.tags.join(' ').indexOf(query)) !== -1)
+          queryScores.set(key, 200 + score)
+        else return false
+
+        return true
       })
       .sort((a, b) => {
         const sa = queryScores.get(`${a.author}/${a.name}`)!

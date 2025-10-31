@@ -10,7 +10,7 @@ import { Component, ViewEncapsulation, ChangeDetectionStrategy } from '@angular/
             type="card"
             [lines]="1"
             class="mdl-cell--12-col mdl-cell--6-col-desktop"
-            style="border-top: 5px solid #0091ea; min-height: 170px"
+            style="border-top: 4px solid #0091ea; min-height: 170px"
           />
         }
       </div>

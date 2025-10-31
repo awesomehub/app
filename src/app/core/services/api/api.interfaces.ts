@@ -48,6 +48,7 @@ export interface ListRepoResponse {
   author: string
   name: string
   desc: string
+  tags: string[]
   lang: string
   lic: string
   cats: number[]
