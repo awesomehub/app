@@ -97,6 +97,10 @@ export class AppComponent implements AfterViewChecked, AfterViewInit, OnDestroy 
       })
   }
 
+  isInitialNavigation() {
+    return this.initialNavigation
+  }
+
   /**
    * Toggles current drawer state.
    *

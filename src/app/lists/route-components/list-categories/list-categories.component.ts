@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router'
 import { AppComponent } from '@app/app.component'
 import { DrawerRouteComponent } from '@app/core'
 import type { List } from '../../state'
+import type { ListCategoryActiveEvent } from '../../components'
 
 @Component({
   styleUrls: ['./list-categories.component.css'],
@@ -40,6 +41,7 @@ import type { List } from '../../state'
         [list]="list"
         [parent]="0"
         (navigate)="app.toggleDrawer()"
+        (activate)="onCategoryActivate($event)"
         style="height: calc(100vh - 190px); overflow: auto;"
       />
     </nav>
@@ -50,9 +52,9 @@ import type { List } from '../../state'
 })
 export class ListCategoriesRouteComponent extends DrawerRouteComponent {
   public title: string
-  public list: List
+  protected list: List
+  protected app = inject<AppComponent>(forwardRef(() => AppComponent))
   private route = inject(ActivatedRoute)
-  public app = inject<AppComponent>(forwardRef(() => AppComponent))
 
   constructor() {
     super()
@@ -62,5 +64,11 @@ export class ListCategoriesRouteComponent extends DrawerRouteComponent {
       this.list = data.list
       this.title = this.list.name
     })
+  }
+
+  onCategoryActivate(e: ListCategoryActiveEvent) {
+    if (this.app.isInitialNavigation() && e.active) {
+      e.ref.scrollIntoView({ block: 'center' })
+    }
   }
 }
