@@ -52,6 +52,7 @@
 .list-repo-inner .repo-author {
   font-size: 65%;
   display: block;
+  width: max-content;
   line-height: 100%;
   color: rgba(0, 0, 0, 0.65);
 }
