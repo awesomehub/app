@@ -148,7 +148,7 @@ export class SearchBarRouteComponent extends HeaderBarRouteComponent implements 
       this.clearFocusNavigationState()
     }
     this.focusAfterNavigation = false
-    this.input.nativeElement.focus()
+    this.input.nativeElement.focus({ preventScroll: true })
   }
 
   // removes the transient focus flag from history.state so reloads don't reapply it
