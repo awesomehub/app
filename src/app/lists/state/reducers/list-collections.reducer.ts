@@ -1,28 +1,32 @@
-import { Action } from '@app/common'
-import { ListCollection, ListCollectionActions } from '@app/lists'
-import { listCollectionReducer } from './list-collection.reducer'
+import { createReducer, on } from '@ngrx/store'
+import { ListCollection, ListCollectionFactory } from '../models'
+import { ListCollectionActions } from '../actions'
 
 export type ListCollections = Record<string, ListCollection>
 
-export function listCollectionsReducer(state: ListCollections = {}, action: Action): ListCollections {
-  switch (action.type) {
-    case ListCollectionActions.FETCH:
-      if (state[action.payload.id]) {
-        return state
-      }
-      return {
-        ...state,
-        [action.payload.id]: listCollectionReducer(undefined, action),
-      }
+const initialState: ListCollections = {}
 
-    case ListCollectionActions.FETCH_SUCCESS:
-    case ListCollectionActions.FETCH_FAILED:
-      return {
-        ...state,
-        [action.payload.id]: listCollectionReducer(state[action.payload.id], action),
-      }
-
-    default:
+export const listCollectionsReducer = createReducer(
+  initialState,
+  on(ListCollectionActions.fetch, (state, { id }): ListCollections => {
+    if (state[id]) {
       return state
-  }
-}
+    }
+    return {
+      ...state,
+      [id]: ListCollectionFactory.create({ id }),
+    }
+  }),
+  on(ListCollectionActions.fetchSuccess, (state, { id, data }): ListCollections => {
+    return {
+      ...state,
+      [id]: ListCollectionFactory.fromResponse(data),
+    }
+  }),
+  on(ListCollectionActions.fetchFailed, (state, { id }): ListCollections => {
+    return {
+      ...state,
+      [id]: state[id],
+    }
+  }),
+)

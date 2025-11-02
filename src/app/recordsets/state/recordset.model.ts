@@ -1,17 +1,3 @@
-export interface Recordset<T> {
-  id: string
-  reducer: string
-  parent: string
-  updated: boolean
-  set: T[]
-  slice: T[]
-  filters: RecordsetFilters
-  sorting: RecordsetSorting
-  pagination: RecordsetPagination
-}
-
-export type RecordsetReducer<T, V> = (state: T, filters: RecordsetFilters, sorting: RecordsetSorting) => V[]
-
 export type RecordsetFilters = Record<string, any>
 
 export interface RecordsetSorting {
@@ -26,6 +12,20 @@ export interface RecordsetPagination {
   hasNext: boolean
 }
 
+export interface Recordset<T> {
+  id: string
+  reducer: string
+  parent: string
+  dirty: boolean
+  set: readonly T[]
+  slice: readonly T[]
+  filters: RecordsetFilters
+  sorting: RecordsetSorting
+  pagination: RecordsetPagination
+}
+
+export type RecordsetReducer<T, V> = (state: T, filters: RecordsetFilters, sorting: RecordsetSorting) => V[]
+
 export interface RecordsetConstructorOptions {
   parent?: string
   filters?: RecordsetFilters
@@ -39,7 +39,7 @@ export class RecordsetFactory {
       id: null,
       reducer: null,
       parent: null,
-      updated: false,
+      dirty: true,
       set: [],
       slice: [],
       filters: {},

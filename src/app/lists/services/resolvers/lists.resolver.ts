@@ -10,7 +10,7 @@ export const listsDataResolver: ResolveFn<ListCollection> = () => {
   const { defaultCollection } = config.lists
 
   const store$ = inject(Store)
-  store$.dispatch(ListCollectionActions.fetch(defaultCollection))
+  store$.dispatch(ListCollectionActions.fetch({ id: defaultCollection }))
 
   const data$ = store$.select(selectListCollection(defaultCollection)).pipe(
     distinctUntilChanged(),

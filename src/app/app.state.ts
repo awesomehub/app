@@ -1,11 +1,11 @@
 import { ActionReducerMap, MetaReducer } from '@ngrx/store'
 import { RouterReducerState, routerReducer } from '@ngrx/router-store'
-import { coreMetaReducers } from './core'
+import { coreMetaReducers, RouterState } from './core'
 import { Recordsets, recordsetsReducer } from './recordsets'
 import { ListCollections, Lists, listCollectionsReducer, listsReducer } from './lists'
 
 export interface AppState {
-  router: RouterReducerState<any>
+  router: RouterReducerState<RouterState>
   recordsets: Recordsets
   collections: ListCollections
   lists: Lists

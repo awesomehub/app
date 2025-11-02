@@ -2,10 +2,6 @@
   "name": "awesomehub-app",
   "version": "3.0.0",
   "private": true,
-  "sideEffects": [
-    "src/main.ts",
-    "src/polyfills.ts"
-  ],
   "author": "Mohamed Elkholy <mohatt@pm.me>",
   "description": "Angular application for AwesomeHub",
   "homepage": "https://github.com/awesomehub/app",

@@ -77,7 +77,7 @@ import type { ListRepo } from '../../state'
         />
       }
 
-      @if (recordset.set.length === 0 && recordset.updated) {
+      @if (recordset.set.length === 0 && !recordset.dirty) {
         <div class="mdl-cell mdl-cell--12-col no-list-repos">No repositories found!</div>
       }
 
@@ -85,7 +85,7 @@ import type { ListRepo } from '../../state'
         [key]="id"
         class="mdl-cell mdl-cell--12-col mdl-shadow--2dp"
         [disabled]="!infinite"
-        [paused]="!recordset.pagination.hasNext || !recordset.updated"
+        [paused]="!recordset.pagination.hasNext || recordset.dirty"
         (next)="needMore.emit()"
       />
     </div>

@@ -11,11 +11,11 @@ export class RecordsetRegistryService {
   register(id: string, reducer: string, options?: RecordsetConstructorOptions): RecordsetService<any> {
     if (this.recordsets[id]) {
       // Reset it if it's already created
-      this.store$.dispatch(RecordsetActions.reset(id, reducer, options))
+      this.store$.dispatch(RecordsetActions.reset({ id, reducer, options }))
       return this.recordsets[id]
     }
 
-    this.store$.dispatch(RecordsetActions.create(id, reducer, options))
+    this.store$.dispatch(RecordsetActions.create({ id, reducer, options }))
     this.recordsets[id] = new RecordsetService(id, this.store$)
     return this.recordsets[id]
   }
@@ -29,11 +29,7 @@ export class RecordsetRegistryService {
   }
 
   destroy(id: string): void {
-    if (!this.recordsets[id]) {
-      throw new Error(`Unable to destroy recordset '${id}', it must be created first.`)
-    }
-
-    this.store$.dispatch(RecordsetActions.destroy(id))
+    this.store$.dispatch(RecordsetActions.destroy({ id }))
     delete this.recordsets[id]
   }
 }

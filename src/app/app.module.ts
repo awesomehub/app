@@ -22,7 +22,7 @@ import { reducers, metaReducers } from './app.state'
       serializer: RouterStateSerializerService,
     }),
     environmentProviders,
-    EffectsModule.forRoot([]),
+    EffectsModule.forRoot(),
     CoreModule,
     ListsModule,
   ],

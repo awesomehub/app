@@ -1,29 +1,32 @@
-import { Action } from '@app/common'
-import { List, ListActions } from '@app/lists'
-import { listReducer } from './list.reducer'
+import { createReducer, on } from '@ngrx/store'
+import { List, ListRecordFactory } from '../models'
+import { ListActions } from '../actions'
 
 export type Lists = Record<string, List>
 
-export function listsReducer(state: Lists = {}, action: Action): Lists {
-  switch (action.type) {
-    case ListActions.FETCH:
-      if (state[action.payload.id]) {
-        return state
-      }
-      return {
-        ...state,
-        [action.payload.id]: listReducer(undefined, action),
-      }
+const initialState: Lists = {}
 
-    case ListActions.FETCH_SUCCESS:
-    case ListActions.FETCH_FAILED:
-      // We are not merging prev state to allow only one fetched list to be available at any time
-      // This is to reduce app memory consumption
-      return {
-        [action.payload.id]: listReducer(state[action.payload.id], action),
-      }
-
-    default:
+export const listsReducer = createReducer(
+  initialState,
+  on(ListActions.fetch, (state, action): Lists => {
+    if (state[action.id]) {
       return state
-  }
-}
+    }
+    return {
+      ...state,
+      [action.id]: ListRecordFactory.create({ id: action.id }),
+    }
+  }),
+  on(ListActions.fetchSuccess, (_, action): Lists => {
+    // We are not merging prev state to allow only one fetched list to be available at any time
+    // This is to reduce app memory consumption
+    return {
+      [action.id]: ListRecordFactory.fromResponse(action.data),
+    }
+  }),
+  on(ListActions.fetchFailed, (state, action): Lists => {
+    return {
+      [action.id]: state[action.id],
+    }
+  }),
+)

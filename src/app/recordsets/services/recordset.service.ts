@@ -17,23 +17,23 @@ export class RecordsetService<T> {
     return this.recordset$
   }
 
-  filter(id: string, filter: any): void {
-    this.store$.dispatch(RecordsetActions.setFilter(this.id, id, filter))
+  filter(filterId: string, filterValue: any): void {
+    this.store$.dispatch(RecordsetActions.setFilter({ id: this.id, filterId, filterValue }))
   }
 
-  unfilter(id: string): void {
-    this.store$.dispatch(RecordsetActions.unsetFilter(this.id, id))
+  unfilter(filterId: string): void {
+    this.store$.dispatch(RecordsetActions.unsetFilter({ id: this.id, filterId }))
   }
 
   sort(sorting: RecordsetSorting): void {
-    this.store$.dispatch(RecordsetActions.sort(this.id, sorting))
+    this.store$.dispatch(RecordsetActions.sort({ id: this.id, sorting }))
   }
 
-  setPageSize(pageSize: number): void {
-    this.store$.dispatch(RecordsetActions.setPageSize(this.id, pageSize))
+  setPageSize(size: number): void {
+    this.store$.dispatch(RecordsetActions.setPageSize({ id: this.id, size }))
   }
 
   paginate(): void {
-    this.store$.dispatch(RecordsetActions.paginate(this.id))
+    this.store$.dispatch(RecordsetActions.paginate({ id: this.id }))
   }
 }
