@@ -5,6 +5,7 @@ import type { List, ListCategory } from '../../state'
 export const listCategoryDataResolver: ResolveFn<ListCategory | boolean> = (route: ActivatedRouteSnapshot) => {
   const router = inject(Router)
   const list = route.parent.data['list'] as List
+
   const categoryPath = route.url.map((segment) => segment.path).join('/')
   const categoryPathEncoded = route.url.map((segment) => segment.toString()).join('/')
   if (categoryPath !== categoryPathEncoded) {

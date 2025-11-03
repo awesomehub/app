@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core'
 import { RouterModule } from '@angular/router'
 import { EffectsModule } from '@ngrx/effects'
-
 import { SharedModule } from '@app/shared'
 import {
   HomeRouteComponent,

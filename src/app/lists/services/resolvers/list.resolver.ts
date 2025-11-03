@@ -6,9 +6,9 @@ import { first, distinctUntilChanged } from 'rxjs/operators'
 import { ListActions, List, selectList } from '../../state'
 
 export const listDataResolver: ResolveFn<List> = (route: ActivatedRouteSnapshot) => {
-  const id = route.params['id'] as string
-
   const store$ = inject(Store)
+  const id: string = route.params['id'] ?? route.data['id']
+
   store$.dispatch(ListActions.fetch({ id }))
 
   const data$ = store$.select(selectList(id)).pipe(

@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router'
+import { config } from '@constants'
 import {
   HomeRouteComponent,
   SearchRouteComponent,
@@ -16,12 +17,13 @@ import {
   DrawerSkeletonComponent,
   SearchBarSkeletonComponent,
 } from './skeletons'
-import { listsDataResolver, listDataResolver, listCategoryDataResolver } from './services'
+import { listCollectionDataResolver, listDataResolver, listCategoryDataResolver } from './services'
 
 export const routes: Routes = [
   {
     path: '',
-    resolve: { collection: listsDataResolver },
+    resolve: { collection: listCollectionDataResolver },
+    data: { id: config.lists.defaultCollection },
     children: [
       {
         path: '',
@@ -50,9 +52,7 @@ export const routes: Routes = [
   },
   {
     path: 'list/:id',
-    resolve: {
-      list: listDataResolver,
-    },
+    resolve: { list: listDataResolver },
     children: [
       {
         path: '',
