@@ -385,9 +385,6 @@
     <loc>https://awesomehub.js.org/list/cli-apps/learning</loc>
   </url>
   <url>
-    <loc>https://awesomehub.js.org/list/cli-apps/learning/command-line</loc>
-  </url>
-  <url>
     <loc>https://awesomehub.js.org/list/cli-apps/media</loc>
   </url>
   <url>
@@ -404,6 +401,9 @@
   </url>
   <url>
     <loc>https://awesomehub.js.org/list/cli-apps/productivity/finance-analytics</loc>
+  </url>
+  <url>
+    <loc>https://awesomehub.js.org/list/cli-apps/productivity/generative-ai</loc>
   </url>
   <url>
     <loc>https://awesomehub.js.org/list/cli-apps/productivity/notes-knowledge</loc>
