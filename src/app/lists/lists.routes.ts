@@ -1,4 +1,4 @@
-import { Routes, Route } from '@angular/router'
+import { Routes } from '@angular/router'
 import {
   HomeRouteComponent,
   SearchRouteComponent,
@@ -18,47 +18,35 @@ import {
 } from './skeletons'
 import { listsDataResolver, listDataResolver, listCategoryDataResolver } from './services'
 
-const listsSearchBarRoute: Route = {
-  path: '',
-  component: SearchBarRouteComponent,
-  data: {
-    skeleton: SearchBarSkeletonComponent,
-    placeholder: 'Search lists...',
-    searchRoute: 'search',
-    searchRouteMatch: '^/search[?|;|/]',
-    cancelRoute: '',
-  },
-  outlet: 'header-bar',
-}
-
 export const routes: Routes = [
   {
     path: '',
-    pathMatch: 'full',
     children: [
       {
         path: '',
+        pathMatch: 'full',
         component: HomeRouteComponent,
-        resolve: {
-          collection: listsDataResolver,
-        },
+        resolve: { collection: listsDataResolver },
         data: { skeleton: HomeSkeletonComponent },
       },
-      listsSearchBarRoute,
-    ],
-  },
-  {
-    path: 'search',
-    children: [
+      {
+        path: 'search',
+        component: SearchRouteComponent,
+        resolve: { collection: listsDataResolver },
+        data: { skeleton: HomeSkeletonComponent },
+      },
       {
         path: '',
-        component: SearchRouteComponent,
-        resolve: {
-          collection: listsDataResolver,
+        component: SearchBarRouteComponent,
+        data: {
+          skeleton: SearchBarSkeletonComponent,
+          placeholder: 'Search lists...',
+          searchRoute: 'search',
+          searchRouteMatch: '^/search[?|;|/]',
+          cancelRoute: '',
         },
-        data: { skeleton: HomeSkeletonComponent },
+        outlet: 'header-bar',
       },
-      listsSearchBarRoute,
     ],
   },
   {
