@@ -62,9 +62,10 @@ export class LoadingIndicatorComponent {
     this.message = message
     this.ref.markForCheck()
     this.timeout = setTimeout(() => {
+      if (!this.active) return
       this.spinner = true
       this.ref.markForCheck()
-    }, 1000)
+    }, 600)
   }
 
   private deactivate() {
