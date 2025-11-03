@@ -21,18 +21,17 @@ import { listsDataResolver, listDataResolver, listCategoryDataResolver } from '.
 export const routes: Routes = [
   {
     path: '',
+    resolve: { collection: listsDataResolver },
     children: [
       {
         path: '',
         pathMatch: 'full',
         component: HomeRouteComponent,
-        resolve: { collection: listsDataResolver },
         data: { skeleton: HomeSkeletonComponent },
       },
       {
         path: 'search',
         component: SearchRouteComponent,
-        resolve: { collection: listsDataResolver },
         data: { skeleton: HomeSkeletonComponent },
       },
       {
