@@ -493,7 +493,7 @@
     <loc>https://awesomehub.js.org/list/github-actions/github-tools-and-management</loc>
   </url>
   <url>
-    <loc>https://awesomehub.js.org/list/github-actions/machine-learning-ops</loc>
+    <loc>https://awesomehub.js.org/list/github-actions/machine-learning</loc>
   </url>
   <url>
     <loc>https://awesomehub.js.org/list/github-actions/monitoring</loc>
@@ -1201,6 +1201,15 @@
     <loc>https://awesomehub.js.org/list/nodejs/all</loc>
   </url>
   <url>
+    <loc>https://awesomehub.js.org/list/nodejs/applications</loc>
+  </url>
+  <url>
+    <loc>https://awesomehub.js.org/list/nodejs/applications/general</loc>
+  </url>
+  <url>
+    <loc>https://awesomehub.js.org/list/nodejs/applications/generative-ai</loc>
+  </url>
+  <url>
     <loc>https://awesomehub.js.org/list/nodejs/miscellaneous</loc>
   </url>
   <url>
@@ -1256,6 +1265,9 @@
   </url>
   <url>
     <loc>https://awesomehub.js.org/list/nodejs/packages/functional-programming</loc>
+  </url>
+  <url>
+    <loc>https://awesomehub.js.org/list/nodejs/packages/generative-ai</loc>
   </url>
   <url>
     <loc>https://awesomehub.js.org/list/nodejs/packages/hardware</loc>
@@ -1678,6 +1690,9 @@
     <loc>https://awesomehub.js.org/list/react/components/forms</loc>
   </url>
   <url>
+    <loc>https://awesomehub.js.org/list/react/components/generative-ai</loc>
+  </url>
+  <url>
     <loc>https://awesomehub.js.org/list/react/components/icons</loc>
   </url>
   <url>
@@ -1712,6 +1727,9 @@
   </url>
   <url>
     <loc>https://awesomehub.js.org/list/react/components/table</loc>
+  </url>
+  <url>
+    <loc>https://awesomehub.js.org/list/react/components/text-and-content</loc>
   </url>
   <url>
     <loc>https://awesomehub.js.org/list/react/components/tree</loc>
