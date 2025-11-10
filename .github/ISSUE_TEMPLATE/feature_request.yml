@@ -1,0 +1,21 @@
+name: Feature request
+description: Suggest an idea or improvement for this project
+labels: ['feature-request']
+body:
+  - type: input
+    id: title
+    attributes:
+      label: Short title
+      description: A quick summary of your request
+      placeholder: Dark mode toggle
+  - type: textarea
+    id: details
+    attributes:
+      label: Details
+      description: Explain your idea clearly and why it’s useful
+      placeholder: It would be great to have a dark mode...
+  - type: textarea
+    id: context
+    attributes:
+      label: Additional context
+      description: Add any extra info or screenshots if relevant

@@ -9,6 +9,7 @@ export type SvgSpiritKey =
   | 'heart'
   | 'flame'
   | 'repo'
+  | 'form'
   | 'bars'
   | 'sort-desc'
   | 'code'
