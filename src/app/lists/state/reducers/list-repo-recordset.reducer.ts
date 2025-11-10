@@ -25,6 +25,7 @@ export function listRepoRecordsetReducer(
         if ((score = key.toLowerCase().indexOf(query)) !== -1) queryScores.set(key, score)
         else if ((score = repo.desc.toLowerCase().indexOf(query)) !== -1) queryScores.set(key, 100 + score)
         else if ((score = repo.tags.join(' ').indexOf(query)) !== -1) queryScores.set(key, 200 + score)
+        else if ((score = (repo.lang?.toLowerCase().indexOf(query) ?? -1)) !== -1) queryScores.set(key, 300 + score)
         else return false
 
         return true
